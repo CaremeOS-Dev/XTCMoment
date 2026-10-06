@@ -308,6 +308,11 @@ public class ImageUtils {
         return scaled;
     }
 
+    /** Scales {@code src} to the given size (alias of {@link #scale(Bitmap, int, int)}). */
+    public static Bitmap scaleBitmap(Bitmap src, int newWidth, int newHeight) {
+        return scale(src, newWidth, newHeight, false);
+    }
+
     /** Scales {@code src} by the given factors. */
     public static Bitmap scale(Bitmap src, float scaleWidth, float scaleHeight) {
         return scale(src, scaleWidth, scaleHeight, false);
