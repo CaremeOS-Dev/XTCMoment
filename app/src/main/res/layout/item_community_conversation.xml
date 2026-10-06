@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.xtc.ui.widget.scalablecontainer.AppLinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/all_root_click_scale_right_icon_with_extra" android:background="@drawable/default_list_item_normal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minHeight="@dimen/item_click_scale_min_height_2"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:layout_width="@dimen/dp_0" android:layout_height="wrap_content" android:layout_weight="1.0" android:layout_marginStart="@dimen/dp_10">
+        <TextView android:textSize="@dimen/sp_14" android:textColor="@color/color_80ffffff" android:id="@id/tv_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dp_11" android:singleLine="true" android:includeFontPadding="false" />
+        <TextView android:textSize="@dimen/sp_15" android:textColor="@color/white" android:ellipsize="end" android:id="@id/tv_content" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dp_8" android:layout_marginBottom="@dimen/dp_12" android:maxLines="3" android:includeFontPadding="false" android:lineSpacingExtra="@dimen/dp_2" />
+    </LinearLayout>
+    <ImageView android:id="@id/iv_right_icon" android:layout_width="@dimen/dp_28" android:layout_height="@dimen/dp_28" android:src="@drawable/ic_right_arrow" android:layout_marginEnd="@dimen/dp_4" />
+</com.xtc.ui.widget.scalablecontainer.AppLinearLayout>

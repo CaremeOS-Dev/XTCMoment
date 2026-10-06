@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dp_10" android:layout_marginStart="@dimen/dp_4"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include layout="@layout/layout_icon_and_name" />
+    <com.xtc.moment.module.widget.ExpandTextView android:id="@id/ev_text" android:visibility="gone" android:layout_width="@dimen/dp_150" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dp_4" />
+    <com.xtc.moment.module.publish.multi.view.PointerViewPager android:id="@id/photos_view_page" android:layout_width="@dimen/dp_125" android:layout_height="@dimen/dp_109" android:layout_marginTop="@dimen/dp_4" />
+</LinearLayout>

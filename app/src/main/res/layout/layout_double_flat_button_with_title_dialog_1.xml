@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="@color/color_black" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ScrollView android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:orientation="vertical" android:id="@id/rl_root_normal_dialog_with_title" style="@style/NormalDialogRoot.WithTitle">
+            <TextView android:id="@id/tv_title_normal_dialog_with_title" style="@style/NormalDialogTitleWithTitle" />
+            <TextView android:textSize="@dimen/normal_content_text_size_with_title" android:textColor="@color/color_ffffff" android:id="@id/tv_content_normal_dialog_with_title" android:paddingBottom="@dimen/dp_50" android:scrollbars="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dp_4" android:layout_marginStart="@dimen/dp_8" android:layout_marginEnd="@dimen/dp_2" />
+        </LinearLayout>
+    </ScrollView>
+    <com.xtc.ui.widget.button.LongSolidButton android:id="@id/lsb_solid_button" android:layout_width="fill_parent" android:layout_height="40.0dip" android:layout_alignParentBottom="true" style="@style/DoubleFlatButton" />
+</RelativeLayout>

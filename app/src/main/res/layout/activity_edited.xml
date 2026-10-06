@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:background="@drawable/bg_grid" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <FrameLayout android:background="@drawable/bg_edit" android:layout_width="fill_parent" android:layout_height="@dimen/dp_90">
+            <com.xtc.aitext.weight.InnerScrollView android:layout_gravity="center_horizontal" android:layout_width="fill_parent" android:layout_height="47.0dip" android:layout_marginTop="6.0dip" android:fillViewport="true">
+                <EditText android:textSize="13.0sp" android:textColor="@color/color_FFFFFF" android:textColorHint="#ff605e77" android:ellipsize="end" android:gravity="top" android:id="@id/edit_input" android:background="@color/colorTransparent" android:layout_width="fill_parent" android:layout_height="fill_parent" android:hint="@string/string_ai_text_hint" android:textSelectHandle="@drawable/bg_edit_cursor_none" android:textCursorDrawable="@drawable/bg_edit_cursor" android:layout_marginStart="@dimen/dp_13" android:layout_marginEnd="@dimen/dp_10" />
+            </com.xtc.aitext.weight.InnerScrollView>
+            <TextView android:textSize="10.0sp" android:textColor="#ff8c8ea3" android:gravity="end|center" android:id="@id/tv_count" android:layout_width="fill_parent" android:layout_height="@dimen/dp_14" android:layout_marginTop="@dimen/dp_63" android:layout_marginStart="@dimen/dp_13" android:layout_marginEnd="@dimen/dp_13" />
+        </FrameLayout>
+        <FrameLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <LinearLayout android:gravity="center" android:orientation="horizontal" android:id="@id/ll_style" android:layout_width="fill_parent" android:layout_height="20.0dip">
+                <TextView android:textSize="12.0sp" android:textColor="#ff00edf3" android:gravity="center" android:id="@id/tv_style" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                <ImageView android:layout_width="@dimen/dp_11" android:layout_height="@dimen/dp_11" android:src="@drawable/icon_next" android:layout_marginStart="@dimen/dp_3" />
+            </LinearLayout>
+            <TextView android:textSize="12.0sp" android:layout_gravity="end" android:id="@id/tv_award" android:background="@drawable/bg_award" android:paddingTop="2.0dip" android:paddingBottom="3.0dip" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:alpha="0.0" android:paddingStart="2.0dip" android:paddingEnd="2.0dip" android:layout_marginEnd="10.0dip" />
+            <LinearLayout android:gravity="center" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="@dimen/dp_19" android:layout_marginTop="20.0dip">
+                <TextView android:textSize="12.0sp" android:textColor="@color/color_FFFFFF" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/string_ai_num_tip" android:alpha="0.5" />
+                <TextView android:textSize="12.0sp" android:textColor="@color/color_FFFFFF" android:id="@id/tv_num" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+            </LinearLayout>
+        </FrameLayout>
+        <Button android:textColor="@color/color_FFFFFF" android:layout_gravity="center_horizontal" android:id="@id/btn_start" android:background="@drawable/bg_button" android:layout_width="94.0dip" android:layout_height="29.0dip" android:layout_marginTop="9.0dip" android:text="@string/string_start_cover" />
+        <RelativeLayout android:orientation="horizontal" android:id="@id/edit_ll_record" android:background="@drawable/shape_edit_bg" android:layout_width="fill_parent" android:layout_height="59.0dip" android:layout_marginTop="15.0dip" android:layout_marginBottom="15.0dip">
+            <TextView android:textSize="17.0sp" android:textColor="@color/color_FFFFFF" android:id="@id/edit_ll_record_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="10.0dip" android:text="@string/string_edit_record" android:layout_alignParentTop="true" android:layout_marginStart="4.0dip" android:layout_alignParentStart="true" />
+            <TextView android:textSize="12.0sp" android:textColor="@color/color_FFFFFF" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="3.0dip" android:text="@string/string_edit_record_gallery" android:layout_below="@id/edit_ll_record_title" android:alpha="0.5" android:layout_marginStart="4.0dip" android:layout_alignParentStart="true" />
+            <ImageView android:layout_width="15.0dip" android:layout_height="15.0dip" android:layout_marginTop="14.0dip" android:src="@drawable/ic_history_enter" android:layout_marginStart="3.0dip" android:layout_toEndOf="@id/edit_ll_record_title" />
+            <ImageView android:layout_width="45.0dip" android:layout_height="50.0dip" android:src="@drawable/ic_record_none" android:layout_centerVertical="true" android:layout_marginEnd="5.0dip" android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+        <android.support.v7.widget.RecyclerView android:id="@id/rv_edit" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+    </LinearLayout>
+</ScrollView>

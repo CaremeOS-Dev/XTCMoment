@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.xtc.ui.widget.button.LongSolidButton android:id="@id/btn_report_seasons" android:layout_width="fill_parent" android:layout_marginTop="18.0dip" style="@style/LongButton"
+  xmlns:android="http://schemas.android.com/apk/res/android" />

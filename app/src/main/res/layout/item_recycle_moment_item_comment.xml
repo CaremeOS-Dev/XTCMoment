@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView android:textSize="@dimen/sp_14" android:textColor="@color/color_d9d9d9" android:id="@id/item_tv_comment" android:background="@drawable/bg_comment_textview" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android" />

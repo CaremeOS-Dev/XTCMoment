@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="@android:color/black" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.xtc.moment.module.widget.coverflow.RecyclerCoverFlow android:id="@id/recyclerCoverFlow" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="@dimen/dp_22" android:layout_marginBottom="@dimen/dp_49" android:layout_marginStart="@dimen/dp_18" android:layout_marginEnd="@dimen/dp_18" />
+    <TextView android:textSize="15.0sp" android:textStyle="bold" android:textColor="#fffafafa" android:ellipsize="end" android:id="@id/tv_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dp_3" android:maxWidth="140.0dip" android:maxLines="1" android:includeFontPadding="false" android:layout_centerHorizontal="true" />
+    <com.xtc.ui.widget.button.DoubleFlatButton android:id="@id/dfb_share" android:layout_alignParentBottom="true" style="@style/DoubleFlatButton" />
+</RelativeLayout>

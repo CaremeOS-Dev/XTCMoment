@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.xtc.moment.module.widget.CommentPraiseView android:id="@id/comment_praise" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+    <com.xtc.moment.module.widget.MomentOfficialPhotoH5TextViewComment android:id="@id/moment" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="12.0dip" android:layout_below="@id/comment_praise" />
+</RelativeLayout>

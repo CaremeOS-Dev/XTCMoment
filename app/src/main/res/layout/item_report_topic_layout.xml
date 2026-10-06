@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="#ff000000" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="16.0sp" android:textColor="#ffffffff" android:id="@id/item_report_content" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:layout_marginBottom="8.0dip" android:text="@string/choice_report_content" android:layout_marginStart="6.0dip" />
+    <LinearLayout android:layout_gravity="center" android:orientation="horizontal" android:id="@id/ll_report_header_item" android:background="@drawable/item_backgroud_grey_report" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <include android:visibility="visible" layout="@layout/item_report_layout_comment" />
+        <LinearLayout android:gravity="center_vertical" android:id="@id/ll_report_checked" android:layout_width="43.0dip" android:layout_height="fill_parent">
+            <CheckBox android:gravity="center" android:id="@id/cb_report_topic_check" android:background="@drawable/report_checkbox_selector" android:layout_width="28.0dip" android:layout_height="28.0dip" android:button="@null" android:layout_marginStart="10.0dip" android:layout_marginEnd="5.0dip" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

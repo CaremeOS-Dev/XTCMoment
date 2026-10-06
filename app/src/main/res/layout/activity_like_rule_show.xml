@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView android:orientation="vertical" android:background="@color/black" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <TextView android:textSize="@dimen/sp_19" android:textColor="@color/white" android:gravity="center" android:id="@id/tv_can_not_praises_more" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dp_7" android:text="@string/can_not_praises_more" android:includeFontPadding="false" android:paddingStart="@dimen/dp_7" android:paddingEnd="@dimen/dp_7" />
+        <TextView android:textSize="@dimen/sp_15" android:textColor="@color/color_80ffffff" android:id="@id/tv_level_of_praises" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dp_4" android:text="@string/level_of_praises" android:includeFontPadding="false" android:paddingStart="@dimen/dp_7" android:paddingEnd="@dimen/dp_5" />
+        <android.support.v7.widget.RecyclerView android:id="@id/recyclerView" android:scrollbars="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        <com.xtc.ui.widget.button.LongSolidButton android:id="@id/lsb_got_it" android:layout_width="fill_parent" android:layout_height="@dimen/dp_40" android:layout_marginTop="@dimen/dp_7" android:layout_marginStart="@dimen/dp_5" android:layout_marginEnd="@dimen/dp_5" />
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

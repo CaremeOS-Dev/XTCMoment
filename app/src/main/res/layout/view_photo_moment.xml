@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/dp_4"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include layout="@layout/layout_icon_and_name" />
+    <ImageView android:id="@id/chat_msg_item_photo_iv" android:layout_width="@dimen/dp_97" android:layout_height="@dimen/dp_109" android:layout_marginTop="7.0dip" android:src="@drawable/pi_friends_default" android:scaleType="centerCrop" />
+    <com.xtc.moment.widget.LbsLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/ll_lbs" android:background="@drawable/default_list_item_normal" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="4.0dip" android:minHeight="31.0dip" />
+</LinearLayout>

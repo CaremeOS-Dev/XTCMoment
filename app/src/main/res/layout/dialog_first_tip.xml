@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:background="#ff000000" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView android:textSize="18.0sp" android:textColor="#ff00edf3" android:gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dp_2" android:text="@string/string_use_tip" />
+    <LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:background="@drawable/bg_tip" android:layout_width="@dimen/dp_154" android:layout_height="@dimen/dp_84" android:layout_marginTop="@dimen/dp_8" android:layout_marginStart="@dimen/dp_3" android:layout_marginEnd="@dimen/dp_3">
+        <TextView android:textSize="15.0sp" android:textStyle="bold" android:textColor="#ffffffff" android:id="@id/tv_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dp_6" />
+        <TextView android:textSize="14.0sp" android:textColor="#ffffffff" android:id="@id/tv_content" android:layout_width="@dimen/dp_135" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dp_5" android:layout_marginStart="@dimen/dp_4" android:layout_marginEnd="@dimen/dp_4" />
+    </LinearLayout>
+    <TextView android:textSize="17.0sp" android:textColor="#ffffffff" android:gravity="center" android:id="@id/tv_button" android:background="@drawable/bg_text_next" android:layout_width="@dimen/dp_150" android:layout_height="@dimen/dp_40" android:layout_marginTop="@dimen/dp_20" />
+</LinearLayout>

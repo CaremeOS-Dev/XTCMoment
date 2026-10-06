@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="@color/black" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.xtc.moment.widget.TouchScrollbarRecyclerView android:id="@id/rv_visible_type_list" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    <com.xtc.ui.widget.button.LongSolidButton android:textSize="@dimen/sp_14" android:layout_gravity="bottom|center" android:id="@id/btn_choose_visible_type" android:visibility="visible" android:layout_width="wrap_content" android:layout_height="@dimen/dp_28" android:layout_margin="5.0dip" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true" style="@style/LongButton" />
+</RelativeLayout>

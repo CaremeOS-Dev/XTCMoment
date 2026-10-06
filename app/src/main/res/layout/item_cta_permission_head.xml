@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView android:textSize="20.0sp" android:textColor="@color/color_ffffff" android:id="@id/tv_title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/dp_7" android:layout_marginTop="@dimen/dp_5" android:layout_marginRight="@dimen/dp_7" android:layout_centerHorizontal="true"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" />

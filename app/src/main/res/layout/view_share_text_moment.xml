@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include layout="@layout/layout_icon_and_name" />
+    <com.xtc.moment.module.widget.MomentContentView android:textSize="15.0sp" android:textColor="#ccffffff" android:id="@id/tv_no_support" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="4.0dip" android:text="@string/no_support_tips" android:layout_below="@id/rl_moment_sender" />
+    <RelativeLayout android:id="@id/rl_share_content" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_below="@id/rl_moment_sender">
+        <com.xtc.moment.module.widget.MomentContentView android:textSize="15.0sp" android:textColor="#ccfafafa" android:id="@id/tv_moment_content" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="4.0dip" android:lineSpacingExtra="1.0dip" />
+        <include android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_below="@id/tv_moment_content" layout="@layout/layout_share_icon_name_flag" />
+    </RelativeLayout>
+</RelativeLayout>

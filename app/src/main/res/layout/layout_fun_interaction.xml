@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="@dimen/dp_30"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="12.0sp" android:textColor="@color/time_text" android:id="@id/tv_time" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" android:layout_marginStart="@dimen/dp_4" />
+    <com.xtc.moment.module.widget.MomentLikeView android:id="@id/moment_like" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    <com.xtc.moment.module.widget.CommentIconView android:id="@id/iv_moment_comment" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+</LinearLayout>

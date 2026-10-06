@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="double_flat_btn_margin_edge">5.0dip</dimen>
+    <dimen name="long_btn_margin_edge">5.0dip</dimen>
+    <dimen name="rounded_corner_radius">11.0dip</dimen>
+    <dimen name="dialog_text_margin_edge">8.0dip</dimen>
+</resources>

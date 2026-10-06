@@ -1,0 +1,56 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+android {
+    namespace 'com.xtc.moment'
+    compileSdk 34
+    defaultConfig {
+        applicationId 'com.xtc.moment'
+        minSdk 19
+        targetSdk 25
+        versionCode 53110
+        versionName '5.3.11.Develop_Qcom_AW_Moment_J359_G17c225e_D2e85c07f'
+        multiDexEnabled true
+        ndk { abiFilters 'armeabi' }
+    }
+    sourceSets {
+        main {
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+            java.srcDirs = ['src/main/java', 'src/main/kotlin']
+            res.srcDirs = ['src/main/res']
+            assets.srcDirs = ['src/main/assets']
+            jniLibs.srcDirs = ['src/main/prebuilt']
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            shrinkResources false
+        }
+        debug {
+            minifyEnabled false
+        }
+    }
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging true
+        }
+        resources {
+            excludes += ['META-INF/*']
+        }
+    }
+}
+dependencies {
+}

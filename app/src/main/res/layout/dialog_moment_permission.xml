@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="@color/color_black" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="@dimen/sp_17" android:textColor="@color/color_fafafa" android:layout_width="@dimen/dp_152" android:layout_height="wrap_content" android:text="@string/allow_moment_permission" android:layout_centerHorizontal="true" />
+    <ImageView android:id="@id/v_dot" android:layout_width="@dimen/dp_5" android:layout_height="@dimen/dp_5" android:layout_marginTop="@dimen/dp_54" android:src="@drawable/bg_dot" android:layout_marginStart="@dimen/dp_4" />
+    <TextView android:textSize="@dimen/sp_13" android:textColor="@color/color_ccfafafa" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dp_70" android:text="@string/contact_permission_desc" android:layout_marginStart="@dimen/dp_12" />
+    <TextView android:textSize="@dimen/sp_13" android:textColor="@color/color_ccfafafa" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dp_48" android:text="@string/contact_permission" android:layout_marginStart="@dimen/dp_12" />
+    <com.xtc.ui.widget.button.DoubleFlatButton android:id="@id/dfb_operate" android:layout_width="fill_parent" android:layout_alignParentBottom="true" style="@style/DoubleFlatButton" />
+</RelativeLayout>

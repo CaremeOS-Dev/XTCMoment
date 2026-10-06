@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:id="@id/fl_loading" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:layout_gravity="center" android:id="@id/iv_load_anim" android:layout_width="@dimen/dp_30" android:layout_height="@dimen/dp_30" />
+    <ImageView android:layout_gravity="bottom" android:id="@id/iv_error" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/dp_43" android:adjustViewBounds="true" />
+    <TextView android:textSize="@dimen/sp_14" android:textColor="@color/white" android:gravity="center" android:layout_gravity="bottom" android:id="@id/tv_load_hint" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/dp_17" android:minHeight="@dimen/dp_20" />
+</FrameLayout>

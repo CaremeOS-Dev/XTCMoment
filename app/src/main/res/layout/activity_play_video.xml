@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:id="@id/rl_root" android:background="@color/color_black" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:custom="http://schemas.android.com/apk/res-auto">
+    <ImageView android:id="@id/bg_iv" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    <com.xtc.moment.module.widget.PlayVideoTextureView android:layout_gravity="center" android:id="@id/video_view" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    <com.xtc.moment.module.widget.NumTipSeekBar android:id="@id/sb_progress" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" custom:NumTipSeekBar_maxProgress="100" custom:NumTipSeekBar_progressColor="@color/play_video_pb" custom:NumTipSeekBar_progressHeight="5.0dip" custom:NumTipSeekBar_tickBarColor="@color/white_transparent" custom:NumTipSeekBar_tickBarHeight="5.0dip" />
+    <ImageView android:id="@id/cover_iv" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="fitXY" />
+    <RelativeLayout android:id="@id/rl_play_pause" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <ImageView android:id="@id/iv_play_button" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_friends_play" android:layout_centerInParent="true" />
+    </RelativeLayout>
+    <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@id/ll_cover" android:background="#80000000" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <View android:id="@id/loading_ll" android:layout_width="@dimen/dp_26" android:layout_height="@dimen/dp_26" />
+        <TextView android:textSize="@dimen/sp_13" android:id="@id/tv_loading_video" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/moment_loading" />
+    </LinearLayout>
+</FrameLayout>

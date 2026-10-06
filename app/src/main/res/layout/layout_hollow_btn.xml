@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <View android:id="@id/loading_long_hollow_btn" android:visibility="gone" android:layout_width="@dimen/normal_btn_loading_size" android:layout_height="@dimen/normal_btn_loading_size" />
+    <View android:id="@id/margin_long_hollow_btn" android:visibility="gone" android:layout_width="@dimen/normal_btn_loading_margin" android:layout_height="fill_parent" />
+    <TextView android:ellipsize="end" android:id="@id/tv_long_hollow_btn" android:layout_width="wrap_content" android:layout_height="wrap_content" android:singleLine="true" />
+</merge>

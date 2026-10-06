@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="@dimen/sp_14" android:textColor="@color/color_d9d9d9" android:id="@id/tv_comment_view_1" android:background="@drawable/bg_comment_textview" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+    <TextView android:textSize="@dimen/sp_14" android:textColor="@color/color_d9d9d9" android:id="@id/tv_comment_view_2" android:background="@drawable/bg_comment_textview" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+    <TextView android:textSize="@dimen/sp_14" android:textColor="@color/color_d9d9d9" android:id="@id/tv_comment_view_3" android:background="@drawable/bg_comment_textview" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+    <TextView android:textSize="@dimen/sp_14" android:textColor="@color/color_d9d9d9" android:id="@id/tv_comment_view_4" android:background="@drawable/bg_comment_textview" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+    <TextView android:textSize="@dimen/sp_14" android:textColor="@color/color_d9d9d9" android:id="@id/tv_comment_view_5" android:background="@drawable/bg_comment_textview" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+    <TextView android:textSize="@dimen/sp_14" android:textColor="@drawable/bg_unfold_comment_textview" android:gravity="center" android:layout_gravity="center" android:id="@id/tv_comment_view_last" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dp_5" android:layout_marginBottom="@dimen/dp_4" android:text="@string/unfold_other_comment" />
+</merge>

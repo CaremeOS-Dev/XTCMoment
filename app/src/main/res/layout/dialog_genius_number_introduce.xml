@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="@color/black" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="17.0sp" android:textColor="#80ffffff" android:gravity="center" android:id="@id/tv_genius_number" android:background="@drawable/bg_normal_corner" android:layout_width="fill_parent" android:layout_height="@dimen/dp_50" android:layout_marginTop="@dimen/dp_2" android:text="@string/genius_number" />
+    <TextView android:textSize="16.0sp" android:textColor="#ff999999" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dp_9" android:text="@string/genius_number_introduce" android:layout_marginStart="@dimen/dp_6" android:layout_marginEnd="@dimen/dp_6" />
+</LinearLayout>

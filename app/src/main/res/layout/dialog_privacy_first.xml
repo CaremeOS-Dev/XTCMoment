@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.xtc.ui.widget.scalablecontainer.AppScrollView android:orientation="vertical" android:background="@color/color_black" android:scrollbars="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:fillViewport="true" app:asv_anim_scale="false">
+        <LinearLayout android:orientation="vertical" android:paddingTop="2.0dip" android:paddingBottom="50.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="@dimen/dialog_text_margin_edge" android:paddingEnd="@dimen/dialog_text_margin_edge">
+            <TextView android:textSize="13.0sp" android:textColor="#fffafafa" android:id="@id/tv_title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/privacy_title1" />
+            <TextView android:textSize="13.0sp" android:textColor="#fffafafa" android:id="@id/tv_title1" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="7.0dip" android:text="@string/privacy_list_titile1" android:alpha="0.8" />
+            <LinearLayout android:orientation="vertical" android:id="@id/ll_list1" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="3.0dip" />
+            <TextView android:textSize="13.0sp" android:textColor="#fffafafa" android:id="@id/tv_title2" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="11.0dip" android:text="@string/privacy_list_titile2" android:alpha="0.8" />
+            <LinearLayout android:orientation="vertical" android:id="@id/ll_list2" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="3.0dip" />
+            <TextView android:textSize="13.0sp" android:textColor="#fffafafa" android:id="@id/tv_title3" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="11.0dip" android:text="@string/privacy_list_titile3" android:alpha="0.8" />
+            <LinearLayout android:orientation="vertical" android:id="@id/ll_list3" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="3.0dip" />
+            <TextView android:textSize="12.0sp" android:textColor="#ff3aec81" android:gravity="center" android:layout_gravity="center_horizontal" android:id="@id/tv_privacy" android:padding="6.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/privacy_link" android:drawableEnd="@drawable/ic_enter_green" />
+            <TextView android:textSize="12.0sp" android:textColor="#ff3aec81" android:gravity="center" android:layout_gravity="center_horizontal" android:id="@id/tv_agreement" android:padding="6.0dip" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/privacy_link_agreement" android:drawableEnd="@drawable/ic_enter_green" />
+            <TextView android:textSize="12.0sp" android:textColor="#ff3aec81" android:gravity="center" android:layout_gravity="center_horizontal" android:id="@id/tv_disclaimer" android:padding="6.0dip" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/privacy_link_disclaimer" android:drawableEnd="@drawable/ic_enter_green" />
+        </LinearLayout>
+    </com.xtc.ui.widget.scalablecontainer.AppScrollView>
+    <View android:layout_gravity="bottom" android:background="@drawable/bg_privacy_mask" android:layout_width="fill_parent" android:layout_height="76.0dip" />
+    <com.xtc.ui.widget.button.DoubleFlatButton android:layout_gravity="bottom" android:id="@id/dfb_operate" style="@style/DoubleFlatButton" />
+</FrameLayout>

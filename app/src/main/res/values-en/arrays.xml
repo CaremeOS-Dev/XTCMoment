@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="permission_label">
+        <item>Make calls</item>
+        <item>Receive and send SMS messages</item>
+        <item>Access network</item>
+        <item>Perform a local recording</item>
+        <item>Read and write SMS content</item>
+        <item>Read contact information</item>
+        <item>Write or delete contacts</item>
+        <item>Read Call History</item>
+        <item>Edit call log</item>
+        <item>Access location data</item>
+        <item>Take photos and record videos</item>
+        <item>Modify network status</item>
+        <item>Read Wi-Fi MAC address</item>
+        <item>Enable or disable WLAN</item>
+        <item>Enable or disable Bluetooth</item>
+        <item>Read the call status and IMEI / MEID of the device</item>
+        <item>Access location data</item>
+        <item>Read and write media audio-visual data (e.g. photos, videos and audio)</item>
+        <item>Read and write media audio-visual data (e.g. photos, videos and audio)</item>
+        <item>Smart Card Privileges</item>
+    </string-array>
+</resources>

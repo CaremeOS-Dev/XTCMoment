@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge android:gravity="center" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <android.support.v4.view.ViewPager android:id="@id/vp_content" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    <com.xtc.moment.module.widget.IndicatorContainerView android:gravity="center_horizontal" android:layout_gravity="center_horizontal" android:orientation="horizontal" android:id="@id/indicatorContainerView" android:background="@drawable/bg_chat_activity_tag" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    <include layout="@layout/layout_common_error" />
+</merge>

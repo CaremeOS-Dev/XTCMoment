@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:background="@color/black" android:layout_width="fill_parent" android:layout_height="fill_parent" android:fillViewport="true"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:textSize="@dimen/sp_12" android:textColor="@color/white" android:gravity="center" android:id="@id/tv_rang_details_tittle" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dp_6" android:layout_marginBottom="@dimen/dp_6" />
+        <ImageView android:layout_gravity="center" android:id="@id/iv_type_visible" android:visibility="gone" android:layout_width="@dimen/dp_60" android:layout_height="@dimen/dp_60" android:layout_marginTop="@dimen/dp_36" />
+        <TextView android:textSize="@dimen/sp_12" android:textColor="@color/white" android:gravity="center" android:id="@id/tv_these_rang_details" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dp_6" android:layout_marginBottom="@dimen/dp_6" />
+        <RelativeLayout android:descendantFocusability="blocksDescendants" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <android.support.v7.widget.RecyclerView android:id="@id/rv_friends_list" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:nestedScrollingEnabled="false" />
+        </RelativeLayout>
+        <LinearLayout android:gravity="center" android:orientation="horizontal" android:id="@id/ll_look_range" android:paddingTop="@dimen/dp_14" android:paddingBottom="@dimen/dp_13" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TextView android:textSize="@dimen/sp_14" android:textColor="@color/white" android:gravity="center" android:layout_width="wrap_content" android:layout_height="@dimen/dp_20" android:text="@string/change_visible_range_btn" android:singleLine="true" android:includeFontPadding="false" />
+            <ImageView android:layout_width="@dimen/dp_12" android:layout_height="@dimen/dp_12" android:src="@drawable/i11_icon_more" android:layout_marginStart="@dimen/dp_2" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:background="#ff000000" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.xtc.ui.widget.scalablecontainer.AppRecyclerView android:id="@id/record_rv" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/record_ll_none" android:background="@drawable/bg_record_none" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <ImageView android:layout_width="88.0dip" android:layout_height="98.0dip" android:src="@drawable/ic_record_none" />
+        <TextView android:textSize="12.0sp" android:textColor="@color/color_white" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="6.0dip" android:text="@string/string_record_none" />
+    </LinearLayout>
+</FrameLayout>

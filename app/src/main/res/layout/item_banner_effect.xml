@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="18.0sp" android:textColor="@color/white" android:id="@id/effect_banner" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="20.0dip" android:text="@string/banner_effect" android:layout_marginStart="@dimen/margin_2dp" android:layout_marginEnd="@dimen/margin_2dp" />
+    <TextView android:textSize="15.0sp" android:textColor="@color/color_b3b3b3" android:id="@id/banner_effect_text" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:text="@string/banner_detail_hint" android:layout_marginStart="@dimen/margin_2dp" android:layout_marginEnd="@dimen/margin_2dp" />
+</LinearLayout>

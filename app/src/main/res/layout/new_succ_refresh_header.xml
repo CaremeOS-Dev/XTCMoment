@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@id/new_succ_header" android:background="@android:color/transparent" android:layout_width="fill_parent" android:layout_height="@dimen/dp_46"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.xtc.ui.widget.ptrrefresh.header.material.SuccCircleView android:id="@id/succ_circle_view" android:layout_width="@dimen/dp_30" android:layout_height="@dimen/dp_30" android:layout_centerInParent="true" />
+    <TextView android:textColor="@android:color/white" android:id="@id/succ_text_view" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/refresh_success" android:layout_centerInParent="true" android:layout_marginStart="@dimen/dp_4" android:layout_toEndOf="@id/succ_circle_view" />
+</RelativeLayout>

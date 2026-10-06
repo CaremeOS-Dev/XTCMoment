@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/ll_location" android:background="@drawable/default_list_item_normal" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="4.0dip" android:minHeight="31.0dip" android:layout_below="@id/chat_msg_item_photo_iv"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/iv_position" android:layout_width="@dimen/dp_12" android:layout_height="wrap_content" android:src="@drawable/ic_lbs_position" android:layout_marginStart="5.0dip" />
+    <TextView android:textSize="13.0sp" android:textColor="#ff96caff" android:ellipsize="end" android:id="@id/tv_location" android:paddingTop="6.0dip" android:paddingBottom="6.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="2" android:layout_marginStart="4.0dip" android:layout_marginEnd="2.0dip" />
+    <ImageView android:id="@id/iv_emoji" android:visibility="invisible" android:layout_width="21.0dip" android:layout_height="24.0dip" android:scaleType="centerCrop" android:translationX="-31.0dip" />
+</merge>

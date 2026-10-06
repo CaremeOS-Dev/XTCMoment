@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@id/rl_root_normal_dialog_with_title" style="@style/NormalDialogRoot.WithTitle"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.xtc.ui.widget.scalablecontainer.AppScrollView android:orientation="vertical" android:scrollbars="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:fillViewport="true" android:layout_above="@id/btn_bottom_with_title">
+        <RelativeLayout android:orientation="vertical" android:paddingTop="2.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="4.0dip" android:paddingEnd="4.0dip">
+            <TextView android:id="@id/tv_title_normal_dialog_with_title" style="@style/NormalDialogTitleWithTitle" />
+            <TextView android:id="@id/tv_content_normal_dialog_with_title" android:layout_below="@id/tv_title_normal_dialog_with_title" style="@style/NormalDialogContentWithTitle" />
+            <TextView android:id="@id/tv_extra_normal_dialog_with_title" android:layout_below="@id/tv_content_normal_dialog_with_title" style="@style/NormalDialogContentWithTitle" />
+        </RelativeLayout>
+    </com.xtc.ui.widget.scalablecontainer.AppScrollView>
+    <com.xtc.ui.widget.button.DoubleFlatButton android:id="@id/btn_bottom_with_title" android:layout_width="fill_parent" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true" style="@style/DoubleFlatButton" />
+</RelativeLayout>

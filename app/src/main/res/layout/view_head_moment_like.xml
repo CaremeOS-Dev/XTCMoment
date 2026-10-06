@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="17.0sp" android:textColor="#fffec02b" android:gravity="center" android:id="@id/moment_like_title" android:background="@drawable/circle_5_title" android:layout_width="fill_parent" android:layout_height="32.0dip" android:text="@string/receive_praise" android:layout_alignParentTop="true" />
+</LinearLayout>

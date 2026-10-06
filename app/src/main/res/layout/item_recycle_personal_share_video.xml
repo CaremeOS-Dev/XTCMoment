@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical" android:paddingBottom="8.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/iv_banner" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentTop="true" />
+    <include android:id="@id/head_include" layout="@layout/layout_share_icon_and_name" />
+    <com.xtc.moment.module.widget.MomentContentView android:textSize="15.0sp" android:textColor="@color/normal_text" android:id="@id/tv_no_support" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:text="@string/no_support_tips" android:layout_below="@id/head_include" />
+    <include android:id="@id/ic_item_recycle_personal_share_video_inner_view" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_below="@id/tv_no_support" layout="@layout/item_recycle_personal_share_video_inner_view" />
+    <ImageView android:id="@id/iv_moment_range" android:layout_below="@id/ic_item_recycle_personal_share_video_inner_view" style="@style/moment_range" />
+    <com.xtc.moment.module.widget.MomentReminderView android:id="@id/moment_reminder" android:layout_below="@id/iv_moment_range" style="@style/moment_reminder" />
+    <include android:id="@id/ll_fun" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_below="@id/moment_reminder" layout="@layout/layout_fun_interaction" />
+    <TextView android:textSize="12.0sp" android:textColor="@color/likes_text" android:id="@id/tv_likes" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="10.0dip" android:layout_below="@id/ll_fun" />
+    <include android:id="@id/include_comment_view" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="12.0dip" android:layout_below="@id/tv_likes" layout="@layout/layout_main_comment_view" />
+    <View android:background="@drawable/view_item_seperator" android:layout_width="fill_parent" android:layout_height="@dimen/divider_height_0.5dp" android:layout_marginTop="9.0dip" android:layout_below="@id/include_comment_view" />
+</RelativeLayout>

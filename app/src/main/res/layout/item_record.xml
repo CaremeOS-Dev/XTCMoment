@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout android:id="@id/cl_top" android:background="@drawable/bg_item_record" android:layout_width="@dimen/dp_160" android:layout_height="@dimen/dp_60" android:layout_marginTop="@dimen/dp_5"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView android:textSize="17.0sp" android:textColor="#ffffffff" android:ellipsize="end" android:id="@id/tv_title" android:layout_width="@dimen/dp_125" android:layout_height="@dimen/dp_25" android:layout_marginTop="8.0dip" android:maxLines="1" android:layout_marginStart="@dimen/dp_6" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
+    <TextView android:textSize="11.0sp" android:textColor="#ffffffff" android:ellipsize="end" android:id="@id/tv_content" android:layout_width="@dimen/dp_120" android:layout_height="@dimen/dp_16" android:maxLines="1" app:layout_constraintStart_toStartOf="@id/tv_title" app:layout_constraintTop_toBottomOf="@id/tv_title" />
+    <ImageView android:layout_width="@dimen/dp_28" android:layout_height="@dimen/dp_28" android:src="@drawable/next_icon" app:layout_constraintBottom_toBottomOf="@id/tv_content" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="@id/tv_title" />
+</android.support.constraint.ConstraintLayout>

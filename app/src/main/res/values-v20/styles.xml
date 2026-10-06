@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="BanSliding">
+        <item name="android:windowSwipeToDismiss">false</item>
+    </style>
+    <style name="CommonDialogStyle">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowSwipeToDismiss">false</item>
+    </style>
+    <style name="NoSwipeTheme" parent="@style/AppTheme">
+        <item name="android:windowSwipeToDismiss">false</item>
+    </style>
+    <style name="Theme_Share_Moment" parent="@style/Theme_Share">
+        <item name="android:windowSwipeToDismiss">false</item>
+    </style>
+    <style name="base_popup_style" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowCloseOnTouchOutside">false</item>
+        <item name="android:windowSwipeToDismiss">false</item>
+    </style>
+    <style name="dialog_default">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowSwipeToDismiss">false</item>
+    </style>
+    <style name="dialog_default_style_forbidSwipe" parent="@style/dialog_default_style">
+        <item name="android:windowSwipeToDismiss">false</item>
+    </style>
+    <style name="three_dialog_style" parent="@style/dialog_default_style">
+        <item name="android:windowSwipeToDismiss">true</item>
+    </style>
+</resources>

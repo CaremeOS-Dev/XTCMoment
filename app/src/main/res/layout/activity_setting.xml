@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <com.xtc.ui.widget.textview.RightIconTextView app:ritv_title_color="@color/color_ffbe0b" style="@style/RightIconTextViewTitle" />
+        <com.xtc.ui.widget.item.clickScale.RightIconItem android:id="@id/community_conversation_rii" app:ri_icon="@drawable/next_icon" app:ri_title="@string/community_conversation" style="@style/RightIconItem" />
+        <com.xtc.ui.widget.item.clickScale.RightIconItem android:id="@id/about_rii_privacy" app:ri_icon="@drawable/next_icon" app:ri_title="@string/privacy" style="@style/RightIconItem" />
+        <com.xtc.ui.widget.item.clickScale.RightIconItemWithExtraInfo android:layout_marginBottom="@dimen/dp_20" app:ris_summary="@string/ipc_information_extra" app:ris_title="@string/ipc_information" style="@style/NoneIconItemWithExtraInfo" />
+    </LinearLayout>
+</ScrollView>

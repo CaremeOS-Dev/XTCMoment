@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.xtc.moment.module.widget.ContentScrollView android:orientation="vertical" android:id="@id/contentScrollView" android:background="@color/black" android:scrollbars="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <ImageView android:id="@id/iv_gender_background" android:layout_width="fill_parent" android:layout_height="wrap_content" android:src="@drawable/bg_gender_boy" />
+            <ImageView android:id="@id/iv_avatar_bg" android:background="@drawable/shape_avatar_bg" android:layout_width="@dimen/dp_77" android:layout_height="@dimen/dp_77" android:layout_marginTop="@dimen/dp_19" android:layout_centerHorizontal="true" />
+            <com.xtc.ui.widget.imageView.CircleImageView android:id="@id/iv_info_head" android:layout_width="@dimen/dp_73" android:layout_height="@dimen/dp_73" android:layout_marginTop="@dimen/dp_21" android:scaleType="fitXY" android:layout_centerHorizontal="true" app:civHasStroke="false" />
+            <com.opensource.svgaplayer.SVGAImageView android:layout_gravity="center" android:id="@id/iv_personal_head_dress" android:layout_width="@dimen/dp_93" android:layout_height="@dimen/dp_93" android:layout_marginTop="@dimen/dp_14" android:scaleType="fitXY" android:layout_centerHorizontal="true" app:clearsAfterStop="false" />
+        </RelativeLayout>
+        <LinearLayout android:layout_gravity="center" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dp_6">
+            <TextView android:textSize="@dimen/sp_17" android:textColor="@color/white" android:ellipsize="end" android:gravity="center" android:id="@id/tv_info_nick_name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="2" android:includeFontPadding="false" />
+            <ImageView android:layout_gravity="center" android:id="@id/iv_gender" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="@dimen/dp_5" />
+        </LinearLayout>
+        <TextView android:textSize="@dimen/sp_13" android:textColor="@color/color_666666" android:ellipsize="end" android:layout_gravity="center" android:id="@id/tv_info_real_name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dp_3" android:maxLines="2" android:includeFontPadding="false" />
+        <TextView android:textSize="@dimen/sp_13" android:textColor="@color/color_666666" android:ellipsize="end" android:layout_gravity="center" android:id="@id/tv_no_birthday" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dp_3" android:text="@string/no_birthday" android:includeFontPadding="false" />
+        <LinearLayout android:gravity="center" android:orientation="horizontal" android:id="@id/ll_my_State" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="@dimen/dp_20" android:layout_marginTop="@dimen/dp_2" android:layout_marginBottom="@dimen/dp_5">
+            <ImageView android:id="@id/my_state_iv" android:layout_width="@dimen/dp_20" android:layout_height="fill_parent" android:scaleType="centerCrop" />
+            <TextView android:textSize="@dimen/sp_15" android:textColor="@color/white" android:gravity="center_vertical" android:id="@id/my_state_tv" android:layout_width="wrap_content" android:layout_height="fill_parent" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center_horizontal" android:layout_gravity="center_horizontal" android:orientation="horizontal" android:id="@id/ll_birthday_and_constellation" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dp_3" android:baselineAligned="false">
+            <LinearLayout android:gravity="center" android:orientation="horizontal" android:background="@drawable/bg_birthday_and_constellation" android:layout_width="0.0dip" android:layout_height="@dimen/dp_35" android:layout_weight="1.0" android:layout_marginEnd="@dimen/dp_2">
+                <ImageView android:layout_width="@dimen/dp_15" android:layout_height="@dimen/dp_15" android:src="@drawable/ic_birthday" android:layout_marginEnd="@dimen/dp_1" />
+                <TextView android:textSize="@dimen/sp_13" android:textColor="#fffcc927" android:gravity="center" android:id="@id/tv_birthday" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout android:gravity="center" android:orientation="horizontal" android:background="@drawable/bg_birthday_and_constellation" android:layout_width="0.0dip" android:layout_height="@dimen/dp_35" android:layout_weight="1.0" android:layout_marginStart="@dimen/dp_2">
+                <ImageView android:id="@id/iv_constellation" android:layout_width="@dimen/dp_15" android:layout_height="@dimen/dp_15" android:src="@drawable/ic_constellation_mojie" android:layout_marginEnd="@dimen/dp_2" />
+                <TextView android:textSize="@dimen/sp_13" android:textColor="@color/color_capricornus" android:gravity="center" android:id="@id/tv_constellation" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+        <com.xtc.moment.module.personalinfo.widget.ItemScalableWithBigCorner android:id="@id/item_genius_number" android:layout_width="fill_parent" android:layout_height="@dimen/dp_40" android:layout_marginTop="@dimen/dp_3" />
+        <com.xtc.ui.widget.item.clickScale.LeftIconItemWithExtraInfo android:id="@id/item_personalized_signature" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dp_5" />
+        <com.xtc.ui.widget.item.clickScale.LeftIconItemWithExtraInfo android:id="@id/item_level" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dp_5" />
+        <com.xtc.moment.module.personalinfo.widget.PersonalBadgeItem android:id="@id/item_badge" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dp_5" />
+        <com.xtc.ui.widget.button.LongSolidButton android:id="@id/lsb_go_to_chat" android:layout_width="fill_parent" android:layout_height="@dimen/dp_40" android:layout_marginTop="@dimen/dp_10" android:layout_marginBottom="@dimen/dp_4" />
+        <com.xtc.ui.widget.button.LongSolidButton android:id="@id/lsb_delete_friend" android:layout_width="fill_parent" android:layout_height="@dimen/dp_40" android:layout_marginBottom="@dimen/dp_6" />
+    </LinearLayout>
+</com.xtc.moment.module.widget.ContentScrollView>

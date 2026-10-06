@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView android:layout_gravity="center_vertical" android:id="@id/iv_h5_loading" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    <RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_centerInParent="true">
+        <ImageView android:layout_gravity="center_vertical" android:id="@id/iv_loading_view" android:layout_width="30.0dip" android:layout_height="30.0dip" android:layout_centerInParent="true" />
+        <TextView android:textSize="@dimen/loading_text_size_13sp" android:textColor="#ffffffff" android:gravity="center" android:id="@id/tv_loading" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:text="@string/text_loading" android:layout_below="@id/iv_loading_view" />
+    </RelativeLayout>
+    <RelativeLayout android:id="@id/rl_webview" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_centerInParent="true" />
+</RelativeLayout>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditText android:textSize="@dimen/sp_0" android:id="@id/et_hint" android:background="@color/color_black" android:layout_width="1.0dip" android:layout_height="1.0dip" android:cursorVisible="false" android:inputType="text" android:imeOptions="actionSend" />
+    <android.support.v7.widget.RecyclerView android:id="@id/rv_details" android:background="@android:color/black" android:visibility="visible" android:scrollbars="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@id/ll_cover" android:background="@android:color/black" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <View android:id="@id/loading_ll" android:layout_width="@dimen/dp_26" android:layout_height="@dimen/dp_26" />
+        <TextView android:textSize="@dimen/sp_13" android:id="@id/tv_loading_video" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/tips_loading" />
+    </LinearLayout>
+</FrameLayout>

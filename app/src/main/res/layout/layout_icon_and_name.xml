@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@id/rl_moment_sender" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/iv_account_icon" android:layout_width="36.0dip" android:layout_height="36.0dip" android:layout_alignParentTop="true" android:layout_alignParentStart="true" />
+    <ImageView android:id="@id/iv_account_icon_bg" android:background="@drawable/head_round_corner_bg" android:layout_width="36.0dip" android:layout_height="36.0dip" android:layout_alignParentTop="true" android:layout_alignParentStart="true" />
+    <ImageView android:id="@id/iv_official_enterprise" android:visibility="gone" android:layout_width="13.0dip" android:layout_height="13.0dip" android:src="@drawable/ic_official_enterprise" android:layout_alignBottom="@id/iv_account_icon" android:layout_alignEnd="@id/iv_account_icon" />
+    <ImageView android:id="@id/iv_official_enterprise_bg" android:visibility="gone" android:layout_width="13.0dip" android:layout_height="13.0dip" android:src="@drawable/ic_official_enterprise" android:layout_alignBottom="@id/iv_account_icon_bg" android:layout_alignEnd="@id/iv_account_icon_bg" />
+    <TextView android:textSize="17.0sp" android:textColor="#fffec02b" android:ellipsize="end" android:id="@id/tv_account_name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:maxLines="1" android:layout_marginStart="8.0dip" android:layout_toEndOf="@id/iv_account_icon" />
+    <ImageView android:id="@id/iv_official_label" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dp_10" android:src="@drawable/ic_official_label" android:layout_marginStart="@dimen/dp_4" android:layout_toEndOf="@id/tv_account_name" />
+    <ImageView android:gravity="center" android:id="@id/iv_account_report" android:paddingTop="12.5dip" android:paddingBottom="4.0dip" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/report_to_bottom" android:paddingStart="5.0dip" android:paddingEnd="7.0dip" android:layout_alignParentEnd="true" />
+</RelativeLayout>

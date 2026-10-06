@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView android:id="@id/scrollView" android:background="@color/black" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <TextView android:textSize="@dimen/sp_15" android:textStyle="bold" android:textColor="@color/color_ff8400" android:ellipsize="end" android:gravity="center_horizontal" android:id="@id/tv_top" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dp_18" android:maxLines="2" android:includeFontPadding="false" android:layout_marginStart="@dimen/dp_6" android:layout_marginEnd="@dimen/dp_6" />
+        <View android:background="@color/color_33ff8400" android:layout_width="fill_parent" android:layout_height="@dimen/dp_4" android:layout_marginTop="@dimen/dp_6" android:layout_marginStart="@dimen/dp_21" android:layout_marginEnd="@dimen/dp_21" />
+        <TextView android:textSize="@dimen/sp_15" android:textStyle="bold" android:textColor="@color/white" android:gravity="center_horizontal" android:id="@id/tv_title" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dp_11" android:includeFontPadding="false" android:lineSpacingExtra="@dimen/dp_4" android:layout_marginStart="@dimen/dp_6" android:layout_marginEnd="@dimen/dp_6" />
+        <TextView android:textSize="@dimen/sp_15" android:textColor="@color/white" android:id="@id/tv_content" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dp_12" android:layout_marginBottom="@dimen/dp_30" android:includeFontPadding="false" android:lineSpacingExtra="@dimen/dp_2" android:layout_marginStart="@dimen/dp_6" android:layout_marginEnd="@dimen/dp_6" />
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

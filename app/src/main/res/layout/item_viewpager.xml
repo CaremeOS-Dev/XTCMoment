@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_width="wrap_content" android:layout_height="@dimen/dp_90"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView android:id="@id/iv_item_pic" android:layout_width="@dimen/dp_81" android:layout_height="@dimen/dp_90" android:scaleType="centerCrop" android:layout_marginEnd="30.0dip" />
+    <TextView android:textSize="@dimen/dp_13" android:textColor="#ffffffff" android:layout_gravity="end|bottom|center" android:id="@id/tv_item_page" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/dp_5" android:shadowColor="@color/color_black" android:layout_marginEnd="@dimen/dp_40" />
+</FrameLayout>

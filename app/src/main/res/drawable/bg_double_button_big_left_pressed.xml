@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <size android:height="@dimen/dimen_big_double_button_height" android:width="@dimen/dimen_big_double_button_single_width" />
+    <gradient android:startColor="@color/color_big_double_button_left_pressed_start" android:endColor="@color/color_big_double_button_left_pressed_end" android:angle="270.0" />
+    <corners android:topLeftRadius="@dimen/dimen_big_double_button_corner" android:bottomLeftRadius="@dimen/dimen_big_double_button_corner" />
+</shape>

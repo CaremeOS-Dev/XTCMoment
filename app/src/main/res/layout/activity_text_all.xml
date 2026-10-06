@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent" android:fillViewport="true"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.constraint.ConstraintLayout android:paddingBottom="@dimen/dp_25" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <ImageView android:id="@id/iv_account_icon" android:layout_width="@dimen/dp_38" android:layout_height="@dimen/dp_38" android:layout_marginTop="@dimen/dp_4" android:scaleType="centerCrop" android:layout_marginStart="@dimen/dp_4" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
+        <TextView android:textSize="@dimen/text_size_17sp" android:textColor="#ffffffff" android:id="@id/tv_account_name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="@dimen/dp_6" app:layout_constraintBottom_toBottomOf="@id/iv_account_icon" app:layout_constraintStart_toEndOf="@id/iv_account_icon" app:layout_constraintTop_toTopOf="@id/iv_account_icon" />
+        <TextView android:textSize="@dimen/text_size_14sp" android:textColor="#ffffffff" android:id="@id/tv_content" android:layout_width="150.0dip" android:layout_height="wrap_content" android:layout_marginTop="4.0dip" android:layout_marginStart="5.0dip" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/iv_account_icon" />
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

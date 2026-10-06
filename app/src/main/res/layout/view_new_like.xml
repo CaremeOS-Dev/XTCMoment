@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.xtc.ui.widget.scalablecontainer.AppLinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/ll_new_like" android:background="@drawable/bg_new_message" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="17.0sp" android:textColor="@color/color_ffffff" android:id="@id/new_like_count" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/moment_newmsg" android:layout_weight="1.0" android:layout_marginStart="@dimen/margin_4dp" />
+    <com.xtc.ui.widget.textview.UnreadView android:id="@id/iv_unread_view" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="2.0dip" />
+    <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/i11_icon_more" android:layout_centerVertical="true" android:layout_marginEnd="@dimen/margin_3dp" android:layout_alignParentEnd="true" />
+</com.xtc.ui.widget.scalablecontainer.AppLinearLayout>

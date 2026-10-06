@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:id="@id/layout" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cube_base="http://schemas.android.com/apk/res-auto">
+    <EditText android:textSize="@dimen/sp_0" android:id="@id/et_hint" android:background="@color/color_black" android:layout_width="1.0dip" android:layout_height="1.0dip" android:cursorVisible="false" android:inputType="text" android:imeOptions="actionSend" />
+    <com.xtc.ui.widget.scalablecontainer.AppRecyclerView android:id="@id/rv" android:background="#ff000000" android:scrollbars="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" cube_base:thumbColor="@color/white_start" />
+</FrameLayout>

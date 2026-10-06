@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include layout="@layout/layout_icon_and_name" />
+    <com.xtc.moment.module.widget.MomentContentView android:textSize="@dimen/sp_15" android:textColor="#ccffffff" android:id="@id/tv_moment_content" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="4.0dip" android:layout_below="@id/rl_moment_sender" />
+    <com.xtc.moment.widget.LbsLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/ll_lbs" android:background="@drawable/default_list_item_normal" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="4.0dip" android:minHeight="31.0dip" android:layout_below="@id/tv_moment_content" />
+    <TextView android:textSize="10.0sp" android:textColor="@color/color_8a8a8a" android:gravity="center" android:id="@id/tv_advert_word" android:background="@drawable/bg_advert_word" android:visibility="gone" android:clickable="true" android:layout_width="30.0dip" android:layout_height="16.0dip" android:layout_marginTop="6.0dip" android:text="@string/advert_word" android:layout_below="@id/ll_lbs" />
+</RelativeLayout>

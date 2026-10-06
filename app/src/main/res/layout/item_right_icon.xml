@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.xtc.ui.widget.scalablecontainer.AppLinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/all_root_click_scale_right_icon" android:background="@drawable/default_list_item_normal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minHeight="@dimen/item_click_scale_min_height_1"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="@dimen/sp_17" android:textColor="@color/color_ffffff" android:ellipsize="end" android:gravity="start" android:id="@id/tv_click_scale_right_icon" android:layout_width="@dimen/dp_0" android:layout_height="wrap_content" android:layout_marginTop="@dimen/item_click_scale_tv_margin_top" android:layout_marginBottom="@dimen/item_click_scale_tv_margin_top" android:maxLines="3" android:layout_weight="1.0" android:lineSpacingExtra="@dimen/item_click_scale_tv_space_extra" android:layout_marginStart="@dimen/item_click_scale_tv_margin_left" />
+    <RelativeLayout android:id="@id/rl_click_scale_right_icon" android:layout_width="wrap_content" android:layout_height="fill_parent">
+        <ImageView android:id="@id/iv_click_scale_right_icon" android:layout_width="@dimen/item_click_scale_icon_small_width" android:layout_height="@dimen/item_click_scale_icon_small_width" android:layout_centerInParent="true" />
+    </RelativeLayout>
+</com.xtc.ui.widget.scalablecontainer.AppLinearLayout>

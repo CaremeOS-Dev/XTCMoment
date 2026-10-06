@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="permission_label">
+        <item>撥打電話</item>
+        <item>接收短訊、發送短訊</item>
+        <item>訪問網絡</item>
+        <item>進行本地錄音</item>
+        <item>讀寫短訊內容</item>
+        <item>讀寫聯絡人資料</item>
+        <item>寫入或刪除聯絡人</item>
+        <item>讀取通話記錄</item>
+        <item>修改通話記錄</item>
+        <item>獲取位置資訊</item>
+        <item>拍攝照片和錄製短片</item>
+        <item>修改網絡狀態</item>
+        <item>讀取WLAN-MAC地址</item>
+        <item>開啟或關閉WLAN</item>
+        <item>開啟或關閉藍牙</item>
+        <item>讀取裝置通話狀態和IMEI</item>
+        <item>獲取位置資訊</item>
+        <item>讀寫媒體影音數據（如相片、短片和音頻）</item>
+        <item>讀寫媒體影音數據（如相片、短片和音頻）</item>
+        <item>智能卡權限</item>
+    </string-array>
+</resources>

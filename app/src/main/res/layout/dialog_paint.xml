@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:background="@drawable/bg_grid" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.xtc.aitext.weight.VideoAnimView android:id="@id/player_painting" android:layout_width="160.0dip" android:layout_height="90.0dip" android:layout_marginTop="@dimen/dp_14" />
+    <TextView android:textSize="15.0sp" android:textColor="#ffffffff" android:gravity="center_horizontal" android:id="@id/dialog_painting_tv_hint" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/string_painting" />
+    <LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:id="@id/ll_root" android:layout_width="wrap_content" android:layout_height="20.0dip" android:layout_marginTop="8.0dip">
+        <ProgressBar android:id="@id/pb_painting" android:layout_width="100.0dip" android:layout_height="4.0dip" android:progress="4" android:progressDrawable="@drawable/setting_progressbar" style="@android:style/Widget.ProgressBar.Horizontal" />
+        <com.xtc.ui.widget.viewfilpper.ViewFlipper android:id="@id/dialog_vf" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4.0dip" android:flipInterval="2000" />
+    </LinearLayout>
+</LinearLayout>

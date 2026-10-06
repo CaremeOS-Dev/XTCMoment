@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical" android:id="@id/moment_text" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="15.0sp" android:textColor="#ffdedede" android:id="@id/tv_report_topic_content" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="16.0dip" android:layout_marginBottom="16.0dip" android:layout_marginStart="7.0dip" />
+    <ImageView android:layout_gravity="center" android:id="@id/iv_report_header_image" android:visibility="visible" android:layout_width="@dimen/photo_thumnail_width" android:layout_height="@dimen/photo_thumnail_height" android:layout_marginTop="16.0dip" android:layout_marginBottom="16.0dip" android:src="@drawable/ic_selfie_album_default" android:layout_centerInParent="true" android:layout_marginStart="7.0dip" android:layout_marginEnd="3.0dip" />
+    <ImageView android:layout_gravity="center" android:id="@id/iv_report_header_image_video_logo" android:padding="@dimen/dp_20" android:visibility="gone" android:layout_width="@dimen/photo_thumnail_width" android:layout_height="@dimen/photo_thumnail_height" android:layout_marginTop="16.0dip" android:layout_marginBottom="16.0dip" android:src="@drawable/ic_friends_play" android:scaleType="centerInside" android:layout_centerInParent="true" android:layout_marginEnd="3.0dip" />
+</RelativeLayout>

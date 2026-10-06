@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include layout="@layout/layout_icon_and_name" />
+    <LinearLayout android:orientation="vertical" android:background="@drawable/bg_comment_title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="2.0dip" android:layout_below="@id/rl_moment_sender">
+        <ImageView android:id="@id/chat_msg_item_photo_iv" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="5.0dip" android:scaleType="fitXY" />
+        <com.xtc.moment.module.widget.MomentContentView android:textSize="13.0sp" android:textColor="#fffafafa" android:ellipsize="end" android:id="@id/tv_moment_description" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:maxLines="2" android:layout_marginStart="5.0dip" android:layout_marginEnd="5.0dip" />
+    </LinearLayout>
+</RelativeLayout>

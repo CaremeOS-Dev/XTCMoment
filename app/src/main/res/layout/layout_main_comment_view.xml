@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <android.support.v7.widget.RecyclerView android:id="@id/moment_comment_rec" android:background="@drawable/bg_comment" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+    <com.xtc.moment.module.widget.MainMomentCommentView android:id="@id/moment_comment" android:background="@drawable/bg_comment" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+</LinearLayout>

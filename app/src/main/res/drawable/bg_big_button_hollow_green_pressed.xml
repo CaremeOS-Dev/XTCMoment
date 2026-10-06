@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <size android:height="@dimen/dimen_big_button_height" android:width="@dimen/dimen_big_button_width" />
+    <corners android:radius="@dimen/dimen_big_button_corner" />
+    <stroke android:width="@dimen/dimen_big_button_stroke" android:color="@color/color_big_button_stroke" />
+    <solid android:color="@color/color_big_hollow_button_bg_green_pressed" />
+</shape>

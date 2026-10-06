@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="@drawable/bg_share_app_group" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/dp_4" android:layout_marginTop="@dimen/dp_2"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include layout="@layout/layout_icon_and_name" />
+    <TextView android:textSize="@dimen/sp_15" android:textColor="#ff888888" android:id="@id/new_like_content" android:visibility="gone" android:layout_width="@dimen/dp_150" android:layout_height="wrap_content" android:layout_below="@id/comment_praise" />
+    <com.xtc.moment.module.publish.multi.view.PointerViewPager android:id="@id/new_like_vp" android:layout_width="@dimen/dp_125" android:layout_height="@dimen/dp_109" android:layout_marginTop="@dimen/dp_4" android:src="@drawable/ic_selfie_album_default" android:scaleType="centerCrop" android:layout_below="@id/new_like_content" />
+    <com.xtc.moment.widget.LbsLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/ll_lbs1" android:background="@drawable/default_list_item_normal" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="4.0dip" android:minHeight="31.0dip" android:layout_below="@id/new_like_vp" />
+</RelativeLayout>

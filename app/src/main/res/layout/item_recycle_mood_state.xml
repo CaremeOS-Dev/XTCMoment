@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.xtc.ui.widget.scalablecontainer.AppLinearLayout android:gravity="center_vertical" android:orientation="vertical" android:background="@drawable/list_bg" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.xtc.moment.module.widget.MomentContentView android:textSize="15.0sp" android:textColor="@color/normal_text" android:ellipsize="end" android:id="@id/tv_moment_content" android:layout_width="fill_parent" android:layout_height="wrap_content" android:maxLines="3" android:layout_marginStart="4.0dip" android:layout_marginEnd="4.0dip" />
+</com.xtc.ui.widget.scalablecontainer.AppLinearLayout>

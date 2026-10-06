@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="normal_dialog_with_icon_title_max_line">4</integer>
+    <integer name="four_icon_dialog_max_line">2</integer>
+    <integer name="normal_dialog_title_max_line">5</integer>
+</resources>

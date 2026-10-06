@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="horizontal" android:layout_width="@dimen/dimen_mid_double_button_width" android:layout_height="@dimen/dimen_mid_double_button_height"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <Button android:textSize="@dimen/dimen_mid_double_button_text" android:textColor="@color/text_color_mid_double_button" android:gravity="center" android:id="@id/double_button_mid_left_btn" android:background="@drawable/bg_double_button_mid_left" android:layout_width="@dimen/dp_0" android:layout_height="wrap_content" android:layout_weight="1.0" android:textAllCaps="false" />
+    <Button android:textSize="@dimen/dimen_mid_double_button_text" android:textColor="@color/text_color_mid_double_button" android:gravity="center" android:id="@id/double_button_mid_right_btn" android:background="@drawable/bg_double_button_mid_right" android:layout_width="@dimen/dp_0" android:layout_height="wrap_content" android:layout_weight="1.0" android:textAllCaps="false" android:layout_marginStart="@dimen/dimen_mid_double_button_divider" />
+</LinearLayout>

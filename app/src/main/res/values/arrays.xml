@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="permission_label">
+        <item>拨打电话</item>
+        <item>接收短信、发送短信</item>
+        <item>访问网络</item>
+        <item>进行本地录音</item>
+        <item>读写短信内容</item>
+        <item>读取联系人信息</item>
+        <item>写入或删除联系人</item>
+        <item>读取通话记录</item>
+        <item>修改通话记录</item>
+        <item>获取位置信息</item>
+        <item>拍摄照片和录制视频</item>
+        <item>修改网络状态</item>
+        <item>读取WLAN-MAC地址</item>
+        <item>开启或关闭WLAN</item>
+        <item>开启或关闭蓝牙</item>
+        <item>读取设备通话状态和IMEI</item>
+        <item>获取位置信息</item>
+        <item>访问媒体影音数据</item>
+        <item>访问媒体影音数据</item>
+        <item>智能卡权限</item>
+    </string-array>
+</resources>

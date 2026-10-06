@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/ll_root" android:background="@color/color_black" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ViewStub android:id="@id/vs_publish_progress" android:layout="@layout/view_publish_progress" android:layout_width="fill_parent" android:layout_height="@dimen/dp_36" />
+    <ImageView android:layout_gravity="center_horizontal" android:id="@id/moment_iv_loading" android:visibility="gone" android:layout_width="@dimen/chartMsgLoading_width_30dp" android:layout_height="@dimen/circleLoading_height_30dp" />
+    <com.xtc.moment.widget.SwipeRefreshLayout android:id="@id/moment_ref_header" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <EditText android:textSize="@dimen/sp_0" android:id="@id/et_hint" android:background="@color/color_black" android:layout_width="1.0dip" android:layout_height="1.0dip" android:cursorVisible="false" android:inputType="text" android:imeOptions="actionSend" />
+        <com.xtc.ui.widget.scalablecontainer.AppRecyclerView android:id="@id/rv_moment" android:background="@color/color_black" android:scrollbars="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    </com.xtc.moment.widget.SwipeRefreshLayout>
+</LinearLayout>

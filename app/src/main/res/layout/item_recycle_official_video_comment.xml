@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.xtc.moment.module.widget.CommentPraiseView android:id="@id/comment_praise" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+    <com.xtc.moment.module.widget.MomentOfficialVideoViewComment android:id="@id/moment" android:background="@drawable/bg_share_app_group" android:paddingBottom="@dimen/dp_12" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_below="@id/comment_praise" />
+</RelativeLayout>

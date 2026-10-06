@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:paddingLeft="@dimen/dp_7" android:paddingTop="@dimen/dp_2" android:paddingRight="@dimen/dp_5" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="@dimen/sp_16" android:textColor="@color/color_cffcff" android:layout_gravity="center_vertical" android:id="@id/tv_level" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="@dimen/dp_39" android:includeFontPadding="false" />
+    <TextView android:textSize="@dimen/sp_16" android:textColor="@color/color_cffcff" android:layout_gravity="center|right" android:id="@id/tv_level_count" android:layout_width="wrap_content" android:layout_height="wrap_content" android:includeFontPadding="false" />
+</FrameLayout>

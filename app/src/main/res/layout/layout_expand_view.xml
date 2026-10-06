@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.xtc.moment.module.widget.ExpandCusTomTextView android:textSize="@dimen/sp_14" android:textColor="@color/color_d9d9d9" android:id="@id/tv_mood_content" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    <LinearLayout android:gravity="center" android:orientation="horizontal" android:id="@id/ll_check" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <TextView android:textSize="@dimen/text_size_14sp" android:textColor="#ff3276ff" android:id="@id/tv_show_more" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/string_check_all_text" />
+        <ImageView android:layout_width="5.0dip" android:layout_height="10.0dip" android:layout_marginTop="@dimen/dp_1" android:src="@drawable/ic_check_text_next" android:layout_marginStart="@dimen/dp_3" />
+    </LinearLayout>
+</LinearLayout>

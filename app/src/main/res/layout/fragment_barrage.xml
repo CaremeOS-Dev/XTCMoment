@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@id/bottom_scroll_layout" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <master.flame.danmaku.ui.widget.DanmakuView android:id="@id/danmaku_view" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="@dimen/dp_10" />
+        <FrameLayout android:id="@id/fl_take_same_parent" android:paddingBottom="@dimen/dp_10" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingStart="@dimen/dp_15" android:layout_alignParentEnd="true">
+            <TextView android:textSize="@dimen/sp_15" android:textColor="@android:color/white" android:id="@id/tv_take_same" android:background="@drawable/bg_fun_video_take_same" android:padding="@dimen/dp_4" android:visibility="visible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/string_take_same_video" />
+        </FrameLayout>
+    </RelativeLayout>
+    <ImageView android:id="@id/iv_arrow" android:background="@drawable/ic_pull_up_arrow" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentBottom="true" />
+    <com.xtc.moment.module.widget.BarrageDrawerView android:orientation="horizontal" android:id="@id/ll_bottom_contentView" android:paddingTop="@dimen/dp_100" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true">
+        <LinearLayout android:orientation="horizontal" android:background="@drawable/ic_pull_up_rectangle" android:paddingTop="@dimen/dp_15" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true">
+            <com.xtc.ui.widget.scalablecontainer.AppLinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@id/ll_hide_danmu" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0">
+                <ImageView android:id="@id/cb_hide_barrage" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                <TextView android:textSize="@dimen/sp_10" android:textColor="@color/color_c6c6c6" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/string_barrage" />
+            </com.xtc.ui.widget.scalablecontainer.AppLinearLayout>
+            <com.xtc.ui.widget.scalablecontainer.AppRelativeLayout android:gravity="center" android:layout_gravity="center" android:id="@id/rl_send_flower_parent" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0">
+                <ImageView android:id="@id/iv_send_flower" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_props_flower_big" android:layout_centerHorizontal="true" />
+                <TextView android:textSize="@dimen/sp_10" android:textColor="@color/color_c6c6c6" android:gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/string_flower" android:layout_below="@id/iv_send_flower" android:layout_centerHorizontal="true" />
+                <TextView android:textSize="12.0sp" android:textColor="@android:color/white" android:gravity="center" android:id="@id/tv_flower_count" android:background="@drawable/bg_flower_shape" android:padding="@dimen/dp_2" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="@dimen/dp_29" />
+            </com.xtc.ui.widget.scalablecontainer.AppRelativeLayout>
+            <com.xtc.ui.widget.scalablecontainer.AppRelativeLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@id/rl_send_egg_parent" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0">
+                <ImageView android:layout_gravity="center" android:id="@id/iv_send_egg" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_props_egg_big" android:layout_centerHorizontal="true" />
+                <TextView android:textSize="@dimen/sp_10" android:textColor="@color/color_c6c6c6" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/string_egg" android:layout_below="@id/iv_send_egg" android:layout_centerHorizontal="true" />
+                <TextView android:textSize="12.0sp" android:textColor="@android:color/white" android:gravity="center" android:id="@id/tv_egg_count" android:background="@drawable/bg_flower_shape" android:padding="@dimen/dp_2" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="@dimen/dp_29" />
+            </com.xtc.ui.widget.scalablecontainer.AppRelativeLayout>
+        </LinearLayout>
+    </com.xtc.moment.module.widget.BarrageDrawerView>
+    <com.xtc.moment.module.widget.VideoAnimView android:id="@id/video_anim" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+</RelativeLayout>

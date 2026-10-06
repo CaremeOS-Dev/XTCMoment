@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include layout="@layout/layout_icon_and_name" />
+    <com.xtc.moment.module.widget.MomentContentView android:textSize="15.0sp" android:textColor="#ccffffff" android:id="@id/tv_no_support" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="4.0dip" android:text="@string/no_support_tips" android:layout_below="@id/rl_moment_sender" />
+    <RelativeLayout android:id="@id/rl_share_content" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:textSize="@dimen/sp_15" android:id="@id/video_share_text" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dp_4" />
+        <ImageView android:id="@id/chat_msg_item_photo_iv" android:layout_width="@dimen/dp_97" android:layout_height="@dimen/dp_107" android:layout_marginTop="7.0dip" android:src="@drawable/ic_selfie_album_default" android:scaleType="centerCrop" android:layout_below="@id/video_share_text" />
+        <ImageView android:id="@id/view_video_moment_video_logo" android:padding="@dimen/dp_30" android:visibility="visible" android:layout_width="@dimen/dp_97" android:layout_height="@dimen/dp_107" android:src="@drawable/ic_friends_play" android:scaleType="centerInside" android:layout_below="@id/video_share_text" />
+        <com.xtc.moment.widget.LbsLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/ll_lbs" android:background="@drawable/default_list_item_normal" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="4.0dip" android:minHeight="31.0dip" android:layout_below="@id/chat_msg_item_photo_iv" />
+        <include android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_below="@id/ll_lbs" android:layout_alignStart="@id/chat_msg_item_photo_iv" layout="@layout/layout_share_icon_name_flag" />
+    </RelativeLayout>
+</LinearLayout>

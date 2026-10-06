@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/iv_community" android:layout_width="fill_parent" android:layout_height="wrap_content" android:adjustViewBounds="true" />
+    <TextView android:textSize="@dimen/sp_15" android:textColor="@color/white" android:id="@id/tv_content" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="@dimen/dp_10" />
+</LinearLayout>

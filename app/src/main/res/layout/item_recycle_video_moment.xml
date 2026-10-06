@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginStart="@dimen/dp_4"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/iv_banner" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentTop="true" />
+    <ImageView android:id="@id/iv_lbs" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentTop="true" />
+    <com.xtc.moment.module.widget.MomentVideoView android:id="@id/moment" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+    <com.xtc.moment.widget.LbsLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/ll_lbs" android:background="@drawable/default_list_item_normal" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="4.0dip" android:minHeight="31.0dip" android:layout_below="@id/moment" />
+    <ImageView android:id="@id/iv_moment_range" android:layout_below="@id/ll_lbs" style="@style/moment_range" />
+    <com.xtc.moment.module.widget.MomentReminderView android:id="@id/moment_reminder" android:layout_below="@id/iv_moment_range" style="@style/moment_reminder" />
+    <LinearLayout android:orientation="horizontal" android:id="@id/ll_fun" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_below="@id/moment_reminder">
+        <TextView android:textSize="12.0sp" android:textColor="@color/time_text" android:id="@id/tv_time" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginTop="10.0dip" android:layout_weight="1.0" android:layout_marginStart="@dimen/dp_6" />
+        <com.xtc.moment.module.widget.MomentLikeView android:id="@id/moment_like" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        <com.xtc.moment.module.widget.CommentIconView android:id="@id/iv_moment_comment" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    </LinearLayout>
+    <include android:id="@id/include_comment_view" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="12.0dip" android:layout_below="@id/ll_fun" layout="@layout/layout_main_comment_view" />
+    <View android:background="@drawable/view_item_seperator" android:layout_width="fill_parent" android:layout_height="@dimen/divider_height_0.5dp" android:layout_below="@id/include_comment_view" />
+</RelativeLayout>

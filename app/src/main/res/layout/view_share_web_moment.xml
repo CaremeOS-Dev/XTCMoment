@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include layout="@layout/layout_icon_and_name" />
+    <com.xtc.moment.module.widget.MomentContentView android:textSize="15.0sp" android:textColor="#ccffffff" android:id="@id/tv_no_support" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip" android:text="@string/no_support_tips" />
+    <LinearLayout android:orientation="vertical" android:id="@id/ll_share_content" android:background="@drawable/bg_comment_title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip">
+        <ImageView android:id="@id/chat_msg_item_photo_iv" android:layout_width="fill_parent" android:layout_height="@dimen/photo_thumnail_height" android:layout_margin="5.0dip" android:scaleType="fitXY" />
+        <com.xtc.moment.module.widget.MomentContentView android:textSize="13.0sp" android:textColor="#fffafafa" android:ellipsize="end" android:id="@id/tv_moment_description" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:maxLines="2" android:layout_marginStart="5.0dip" android:layout_marginEnd="5.0dip" />
+    </LinearLayout>
+    <RelativeLayout android:id="@id/rl_share_content" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="2.0dip">
+        <ImageView android:id="@id/iv_app_icon" android:layout_width="14.0dip" android:layout_height="14.0dip" android:layout_marginTop="5.0dip" android:layout_marginStart="5.0dip" />
+        <ImageView android:layout_width="14.0dip" android:layout_height="14.0dip" android:layout_marginTop="5.0dip" android:src="@drawable/ic_app_icon_templates" android:layout_alignStart="@id/iv_app_icon" />
+        <TextView android:textSize="13.0sp" android:textColor="#ff777777" android:id="@id/tv_app_name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="3.0dip" android:layout_marginStart="3.0dip" android:layout_toEndOf="@id/iv_app_icon" />
+    </RelativeLayout>
+</LinearLayout>

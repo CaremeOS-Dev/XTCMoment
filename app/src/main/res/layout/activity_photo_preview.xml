@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:background="@color/color_black" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:layout_gravity="center_vertical" android:id="@id/iv_preview_loading" android:layout_width="fill_parent" android:layout_height="wrap_content" android:src="@drawable/ic_selfie_album_big" />
+    <com.github.chrisbanes.photoview.PhotoView android:layout_gravity="center_vertical" android:id="@id/pv_small_pic" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    <com.github.chrisbanes.photoview.PhotoView android:id="@id/pv_preview" android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+</FrameLayout>

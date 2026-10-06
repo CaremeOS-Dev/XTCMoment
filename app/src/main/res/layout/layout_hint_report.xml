@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <android.support.v4.widget.NestedScrollView android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginBottom="45.0dip">
+        <TextView android:textSize="@dimen/text_size_15sp" android:textColor="#ffffffff" android:id="@id/centerHintView" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_marginTop="@dimen/margin_3dp" android:layout_marginRight="5.0dip" android:text="@string/cancel_share" />
+    </android.support.v4.widget.NestedScrollView>
+    <com.xtc.ui.widget.button.DoubleFlatButton android:id="@id/hintDoubleButton" android:visibility="visible" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true" style="@style/DoubleFlatButton" />
+    <com.xtc.ui.widget.button.LongSolidButton android:layout_gravity="bottom" android:id="@id/btn_hint_sure" android:visibility="gone" android:layout_width="fill_parent" android:layout_margin="5.0dip" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true" style="@style/LongButton" />
+</RelativeLayout>

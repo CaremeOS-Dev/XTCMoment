@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@id/rl_moment_sender" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/iv_icon" android:layout_width="36.0dip" android:layout_height="36.0dip" android:scaleType="centerCrop" android:layout_centerVertical="true" />
+    <ImageView android:background="@drawable/head_round_corner_bg" android:layout_width="36.0dip" android:layout_height="36.0dip" android:layout_centerVertical="true" />
+    <TextView android:textSize="16.0sp" android:textColor="#fffec02b" android:ellipsize="end" android:gravity="center_vertical" android:id="@id/tv_name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="1" android:layout_centerInParent="true" android:layout_marginStart="8.0dip" android:layout_toEndOf="@id/iv_icon" />
+    <ImageView android:id="@id/iv_share_account_report" android:paddingTop="10.5dip" android:paddingBottom="5.0dip" android:visibility="visible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/report_to_bottom" android:layout_alignParentTop="true" android:paddingStart="5.0dip" android:paddingEnd="7.0dip" android:layout_alignParentEnd="true" />
+</RelativeLayout>

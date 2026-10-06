@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/dp_4" android:layout_marginTop="@dimen/dp_10"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include layout="@layout/layout_icon_and_name" />
+    <com.xtc.moment.module.widget.ExpandTextView android:id="@id/ev_text" android:visibility="gone" android:layout_width="@dimen/dp_150" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dp_4" android:layout_below="@id/rl_moment_sender" />
+    <TextView android:textSize="@dimen/text_size_15sp" android:id="@id/video_text" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dp_4" android:layout_below="@id/rl_moment_sender" />
+    <ImageView android:id="@id/chat_msg_item_photo_iv" android:layout_width="@dimen/dp_97" android:layout_height="@dimen/dp_109" android:layout_marginTop="4.0dip" android:src="@drawable/ic_selfie_album_default" android:scaleType="centerCrop" android:layout_below="@id/ev_text" />
+    <ImageView android:id="@id/view_video_moment_video_logo" android:padding="@dimen/dp_30" android:visibility="visible" android:layout_width="@dimen/dp_97" android:layout_height="@dimen/dp_109" android:src="@drawable/ic_friends_play" android:scaleType="centerInside" android:layout_below="@id/ev_text" />
+</RelativeLayout>
