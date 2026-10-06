@@ -7,22 +7,33 @@ import com.xtc.moment.util.HandlerUtil;
 
 import java.util.HashMap;
 
+/**
+ * 个人中心页面的埋点上报入口。
+ *
+ * <p>每个事件都在后台线程里组装参数并调用 {@link BehaviorUtil#customEvent}，
+ * 避免埋点逻辑阻塞 UI。事件名与参数键来自 {@link IPersonalCenterBehaviorConstant}。
+ */
 public class PersonalCenterBehavior implements IPersonalCenterBehaviorConstant {
 
     private static final String TAG = "PersonalCenterBehavior";
 
+    private PersonalCenterBehavior() {
+    }
+
+    /** 进入好友主页，{@code way} 表示入口来源。 */
     public static void viewFriendPage(final int way) {
         HandlerUtil.runOnBackground(new Runnable() {
             @Override
             public void run() {
                 LogUtil.d(TAG, "viewFriendPage : way = " + way);
-                HashMap<String, String> map = new HashMap<>();
-                map.put(Key.WAY, String.valueOf(way));
-                BehaviorUtil.customEvent(ContextUtils.getContext(), VIEW_FRIEND_PAGE, map);
+                HashMap<String, String> params = new HashMap<>();
+                params.put(Key.WAY, String.valueOf(way));
+                BehaviorUtil.customEvent(ContextUtils.getContext(), VIEW_FRIEND_PAGE, params);
             }
         });
     }
 
+    /** 下拉展示好友天才秀。 */
     public static void pullDownVirtualself() {
         HandlerUtil.runOnBackground(new Runnable() {
             @Override
@@ -33,30 +44,33 @@ public class PersonalCenterBehavior implements IPersonalCenterBehaviorConstant {
         });
     }
 
+    /** 点赞好友，{@code way} 表示点赞入口。 */
     public static void likeFriendWay(final int way) {
         HandlerUtil.runOnBackground(new Runnable() {
             @Override
             public void run() {
                 LogUtil.d(TAG, "likeFriendWay : way = " + way);
-                HashMap<String, String> map = new HashMap<>();
-                map.put(Key.WAY, String.valueOf(way));
-                BehaviorUtil.customEvent(ContextUtils.getContext(), LIKE_FRIEND_WAY, map);
+                HashMap<String, String> params = new HashMap<>();
+                params.put(Key.WAY, String.valueOf(way));
+                BehaviorUtil.customEvent(ContextUtils.getContext(), LIKE_FRIEND_WAY, params);
             }
         });
     }
 
+    /** 上报点赞数量。 */
     public static void likeFriendCount(final int count) {
         HandlerUtil.runOnBackground(new Runnable() {
             @Override
             public void run() {
                 LogUtil.d(TAG, "likeFriendCount : count = " + count);
-                HashMap<String, String> map = new HashMap<>();
-                map.put(Key.COUNT, String.valueOf(count));
-                BehaviorUtil.customEvent(ContextUtils.getContext(), LIKE_FRIEND_COUNT, map);
+                HashMap<String, String> params = new HashMap<>();
+                params.put(Key.COUNT, String.valueOf(count));
+                BehaviorUtil.customEvent(ContextUtils.getContext(), LIKE_FRIEND_COUNT, params);
             }
         });
     }
 
+    /** 点赞次数达到上限。 */
     public static void likeFriendLimit() {
         HandlerUtil.runOnBackground(new Runnable() {
             @Override
@@ -67,6 +81,7 @@ public class PersonalCenterBehavior implements IPersonalCenterBehaviorConstant {
         });
     }
 
+    /** 查看好友勋章墙。 */
     public static void viewFriendBadge() {
         HandlerUtil.runOnBackground(new Runnable() {
             @Override
@@ -77,14 +92,15 @@ public class PersonalCenterBehavior implements IPersonalCenterBehaviorConstant {
         });
     }
 
+    /** 删除好友，{@code way} 表示删除入口。 */
     public static void deleteFriend(final int way) {
         HandlerUtil.runOnBackground(new Runnable() {
             @Override
             public void run() {
                 LogUtil.d(TAG, "deleteFriend : way = " + way);
-                HashMap<String, String> map = new HashMap<>();
-                map.put(Key.WAY, String.valueOf(way));
-                BehaviorUtil.customEvent(ContextUtils.getContext(), DELETE_FRIEND, map);
+                HashMap<String, String> params = new HashMap<>();
+                params.put(Key.WAY, String.valueOf(way));
+                BehaviorUtil.customEvent(ContextUtils.getContext(), DELETE_FRIEND, params);
             }
         });
     }

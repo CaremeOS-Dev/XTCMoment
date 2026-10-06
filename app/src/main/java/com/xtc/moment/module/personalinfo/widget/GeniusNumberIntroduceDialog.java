@@ -10,35 +10,35 @@ import android.widget.TextView;
 import com.xtc.log.LogUtil;
 import com.xtc.moment.R;
 
+/**
+ * 天才号介绍弹窗，展示当前好友的天才号（未设置时显示"未设置"）。
+ */
 public class GeniusNumberIntroduceDialog extends Dialog {
 
     private static final String TAG = "GeniusNumberIntroduceDialog";
 
     private final Context mContext;
+    private final TextView tvGeniusNumber;
     private String geniusNumber;
-    private TextView tvGeniusNumber;
 
     public GeniusNumberIntroduceDialog(Context context, String geniusNumber) {
         super(context, R.style.dialog_default_style);
         super.setContentView(R.layout.dialog_genius_number_introduce);
-        mContext = context;
+        this.mContext = context;
         this.geniusNumber = geniusNumber;
-        initView();
-    }
-
-    private void initView() {
-        tvGeniusNumber = (TextView) findViewById(R.id.tv_genius_number);
+        this.tvGeniusNumber = (TextView) findViewById(R.id.tv_genius_number);
         showGeniusNumber();
     }
 
     private void showGeniusNumber() {
         String text;
-        if (TextUtils.isEmpty(geniusNumber)) {
-            text = mContext.getString(R.string.genius_number, mContext.getString(R.string.not_set));
+        if (TextUtils.isEmpty(this.geniusNumber)) {
+            Context context = this.mContext;
+            text = context.getString(R.string.genius_number, context.getString(R.string.not_set));
         } else {
-            text = mContext.getString(R.string.genius_number, geniusNumber);
+            text = this.mContext.getString(R.string.genius_number, this.geniusNumber);
         }
-        tvGeniusNumber.setText(text);
+        this.tvGeniusNumber.setText(text);
     }
 
     public void setGeniusNumber(String geniusNumber) {
@@ -55,8 +55,8 @@ public class GeniusNumberIntroduceDialog extends Dialog {
             return;
         }
         WindowManager.LayoutParams attributes = window.getAttributes();
-        attributes.width = -1;
-        attributes.height = -1;
+        attributes.width = WindowManager.LayoutParams.MATCH_PARENT;
+        attributes.height = WindowManager.LayoutParams.MATCH_PARENT;
         window.getDecorView().setPadding(0, 0, 0, 0);
         window.setAttributes(attributes);
     }

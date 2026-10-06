@@ -23,14 +23,23 @@ import com.xtc.utils.ui.DimenUtil;
 
 import java.util.List;
 
+/**
+ * 个人中心勋章展示条目。
+ *
+ * <p>没有勋章时显示数量为 0 的占位文案；有勋章时最多平铺展示 5 个图标。
+ */
 public class PersonalBadgeItem extends FrameLayout {
 
     private static final String TAG = "PersonalBadgeItem";
 
-    private final TextView tvNoBadge;
-    private final LinearLayout llBadge;
-    private OnClickListener onClickListener;
+    /** 勋章图标最多展示的数量。 */
+    private static final int MAX_BADGE_COUNT = 5;
 
+    private final LinearLayout llBadge;
+    private final TextView tvNoBadge;
+    private OnClickListener clickListener;
+
+    /** 条目点击回调。 */
     public interface OnClickListener {
         void onClick();
     }
@@ -48,53 +57,56 @@ public class PersonalBadgeItem extends FrameLayout {
         LayoutInflater.from(context).inflate(R.layout.item_personal_badge, (ViewGroup) this, true);
         ((AppLinearLayout) findViewById(R.id.ll_root)).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                if (onClickListener != null) {
-                    onClickListener.onClick();
+            public void onClick(View view) {
+                if (PersonalBadgeItem.this.clickListener != null) {
+                    PersonalBadgeItem.this.clickListener.onClick();
                 }
             }
         });
-        tvNoBadge = (TextView) findViewById(R.id.tv_no_badge);
-        llBadge = (LinearLayout) findViewById(R.id.ll_badge);
+        this.tvNoBadge = (TextView) findViewById(R.id.tv_no_badge);
+        this.llBadge = (LinearLayout) findViewById(R.id.ll_badge);
     }
 
-    public void setClickListener(OnClickListener listener) {
-        onClickListener = listener;
+    public void setClickListener(OnClickListener clickListener) {
+        this.clickListener = clickListener;
     }
 
+    /** 刷新勋章列表。 */
     public void updateBadge(List<BadgeBean> badgeBeanList) {
         LogUtil.d(TAG, "updateBadge() called with: badgeBeanList = [" + badgeBeanList + "]");
         if (getContext() == null) {
             return;
         }
         if (CollectionUtil.isEmpty(badgeBeanList)) {
-            tvNoBadge.setText(getContext().getString(R.string.badge_num_format, "0 "));
-            tvNoBadge.setTextColor(ContextCompat.getColor(getContext(), R.color.color_877eff));
-            tvNoBadge.setTextSize(19.0f);
-            tvNoBadge.setVisibility(View.VISIBLE);
-            llBadge.setVisibility(View.GONE);
+            this.tvNoBadge.setText(getContext().getString(R.string.badge_num_format, "0 "));
+            this.tvNoBadge.setTextColor(ContextCompat.getColor(getContext(), R.color.color_877eff));
+            this.tvNoBadge.setTextSize(19.0f);
+            this.tvNoBadge.setVisibility(View.VISIBLE);
+            this.llBadge.setVisibility(View.GONE);
             return;
         }
-        llBadge.setVisibility(View.VISIBLE);
-        llBadge.removeAllViews();
-        tvNoBadge.setVisibility(View.GONE);
-        int size = badgeBeanList.size();
+        this.llBadge.setVisibility(View.VISIBLE);
+        this.llBadge.removeAllViews();
+        this.tvNoBadge.setVisibility(View.GONE);
+        int badgeCount = badgeBeanList.size();
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 DimenUtil.dp2px(getContext(), 22.0f), DimenUtil.dp2px(getContext(), 20.0f));
-        int showCount = Math.min(5, size);
-        for (int i = 0; i < showCount; i++) {
-            String icon = badgeBeanList.get(i).getIcon();
+        int showCount = Math.min(MAX_BADGE_COUNT, badgeCount);
+        for (int index = 0; index < showCount; index++) {
+            String icon = badgeBeanList.get(index).getIcon();
             ImageView imageView = new ImageView(getContext());
             layoutParams.rightMargin = DimenUtil.dp2px(getContext(), 0);
             imageView.setLayoutParams(layoutParams);
             imageView.setAdjustViewBounds(true);
-            llBadge.addView(imageView);
+            this.llBadge.addView(imageView);
             showBadge(icon, imageView);
         }
     }
 
-    private void showBadge(String icon, ImageView imageView) {
+    private void showBadge(String iconUrl, ImageView imageView) {
         imageView.setVisibility(View.VISIBLE);
-        Glide.with(getContext()).load(icon).apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE)).into(imageView);
+        Glide.with(getContext()).load(iconUrl)
+                .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE))
+                .into(imageView);
     }
 }

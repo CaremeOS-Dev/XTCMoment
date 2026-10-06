@@ -18,102 +18,110 @@ import com.xtc.log.LogUtil;
 import com.xtc.moment.R;
 import com.xtc.moment.util.ToastUtil;
 
+/**
+ * 全屏 Lottie 加载弹窗，用于个人中心的加载/成功/失败状态展示。
+ *
+ * <p>加载动画每循环一次计数一次，当超过 {@link #REPEAT_MAX_TIMES} 次仍未成功且开启了自动失败，
+ * 则切换为失败状态并提示。
+ */
 public class LoadingViewHolder {
 
     private static final String TAG = "LoadingViewHolder";
+
+    /** 加载动画最大循环次数，超过则视为超时失败。 */
     private static final int REPEAT_MAX_TIMES = 45;
 
     public static final int STATUS_FAILED = -1;
     public static final int STATUS_LOADING = 0;
     public static final int STATUS_SUCCESS = 1;
 
-    private Context mContext;
-    private PopupWindow mLoadingAnimationPopup;
-    private LottieAnimationView mLoadingAnimationView;
-    private LottieAnimationView mSucceedAnimationView;
-    private TextView tipsText;
-    private int loadingStatus;
-    private int mTimes;
-    private String loadingStr;
+    private final Context mContext;
+    private final PopupWindow mLoadingAnimationPopup;
+    private final LottieAnimationView mLoadingAnimationView;
+    private final LottieAnimationView mSucceedAnimationView;
+    private final TextView tipsText;
+
     private String failedStr;
+    private String loadingStr;
     private String successStr;
+    private int loadingStatus;
+    private int repeatTimes;
     private Runnable onSuccessAction;
     private boolean isSuccessAutoDismiss = true;
     private boolean isAutoLoadFail = true;
 
     public LoadingViewHolder(Context context) {
-        mContext = context;
-        initLoadingAnimation(context);
-    }
-
-    private void initLoadingAnimation(Context context) {
+        this.mContext = context;
         View content = LayoutInflater.from(context).inflate(R.layout.loading_view, (ViewGroup) null);
-        tipsText = (TextView) content.findViewById(R.id.loading_text);
-        mLoadingAnimationView = (LottieAnimationView) content.findViewById(R.id.loading_animation_view);
+        this.tipsText = (TextView) content.findViewById(R.id.loading_text);
+        this.mLoadingAnimationView = (LottieAnimationView) content.findViewById(R.id.loading_animation_view);
         LottieComposition.Factory.fromAssetFileName(context, "bigloading.json", new OnCompositionLoadedListener() {
             @Override
             public void onCompositionLoaded(LottieComposition composition) {
-                mLoadingAnimationView.setComposition(composition);
-                mLoadingAnimationView.loop(true);
+                LoadingViewHolder.this.mLoadingAnimationView.setComposition(composition);
+                LoadingViewHolder.this.mLoadingAnimationView.loop(true);
             }
         });
-        mSucceedAnimationView = (LottieAnimationView) content.findViewById(R.id.succeed_animation_view);
+        this.mSucceedAnimationView = (LottieAnimationView) content.findViewById(R.id.succeed_animation_view);
         LottieComposition.Factory.fromAssetFileName(context, "succeed.json", new OnCompositionLoadedListener() {
             @Override
             public void onCompositionLoaded(LottieComposition composition) {
-                mSucceedAnimationView.setComposition(composition);
-                mSucceedAnimationView.loop(false);
+                LoadingViewHolder.this.mSucceedAnimationView.setComposition(composition);
+                LoadingViewHolder.this.mSucceedAnimationView.loop(false);
             }
         });
         addAnimatorListener();
-        mLoadingAnimationPopup = new PopupWindow(content, -1, -1, false);
-        mLoadingAnimationPopup.setOutsideTouchable(false);
+        this.mLoadingAnimationPopup = new PopupWindow(content, ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT, false);
+        this.mLoadingAnimationPopup.setOutsideTouchable(false);
     }
 
     private void addAnimatorListener() {
-        mLoadingAnimationView.addAnimatorListener(new Animator.AnimatorListener() {
+        this.mLoadingAnimationView.addAnimatorListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationEnd(Animator animator) {
             }
 
             @Override
             public void onAnimationStart(Animator animator) {
-                if (!TextUtils.isEmpty(loadingStr)) {
-                    tipsText.setText(loadingStr);
+                if (!TextUtils.isEmpty(LoadingViewHolder.this.loadingStr)) {
+                    LoadingViewHolder.this.tipsText.setText(LoadingViewHolder.this.loadingStr);
                 }
-                loadingStatus = STATUS_LOADING;
+                LoadingViewHolder.this.loadingStatus = STATUS_LOADING;
                 LogUtil.d(TAG, "onAnimationStart");
-                mLoadingAnimationView.setVisibility(View.VISIBLE);
-                mSucceedAnimationView.setVisibility(View.GONE);
-                mTimes = 0;
+                LoadingViewHolder.this.mLoadingAnimationView.setVisibility(View.VISIBLE);
+                LoadingViewHolder.this.mSucceedAnimationView.setVisibility(View.GONE);
+                LoadingViewHolder.this.repeatTimes = 0;
             }
 
             @Override
             public void onAnimationCancel(Animator animator) {
-                mSucceedAnimationView.setVisibility(View.VISIBLE);
-                mLoadingAnimationView.setVisibility(View.GONE);
-                if (loadingStatus == STATUS_SUCCESS) {
-                    mSucceedAnimationView.playAnimation();
+                LoadingViewHolder.this.mSucceedAnimationView.setVisibility(View.VISIBLE);
+                LoadingViewHolder.this.mLoadingAnimationView.setVisibility(View.GONE);
+                if (LoadingViewHolder.this.loadingStatus == STATUS_SUCCESS) {
+                    LoadingViewHolder.this.mSucceedAnimationView.playAnimation();
                 }
             }
 
             @Override
             public void onAnimationRepeat(Animator animator) {
-                mTimes++;
-                LogUtil.d(TAG, "repeatTimes: " + mTimes + ", loadingStatus: " + loadingStatus);
-                if (mTimes == REPEAT_MAX_TIMES && isAutoLoadFail && loadingStatus != STATUS_SUCCESS) {
-                    LogUtil.i(TAG, "onAnimationRepeat: " + mTimes);
-                    loadingStatus = STATUS_FAILED;
+                LoadingViewHolder.this.repeatTimes++;
+                LogUtil.d(TAG, "repeatTimes: " + LoadingViewHolder.this.repeatTimes + ", loadingStatus: "
+                        + LoadingViewHolder.this.loadingStatus);
+                if (LoadingViewHolder.this.repeatTimes == REPEAT_MAX_TIMES && LoadingViewHolder.this.isAutoLoadFail
+                        && LoadingViewHolder.this.loadingStatus != STATUS_SUCCESS) {
+                    LogUtil.i(TAG, "onAnimationRepeat: " + LoadingViewHolder.this.repeatTimes);
+                    LoadingViewHolder.this.loadingStatus = STATUS_FAILED;
                 }
-                int status = loadingStatus;
+                int status = LoadingViewHolder.this.loadingStatus;
                 if (status == STATUS_FAILED) {
-                    showLoadFailed();
+                    LoadingViewHolder.this.showLoadFailed();
                 } else if (status == STATUS_SUCCESS) {
-                    mLoadingAnimationView.cancelAnimation();
+                    LoadingViewHolder.this.mLoadingAnimationView.cancelAnimation();
                 }
             }
         });
-        mSucceedAnimationView.addAnimatorListener(new Animator.AnimatorListener() {
+        this.mSucceedAnimationView.addAnimatorListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationCancel(Animator animator) {
             }
@@ -124,49 +132,50 @@ public class LoadingViewHolder {
 
             @Override
             public void onAnimationStart(Animator animator) {
-                if (!TextUtils.isEmpty(successStr)) {
-                    tipsText.setText(successStr);
+                if (!TextUtils.isEmpty(LoadingViewHolder.this.successStr)) {
+                    LoadingViewHolder.this.tipsText.setText(LoadingViewHolder.this.successStr);
                 }
-                mLoadingAnimationView.setVisibility(View.GONE);
-                mSucceedAnimationView.setVisibility(View.VISIBLE);
+                LoadingViewHolder.this.mLoadingAnimationView.setVisibility(View.GONE);
+                LoadingViewHolder.this.mSucceedAnimationView.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onAnimationEnd(Animator animator) {
-                if (onSuccessAction != null) {
-                    onSuccessAction.run();
+                if (LoadingViewHolder.this.onSuccessAction != null) {
+                    LoadingViewHolder.this.onSuccessAction.run();
                 }
-                if (isSuccessAutoDismiss) {
-                    dismissLoading();
+                if (LoadingViewHolder.this.isSuccessAutoDismiss) {
+                    LoadingViewHolder.this.dismissLoading();
                 }
             }
         });
     }
 
+    /** 加载超时或失败时提示并关闭弹窗。 */
     private void showLoadFailed() {
-        if (!TextUtils.isEmpty(failedStr)) {
-            ToastUtil.showShort(mContext, failedStr);
+        if (!TextUtils.isEmpty(this.failedStr)) {
+            ToastUtil.showShort(this.mContext, this.failedStr);
         }
         dismissLoading();
     }
 
-    public void showLoading(View view) {
-        mLoadingAnimationPopup.showAtLocation(view, 17, 0, 0);
-        mLoadingAnimationView.playAnimation();
+    public void showLoading(View anchor) {
+        this.mLoadingAnimationPopup.showAtLocation(anchor, android.view.Gravity.CENTER, 0, 0);
+        this.mLoadingAnimationView.playAnimation();
     }
 
     public void loadSuccess() {
-        loadingStatus = STATUS_SUCCESS;
-        if (mLoadingAnimationView != null && mSucceedAnimationView != null) {
+        this.loadingStatus = STATUS_SUCCESS;
+        if (this.mLoadingAnimationView != null && this.mSucceedAnimationView != null) {
             new Handler(Looper.getMainLooper()).post(new Runnable() {
                 @Override
                 public void run() {
-                    mLoadingAnimationView.cancelAnimation();
-                    mSucceedAnimationView.playAnimation();
+                    LoadingViewHolder.this.mLoadingAnimationView.cancelAnimation();
+                    LoadingViewHolder.this.mSucceedAnimationView.playAnimation();
                 }
             });
         }
-        LogUtil.d(TAG, "setLoadingSuccess, loadingStatus: " + loadingStatus);
+        LogUtil.d(TAG, "setLoadingSuccess, loadingStatus: " + this.loadingStatus);
     }
 
     public void loadSuccess(String successStr) {
@@ -175,7 +184,7 @@ public class LoadingViewHolder {
     }
 
     public void loadFailed() {
-        loadingStatus = STATUS_FAILED;
+        this.loadingStatus = STATUS_FAILED;
     }
 
     public void loadFailed(String failedStr) {
@@ -198,14 +207,17 @@ public class LoadingViewHolder {
     }
 
     public void dismissLoading() {
-        if (mLoadingAnimationPopup != null && mLoadingAnimationPopup.isShowing()) {
-            mLoadingAnimationPopup.dismiss();
+        PopupWindow popupWindow = this.mLoadingAnimationPopup;
+        if (popupWindow != null && popupWindow.isShowing()) {
+            this.mLoadingAnimationPopup.dismiss();
         }
-        if (mLoadingAnimationView != null && mLoadingAnimationView.isAnimating()) {
-            mLoadingAnimationView.cancelAnimation();
+        LottieAnimationView loadingAnimationView = this.mLoadingAnimationView;
+        if (loadingAnimationView != null && loadingAnimationView.isAnimating()) {
+            this.mLoadingAnimationView.cancelAnimation();
         }
-        if (mSucceedAnimationView != null && mSucceedAnimationView.isAnimating()) {
-            mSucceedAnimationView.cancelAnimation();
+        LottieAnimationView succeedAnimationView = this.mSucceedAnimationView;
+        if (succeedAnimationView != null && succeedAnimationView.isAnimating()) {
+            this.mSucceedAnimationView.cancelAnimation();
         }
     }
 
@@ -213,15 +225,19 @@ public class LoadingViewHolder {
         this.onSuccessAction = onSuccessAction;
     }
 
-    public void setSuccessAutoDismiss(boolean autoDismiss) {
-        isSuccessAutoDismiss = autoDismiss;
+    public void setSuccessAutoDismiss(boolean successAutoDismiss) {
+        this.isSuccessAutoDismiss = successAutoDismiss;
     }
 
     public void setAutoLoadFail(boolean autoLoadFail) {
-        isAutoLoadFail = autoLoadFail;
+        this.isAutoLoadFail = autoLoadFail;
     }
 
     public boolean isShowing() {
-        return mLoadingAnimationPopup != null && mLoadingAnimationPopup.isShowing();
+        PopupWindow popupWindow = this.mLoadingAnimationPopup;
+        if (popupWindow != null) {
+            return popupWindow.isShowing();
+        }
+        return false;
     }
 }
