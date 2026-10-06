@@ -7,19 +7,18 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * 特权资源处理器接口。
+ * 特权资源处理器接口：负责动效资源的下载、解压、入库与本地状态刷新。
  */
 public interface IPrerogativeHandler<T> {
-
-    Boolean initPrerogativeResource(ResourceNetResponse resource);
-
-    void refreshLocalPrerogativeData(HashMap<Integer, EmotionsEntity> emotions);
-
-    List<T> getAllLocalData(boolean onlyValid);
-
-    T getPrerogativeByEmotionId(int emotionId);
+    List<T> getAllLocalData(boolean refreshCurrentUse);
 
     int getCurrentUseEmotionId();
 
+    T getPrerogativeByEmotionId(int emotionId);
+
     boolean hasOverdueData();
+
+    Boolean initPrerogativeResource(ResourceNetResponse resourceNetResponse);
+
+    void refreshLocalPrerogativeData(HashMap<Integer, EmotionsEntity> emotions);
 }

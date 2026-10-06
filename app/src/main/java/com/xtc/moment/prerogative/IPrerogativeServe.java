@@ -4,17 +4,16 @@ import com.xtc.moment.db.bean.prerogative.DbMomentPrerogativeBackground;
 import com.xtc.moment.db.bean.prerogative.DbMomentPrerogativeLike;
 
 /**
- * 特权装扮服务接口。
+ * 特权服务接口：查询当前使用的点赞/背景动效资源。
  */
 public interface IPrerogativeServe {
-
-    void initPrerogativeResource(InitPrerogativeCallback callback);
+    int getCurrentUseBackgroundEmotionId();
 
     int getCurrentUseLikeEmotionId();
 
-    int getCurrentUseBackgroundEmotionId();
+    DbMomentPrerogativeBackground getPrerogativeBackgroundByEmotionId(int emotionId);
 
     DbMomentPrerogativeLike getPrerogativeLikeByEmotionId(int emotionId);
 
-    DbMomentPrerogativeBackground getPrerogativeBackgroundByEmotionId(int emotionId);
+    void initPrerogativeResource(InitPrerogativeCallback callback);
 }
