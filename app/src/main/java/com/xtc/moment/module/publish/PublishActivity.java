@@ -247,38 +247,44 @@ public class PublishActivity extends BaseCtaPermissionActivity<IPublishView, Pub
         }
         int photoType = extras.getInt("com.xtc.camera.EXTRA_PHOTO_TYPE");
         LogUtil.i(TAG, "type = " + photoType);
-        if (checkIsSupport() && 2 == photoType) {
-            dealMultiLivePhoto(extras);
-            return;
-        }
-        String photoPath = extras.getString("output", null);
-        int selectedPhotoType = extras.getInt("com.xtc.camera.EXTRA_PHOTO_TYPE");
-        if (toastNoNet()) {
-            LogUtil.i(TAG, "open album return, net unvalid");
-            return;
-        }
-        LogUtil.d(TAG, selectedPhotoType + "onActivityResult: photoPath = " + photoPath);
-        if (TextUtils.isEmpty(photoPath)) {
-            return;
-        }
-        if (selectedPhotoType != 0) {
-            if (1 == selectedPhotoType) {
-                if (!TextUtils.isEmpty(null)) {
-                    dealFunVideo(extras);
-                } else {
-                    chooseVideoItemSuccess(true, photoPath);
+        if (!checkIsSupport() || 2 == photoType) {
+            if (checkIsSupport() && 2 == photoType) {
+                dealMultiLivePhoto(extras);
+                return;
+            }
+            String photoPath = extras.getString("output", null);
+            int selectedPhotoType = extras.getInt("com.xtc.camera.EXTRA_PHOTO_TYPE");
+            if (toastNoNet()) {
+                LogUtil.i(TAG, "open album return, net unvalid");
+                return;
+            }
+            LogUtil.d(TAG, selectedPhotoType + "onActivityResult: photoPath = " + photoPath);
+            if (TextUtils.isEmpty(photoPath)) {
+                return;
+            }
+            if (selectedPhotoType != 0) {
+                if (1 == selectedPhotoType) {
+                    if (!TextUtils.isEmpty(null)) {
+                        dealFunVideo(extras);
+                    } else {
+                        chooseVideoItemSuccess(true, photoPath);
+                    }
                 }
+                return;
+            }
+            boolean isLivePhoto = LivePhotoServe.isLivePhotoFile(photoPath);
+            String videoFilePath = LivePhotoServe.getVideoFilePath(photoPath);
+            if (isLivePhoto && !TextUtils.isEmpty(videoFilePath)) {
+                LogUtil.i(TAG, "当前选择的是实况照片");
+                chooseAlbumItemSuccess(BeanConverterUtil.toLivePhotoMsg(photoPath, videoFilePath));
+            } else {
+                chooseAlbumItemSuccess(BeanConverterUtil.toPhotoMsg(photoPath));
             }
             return;
         }
-        boolean isLivePhoto = LivePhotoServe.isLivePhotoFile(photoPath);
-        String videoFilePath = LivePhotoServe.getVideoFilePath(photoPath);
-        if (isLivePhoto && !TextUtils.isEmpty(videoFilePath)) {
-            LogUtil.i(TAG, "当前选择的是实况照片");
-            chooseAlbumItemSuccess(BeanConverterUtil.toLivePhotoMsg(photoPath, videoFilePath));
-        } else {
-            chooseAlbumItemSuccess(BeanConverterUtil.toPhotoMsg(photoPath));
-        }
+        startPushPictureActivity(1 == photoType ? "video_path" : "photo_path", extras,
+                "isFromAlbum", true, false);
+        MomentBehavior.pushDynamicEntrace(this, 2);
     }
 
     /**
