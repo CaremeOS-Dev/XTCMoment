@@ -34,9 +34,14 @@ public class PhotoCompressManager {
         for (int index = 0; index < size; index++) {
             observables[index] = Observable.just(photoMsgs.get(index)).map(new Func1<PhotoMsg, PhotoMsg>() {
                 @Override
-                public PhotoMsg call(PhotoMsg photoMsg) throws Throwable {
-                    String compressedPath = ImageUtil.compressByScale(photoMsg.getLocalPath(), PhotoTokenParam.WEBP_FORMAT,
-                            Constants.Camera.PhotoSize.WIDTH, Constants.Camera.PhotoSize.HEIGHT);
+                public PhotoMsg call(PhotoMsg photoMsg) {
+                    String compressedPath = null;
+                    try {
+                        compressedPath = ImageUtil.compressByScale(photoMsg.getLocalPath(), PhotoTokenParam.WEBP_FORMAT,
+                                Constants.Camera.PhotoSize.WIDTH, Constants.Camera.PhotoSize.HEIGHT);
+                    } catch (Throwable throwable) {
+                        LogUtil.e(TAG, "compress photo error", throwable);
+                    }
                     if (TextUtils.isEmpty(compressedPath)) {
                         compressedPath = photoMsg.getLocalPath();
                     }
@@ -59,9 +64,14 @@ public class PhotoCompressManager {
         for (int index = 0; index < size; index++) {
             observables[index] = Observable.just(paths.get(index)).map(new Func1<String, String>() {
                 @Override
-                public String call(String path) throws Throwable {
-                    String compressedPath = ImageUtil.compressByScale(path, PhotoTokenParam.WEBP_FORMAT,
-                            Constants.Camera.PhotoSize.WIDTH, Constants.Camera.PhotoSize.HEIGHT);
+                public String call(String path) {
+                    String compressedPath = null;
+                    try {
+                        compressedPath = ImageUtil.compressByScale(path, PhotoTokenParam.WEBP_FORMAT,
+                                Constants.Camera.PhotoSize.WIDTH, Constants.Camera.PhotoSize.HEIGHT);
+                    } catch (Throwable throwable) {
+                        LogUtil.e(TAG, "compress photo error", throwable);
+                    }
                     return TextUtils.isEmpty(compressedPath) ? path : compressedPath;
                 }
             }).subscribeOn(Schedulers.io());

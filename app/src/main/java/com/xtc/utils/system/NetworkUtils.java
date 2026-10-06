@@ -93,6 +93,10 @@ public class NetworkUtils {
         return null;
     }
 
+    public static boolean isNetworkAvailable(Context context) {
+        return isConnected(context);
+    }
+
     public static boolean isConnected(Context context) {
         return isConnectedOrConnecting(context);
     }

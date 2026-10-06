@@ -135,7 +135,7 @@ public class AIPaintDialog extends Dialog implements LifecycleOwner {
     }
 
     private void addTextView(LayoutInflater inflater, String text) {
-        TextView textView = inflater.inflate(R.layout.item_painting_info, viewFlipper, false);
+        TextView textView = (TextView) inflater.inflate(R.layout.item_painting_info, viewFlipper, false);
         textView.setText(text);
         this.viewFlipper.addView(textView);
     }

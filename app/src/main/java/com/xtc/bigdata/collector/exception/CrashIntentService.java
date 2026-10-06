@@ -27,7 +27,7 @@ public class CrashIntentService extends IntentService {
     private static final String TAG = "CrashIntentService";
     private static final String EXTRA_CRASH_INFO = "CRASH_INFO";
 
-    private final Object lock = new Object();
+    private Object lock = new Object();
 
     public CrashIntentService() {
         super(TAG);

@@ -92,7 +92,7 @@ public class MomentLikeView extends RelativeLayout {
             }
             if (liked || TextUtils.isEmpty(praisedPic)) {
                 Glide.with(context).load(praisedPic)
-                        .apply(new RequestOptions().fitCenter(likeResId).diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .apply(new RequestOptions().fitCenter().diskCacheStrategy(DiskCacheStrategy.ALL)
                                 .placeholder(likeResId))
                         .into(this.mIvLike);
                 this.usingLikeResId = -1;
