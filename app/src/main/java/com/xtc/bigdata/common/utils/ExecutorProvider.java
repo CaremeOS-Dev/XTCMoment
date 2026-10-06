@@ -7,7 +7,9 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 
-/** Shared executors for the big-data library. */
+/**
+ * 主线程/后台线程 Executor 提供者。
+ */
 public class ExecutorProvider {
 
     public static Executor main() {
@@ -19,11 +21,7 @@ public class ExecutorProvider {
     }
 
     private static class MainExecutor implements Executor {
-        private final Handler handler;
-
-        private MainExecutor() {
-            this.handler = new Handler(Looper.getMainLooper());
-        }
+        private final Handler handler = new Handler(Looper.getMainLooper());
 
         @Override
         public void execute(Runnable runnable) {

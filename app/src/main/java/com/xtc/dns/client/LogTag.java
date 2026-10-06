@@ -1,16 +1,15 @@
 package com.xtc.dns.client;
 
-/** Log tag factory for the HTTP-DNS client. */
+/**
+ * DNS 客户端日志标签工具。
+ */
 public class LogTag {
-
-    private LogTag() {
-    }
 
     public static String tag() {
         return "HttpDnsClient";
     }
 
-    public static String tag(String name) {
-        return tag() + name;
+    public static String tag(String suffix) {
+        return "HttpDnsClient-" + suffix;
     }
 }
