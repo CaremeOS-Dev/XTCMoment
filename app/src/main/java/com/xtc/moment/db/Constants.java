@@ -1,21 +1,24 @@
 package com.xtc.moment.db;
 
-/** Database constants: file name, error codes, keep-alive and table names. */
+/** Database constants of the moment app. */
 public interface Constants {
 
     String DATABASE_NAME = "moment.db";
 
+    /** Error codes shared with the http layer. */
     interface ErrorCode {
         String FREQUENT_REQUEST = "1003";
         String NET_WORK = "1005";
     }
 
+    /** Keep-alive notification constants. */
     interface KeepAlive {
         int KEEP_DURATION = 10000;
         int NOTIFICATION_ID = 22;
         String TAG_PRE = "keep_pre_";
     }
 
+    /** Physical table names. */
     interface TableName {
         String ADVERT_CLOSE_RECORD = "advert_close_record";
         String ILLEGAL_RECORD = "db_illegal_record";
