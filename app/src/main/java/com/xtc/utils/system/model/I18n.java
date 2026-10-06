@@ -3,22 +3,24 @@ package com.xtc.utils.system.model;
 /** Language and region codes used across the system apps. */
 public interface I18n {
 
+    /** ISO language codes supported by the watch firmware. */
     interface Language {
-        String a = "zh";
-        String b = "en";
-        String c = "in";
-        String d = "th";
-        String e = "ms";
+        String CHINESE = "zh";
+        String ENGLISH = "en";
+        String INDONESIAN = "in";
+        String THAI = "th";
+        String MALAY = "ms";
     }
 
+    /** Region codes reported by the firmware. */
     interface Region {
-        String a = "CN";
-        String b = "HK";
-        String c = "TW";
-        String d = "ID";
-        String e = "TH";
-        String f = "US";
-        String g = "MY";
-        String h = "";
+        String CHINA = "CN";
+        String HONG_KONG = "HK";
+        String TAIWAN = "TW";
+        String INDONESIA = "ID";
+        String THAILAND = "TH";
+        String UNITED_STATES = "US";
+        String MALAYSIA = "MY";
+        String UNKNOWN = "";
     }
 }

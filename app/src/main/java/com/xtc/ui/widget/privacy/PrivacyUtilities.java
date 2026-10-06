@@ -49,7 +49,7 @@ public class PrivacyUtilities {
 
     static String getLocalLanguage(Context context) {
         String localLanguage = getLocalLanguageImpl(context);
-        return localLanguage.startsWith(I18n.Language.d) ? I18n.Language.d : localLanguage;
+        return localLanguage.startsWith(I18n.Language.THAI) ? I18n.Language.THAI : localLanguage;
     }
 
     static String getWatchInnerModel() {
@@ -97,7 +97,7 @@ public class PrivacyUtilities {
     }
 
     private static boolean isGaotong() {
-        return Platform.b.equals(getString("ro.hardware", ""));
+        return Platform.QCOM.equals(getString("ro.hardware", ""));
     }
 
     private static String getServerInnerModel() {
