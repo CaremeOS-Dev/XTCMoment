@@ -23,39 +23,47 @@ import com.xtc.ui.widget.drawable.RoundDrawable;
 import com.xtc.ui.widget.drawable.RoundRectDrawable;
 
 /**
- * Factory for the gradient/rounded backgrounds used by buttons and dialogs.
+ * Factory for the gradient / rounded backgrounds used by buttons and dialogs.
  *
  * <p>Every "state" drawable pairs a normal layer with a pressed layer (the same
  * shape filled with {@link UiConstants.Color#MASK}), which is how the stock
  * buttons get their press feedback without a separate selector xml.
+ *
+ * <p>All radii / sizes are expressed the way the call sites pass them: the
+ * "gradient" family takes pixels, the "roundRect" family takes dp and converts.
  */
 public class UiBgUtil {
 
     private static final String TAG = "UiBgUtil";
 
-    public static Drawable getGradientRoundRectStateDrawable(Context context, int width, int height, int topRadius, int bottomRadius, int[] colorResArray) {
-        float top = topRadius;
-        float bottom = bottomRadius;
+    // ------------------------------------------------------------------ gradient round rect
+
+    /** Gradient rounded rect, per-corner radii in px, with a pressed state. */
+    public static Drawable getGradientRoundRectStateDrawable(Context context, int widthPx, int heightPx, int topRadiusPx, int bottomRadiusPx, int[] colorResArray) {
+        float top = topRadiusPx;
+        float bottom = bottomRadiusPx;
         float[] radii = {top, top, bottom, bottom, bottom, bottom, top, top};
         int[] colors = UiCommonUtil.getColorArray(context, colorResArray);
         return getStateDrawable(
-                getGradientRoundRectDrawable(0, colors[0], colors[1], radii, width, height),
-                getGradientRoundRectMaskDrawable(0, colors, UiCommonUtil.getColorArray(context, UiConstants.Color.MASK), radii, radii, width, height));
+                getGradientRoundRectDrawable(0, colors[0], colors[1], radii, widthPx, heightPx),
+                getGradientRoundRectMaskDrawable(0, colors, UiCommonUtil.getColorArray(context, UiConstants.Color.MASK), radii, radii, widthPx, heightPx));
     }
 
-    public static Drawable getGradientRoundRectStateDrawable(Context context, int width, int height, int[] colorResArray) {
-        float radius = height / 2;
+    /** Gradient rounded rect with a pill radius (height / 2), with a pressed state. */
+    public static Drawable getGradientRoundRectStateDrawable(Context context, int widthPx, int heightPx, int[] colorResArray) {
+        float radius = heightPx / 2;
         float[] radii = {radius, radius, radius, radius, radius, radius, radius, radius};
         int[] colors = UiCommonUtil.getColorArray(context, colorResArray);
         return getStateDrawable(
-                getGradientRoundRectDrawable(0, colors[0], colors[1], radii, width, height),
-                getGradientRoundRectMaskDrawable(0, colors, UiCommonUtil.getColorArray(context, UiConstants.Color.MASK), radii, radii, width, height));
+                getGradientRoundRectDrawable(0, colors[0], colors[1], radii, widthPx, heightPx),
+                getGradientRoundRectMaskDrawable(0, colors, UiCommonUtil.getColorArray(context, UiConstants.Color.MASK), radii, radii, widthPx, heightPx));
     }
 
-    public static Drawable getGradientRoundRectMaskDrawable(int shape, int[] colorResArray, int[] maskColorResArray, float[] radii, float[] maskRadii, int width, int height) {
+    /** Two stacked gradient rounded rects (normal + pressed colours). */
+    public static Drawable getGradientRoundRectMaskDrawable(int shape, int[] colorResArray, int[] maskColorResArray, float[] radii, float[] maskRadii, int widthPx, int heightPx) {
         LayerDrawable layerDrawable = new LayerDrawable(new Drawable[]{
-                getGradientRoundRectDrawable(shape, colorResArray[0], colorResArray[1], radii, width, height),
-                getGradientRoundRectDrawable(shape, maskColorResArray[0], maskColorResArray[1], maskRadii, width, height)});
+                getGradientRoundRectDrawable(shape, colorResArray[0], colorResArray[1], radii, widthPx, heightPx),
+                getGradientRoundRectDrawable(shape, maskColorResArray[0], maskColorResArray[1], maskRadii, widthPx, heightPx)});
         layerDrawable.setLayerInset(1, 0, 0, 0, 0);
         return layerDrawable;
     }
@@ -65,56 +73,58 @@ public class UiBgUtil {
                 UiCommonUtil.px2Dp(context, context.getResources().getDimension(R.dimen.long_btn_width)), 40);
     }
 
-    public static Drawable getGradientRoundRectStateDrawable(Context context, int shape, int[] colorResArray, int[] maskColorResArray, float topRadius, float bottomRadius, int width, int height) {
+    public static Drawable getGradientRoundRectStateDrawable(Context context, int shape, int[] colorResArray, int[] maskColorResArray, float topRadius, float bottomRadius, int widthPx, int heightPx) {
         return getGradientRoundRectStateDrawable(context, shape, colorResArray, maskColorResArray,
-                new float[]{topRadius, topRadius, bottomRadius, bottomRadius, bottomRadius, bottomRadius, topRadius, topRadius}, width, height);
+                new float[]{topRadius, topRadius, bottomRadius, bottomRadius, bottomRadius, bottomRadius, topRadius, topRadius}, widthPx, heightPx);
     }
 
-    public static Drawable getGradientRoundRectStateDrawable(Context context, int shape, int[] colorResArray, int[] maskColorResArray, float[] radii, int width, int height) {
+    public static Drawable getGradientRoundRectStateDrawable(Context context, int shape, int[] colorResArray, int[] maskColorResArray, float[] radiiDp, int widthPx, int heightPx) {
         return getStateDrawable(
-                getGradientRoundRectDrawable(context, shape, colorResArray[0], colorResArray[1], radii, width, height),
-                getGradientRoundRectMaskDrawable(context, shape, colorResArray, maskColorResArray, radii, radii, width, height));
+                getGradientRoundRectDrawable(context, shape, colorResArray[0], colorResArray[1], radiiDp, widthPx, heightPx),
+                getGradientRoundRectMaskDrawable(context, shape, colorResArray, maskColorResArray, radiiDp, radiiDp, widthPx, heightPx));
     }
 
     public static GradientDrawable getGradientRoundRectDrawable(Context context) {
         return getGradientRoundRectDrawable(context, 0, R.color.color_55dd7b, R.color.color_0ab158, 20.0f, 20.0f, 150, 40);
     }
 
-    public static GradientDrawable getGradientRoundRectDrawable(Context context, int shape, int startColorRes, int endColorRes, float topRadius, float bottomRadius, int width, int height) {
+    public static GradientDrawable getGradientRoundRectDrawable(Context context, int shape, int startColorRes, int endColorRes, float topRadiusDp, float bottomRadiusDp, int widthDp, int heightDp) {
         return getGradientRoundRectDrawable(context, shape, startColorRes, endColorRes,
-                new float[]{topRadius, topRadius, bottomRadius, bottomRadius, bottomRadius, bottomRadius, topRadius, topRadius}, width, height);
+                new float[]{topRadiusDp, topRadiusDp, bottomRadiusDp, bottomRadiusDp, bottomRadiusDp, bottomRadiusDp, topRadiusDp, topRadiusDp}, widthDp, heightDp);
     }
 
-    public static GradientDrawable getGradientRoundRectDrawable(Context context, int shape, int startColorRes, int endColorRes, float[] radii, int width, int height) {
+    public static GradientDrawable getGradientRoundRectDrawable(Context context, int shape, int startColorRes, int endColorRes, float[] radiiDp, int widthDp, int heightDp) {
         return getGradientRoundRectDrawable(shape, UiCommonUtil.getColor(context, startColorRes), UiCommonUtil.getColor(context, endColorRes),
-                UiCommonUtil.dp2Px(context, radii), UiCommonUtil.dp2Px(context, width), UiCommonUtil.dp2Px(context, height));
+                UiCommonUtil.dp2Px(context, radiiDp), UiCommonUtil.dp2Px(context, widthDp), UiCommonUtil.dp2Px(context, heightDp));
     }
 
-    private static GradientDrawable getGradientRoundRectDrawable(int shape, int startColor, int endColor, float[] radii, int width, int height) {
+    private static GradientDrawable getGradientRoundRectDrawable(int shape, int startColor, int endColor, float[] radiiPx, int widthPx, int heightPx) {
         GradientDrawable drawable = new GradientDrawable();
         drawable.setOrientation(GradientDrawable.Orientation.TOP_BOTTOM);
         drawable.setColors(new int[]{startColor, endColor});
         drawable.setShape(shape);
-        drawable.setCornerRadii(radii);
-        drawable.setSize(width, height);
+        drawable.setCornerRadii(radiiPx);
+        drawable.setSize(widthPx, heightPx);
         return drawable;
     }
 
-    public static Drawable getGradientRoundRectMaskDrawable(Context context, int shape, int[] colorResArray, int[] maskColorResArray, int radius, int maskRadius, int width, int height) {
-        float r = radius;
-        float[] radii = {r, r, r, r, r, r, r, r};
-        float mr = maskRadius;
+    public static Drawable getGradientRoundRectMaskDrawable(Context context, int shape, int[] colorResArray, int[] maskColorResArray, int radiusDp, int maskRadiusDp, int widthDp, int heightDp) {
+        float radius = radiusDp;
+        float[] radii = {radius, radius, radius, radius, radius, radius, radius, radius};
+        float maskRadius = maskRadiusDp;
         return getGradientRoundRectMaskDrawable(context, shape, colorResArray, maskColorResArray, radii,
-                new float[]{mr, mr, mr, mr, mr, mr, mr, mr}, width, height);
+                new float[]{maskRadius, maskRadius, maskRadius, maskRadius, maskRadius, maskRadius, maskRadius, maskRadius}, widthDp, heightDp);
     }
 
-    public static Drawable getGradientRoundRectMaskDrawable(Context context, int shape, int[] colorResArray, int[] maskColorResArray, float[] radii, float[] maskRadii, int width, int height) {
+    public static Drawable getGradientRoundRectMaskDrawable(Context context, int shape, int[] colorResArray, int[] maskColorResArray, float[] radiiDp, float[] maskRadiiDp, int widthDp, int heightDp) {
         LayerDrawable layerDrawable = new LayerDrawable(new Drawable[]{
-                getGradientRoundRectDrawable(context, shape, colorResArray[0], colorResArray[1], radii, width, height),
-                getGradientRoundRectDrawable(context, shape, maskColorResArray[0], maskColorResArray[1], maskRadii, width, height)});
+                getGradientRoundRectDrawable(context, shape, colorResArray[0], colorResArray[1], radiiDp, widthDp, heightDp),
+                getGradientRoundRectDrawable(context, shape, maskColorResArray[0], maskColorResArray[1], maskRadiiDp, widthDp, heightDp)});
         layerDrawable.setLayerInset(1, 0, 0, 0, 0);
         return layerDrawable;
     }
+
+    // ------------------------------------------------------------------ gradient round
 
     public static Drawable getGradientRoundStateDrawable(Context context) {
         return getGradientRoundStateDrawable(context, UiConstants.Color.GREED, UiConstants.Color.MASK, 30);
@@ -135,37 +145,40 @@ public class UiBgUtil {
         return stateListDrawable;
     }
 
-    public static StateListDrawable getHollowRoundRectStateDrawable(Context context, int fillColorRes, int strokeColorRes, int strokeWidthRes, int topRadius, int bottomRadius) {
+    // ------------------------------------------------------------------ hollow round rect
+
+    /** Hollow rounded rect with a pressed state; all sizes in px. */
+    public static StateListDrawable getHollowRoundRectStateDrawable(Context context, int widthPx, int heightPx, int strokeColor, int strokeWidthPx, int pressColorRes) {
         return getStateDrawable(
-                getHollowRoundRectDrawable(context, 0, fillColorRes, strokeColorRes, strokeWidthRes, topRadius, bottomRadius),
-                getHollowRoundRectMaskDrawable(context, fillColorRes, strokeColorRes, strokeWidthRes, topRadius, bottomRadius));
+                getHollowRoundRectDrawable(context, 0, widthPx, heightPx, strokeColor, strokeWidthPx),
+                getHollowRoundRectMaskDrawable(context, widthPx, heightPx, strokeColor, strokeWidthPx, pressColorRes));
     }
 
-    private static Drawable getHollowRoundRectMaskDrawable(Context context, int fillColorRes, int strokeColorRes, int strokeWidthRes, int topRadius, int bottomRadius) {
+    private static Drawable getHollowRoundRectMaskDrawable(Context context, int widthPx, int heightPx, int strokeColor, int strokeWidthPx, int pressColorRes) {
         LayerDrawable layerDrawable = new LayerDrawable(new Drawable[]{
-                getHollowRoundRectDrawable(context, 0, fillColorRes, strokeColorRes, strokeWidthRes, topRadius, bottomRadius),
-                getHollowRoundRectDrawable(context, R.color.mask, fillColorRes, strokeColorRes, strokeWidthRes, topRadius, bottomRadius)});
+                getHollowRoundRectDrawable(context, 0, widthPx, heightPx, strokeColor, strokeWidthPx),
+                getHollowRoundRectDrawable(context, pressColorRes, widthPx, heightPx, strokeColor, strokeWidthPx)});
         layerDrawable.setLayerInset(1, 0, 0, 0, 0);
         return layerDrawable;
     }
 
-    public static StateListDrawable getHollowRoundRectStateDrawable(Context context, int fillColorRes, int strokeColorRes, int topRadius, int bottomRadius) {
+    public static StateListDrawable getHollowRoundRectStateDrawable(Context context, int widthPx, int heightPx, int strokeColor, int strokeWidthPx) {
         return getStateDrawable(
-                getHollowRoundRectDrawable(context, 0, fillColorRes, strokeColorRes, topRadius, bottomRadius),
-                getHollowRoundRectMaskDrawable(context, fillColorRes, strokeColorRes, topRadius, bottomRadius));
+                getHollowRoundRectDrawable(context, 0, widthPx, heightPx, strokeColor, strokeWidthPx),
+                getHollowRoundRectMaskDrawable(context, widthPx, heightPx, strokeColor, strokeWidthPx));
     }
 
-    private static Drawable getHollowRoundRectMaskDrawable(Context context, int fillColorRes, int strokeColorRes, int topRadius, int bottomRadius) {
+    private static Drawable getHollowRoundRectMaskDrawable(Context context, int widthPx, int heightPx, int strokeColor, int strokeWidthPx) {
         LayerDrawable layerDrawable = new LayerDrawable(new Drawable[]{
-                getHollowRoundRectDrawable(context, 0, fillColorRes, strokeColorRes, topRadius, bottomRadius),
-                getHollowRoundRectDrawable(context, R.color.mask, fillColorRes, strokeColorRes, topRadius, bottomRadius)});
+                getHollowRoundRectDrawable(context, 0, widthPx, heightPx, strokeColor, strokeWidthPx),
+                getHollowRoundRectDrawable(context, R.color.mask, widthPx, heightPx, strokeColor, strokeWidthPx)});
         layerDrawable.setLayerInset(1, 0, 0, 0, 0);
         return layerDrawable;
     }
 
-    private static Drawable getHollowRoundRectDrawable(Context context, int pressedColorRes, int fillColorRes, int strokeColorRes, int strokeWidthRes, int topRadius, int bottomRadius) {
-        float radius = bottomRadius / 2;
-        return getHollowRoundRectDrawable(context, 0, fillColorRes, strokeColorRes, topRadius, bottomRadius,
+    private static Drawable getHollowRoundRectDrawable(Context context, int pressedColorRes, int widthPx, int heightPx, int strokeColor, int strokeWidthPx) {
+        float radius = heightPx / 2;
+        return getHollowRoundRectDrawable(context, 0, widthPx, heightPx, strokeColor, strokeWidthPx,
                 new float[]{radius, radius, radius, radius, radius, radius, radius, radius}, pressedColorRes);
     }
 
@@ -186,16 +199,16 @@ public class UiBgUtil {
                 R.color.color_55dd7b, 1, pressedColorRes);
     }
 
-    public static GradientDrawable getHollowRoundRectDrawable(Context context, int pressedColorRes, float topRadius, float bottomRadius, int width, int height, int strokeColorRes, int strokeWidthRes, int fillColorRes) {
+    public static GradientDrawable getHollowRoundRectDrawable(Context context, int pressedColorRes, float topRadiusDp, float bottomRadiusDp, int widthDp, int heightDp, int strokeColorRes, int strokeWidthDp, int fillColorRes) {
         return getHollowRoundRectDrawable(context, pressedColorRes,
-                new float[]{topRadius, topRadius, bottomRadius, bottomRadius, bottomRadius, bottomRadius, topRadius, topRadius},
-                width, height, strokeColorRes, strokeWidthRes, fillColorRes);
+                new float[]{topRadiusDp, topRadiusDp, bottomRadiusDp, bottomRadiusDp, bottomRadiusDp, bottomRadiusDp, topRadiusDp, topRadiusDp},
+                widthDp, heightDp, strokeColorRes, strokeWidthDp, fillColorRes);
     }
 
-    private static GradientDrawable getHollowRoundRectDrawable(Context context, int pressedColorRes, float[] radii, int width, int height, int strokeColorRes, int strokeWidthRes, int fillColorRes) {
+    private static GradientDrawable getHollowRoundRectDrawable(Context context, int pressedColorRes, float[] radiiDp, int widthDp, int heightDp, int strokeColorRes, int strokeWidthDp, int fillColorRes) {
         return getHollowRoundRectDrawable(context, pressedColorRes, UiCommonUtil.getColor(context, strokeColorRes),
-                UiCommonUtil.dp2Px(context, strokeWidthRes), UiCommonUtil.dp2Px(context, width), UiCommonUtil.dp2Px(context, height),
-                UiCommonUtil.dp2Px(context, radii), fillColorRes);
+                UiCommonUtil.dp2Px(context, strokeWidthDp), UiCommonUtil.dp2Px(context, widthDp), UiCommonUtil.dp2Px(context, heightDp),
+                UiCommonUtil.dp2Px(context, radiiDp), fillColorRes);
     }
 
     private static GradientDrawable getHollowRoundRectDrawable(Context context, int pressedColorRes, int strokeColor, int strokeWidthPx, int widthPx, int heightPx, float[] radiiPx, int fillColorRes) {
@@ -210,6 +223,8 @@ public class UiBgUtil {
         return drawable;
     }
 
+    // ------------------------------------------------------------------ round / round rect
+
     public static Drawable getRoundStateDrawable(Context context, int normalColorRes, int pressedColorRes, int radiusDp) {
         int radiusPx = UiCommonUtil.dp2Px(context, radiusDp);
         int normalColor = UiCommonUtil.getColor(context, normalColorRes);
@@ -217,15 +232,15 @@ public class UiBgUtil {
                 getRoundMaskDrawable(normalColor, UiCommonUtil.getColor(context, pressedColorRes), radiusPx, radiusPx));
     }
 
-    public static Drawable getRoundMaskDrawable(int normalColor, int pressedColor, int normalRadius, int pressedRadius) {
+    public static Drawable getRoundMaskDrawable(int normalColor, int pressedColor, int normalRadiusPx, int pressedRadiusPx) {
         LayerDrawable layerDrawable = new LayerDrawable(new Drawable[]{
-                getRoundDrawable(normalColor, normalRadius), getRoundDrawable(pressedColor, pressedRadius)});
+                getRoundDrawable(normalColor, normalRadiusPx), getRoundDrawable(pressedColor, pressedRadiusPx)});
         layerDrawable.setLayerInset(1, 0, 0, 0, 0);
         return layerDrawable;
     }
 
-    public static Drawable getRoundDrawable(int color, int radius) {
-        return new RoundDrawable(color, radius);
+    public static Drawable getRoundDrawable(int color, int radiusPx) {
+        return new RoundDrawable(color, radiusPx);
     }
 
     public static CompatibleRoundDrawable getRoundRectDrawable(Context context, int colorRes, int radiusDp) {
@@ -276,17 +291,17 @@ public class UiBgUtil {
                 getRoundRectMaskDrawable(context, normalColorRes, pressedColorRes, normalRadiiDp, pressedRadiiDp, borderColorRes, borderWidthDp));
     }
 
-    public static Drawable getRoundRectMaskDrawable(int normalColor, int pressedColor, int normalRadius, int pressedRadius, int width, int height) {
+    public static Drawable getRoundRectMaskDrawable(int normalColor, int pressedColor, int normalRadiusPx, int pressedRadiusPx, int widthPx, int heightPx) {
         LayerDrawable layerDrawable = new LayerDrawable(new Drawable[]{
-                getRoundRectDrawable(normalColor, normalRadius, width, height),
-                getRoundRectDrawable(pressedColor, pressedRadius, width, height)});
+                getRoundRectDrawable(normalColor, normalRadiusPx, widthPx, heightPx),
+                getRoundRectDrawable(pressedColor, pressedRadiusPx, widthPx, heightPx)});
         layerDrawable.setLayerInset(1, 0, 0, 0, 0);
         return layerDrawable;
     }
 
-    public static RoundRectDrawable getRoundRectDrawable(int color, int radius, int width, int height) {
-        RoundRectDrawable drawable = new RoundRectDrawable(color, radius);
-        drawable.setRectParams(0, 0, width, height);
+    public static RoundRectDrawable getRoundRectDrawable(int color, int radiusPx, int widthPx, int heightPx) {
+        RoundRectDrawable drawable = new RoundRectDrawable(color, radiusPx);
+        drawable.setRectParams(0, 0, widthPx, heightPx);
         return drawable;
     }
 
