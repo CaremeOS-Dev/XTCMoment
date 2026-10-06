@@ -93,7 +93,83 @@ public class ShareHelper {
         }
     }
 
+    /** Notifies the provider that the home key was pressed. */
+    public void pressHomeKeyNotify() {
+        if (ContextUtils.isEmpty()) {
+            return;
+        }
+        Uri uri = UriUtils.getPressHomeKeyContentUri(ContextUtils.getContext());
+        ContentProviderClient client = null;
+        try {
+            client = acquireContentProviderClient(uri);
+            client.getType(uri);
+        } catch (Exception e) {
+            LogUtil.e(TAG, ErrorCode.CONTROL_INIT_PROVIDER);
+            e.printStackTrace();
+        } finally {
+            if (client != null) {
+                client.release();
+            }
+        }
+    }
+
     /** Notifies the provider that real-time upload is requested. */
     public void realTimeNotify() {
+        if (ContextUtils.isEmpty()) {
+            return;
+        }
+        Uri uri = UriUtils.getRealTimeContentUri(ContextUtils.getContext());
+        ContentProviderClient client = null;
+        try {
+            client = acquireContentProviderClient(uri);
+            client.getType(uri);
+        } catch (Exception e) {
+            LogUtil.e(TAG, ErrorCode.CONTROL_INIT_PROVIDER);
+            e.printStackTrace();
+        } finally {
+            if (client != null) {
+                client.release();
+            }
+        }
+    }
+
+    /** Queries collected data of the given package. */
+    public void queryData(String packageName) {
+        if (ContextUtils.isEmpty()) {
+            return;
+        }
+        Uri uri = UriUtils.getQueryDataContentUri(packageName);
+        ContentProviderClient client = null;
+        try {
+            client = acquireContentProviderClient(uri);
+            client.getType(uri);
+        } catch (Throwable throwable) {
+            LogUtil.e(TAG, ErrorCode.CONTROL_INIT_PROVIDER);
+            throwable.printStackTrace();
+        } finally {
+            if (client != null) {
+                client.release();
+            }
+        }
+    }
+
+    /** Notifies the provider to report data of the given package. */
+    public void reportData(String packageName) {
+        if (ContextUtils.isEmpty()) {
+            return;
+        }
+        Uri uri = UriUtils.getReportDataContentUri(packageName);
+        ContentProviderClient client = null;
+        try {
+            client = acquireContentProviderClient(uri);
+            client.getType(uri);
+        } catch (Exception e) {
+            LogUtil.e(TAG, ErrorCode.CONTROL_INIT_PROVIDER);
+            e.printStackTrace();
+        } finally {
+            if (client != null) {
+                client.release();
+            }
+        }
     }
 }
