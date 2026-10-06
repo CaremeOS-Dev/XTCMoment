@@ -100,7 +100,7 @@ object NsfwSDKUtil {
             val mimeType = getMimeType(file)
             var descriptor: ParcelFileDescriptor? = null
             try {
-                descriptor = ParcelFileDescriptor.open(file, NotificationFlag.n)
+                descriptor = ParcelFileDescriptor.open(file, NotificationFlag.NOTIFICATION_FLAG_CUSTOM)
             } catch (e: FileNotFoundException) {
                 LogUtil.e(TAG, e.message)
             }
@@ -196,7 +196,7 @@ object NsfwSDKUtil {
         return null
     }
 
-    /** 根据扩展名推断 MIME 类型，推断失败时返回 file/*。 */
+    /** 根据扩展名推断 MIME 类型，推断失败时返回 file/star。 */
     private fun getMimeType(file: File?): String {
         val extension = getExtension(file)
         if (extension == null) {
