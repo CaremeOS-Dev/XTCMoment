@@ -28,8 +28,8 @@ public interface IAIEditedView extends MvpView {
     /** 展示空数据。 */
     void showEmpty();
 
-    /** 处理权益领取状态。 */
-    void onUserAccessObtained(UserAccessBean userAccessBean);
+    /** 展示权益领取的额外手表弹窗。 */
+    void showUserAccessWatchBox(UserAccessBean userAccessBean);
 
     /** 次数单位后缀。 */
     int getTimesSuffix();

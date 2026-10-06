@@ -139,7 +139,7 @@ public class AIEditedPresenter extends MvpPresenter<IAIEditedView> {
             obtainForTimes(userAccessBean, true);
             return true;
         }
-        getView().onUserAccessObtained(userAccessBean);
+        getView().showUserAccessWatchBox(userAccessBean);
         return false;
     }
 
