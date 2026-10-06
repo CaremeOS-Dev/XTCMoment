@@ -30,6 +30,7 @@ import com.xtc.contactapi.contact.observable.interfaces.IContactSubscribe;
 import com.xtc.contactapi.contact.observable.interfaces.IDefaultSubscribe;
 import com.xtc.contactapi.contact.utils.GsonUtil;
 import com.xtc.contactapi.contacthead.impl.ContactHeadCacheServeImpl;
+import com.xtc.contactapi.contacthead.impl.ContactHeadManager;
 import com.xtc.moment.module.Constants;
 import com.xtc.system.account.WatchAccountBase;
 import com.xtc.utils.storage.FileUtils;
