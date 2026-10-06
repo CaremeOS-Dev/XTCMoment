@@ -1,8 +1,6 @@
 package com.xtc.moment.module.widget.coverflow;
 
-/**
- * CoverFlow 自定义透明度参数。
- */
+/** View id plus ratio used to fade a child of the cover flow item. */
 public class FlowCustomAlphaParam {
 
     private int viewId = -1;
