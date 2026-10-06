@@ -4,9 +4,7 @@ import android.content.Context;
 
 import com.xtc.architecture.mvp.core.MvpBasePresenter;
 
-/**
- * 位置发布 Presenter。
- */
+/** Presenter of the publish-with-location page. */
 class PublishLocationPresenter extends MvpBasePresenter<IPublishLocationView> {
 
     private static final String TAG = PublishLocationPresenter.class.getSimpleName();
