@@ -19,6 +19,7 @@ import com.xtc.moment.module.bean.VideoTokenParam;
 import com.xtc.moment.module.report.bean.ReportDataBean;
 import com.xtc.moment.module.report.bean.ReportInformParam;
 import com.xtc.moment.module.report.bean.StartReportRequest;
+import com.xtc.moment.net.bean.BanStateBean;
 import com.xtc.moment.net.bean.BanStateBody;
 import com.xtc.moment.net.bean.CommentBean;
 import com.xtc.moment.net.bean.CommentOfficialResultBean;

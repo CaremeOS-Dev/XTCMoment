@@ -28,7 +28,8 @@ import com.xtc.moment.util.HandlerUtil;
 import com.xtc.moment.util.SystemUtil;
 import com.xtc.moment.util.ToastUtil;
 import com.xtc.ui.widget.ptrrefresh.adpter.ClassicRecyclerAdapter;
-import com.xtc.ui.widget.ptrrefresh.footer.LoadMoreHelper;
+import com.xtc.ui.widget.ptrrefresh.footer.LoadMoreHelper.LoadMoreHelper;
+import com.xtc.ui.widget.ptrrefresh.footer.LoadMoreHelper.RecyclerLoadMoreHelper;
 import com.xtc.ui.widget.ptrrefresh.footer.OnLoadMoreListener;
 import com.xtc.ui.widget.ptrrefresh.footer.PushLoadMoreView;
 import com.xtc.ui.widget.ptrrefresh.layout.PullRefreshFrameLayout;
@@ -119,7 +120,7 @@ public class MoodOrStateActivity extends BaseActivity<IMoodOrStateView, MoodOrSt
     }
 
     private void initLoadMore() {
-        this.mLoadMoreHelper = new LoadMoreHelper.RecyclerLoadMoreHelper();
+        this.mLoadMoreHelper = new RecyclerLoadMoreHelper();
         PushLoadMoreView loadMoreView = new PushLoadMoreView();
         this.mLoadMoreHelper.attachToView(this.mRv, loadMoreView);
         loadMoreView.setCirCleColor(Color.parseColor("#fec02b"));
