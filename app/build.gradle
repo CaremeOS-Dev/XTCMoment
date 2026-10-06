@@ -27,9 +27,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
+    kotlinOptions { jvmTarget = '1.8' }
     buildTypes {
         release {
             minifyEnabled false
@@ -44,13 +42,13 @@ android {
         checkReleaseBuilds false
     }
     packagingOptions {
-        jniLibs {
-            useLegacyPackaging true
-        }
+        jniLibs { useLegacyPackaging true }
         resources {
-            excludes += ['META-INF/*']
+            excludes += ['META-INF/*', 'kotlin/**', 'DebugProbesKt.bin', 'META-INF/versions/**']
         }
     }
 }
 dependencies {
+    implementation fileTree(dir: '../prebuilt-libs', include: ['*.jar'])
+    implementation 'com.android.support:multidex:1.0.3'
 }
