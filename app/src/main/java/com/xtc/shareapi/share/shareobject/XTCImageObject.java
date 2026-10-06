@@ -114,7 +114,7 @@ public class XTCImageObject implements Parcelable, IShareObject {
         ShowMessageFromXTC.Response response = new ShowMessageFromXTC.Response();
         byte[] imageData = this.imageData;
         String imagePath = this.imagePath;
-        if ((imageData != null && imageData.length != 0) || (imagePath != null && imagePath.length != 0)) {
+        if ((imageData != null && imageData.length != 0) || (imagePath != null && imagePath.length() != 0)) {
             byte[] data = this.imageData;
             if (data != null && data.length > CONTENT_LENGTH_LIMIT) {
                 Log.e(TAG, "checkArgs fail, content is too large");

@@ -41,7 +41,7 @@ public class XTCSocialVideoObject implements IShareObject {
 
     @Override
     public int type() {
-        return TYPE_SOCIAL_VIDEO;
+        return OpenApiConstant.XTCShareType.SOCIAL_VIDEO;
     }
 
     @Override
