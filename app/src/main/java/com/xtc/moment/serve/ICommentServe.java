@@ -7,17 +7,22 @@ import java.util.List;
 
 import rx.Observable;
 
-/** Comment persistence and network access. */
+/**
+ * 评论数据服务接口（本地库 + 网络）。
+ */
 public interface ICommentServe {
-    DbMoment getDbCommentFromDbSync(String momentId);
 
     DbMoment getMomentsFromDbSync(String momentId);
 
-    Observable<List<DbMomentComment>> searchAllCommentFromNet(String momentId, String momentWatchId);
+    DbMoment getDbCommentFromDbSync(String momentId);
 
-    Observable<List<DbMomentComment>> searchCommentFromDb(int pageNum, int pageSize, String momentId, String momentWatchId);
+    Observable<List<DbMomentComment>> searchCommentFromDb(int page, int pageSize, String momentId, String commentId);
 
-    Observable<List<DbMomentComment>> searchCommentFromNet(int pageNum, int pageSize, String momentId, String momentWatchId, boolean fromMomentDetail);
+    Observable<List<DbMomentComment>> searchCommentFromNet(int page, int pageSize, String momentId, String commentId,
+            boolean isOfficial);
 
-    Observable<List<DbMomentComment>> searchOfficialCommentFromNet(int pageNum, int pageSize, String momentId, String momentWatchId, boolean fromMomentDetail);
+    Observable<List<DbMomentComment>> searchOfficialCommentFromNet(int page, int pageSize, String advertId,
+            String commentId, boolean isOfficial);
+
+    Observable<List<DbMomentComment>> searchAllCommentFromNet(String momentId, String commentId);
 }
