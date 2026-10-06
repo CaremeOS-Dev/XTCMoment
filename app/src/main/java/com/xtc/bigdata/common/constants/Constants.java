@@ -1,6 +1,8 @@
 package com.xtc.bigdata.common.constants;
 
-/** Constants shared by the big-data collection library. */
+/**
+ * 大数据采集全局常量与开关。
+ */
 public class Constants {
 
     public static final String AUTO_COLLECT = "自动采集点击事件";
