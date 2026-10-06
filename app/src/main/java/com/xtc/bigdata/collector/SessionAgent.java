@@ -17,4 +17,12 @@ public class SessionAgent {
     public static void newSession() {
         sessionId = UUID.randomUUID().toString();
     }
+
+    public static void refreshSessionId() {
+        newSession();
+    }
+
+    public static void clean() {
+        sessionId = UUID.randomUUID().toString();
+    }
 }

@@ -252,7 +252,7 @@ public abstract class AbsMomentView extends FrameLayout {
             }
         }
         if (TextUtils.isEmpty(iconPath)) {
-            Glide.with(getMyContext()).load(this.contactManager.getDefaultHead())
+            Glide.with(getMyContext()).load(this.contactManager.getDefaultPortraitPath(getMyContext()))
                     .apply(new RequestOptions().centerCrop()
                             .placeholder(R.drawable.default_custom_default)
                             .transform((Transformation<Bitmap>) new CircleCrop()))

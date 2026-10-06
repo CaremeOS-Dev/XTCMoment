@@ -4,22 +4,23 @@ import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.widget.RelativeLayout;
+import android.widget.FrameLayout;
 
-import com.ss.ugc.android.alpha_player.IMonitor;
-import com.ss.ugc.android.alpha_player.IPlayerAction;
-import com.ss.ugc.android.alpha_player.controller.IPlayerController;
-import com.ss.ugc.android.alpha_player.controller.PlayerController;
-import com.ss.ugc.android.alpha_player.model.AlphaVideoViewType;
-import com.ss.ugc.android.alpha_player.model.Configuration;
-import com.ss.ugc.android.alpha_player.model.DataSource;
-import com.ss.ugc.android.alpha_player.model.ScaleType;
+import com.xtc.anim.alphaplayer.IMonitor;
+import com.xtc.anim.alphaplayer.IPlayerAction;
+import com.xtc.anim.alphaplayer.controller.IPlayerController;
+import com.xtc.anim.alphaplayer.controller.PlayerController;
+import com.xtc.anim.alphaplayer.model.AlphaVideoViewType;
+import com.xtc.anim.alphaplayer.model.Configuration;
+import com.xtc.anim.alphaplayer.model.DataSource;
+import com.xtc.anim.alphaplayer.model.ScaleType;
+import com.xtc.anim.alphaplayer.player.DefaultSystemPlayer;
 import com.xtc.log.LogUtil;
 
 /**
  * 透明视频动画视图，封装 alpha player 的播放控制。
  */
-public class VideoAnimView extends RelativeLayout {
+public class VideoAnimView extends FrameLayout {
 
     private static final String TAG = "VideoAnimView";
 
@@ -53,12 +54,12 @@ public class VideoAnimView extends RelativeLayout {
     /** 初始化播放控制器。 */
     public void initPlayerController(Context context, LifecycleOwner lifecycleOwner, VideoAnimationListener listener) {
         Configuration configuration = new Configuration(context, lifecycleOwner);
-        configuration.setVideoViewType(AlphaVideoViewType.GL_TEXTURE_VIEW);
-        this.playerController = PlayerController.INSTANCE.create(configuration, null);
-        this.playerController.setPlayerAction(createPlayerAction(listener));
-        this.playerController.setMonitor(createMonitor(listener));
-        this.playerController.setLooping(true);
-        this.playerController.attachView(this);
+        configuration.setAlphaVideoViewType(AlphaVideoViewType.GL_TEXTURE_VIEW);
+        this.playerController = PlayerController.get(configuration, new DefaultSystemPlayer());
+        this.playerController.setPlayerAction(initPlayerAction(listener));
+        this.playerController.setMonitor(initMonitor(listener));
+        this.playerController.setLooperCount(-1);
+        this.playerController.attachAlphaView(this);
     }
 
     /** 开始播放指定资源。 */
@@ -80,12 +81,11 @@ public class VideoAnimView extends RelativeLayout {
         if (controller == null) {
             return;
         }
-        controller.setLooping(looping ? -1 : 0);
+        controller.setLooperCount(looping ? -1 : 0);
     }
 
     private void startDataSource(DataSource dataSource) {
         if (this.playerController != null) {
-            LogUtil.d(TAG, "startDataSource: ");
             this.playerController.start(dataSource);
         }
     }
@@ -94,20 +94,24 @@ public class VideoAnimView extends RelativeLayout {
     public void releasePlayerController() {
         if (this.playerController != null) {
             LogUtil.d(TAG, "releasePlayerController");
-            this.playerController.detachView(this);
+            this.playerController.detachAlphaView(this);
             this.playerController.release();
             this.playerController = null;
         }
     }
 
-    private IPlayerAction createPlayerAction(final VideoAnimationListener listener) {
+    private IPlayerAction initPlayerAction(final VideoAnimationListener listener) {
         return new IPlayerAction() {
             @Override
-            public void onVideoSizeChanged(int width, int height, ScaleType scaleType) {
+            public void onPlayProcess(int position) {
             }
 
             @Override
-            public void startAction(int orientation) {
+            public void onVideoSizeChanged(int videoWidth, int videoHeight, ScaleType scaleType) {
+            }
+
+            @Override
+            public void startAction(int duration) {
             }
 
             @Override
@@ -133,13 +137,14 @@ public class VideoAnimView extends RelativeLayout {
         };
     }
 
-    private IMonitor createMonitor(final VideoAnimationListener listener) {
+    private IMonitor initMonitor(final VideoAnimationListener listener) {
         return new IMonitor() {
             @Override
-            public void monitor(boolean success, String message, int code, int extraCode, String detail) {
-                if (!success && listener != null) {
-                    listener.onError(message, code, extraCode, detail);
+            public void monitor(boolean success, String playType, int what, int extra, String errorInfo) {
+                if (success || listener == null) {
+                    return;
                 }
+                listener.onError(playType, what, extra, errorInfo);
             }
         };
     }

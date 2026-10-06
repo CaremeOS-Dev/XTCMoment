@@ -3,7 +3,7 @@ package com.xtc.contactapi.contact.constant;
 import android.net.Uri;
 import android.os.Environment;
 
-import com.baidu.speech.asr.SpeechConstant;
+
 import com.xtc.dataservice.api.SessionConstant;
 
 import java.io.File;
@@ -42,14 +42,14 @@ public class ContactApiConstant {
     /** 模块名。 */
     public static String MODULE_LAUNCHER = "launcher";
     /** 联系人数据源名。 */
-    public static String SOURCE_CONTACT = SpeechConstant.CONTACT;
+    public static String SOURCE_CONTACT = "contact";
     /** 联系人头像数据源名。 */
     public static String SOURCE_CONTACT_HEAD = "contact_head";
 
     /** 联系人头像缓存目录。 */
     public static String CONTACT_HEAD_DIR = Environment.getExternalStorageDirectory().getPath()
             + File.separator + SessionConstant.Source.XTC + File.separator + "ibwatch"
-            + File.separator + "launcher" + File.separator + SpeechConstant.CONTACT
+            + File.separator + "launcher" + File.separator + SOURCE_CONTACT
             + File.separator + "contact_head";
     /** 头像文件后缀。 */
     public static String HEAD_FILE_SUFFIX = ".png";

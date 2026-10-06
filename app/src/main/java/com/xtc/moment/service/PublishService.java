@@ -148,9 +148,9 @@ public class PublishService extends Service {
             return;
         }
         resetStartTime();
-        ArrayList<PhotoMsg> compressedPhotos = new ArrayList<>();
+        ArrayList<String> compressedPaths = new ArrayList<>();
         final long startTime = SystemClock.elapsedRealtime();
-        Observable<PhotoMsg>[] compressObservables = PhotoCompressManager.createCompressObservables(photoMsgs, compressedPhotos);
+        Observable<PhotoMsg>[] compressObservables = PhotoCompressManager.createCompressObservables(photoMsgs, compressedPaths);
         if (compressObservables == null || compressObservables.length <= 0) {
             LogUtil.i(TAG, "compress photos error, size is empty");
             DigitalBigDateSender.onUploadError(getApplicationContext(), DigitalManager.getInstance().getDigitalEntity(),
@@ -160,7 +160,7 @@ public class PublishService extends Service {
             }
             return;
         }
-        Observable.combineLatest(compressObservables, new FuncN<Object>() {
+        Observable.combineLatest(java.util.Arrays.<Observable<? extends PhotoMsg>>asList(compressObservables), new FuncN<Object>() {
             @Override
             public Object call(Object... args) {
                 LogUtil.i(TAG, "compress all photos success");
@@ -261,7 +261,7 @@ public class PublishService extends Service {
             }
             return;
         }
-        Observable.combineLatest(uploadObservables, new FuncN<PhotoTokenVo>() {
+        Observable.combineLatest(java.util.Arrays.<Observable<? extends PhotoTokenVo>>asList(uploadObservables), new FuncN<PhotoTokenVo>() {
             @Override
             public PhotoTokenVo call(Object... args) {
                 return null;
@@ -688,7 +688,7 @@ public class PublishService extends Service {
         resetStartTime();
         Observable.just(photoMsg.getLocalPath()).map(new Func1<String, String>() {
             @Override
-            public String call(String path) throws Throwable {
+            public String call(String path) {
                 long startTime = SystemClock.elapsedRealtime();
                 String compressedPath = ImageUtil.compressByScale(path, PhotoTokenParam.WEBP_FORMAT,
                         Constants.Camera.PhotoSize.WIDTH, Constants.Camera.PhotoSize.HEIGHT);

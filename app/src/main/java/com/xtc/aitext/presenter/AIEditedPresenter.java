@@ -92,7 +92,7 @@ public class AIEditedPresenter extends MvpPresenter<IAIEditedView> {
             ToastUtil.showShortCover(context, context.getString(R.string.string_toast_no_available_number));
             return;
         }
-        AIModuleUtil.sendCreateStatus(context, new AICreatStatusBean(4, 0L));
+        AIModuleUtil.notifyCreateStatus(context, new AICreatStatusBean(4, 0L));
         CreatTextBody body = new CreatTextBody();
         body.setAiText(aiText);
         body.setAiStyleId(styleId);
@@ -108,16 +108,16 @@ public class AIEditedPresenter extends MvpPresenter<IAIEditedView> {
                             return;
                         }
                         if (Objects.equals(creatBackBean.getCallResult(), 0)) {
-                            AIModuleUtil.sendCreateStatus(context, new AICreatStatusBean(0, 0L, creatBackBean.getId()));
+                            AIModuleUtil.notifyCreateStatus(context, new AICreatStatusBean(0, 0L, creatBackBean.getId()));
                         } else if (Objects.equals(creatBackBean.getCallResult(), 1)) {
                             getView().showRemainTimes(creatBackBean.getRemainTimes());
-                            AIModuleUtil.sendCreateStatus(context, new AICreatStatusBean(1, creatBackBean.getWaitTime(), creatBackBean.getId()));
+                            AIModuleUtil.notifyCreateStatus(context, new AICreatStatusBean(1, creatBackBean.getWaitTime(), creatBackBean.getId()));
                         }
                     }
                 }, new AINetErrorAction(getClass(), new AINetErrorAction.ErrorCallback() {
                     @Override
                     public void onError(Throwable throwable) {
-                        AIModuleUtil.sendCreateStatus(context, new AICreatStatusBean(5, 0L));
+                        AIModuleUtil.notifyCreateStatus(context, new AICreatStatusBean(5, 0L));
                     }
                 }, "startCreateText"));
     }
@@ -169,7 +169,7 @@ public class AIEditedPresenter extends MvpPresenter<IAIEditedView> {
                         return mergeObtainResult(obtainTimeBean, userAccessBean);
                     }
                 })
-                .subscribeOn(AITextRxUtils.getComputeScheduler())
+                .subscribeOn(AITextRxUtils.getSingleScheduler())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<ObtainTimeBean>() {
                     @Override

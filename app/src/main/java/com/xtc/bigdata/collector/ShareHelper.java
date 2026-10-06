@@ -114,6 +114,12 @@ public class ShareHelper {
     }
 
     /** Notifies the provider that real-time upload is requested. */
+    public void appLaunchNotify() {
+    }
+
+    public void appExitNotify() {
+    }
+
     public void realTimeNotify() {
         if (ContextUtils.isEmpty()) {
             return;

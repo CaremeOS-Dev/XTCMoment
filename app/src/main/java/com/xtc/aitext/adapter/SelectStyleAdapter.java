@@ -30,7 +30,7 @@ public class SelectStyleAdapter extends RecyclerView.Adapter<SelectStyleAdapter.
 
     private static final RequestOptions STYLE_IMAGE_OPTIONS = new RequestOptions()
             .transform((Transformation<Bitmap>) new RoundedCorners((int) TypedValueCompat.applyDimensionDip(10.0f)))
-            .diskCacheStrategy(DiskCacheStrategy.SOURCE);
+            .diskCacheStrategy(DiskCacheStrategy.ALL);
 
     private final Context context;
     private final List<AIStyleTextBean> styleList;
