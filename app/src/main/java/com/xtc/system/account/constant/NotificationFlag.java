@@ -1,0 +1,13 @@
+package com.xtc.system.account.constant;
+
+/** Window flags used by the status-bar helpers. */
+public interface NotificationFlag {
+    int NOTIFICATION_FLAG_BOOT_USE = 536870912;
+    int NOTIFICATION_FLAG_CUSTOM = 268435456;
+    int NOTIFICATION_FLAG_HEADER = 134217728;
+    int NOTIFICATION_FLAG_MASK = -16777216;
+    int NOTIFICATION_FLAG_MUSIC = 16777216;
+    int NOTIFICATION_FLAG_NOT_IN_MAIN = 67108864;
+    int NOTIFICATION_FLAG_REAL_TIME_CLOCK = 33554432;
+    int NOTIFICATION_FLAG_START_NOT_DELETE = 1073741824;
+}

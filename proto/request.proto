@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package com.xtc.dataservice.api.request;
+
+option java_package = "com.xtc.dataservice.api.request";
+option java_outer_classname = "RequestProto";
+option optimize_for = LITE_RUNTIME;
+
+message FindLastKnownDataRequest {
+  repeated int32 dataType = 3;
+}
+
+message ReadDataRequest {
+  int64 startTimeAtMils = 1;
+  int64 endTimeAtMils = 2;
+  repeated int32 dataType = 3;
+}
+
+message DeleteDataRequest {
+  int64 startTimeAtMils = 1;
+  int64 endTimeAtMils = 2;
+  repeated int32 dataType = 3;
+}
+
+message RegisterDataInsertListenerRequest {
+  repeated int32 dataType = 1;
+}
+
+message FindSessionRequest {
+  string sessionId = 1;
+}
+
+message FindStartingSessionRequest {
+  repeated int32 sessionType = 3;
+}
+
+message ReadSessionRequest {
+  int64 startTimeAtMils = 1;
+  int64 endTimeAtMils = 2;
+  repeated int32 sessionType = 3;
+}
+
+message RegisterSessionListenerRequest {
+  repeated int32 sessionType = 1;
+}
+
+message SensorRequest {
+  repeated int32 dataType = 1;
+  bool includeLastKnown = 2;
+}

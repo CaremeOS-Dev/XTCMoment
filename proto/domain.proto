@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package com.xtc.dataservice.api.domain;
+
+option java_package = "com.xtc.dataservice.api.domain";
+option java_outer_classname = "DomainProto";
+option optimize_for = LITE_RUNTIME;
+
+message DataPoint {
+  int32 dataType = 1;
+  string dataSource = 2;
+  int64 startTimeAtMillis = 3;
+  int64 endTimeAtMillis = 4;
+  map<int32, Value> value = 5;
+}
+
+message Session {
+  string id = 1;
+  int32 sessionType = 2;
+  string sessionSource = 3;
+  int64 startTimeAtMillis = 4;
+  int64 endTimeAtMillis = 5;
+  map<int32, Value> value = 6;
+}
+
+message Value {
+  oneof value {
+    int32 intVal = 1;
+    int64 longVal = 2;
+    float floatVal = 3;
+    double doubleVal = 4;
+    string stringVal = 5;
+    bytes byteArrayVal = 6;
+  }
+}
