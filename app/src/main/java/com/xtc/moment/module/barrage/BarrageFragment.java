@@ -100,8 +100,8 @@ public class BarrageFragment extends BaseFragment<IBarrageView, BarragePresenter
     private static final int RANDOM_INT = 1000;
     private static final int MAX_GIFT_COUNT = 99;
 
-    private int dp_18 = 18;
-    private int dp_0 = 0;
+    private int iconSizeDp = 18;
+    private int iconPaddingPx = 0;
 
     private LifecycleRegistry lifecycleRegistry;
     private DanmakuView danmakuView;
@@ -727,9 +727,9 @@ public class BarrageFragment extends BaseFragment<IBarrageView, BarragePresenter
             LogUtil.d(TAG, "setFlowerTextView ：context 无效");
             return;
         }
-        this.tvFlowerCount.setWidth(DimenUtil.dp2px(context, this.dp_18));
-        this.tvFlowerCount.setHeight(DimenUtil.dp2px(context, this.dp_18));
-        this.tvFlowerCount.setPadding(this.dp_0, this.dp_0, this.dp_0, this.dp_0);
+        this.tvFlowerCount.setWidth(DimenUtil.dp2px(context, this.iconSizeDp));
+        this.tvFlowerCount.setHeight(DimenUtil.dp2px(context, this.iconSizeDp));
+        this.tvFlowerCount.setPadding(this.iconPaddingPx, this.iconPaddingPx, this.iconPaddingPx, this.iconPaddingPx);
         this.tvFlowerCount.setText(String.valueOf(count));
     }
 
@@ -743,9 +743,9 @@ public class BarrageFragment extends BaseFragment<IBarrageView, BarragePresenter
             LogUtil.d(TAG, "setEggTextView ：context 无效");
             return;
         }
-        this.tvEggCount.setWidth(DimenUtil.dp2px(context, this.dp_18));
-        this.tvEggCount.setHeight(DimenUtil.dp2px(context, this.dp_18));
-        this.tvEggCount.setPadding(this.dp_0, this.dp_0, this.dp_0, this.dp_0);
+        this.tvEggCount.setWidth(DimenUtil.dp2px(context, this.iconSizeDp));
+        this.tvEggCount.setHeight(DimenUtil.dp2px(context, this.iconSizeDp));
+        this.tvEggCount.setPadding(this.iconPaddingPx, this.iconPaddingPx, this.iconPaddingPx, this.iconPaddingPx);
         this.tvEggCount.setText(String.valueOf(count));
     }
 
