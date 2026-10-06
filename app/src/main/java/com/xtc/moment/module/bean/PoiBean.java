@@ -6,14 +6,15 @@ import android.text.TextUtils;
 
 import com.google.gson.annotations.SerializedName;
 import com.xtc.moment.module.Constants;
+import com.xtc.system.account.bean.AppInfoBase;
 
-/** A point of interest attached to a moment's location. */
+/** Point of interest attached to a published moment. */
 public class PoiBean implements Parcelable {
 
     public static final Parcelable.Creator<PoiBean> CREATOR = new Parcelable.Creator<PoiBean>() {
         @Override
-        public PoiBean createFromParcel(Parcel parcel) {
-            return new PoiBean(parcel);
+        public PoiBean createFromParcel(Parcel source) {
+            return new PoiBean(source);
         }
 
         @Override
@@ -51,16 +52,34 @@ public class PoiBean implements Parcelable {
     public PoiBean() {
     }
 
-    protected PoiBean(Parcel parcel) {
-        this.poiName = parcel.readString();
-        this.province = parcel.readString();
-        this.city = parcel.readString();
-        this.address = parcel.readString();
-        this.location = (Location) parcel.readParcelable(Location.class.getClassLoader());
-        this.addressDesc = parcel.readString();
-        this.locationType = parcel.readInt();
-        this.goalPoi = parcel.readString();
-        this.detailInfo = (DetailInfo) parcel.readParcelable(DetailInfo.class.getClassLoader());
+    protected PoiBean(Parcel source) {
+        this.poiName = source.readString();
+        this.province = source.readString();
+        this.city = source.readString();
+        this.address = source.readString();
+        this.location = source.readParcelable(Location.class.getClassLoader());
+        this.addressDesc = source.readString();
+        this.locationType = source.readInt();
+        this.goalPoi = source.readString();
+        this.detailInfo = source.readParcelable(DetailInfo.class.getClassLoader());
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.poiName);
+        dest.writeString(this.province);
+        dest.writeString(this.city);
+        dest.writeString(this.address);
+        dest.writeParcelable(this.location, flags);
+        dest.writeString(this.addressDesc);
+        dest.writeInt(this.locationType);
+        dest.writeString(this.goalPoi);
+        dest.writeParcelable(this.detailInfo, flags);
     }
 
     public String getPoiName() {
@@ -87,6 +106,7 @@ public class PoiBean implements Parcelable {
         this.city = city;
     }
 
+    /** @return the address description, falling back to the poi name. */
     public String getAddressDesc() {
         if (!TextUtils.isEmpty(this.addressDesc)) {
             return this.addressDesc;
@@ -140,34 +160,18 @@ public class PoiBean implements Parcelable {
 
     @Override
     public String toString() {
-        return "LocationInfo{poiName='" + this.poiName + "', province='" + this.province + "', city='" + this.city + "', address='" + this.address + "', location=" + this.location + ", locationType=" + this.locationType + ", addressDesc=" + this.addressDesc + ", goalPoi='" + this.goalPoi + "'}";
+        return "LocationInfo{poiName='" + this.poiName + "', province='" + this.province + "', city='" + this.city
+                + "', address='" + this.address + "', location=" + this.location + ", locationType=" + this.locationType
+                + ", addressDesc=" + this.addressDesc + ", goalPoi='" + this.goalPoi + "'}";
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int flags) {
-        parcel.writeString(this.poiName);
-        parcel.writeString(this.province);
-        parcel.writeString(this.city);
-        parcel.writeString(this.address);
-        parcel.writeParcelable(this.location, flags);
-        parcel.writeString(this.addressDesc);
-        parcel.writeInt(this.locationType);
-        parcel.writeString(this.goalPoi);
-        parcel.writeParcelable(this.detailInfo, flags);
-    }
-
-    /** Latitude/longitude pair. */
+    /** Latitude/longitude of the poi. */
     public static class Location implements Parcelable {
 
         public static final Parcelable.Creator<Location> CREATOR = new Parcelable.Creator<Location>() {
             @Override
-            public Location createFromParcel(Parcel parcel) {
-                return new Location(parcel);
+            public Location createFromParcel(Parcel source) {
+                return new Location(source);
             }
 
             @Override
@@ -187,9 +191,20 @@ public class PoiBean implements Parcelable {
             this.longitude = longitude;
         }
 
-        protected Location(Parcel parcel) {
-            this.latitude = parcel.readString();
-            this.longitude = parcel.readString();
+        protected Location(Parcel source) {
+            this.latitude = source.readString();
+            this.longitude = source.readString();
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(this.latitude);
+            dest.writeString(this.longitude);
         }
 
         public String getLatitude() {
@@ -212,26 +227,15 @@ public class PoiBean implements Parcelable {
         public String toString() {
             return "Location{goalLatitude='" + this.latitude + "', goalLongitude='" + this.longitude + "'}";
         }
-
-        @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        @Override
-        public void writeToParcel(Parcel parcel, int flags) {
-            parcel.writeString(this.latitude);
-            parcel.writeString(this.longitude);
-        }
     }
 
-    /** Distance and tag for a POI. */
+    /** Additional poi attributes reported by the map service. */
     public static class DetailInfo implements Parcelable {
 
         public static final Parcelable.Creator<DetailInfo> CREATOR = new Parcelable.Creator<DetailInfo>() {
             @Override
-            public DetailInfo createFromParcel(Parcel parcel) {
-                return new DetailInfo(parcel);
+            public DetailInfo createFromParcel(Parcel source) {
+                return new DetailInfo(source);
             }
 
             @Override
@@ -243,7 +247,7 @@ public class PoiBean implements Parcelable {
         @SerializedName("distance")
         private int distance;
 
-        @SerializedName("tag")
+        @SerializedName(AppInfoBase.KEY_TAG)
         private String tag;
 
         public DetailInfo(int distance, String tag) {
@@ -251,9 +255,20 @@ public class PoiBean implements Parcelable {
             this.tag = tag;
         }
 
-        protected DetailInfo(Parcel parcel) {
-            this.distance = parcel.readInt();
-            this.tag = parcel.readString();
+        protected DetailInfo(Parcel source) {
+            this.distance = source.readInt();
+            this.tag = source.readString();
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeInt(this.distance);
+            dest.writeString(this.tag);
         }
 
         public int getDistance() {
@@ -275,17 +290,6 @@ public class PoiBean implements Parcelable {
         @Override
         public String toString() {
             return "DetailInfo{distance=" + this.distance + ", tag='" + this.tag + "'}";
-        }
-
-        @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        @Override
-        public void writeToParcel(Parcel parcel, int flags) {
-            parcel.writeInt(this.distance);
-            parcel.writeString(this.tag);
         }
     }
 }

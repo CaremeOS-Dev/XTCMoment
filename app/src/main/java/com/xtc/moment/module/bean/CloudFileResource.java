@@ -1,10 +1,10 @@
 package com.xtc.moment.module.bean;
 
-/** A file stored in the cloud, with its key and a time-limited download URL. */
+/** A cloud file resource with its temporary download url. */
 public class CloudFileResource {
 
-    public static final int WIDTH = 320;
     public static final int HEIGHT = 360;
+    public static final int WIDTH = 320;
 
     private String downloadUrl;
     private String key;
@@ -63,6 +63,7 @@ public class CloudFileResource {
 
     @Override
     public String toString() {
-        return "CloudFileResource{key='" + this.key + "', downloadUrl='" + this.downloadUrl + "', urlDeadline=" + this.urlDeadline + ", width=" + this.width + ", height=" + this.height + '}';
+        return "CloudFileResource{key='" + this.key + "', downloadUrl='" + this.downloadUrl + "', urlDeadline="
+                + this.urlDeadline + ", width=" + this.width + ", height=" + this.height + '}';
     }
 }
