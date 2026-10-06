@@ -14,6 +14,7 @@ import android.renderscript.ScriptIntrinsicBlur;
 import android.view.View;
 
 import com.xtc.log.LogUtil;
+import com.xtc.moment.R;
 
 /**
  * Gaussian blur helper used by dialogs to blur the screen behind them.

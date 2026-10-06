@@ -27,7 +27,7 @@ class MvpInternalDelegate<V extends MvpView, P extends MvpPresenter<V>> {
         if (presenter == null) {
             throw new NullPointerException("Presenter is null! Do you return null in createPresenter()?");
         }
-        this.callback.setPresenter(presenter);
+        this.callback.setPresenter((P) presenter);
     }
 
     void attachView() {

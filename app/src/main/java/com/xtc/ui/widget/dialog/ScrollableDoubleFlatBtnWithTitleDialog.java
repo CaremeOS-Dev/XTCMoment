@@ -2,7 +2,7 @@ package com.xtc.ui.widget.dialog;
 
 import android.content.Context;
 
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 
 /** Variant of {@link DoubleFlatBtnWithTitleDialog} whose content area scrolls. */
 public class ScrollableDoubleFlatBtnWithTitleDialog extends DoubleFlatBtnWithTitleDialog {

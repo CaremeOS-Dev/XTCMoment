@@ -1,6 +1,6 @@
 package com.xtc.ui.widget.util;
 
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

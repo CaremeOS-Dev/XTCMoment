@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.xtc.log.LogUtil;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 import com.xtc.ui.widget.UiConstants;
 import com.xtc.ui.widget.util.UiBgUtil;
 import com.xtc.ui.widget.util.UiCommonUtil;

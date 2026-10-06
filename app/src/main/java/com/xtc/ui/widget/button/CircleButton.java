@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 import android.widget.Button;
 
 import com.xtc.log.LogUtil;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 
 /** Fixed-diameter circular button with configurable background and text colour. */
 public class CircleButton extends Button {

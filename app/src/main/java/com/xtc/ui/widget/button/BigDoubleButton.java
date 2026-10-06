@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 
 /** Two large buttons side by side, dispatching through {@link OnClickListener}. */
 public class BigDoubleButton extends LinearLayout implements View.OnClickListener {

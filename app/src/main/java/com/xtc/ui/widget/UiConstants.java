@@ -1,5 +1,7 @@
 package com.xtc.ui.widget;
 
+import com.xtc.moment.R;
+
 /** Shared colour/dimension/icon tables for the widget library. */
 public class UiConstants {
 

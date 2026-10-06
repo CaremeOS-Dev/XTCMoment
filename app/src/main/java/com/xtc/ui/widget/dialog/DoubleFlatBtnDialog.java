@@ -14,7 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.xtc.log.LogUtil;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 import com.xtc.ui.widget.button.DoubleFlatButton;
 import com.xtc.ui.widget.dialog.bean.noIcon.DoubleFlatBtnBean;
 import com.xtc.ui.widget.util.UiCommonUtil;

@@ -15,7 +15,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.StateListDrawable;
 
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 import com.xtc.ui.widget.UiConstants;
 import com.xtc.ui.widget.animation.indicator.LoadingAnim;
 import com.xtc.ui.widget.circle.CompatibleRoundDrawable;

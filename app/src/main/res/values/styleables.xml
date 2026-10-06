@@ -1,0 +1,906 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Reconstructed declare-styleable blocks; apktool strips these from attrs.xml. -->
+<resources>
+    <declare-styleable name="ActionBar">
+        <attr name="background" />
+        <attr name="backgroundSplit" />
+        <attr name="backgroundStacked" />
+        <attr name="contentInsetEnd" />
+        <attr name="contentInsetEndWithActions" />
+        <attr name="contentInsetLeft" />
+        <attr name="contentInsetRight" />
+        <attr name="contentInsetStart" />
+        <attr name="contentInsetStartWithNavigation" />
+        <attr name="customNavigationLayout" />
+        <attr name="displayOptions" />
+        <attr name="divider" />
+        <attr name="elevation" />
+        <attr name="height" />
+        <attr name="hideOnContentScroll" />
+        <attr name="homeAsUpIndicator" />
+        <attr name="homeLayout" />
+        <attr name="icon" />
+        <attr name="indeterminateProgressStyle" />
+        <attr name="itemPadding" />
+        <attr name="logo" />
+        <attr name="navigationMode" />
+        <attr name="popupTheme" />
+        <attr name="progressBarPadding" />
+        <attr name="progressBarStyle" />
+        <attr name="subtitle" />
+        <attr name="subtitleTextStyle" />
+        <attr name="title" />
+        <attr name="titleTextStyle" />
+    </declare-styleable>
+    <declare-styleable name="ActionBarLayout">
+        <attr name="layout_gravity" />
+    </declare-styleable>
+    <declare-styleable name="ActionMenuItemView">
+        <attr name="minWidth" />
+    </declare-styleable>
+    <declare-styleable name="ActionMode">
+        <attr name="background" />
+        <attr name="backgroundSplit" />
+        <attr name="closeItemLayout" />
+        <attr name="height" />
+        <attr name="subtitleTextStyle" />
+        <attr name="titleTextStyle" />
+    </declare-styleable>
+    <declare-styleable name="ActivityChooserView">
+        <attr name="expandActivityOverflowButtonDrawable" />
+        <attr name="initialActivityCount" />
+    </declare-styleable>
+    <declare-styleable name="AlertDialog">
+        <attr name="layout" />
+        <attr name="buttonPanelSideLayout" />
+        <attr name="listItemLayout" />
+        <attr name="listLayout" />
+        <attr name="multiChoiceItemLayout" />
+        <attr name="showTitle" />
+        <attr name="singleChoiceItemLayout" />
+    </declare-styleable>
+    <declare-styleable name="AlignTextView">
+        <attr name="align" />
+        <attr name="maxLines" />
+    </declare-styleable>
+    <declare-styleable name="AlignTextViewTwo">
+        <attr name="tv_maxWidth" />
+        <attr name="tv_textColor" />
+        <attr name="tv_textSize" />
+    </declare-styleable>
+    <declare-styleable name="AppCompatImageView">
+        <attr name="src" />
+        <attr name="srcCompat" />
+        <attr name="tint" />
+        <attr name="tintMode" />
+    </declare-styleable>
+    <declare-styleable name="AppCompatSeekBar">
+        <attr name="thumb" />
+        <attr name="tickMark" />
+        <attr name="tickMarkTint" />
+        <attr name="tickMarkTintMode" />
+    </declare-styleable>
+    <declare-styleable name="AppCompatTextHelper">
+        <attr name="textAppearance" />
+        <attr name="drawableTop" />
+        <attr name="drawableBottom" />
+        <attr name="drawableLeft" />
+        <attr name="drawableRight" />
+        <attr name="drawableStart" />
+        <attr name="drawableEnd" />
+    </declare-styleable>
+    <declare-styleable name="AppCompatTextView">
+        <attr name="textAppearance" />
+        <attr name="textAllCaps" />
+    </declare-styleable>
+    <declare-styleable name="AppCompatTheme">
+        <attr name="windowIsFloating" />
+        <attr name="windowAnimationStyle" />
+        <attr name="actionBarDivider" />
+        <attr name="actionBarItemBackground" />
+        <attr name="actionBarPopupTheme" />
+        <attr name="actionBarSize" />
+        <attr name="actionBarSplitStyle" />
+        <attr name="actionBarStyle" />
+        <attr name="actionBarTabBarStyle" />
+        <attr name="actionBarTabStyle" />
+        <attr name="actionBarTabTextStyle" />
+        <attr name="actionBarTheme" />
+        <attr name="actionBarWidgetTheme" />
+        <attr name="actionButtonStyle" />
+        <attr name="actionDropDownStyle" />
+        <attr name="actionMenuTextAppearance" />
+        <attr name="actionMenuTextColor" />
+        <attr name="actionModeBackground" />
+        <attr name="actionModeCloseButtonStyle" />
+        <attr name="actionModeCloseDrawable" />
+        <attr name="actionModeCopyDrawable" />
+        <attr name="actionModeCutDrawable" />
+        <attr name="actionModeFindDrawable" />
+        <attr name="actionModePasteDrawable" />
+        <attr name="actionModePopupWindowStyle" />
+        <attr name="actionModeSelectAllDrawable" />
+        <attr name="actionModeShareDrawable" />
+        <attr name="actionModeSplitBackground" />
+        <attr name="actionModeStyle" />
+        <attr name="actionModeWebSearchDrawable" />
+        <attr name="actionOverflowButtonStyle" />
+        <attr name="actionOverflowMenuStyle" />
+        <attr name="activityChooserViewStyle" />
+        <attr name="alertDialogButtonGroupStyle" />
+        <attr name="alertDialogCenterButtons" />
+        <attr name="alertDialogStyle" />
+        <attr name="alertDialogTheme" />
+        <attr name="autoCompleteTextViewStyle" />
+        <attr name="borderlessButtonStyle" />
+        <attr name="buttonBarButtonStyle" />
+        <attr name="buttonBarNegativeButtonStyle" />
+        <attr name="buttonBarNeutralButtonStyle" />
+        <attr name="buttonBarPositiveButtonStyle" />
+        <attr name="buttonBarStyle" />
+        <attr name="buttonStyle" />
+        <attr name="buttonStyleSmall" />
+        <attr name="checkboxStyle" />
+        <attr name="checkedTextViewStyle" />
+        <attr name="colorAccent" />
+        <attr name="colorBackgroundFloating" />
+        <attr name="colorButtonNormal" />
+        <attr name="colorControlActivated" />
+        <attr name="colorControlHighlight" />
+        <attr name="colorControlNormal" />
+        <attr name="colorPrimary" />
+        <attr name="colorPrimaryDark" />
+        <attr name="colorSwitchThumbNormal" />
+        <attr name="controlBackground" />
+        <attr name="dialogPreferredPadding" />
+        <attr name="dialogTheme" />
+        <attr name="dividerHorizontal" />
+        <attr name="dividerVertical" />
+        <attr name="dropDownListViewStyle" />
+        <attr name="dropdownListPreferredItemHeight" />
+        <attr name="editTextBackground" />
+        <attr name="editTextColor" />
+        <attr name="editTextStyle" />
+        <attr name="homeAsUpIndicator" />
+        <attr name="imageButtonStyle" />
+        <attr name="listChoiceBackgroundIndicator" />
+        <attr name="listDividerAlertDialog" />
+        <attr name="listMenuViewStyle" />
+        <attr name="listPopupWindowStyle" />
+        <attr name="listPreferredItemHeight" />
+        <attr name="listPreferredItemHeightLarge" />
+        <attr name="listPreferredItemHeightSmall" />
+        <attr name="listPreferredItemPaddingLeft" />
+        <attr name="listPreferredItemPaddingRight" />
+        <attr name="panelBackground" />
+        <attr name="panelMenuListTheme" />
+        <attr name="panelMenuListWidth" />
+        <attr name="popupMenuStyle" />
+        <attr name="popupWindowStyle" />
+        <attr name="radioButtonStyle" />
+        <attr name="ratingBarStyle" />
+        <attr name="ratingBarStyleIndicator" />
+        <attr name="ratingBarStyleSmall" />
+        <attr name="searchViewStyle" />
+        <attr name="seekBarStyle" />
+        <attr name="selectableItemBackground" />
+        <attr name="selectableItemBackgroundBorderless" />
+        <attr name="spinnerDropDownItemStyle" />
+        <attr name="spinnerStyle" />
+        <attr name="switchStyle" />
+        <attr name="textAppearanceLargePopupMenu" />
+        <attr name="textAppearanceListItem" />
+        <attr name="textAppearanceListItemSecondary" />
+        <attr name="textAppearanceListItemSmall" />
+        <attr name="textAppearancePopupMenuHeader" />
+        <attr name="textAppearanceSearchResultSubtitle" />
+        <attr name="textAppearanceSearchResultTitle" />
+        <attr name="textAppearanceSmallPopupMenu" />
+        <attr name="textColorAlertDialogListItem" />
+        <attr name="textColorSearchUrl" />
+        <attr name="toolbarNavigationButtonStyle" />
+        <attr name="toolbarStyle" />
+        <attr name="windowActionBar" />
+        <attr name="windowActionBarOverlay" />
+        <attr name="windowActionModeOverlay" />
+        <attr name="windowFixedHeightMajor" />
+        <attr name="windowFixedHeightMinor" />
+        <attr name="windowFixedWidthMajor" />
+        <attr name="windowFixedWidthMinor" />
+        <attr name="windowMinWidthMajor" />
+        <attr name="windowMinWidthMinor" />
+        <attr name="windowNoTitle" />
+    </declare-styleable>
+    <declare-styleable name="AppLinearLayout">
+        <attr name="useAlphaForLL" />
+        <attr name="useZoomForLL" />
+    </declare-styleable>
+    <declare-styleable name="AppNestedScrollView">
+        <attr name="ansv_anim_scale" />
+        <attr name="ansv_enable_end" />
+        <attr name="ansv_enable_start" />
+    </declare-styleable>
+    <declare-styleable name="AppRecyclerView">
+        <attr name="arv_enable_end" />
+        <attr name="arv_enable_start" />
+    </declare-styleable>
+    <declare-styleable name="AppRelativeLayout">
+        <attr name="useAlphaForRL" />
+        <attr name="useZoomForRL" />
+    </declare-styleable>
+    <declare-styleable name="AppScrollView">
+        <attr name="asv_anim_scale" />
+        <attr name="asv_enable_end" />
+        <attr name="asv_enable_start" />
+    </declare-styleable>
+    <declare-styleable name="ArrowTextView">
+        <attr name="arrowRadius" />
+        <attr name="arrowTvHeight" />
+        <attr name="arrowTvWidth" />
+        <attr name="bgColor" />
+    </declare-styleable>
+    <declare-styleable name="BaseFrameLayout">
+        <attr name="base_content" />
+        <attr name="base_duration_to_close" />
+        <attr name="base_duration_to_close_header" />
+        <attr name="base_footer" />
+        <attr name="base_header" />
+        <attr name="base_keep_header_when_refresh" />
+        <attr name="base_pull_to_fresh" />
+        <attr name="base_ratio_of_header_height_to_refresh" />
+        <attr name="base_resistance" />
+    </declare-styleable>
+    <declare-styleable name="BaseProgressBar">
+        <attr name="base_progress_text_color" />
+        <attr name="base_progress_text_size" />
+        <attr name="progress_reached_bar_height" />
+        <attr name="progress_reached_color" />
+        <attr name="progress_text_offset" />
+        <attr name="progress_text_visibility" />
+        <attr name="progress_unreached_bar_height" />
+        <attr name="progress_unreached_color" />
+    </declare-styleable>
+    <declare-styleable name="BigHollowButton">
+        <attr name="bhb_textSize" />
+    </declare-styleable>
+    <declare-styleable name="BigSolidButton">
+        <attr name="BigSolidButtonBgColor" />
+        <attr name="bsb_textSize" />
+    </declare-styleable>
+    <declare-styleable name="ButtonBarLayout">
+        <attr name="allowStacking" />
+    </declare-styleable>
+    <declare-styleable name="CircleButton">
+        <attr name="CircleButtonBgColor" />
+        <attr name="CircleButtonTextColor" />
+    </declare-styleable>
+    <declare-styleable name="CircleImageView">
+        <attr name="civHasStroke" />
+        <attr name="civStrokeColor" />
+        <attr name="civStrokeWidth" />
+    </declare-styleable>
+    <declare-styleable name="CircleProgressBar">
+        <attr name="animationDuration" />
+        <attr name="bottomColor" />
+        <attr name="circleWidth" />
+        <attr name="currentProgress" />
+        <attr name="gradientConstant" />
+        <attr name="gradientEndColor" />
+        <attr name="gradientStartColor" />
+        <attr name="maxProgress" />
+        <attr name="topColor" />
+        <attr name="useRoundAngle" />
+    </declare-styleable>
+    <declare-styleable name="ColorStateListItem">
+        <attr name="color" />
+        <attr name="alpha" />
+        <attr name="alpha" />
+    </declare-styleable>
+    <declare-styleable name="CompoundButton">
+        <attr name="button" />
+        <attr name="buttonTint" />
+        <attr name="buttonTintMode" />
+    </declare-styleable>
+    <declare-styleable name="ConstraintLayout_Layout">
+        <attr name="orientation" />
+        <attr name="maxWidth" />
+        <attr name="maxHeight" />
+        <attr name="minWidth" />
+        <attr name="minHeight" />
+        <attr name="barrierAllowsGoneWidgets" />
+        <attr name="barrierDirection" />
+        <attr name="chainUseRtl" />
+        <attr name="constraintSet" />
+        <attr name="constraint_referenced_ids" />
+        <attr name="layout_constrainedHeight" />
+        <attr name="layout_constrainedWidth" />
+        <attr name="layout_constraintBaseline_creator" />
+        <attr name="layout_constraintBaseline_toBaselineOf" />
+        <attr name="layout_constraintBottom_creator" />
+        <attr name="layout_constraintBottom_toBottomOf" />
+        <attr name="layout_constraintBottom_toTopOf" />
+        <attr name="layout_constraintCircle" />
+        <attr name="layout_constraintCircleAngle" />
+        <attr name="layout_constraintCircleRadius" />
+        <attr name="layout_constraintDimensionRatio" />
+        <attr name="layout_constraintEnd_toEndOf" />
+        <attr name="layout_constraintEnd_toStartOf" />
+        <attr name="layout_constraintGuide_begin" />
+        <attr name="layout_constraintGuide_end" />
+        <attr name="layout_constraintGuide_percent" />
+        <attr name="layout_constraintHeight_default" />
+        <attr name="layout_constraintHeight_max" />
+        <attr name="layout_constraintHeight_min" />
+        <attr name="layout_constraintHeight_percent" />
+        <attr name="layout_constraintHorizontal_bias" />
+        <attr name="layout_constraintHorizontal_chainStyle" />
+        <attr name="layout_constraintHorizontal_weight" />
+        <attr name="layout_constraintLeft_creator" />
+        <attr name="layout_constraintLeft_toLeftOf" />
+        <attr name="layout_constraintLeft_toRightOf" />
+        <attr name="layout_constraintRight_creator" />
+        <attr name="layout_constraintRight_toLeftOf" />
+        <attr name="layout_constraintRight_toRightOf" />
+        <attr name="layout_constraintStart_toEndOf" />
+        <attr name="layout_constraintStart_toStartOf" />
+        <attr name="layout_constraintTop_creator" />
+        <attr name="layout_constraintTop_toBottomOf" />
+        <attr name="layout_constraintTop_toTopOf" />
+        <attr name="layout_constraintVertical_bias" />
+        <attr name="layout_constraintVertical_chainStyle" />
+        <attr name="layout_constraintVertical_weight" />
+        <attr name="layout_constraintWidth_default" />
+        <attr name="layout_constraintWidth_max" />
+        <attr name="layout_constraintWidth_min" />
+        <attr name="layout_constraintWidth_percent" />
+        <attr name="layout_editor_absoluteX" />
+        <attr name="layout_editor_absoluteY" />
+        <attr name="layout_goneMarginBottom" />
+        <attr name="layout_goneMarginEnd" />
+        <attr name="layout_goneMarginLeft" />
+        <attr name="layout_goneMarginRight" />
+        <attr name="layout_goneMarginStart" />
+        <attr name="layout_goneMarginTop" />
+        <attr name="layout_optimizationLevel" />
+    </declare-styleable>
+    <declare-styleable name="ConstraintLayout_placeholder">
+        <attr name="content" />
+        <attr name="emptyVisibility" />
+    </declare-styleable>
+    <declare-styleable name="ConstraintSet">
+        <attr name="orientation" />
+        <attr name="id" />
+        <attr name="visibility" />
+        <attr name="layout_width" />
+        <attr name="layout_height" />
+        <attr name="layout_marginLeft" />
+        <attr name="layout_marginTop" />
+        <attr name="layout_marginRight" />
+        <attr name="layout_marginBottom" />
+        <attr name="maxWidth" />
+        <attr name="maxHeight" />
+        <attr name="minWidth" />
+        <attr name="minHeight" />
+        <attr name="alpha" />
+        <attr name="transformPivotX" />
+        <attr name="transformPivotY" />
+        <attr name="translationX" />
+        <attr name="translationY" />
+        <attr name="scaleX" />
+        <attr name="scaleY" />
+        <attr name="rotation" />
+        <attr name="rotationX" />
+        <attr name="rotationY" />
+        <attr name="layout_marginStart" />
+        <attr name="layout_marginEnd" />
+        <attr name="translationZ" />
+        <attr name="elevation" />
+        <attr name="barrierAllowsGoneWidgets" />
+        <attr name="barrierDirection" />
+        <attr name="chainUseRtl" />
+        <attr name="constraint_referenced_ids" />
+        <attr name="layout_constrainedHeight" />
+        <attr name="layout_constrainedWidth" />
+        <attr name="layout_constraintBaseline_creator" />
+        <attr name="layout_constraintBaseline_toBaselineOf" />
+        <attr name="layout_constraintBottom_creator" />
+        <attr name="layout_constraintBottom_toBottomOf" />
+        <attr name="layout_constraintBottom_toTopOf" />
+        <attr name="layout_constraintCircle" />
+        <attr name="layout_constraintCircleAngle" />
+        <attr name="layout_constraintCircleRadius" />
+        <attr name="layout_constraintDimensionRatio" />
+        <attr name="layout_constraintEnd_toEndOf" />
+        <attr name="layout_constraintEnd_toStartOf" />
+        <attr name="layout_constraintGuide_begin" />
+        <attr name="layout_constraintGuide_end" />
+        <attr name="layout_constraintGuide_percent" />
+        <attr name="layout_constraintHeight_default" />
+        <attr name="layout_constraintHeight_max" />
+        <attr name="layout_constraintHeight_min" />
+        <attr name="layout_constraintHeight_percent" />
+        <attr name="layout_constraintHorizontal_bias" />
+        <attr name="layout_constraintHorizontal_chainStyle" />
+        <attr name="layout_constraintHorizontal_weight" />
+        <attr name="layout_constraintLeft_creator" />
+        <attr name="layout_constraintLeft_toLeftOf" />
+        <attr name="layout_constraintLeft_toRightOf" />
+        <attr name="layout_constraintRight_creator" />
+        <attr name="layout_constraintRight_toLeftOf" />
+        <attr name="layout_constraintRight_toRightOf" />
+        <attr name="layout_constraintStart_toEndOf" />
+        <attr name="layout_constraintStart_toStartOf" />
+        <attr name="layout_constraintTop_creator" />
+        <attr name="layout_constraintTop_toBottomOf" />
+        <attr name="layout_constraintTop_toTopOf" />
+        <attr name="layout_constraintVertical_bias" />
+        <attr name="layout_constraintVertical_chainStyle" />
+        <attr name="layout_constraintVertical_weight" />
+        <attr name="layout_constraintWidth_default" />
+        <attr name="layout_constraintWidth_max" />
+        <attr name="layout_constraintWidth_min" />
+        <attr name="layout_constraintWidth_percent" />
+        <attr name="layout_editor_absoluteX" />
+        <attr name="layout_editor_absoluteY" />
+        <attr name="layout_goneMarginBottom" />
+        <attr name="layout_goneMarginEnd" />
+        <attr name="layout_goneMarginLeft" />
+        <attr name="layout_goneMarginRight" />
+        <attr name="layout_goneMarginStart" />
+        <attr name="layout_goneMarginTop" />
+    </declare-styleable>
+    <declare-styleable name="DefClassicHeader">
+        <attr name="base_rotate_ani_time" />
+    </declare-styleable>
+    <declare-styleable name="DoubleFlatButton">
+        <attr name="leftBgColorArray" />
+        <attr name="rightBgColorArray" />
+    </declare-styleable>
+    <declare-styleable name="DrawerArrowToggle">
+        <attr name="arrowHeadLength" />
+        <attr name="arrowShaftLength" />
+        <attr name="barLength" />
+        <attr name="color" />
+        <attr name="drawableSize" />
+        <attr name="gapBetweenBars" />
+        <attr name="spinBars" />
+        <attr name="thickness" />
+    </declare-styleable>
+    <declare-styleable name="FixScrBarLenRecyclerView">
+        <attr name="fsblrv_bg_color" />
+        <attr name="fsblrv_bg_length" />
+        <attr name="fsblrv_bg_top_margin" />
+        <attr name="fsblrv_bg_width" />
+        <attr name="fsblrv_stay_duration" />
+        <attr name="fsblrv_thumb_color" />
+        <attr name="fsblrv_thumb_width" />
+    </declare-styleable>
+    <declare-styleable name="KsgLikeView">
+        <attr name="ksg_curve_duration" />
+        <attr name="ksg_enter_duration" />
+    </declare-styleable>
+    <declare-styleable name="LeftIconItem">
+        <attr name="li_icon" />
+        <attr name="li_iconSize" />
+        <attr name="li_minHeightX" />
+        <attr name="li_title" />
+    </declare-styleable>
+    <declare-styleable name="LeftIconItemWithExtraInfo">
+        <attr name="lis_icon" />
+        <attr name="lis_minHeightX" />
+        <attr name="lis_summary" />
+        <attr name="lis_title" />
+    </declare-styleable>
+    <declare-styleable name="LinearConstraintLayout">
+        <attr name="orientation" />
+    </declare-styleable>
+    <declare-styleable name="LinearLayoutCompat">
+        <attr name="gravity" />
+        <attr name="orientation" />
+        <attr name="baselineAligned" />
+        <attr name="baselineAlignedChildIndex" />
+        <attr name="weightSum" />
+        <attr name="divider" />
+        <attr name="dividerPadding" />
+        <attr name="measureWithLargestChild" />
+        <attr name="showDividers" />
+    </declare-styleable>
+    <declare-styleable name="LinearLayoutCompat_Layout">
+        <attr name="layout_gravity" />
+        <attr name="layout_width" />
+        <attr name="layout_height" />
+        <attr name="layout_weight" />
+    </declare-styleable>
+    <declare-styleable name="ListPopupWindow">
+        <attr name="dropDownHorizontalOffset" />
+        <attr name="dropDownVerticalOffset" />
+    </declare-styleable>
+    <declare-styleable name="LongHollowButton">
+        <attr name="strokeColor" />
+        <attr name="strokeWidth" />
+    </declare-styleable>
+    <declare-styleable name="LongSolidButton">
+        <attr name="bgColorArray" />
+    </declare-styleable>
+    <declare-styleable name="LottieAnimationView">
+        <attr name="lottie_autoPlay" />
+        <attr name="lottie_cacheStrategy" />
+        <attr name="lottie_colorFilter" />
+        <attr name="lottie_enableMergePathsForKitKatAndAbove" />
+        <attr name="lottie_fileName" />
+        <attr name="lottie_imageAssetsFolder" />
+        <attr name="lottie_loop" />
+        <attr name="lottie_progress" />
+        <attr name="lottie_scale" />
+    </declare-styleable>
+    <declare-styleable name="MenuGroup">
+        <attr name="enabled" />
+        <attr name="id" />
+        <attr name="visible" />
+        <attr name="menuCategory" />
+        <attr name="orderInCategory" />
+        <attr name="checkableBehavior" />
+    </declare-styleable>
+    <declare-styleable name="MenuItem">
+        <attr name="icon" />
+        <attr name="enabled" />
+        <attr name="id" />
+        <attr name="checked" />
+        <attr name="visible" />
+        <attr name="menuCategory" />
+        <attr name="orderInCategory" />
+        <attr name="title" />
+        <attr name="titleCondensed" />
+        <attr name="alphabeticShortcut" />
+        <attr name="numericShortcut" />
+        <attr name="checkable" />
+        <attr name="onClick" />
+        <attr name="actionLayout" />
+        <attr name="actionProviderClass" />
+        <attr name="actionViewClass" />
+        <attr name="showAsAction" />
+    </declare-styleable>
+    <declare-styleable name="MenuView">
+        <attr name="windowAnimationStyle" />
+        <attr name="itemTextAppearance" />
+        <attr name="horizontalDivider" />
+        <attr name="verticalDivider" />
+        <attr name="headerBackground" />
+        <attr name="itemBackground" />
+        <attr name="itemIconDisabledAlpha" />
+        <attr name="preserveIconSpacing" />
+        <attr name="subMenuArrow" />
+    </declare-styleable>
+    <declare-styleable name="NumberPickerView">
+        <attr name="npv_AlternativeHint" />
+        <attr name="npv_AlternativeTextArrayWithMeasureHint" />
+        <attr name="npv_AlternativeTextArrayWithoutMeasureHint" />
+        <attr name="npv_CenterBottomShadow" />
+        <attr name="npv_DividerColor" />
+        <attr name="npv_DividerHeight" />
+        <attr name="npv_DividerMarginLeft" />
+        <attr name="npv_DividerMarginRight" />
+        <attr name="npv_EmptyItemHint" />
+        <attr name="npv_HintText" />
+        <attr name="npv_ImagePaddingHorizontalNormal" />
+        <attr name="npv_ImagePaddingHorizontalSelected" />
+        <attr name="npv_ImageViewNormal" />
+        <attr name="npv_ImageViewSelected" />
+        <attr name="npv_ItemPaddingHorizontal" />
+        <attr name="npv_ItemPaddingVertical" />
+        <attr name="npv_MarginEndOfHint" />
+        <attr name="npv_MarginStartOfHint" />
+        <attr name="npv_MaxValue" />
+        <attr name="npv_MinValue" />
+        <attr name="npv_RespondChangeInMainThread" />
+        <attr name="npv_RespondChangeOnDetached" />
+        <attr name="npv_ShowCount" />
+        <attr name="npv_ShowDivider" />
+        <attr name="npv_TextArray" />
+        <attr name="npv_TextColorHint" />
+        <attr name="npv_TextColorNormal" />
+        <attr name="npv_TextColorSelected" />
+        <attr name="npv_TextSizeHint" />
+        <attr name="npv_TextSizeNormal" />
+        <attr name="npv_TextSizeSelected" />
+        <attr name="npv_WrapSelectorWheel" />
+    </declare-styleable>
+    <declare-styleable name="NumTipSeekBar">
+        <attr name="NumTipSeekBar_borderColor" />
+        <attr name="NumTipSeekBar_borderSize" />
+        <attr name="NumTipSeekBar_circleApertureColor" />
+        <attr name="NumTipSeekBar_circleApertureWidth" />
+        <attr name="NumTipSeekBar_circleButtonColor" />
+        <attr name="NumTipSeekBar_circleButtonRadius" />
+        <attr name="NumTipSeekBar_circleButtonTextColor" />
+        <attr name="NumTipSeekBar_circleButtonTextSize" />
+        <attr name="NumTipSeekBar_isRound" />
+        <attr name="NumTipSeekBar_isShowButton" />
+        <attr name="NumTipSeekBar_isShowButtonText" />
+        <attr name="NumTipSeekBar_maxProgress" />
+        <attr name="NumTipSeekBar_progressColor" />
+        <attr name="NumTipSeekBar_progressHeight" />
+        <attr name="NumTipSeekBar_selectProgress" />
+        <attr name="NumTipSeekBar_startProgress" />
+        <attr name="NumTipSeekBar_tickBarColor" />
+        <attr name="NumTipSeekBar_tickBarHeight" />
+    </declare-styleable>
+    <declare-styleable name="OldRoundProgressBar">
+        <attr name="rp_innerRingColor" />
+        <attr name="rp_innerRingWidth" />
+        <attr name="rp_progressBarEndColor" />
+        <attr name="rp_progressBarStartColor" />
+        <attr name="rp_progressBarWidth" />
+        <attr name="rp_smallBallColor" />
+        <attr name="rp_smallBallRadius" />
+    </declare-styleable>
+    <declare-styleable name="PopupWindow">
+        <attr name="popupBackground" />
+        <attr name="popupAnimationStyle" />
+        <attr name="overlapAnchor" />
+    </declare-styleable>
+    <declare-styleable name="PopupWindowBackgroundState">
+        <attr name="state_above_anchor" />
+    </declare-styleable>
+    <declare-styleable name="PtrClassicHeader">
+        <attr name="ptr_rotate_ani_time" />
+    </declare-styleable>
+    <declare-styleable name="PtrFrameLayout">
+        <attr name="ptr_content" />
+        <attr name="ptr_duration_to_close" />
+        <attr name="ptr_duration_to_close_header" />
+        <attr name="ptr_footer" />
+        <attr name="ptr_header" />
+        <attr name="ptr_keep_header_when_refresh" />
+        <attr name="ptr_pull_to_fresh" />
+        <attr name="ptr_ratio_of_header_height_to_refresh" />
+        <attr name="ptr_resistance" />
+    </declare-styleable>
+    <declare-styleable name="RadarScannerView">
+        <attr name="isRed" />
+        <attr name="jumpPortrait" />
+        <attr name="mainPortrait" />
+    </declare-styleable>
+    <declare-styleable name="ReadRemindView">
+        <attr name="remindBackground" />
+        <attr name="remindCircleRadius" />
+        <attr name="remindTextColor" />
+        <attr name="remindTextSize" />
+    </declare-styleable>
+    <declare-styleable name="RecycleListView">
+        <attr name="paddingBottomNoButtons" />
+        <attr name="paddingTopNoTitle" />
+    </declare-styleable>
+    <declare-styleable name="RecyclerView">
+        <attr name="orientation" />
+        <attr name="descendantFocusability" />
+        <attr name="layoutManager" />
+        <attr name="reverseLayout" />
+        <attr name="spanCount" />
+        <attr name="stackFromEnd" />
+    </declare-styleable>
+    <declare-styleable name="RefreshView">
+        <attr name="type" />
+    </declare-styleable>
+    <declare-styleable name="RightIconItem">
+        <attr name="ri_icon" />
+        <attr name="ri_minHeightX" />
+        <attr name="ri_title" />
+    </declare-styleable>
+    <declare-styleable name="RightIconItemWithExtraInfo">
+        <attr name="ris_icon" />
+        <attr name="ris_icon_visibility" />
+        <attr name="ris_minHeightX" />
+        <attr name="ris_summary" />
+        <attr name="ris_title" />
+    </declare-styleable>
+    <declare-styleable name="RightIconTextView">
+        <attr name="ritv_bg_color" />
+        <attr name="ritv_icon" />
+        <attr name="ritv_icon_height" />
+        <attr name="ritv_icon_visibility" />
+        <attr name="ritv_icon_width" />
+        <attr name="ritv_title" />
+        <attr name="ritv_title_color" />
+        <attr name="ritv_title_size" />
+    </declare-styleable>
+    <declare-styleable name="RoundCornerRelativeComponent">
+        <attr name="relative_left_to_bottom_radii" />
+        <attr name="relative_left_to_top_radii" />
+        <attr name="relative_radius" />
+        <attr name="relative_right_to_bottom_radii" />
+        <attr name="relative_right_to_top_radii" />
+        <attr name="relative_use_radius" />
+    </declare-styleable>
+    <declare-styleable name="RoundProgressBar">
+        <attr name="progress_start_angle" />
+        <attr name="round_progress_radius" />
+    </declare-styleable>
+    <declare-styleable name="ScrollbarRecyclerView">
+        <attr name="thumbColor" />
+    </declare-styleable>
+    <declare-styleable name="ScrollLayout">
+        <attr name="allowHorizontalScroll" />
+        <attr name="exitOffset" />
+        <attr name="isSupportExit" />
+        <attr name="maxOffset" />
+        <attr name="minOffset" />
+        <attr name="mode" />
+    </declare-styleable>
+    <declare-styleable name="SearchView">
+        <attr name="focusable" />
+        <attr name="maxWidth" />
+        <attr name="inputType" />
+        <attr name="imeOptions" />
+        <attr name="closeIcon" />
+        <attr name="commitIcon" />
+        <attr name="defaultQueryHint" />
+        <attr name="goIcon" />
+        <attr name="iconifiedByDefault" />
+        <attr name="layout" />
+        <attr name="queryBackground" />
+        <attr name="queryHint" />
+        <attr name="searchHintIcon" />
+        <attr name="searchIcon" />
+        <attr name="submitBackground" />
+        <attr name="suggestionRowLayout" />
+        <attr name="voiceIcon" />
+    </declare-styleable>
+    <declare-styleable name="SlantedTextView">
+        <attr name="slantedBackgroundColor" />
+        <attr name="slantedDegree" />
+        <attr name="slantedLength" />
+        <attr name="slantedMode" />
+        <attr name="slantedText" />
+        <attr name="slantedTextColor" />
+        <attr name="slantedTextSize" />
+    </declare-styleable>
+    <declare-styleable name="SlideMenuComponent">
+        <attr name="enableSlide" />
+        <attr name="leftSlide" />
+        <attr name="rightSlide" />
+    </declare-styleable>
+    <declare-styleable name="speedOfProgress">
+        <attr name="animTime" />
+        <attr name="arcColors" />
+        <attr name="arcWidth" />
+        <attr name="bgArcColor" />
+        <attr name="bgArcWidth" />
+        <attr name="isNeed" />
+        <attr name="lineWidth" />
+        <attr name="mBackground" />
+        <attr name="maxValue" />
+        <attr name="startAngle" />
+        <attr name="sweepAngle" />
+    </declare-styleable>
+    <declare-styleable name="Spinner">
+        <attr name="entries" />
+        <attr name="popupBackground" />
+        <attr name="prompt" />
+        <attr name="dropDownWidth" />
+        <attr name="popupTheme" />
+    </declare-styleable>
+    <declare-styleable name="SVGAImageView">
+        <attr name="antiAlias" />
+        <attr name="autoPlay" />
+        <attr name="clearsAfterStop" />
+        <attr name="fillMode" />
+        <attr name="loopCount" />
+        <attr name="source" />
+    </declare-styleable>
+    <declare-styleable name="SwitchButton">
+        <attr name="animation_duration" />
+        <attr name="background_color" />
+        <attr name="border_width" />
+        <attr name="checked_color" />
+        <attr name="circle_button_color" />
+        <attr name="enable_animation_effect" />
+        <attr name="enable_checked" />
+        <attr name="enable_shadow_effect" />
+        <attr name="shadow_color" />
+        <attr name="shadow_offset" />
+        <attr name="shadow_radius" />
+        <attr name="uncheck_color" />
+    </declare-styleable>
+    <declare-styleable name="SwitchCompat">
+        <attr name="textOn" />
+        <attr name="textOff" />
+        <attr name="thumb" />
+        <attr name="showText" />
+        <attr name="splitTrack" />
+        <attr name="switchMinWidth" />
+        <attr name="switchPadding" />
+        <attr name="switchTextAppearance" />
+        <attr name="thumbTextPadding" />
+        <attr name="thumbTint" />
+        <attr name="thumbTintMode" />
+        <attr name="track" />
+        <attr name="trackTint" />
+        <attr name="trackTintMode" />
+    </declare-styleable>
+    <declare-styleable name="SwitchTextView">
+        <attr name="duration" />
+        <attr name="text_size" />
+        <attr name="texts" />
+    </declare-styleable>
+    <declare-styleable name="TextAppearance">
+        <attr name="textSize" />
+        <attr name="typeface" />
+        <attr name="textStyle" />
+        <attr name="textColor" />
+        <attr name="textColorHint" />
+        <attr name="shadowColor" />
+        <attr name="shadowDx" />
+        <attr name="shadowDy" />
+        <attr name="shadowRadius" />
+        <attr name="textAllCaps" />
+    </declare-styleable>
+    <declare-styleable name="Toolbar">
+        <attr name="gravity" />
+        <attr name="minHeight" />
+        <attr name="buttonGravity" />
+        <attr name="collapseContentDescription" />
+        <attr name="collapseIcon" />
+        <attr name="contentInsetEnd" />
+        <attr name="contentInsetEndWithActions" />
+        <attr name="contentInsetLeft" />
+        <attr name="contentInsetRight" />
+        <attr name="contentInsetStart" />
+        <attr name="contentInsetStartWithNavigation" />
+        <attr name="logo" />
+        <attr name="logoDescription" />
+        <attr name="maxButtonHeight" />
+        <attr name="navigationContentDescription" />
+        <attr name="navigationIcon" />
+        <attr name="popupTheme" />
+        <attr name="subtitle" />
+        <attr name="subtitleTextAppearance" />
+        <attr name="subtitleTextColor" />
+        <attr name="title" />
+        <attr name="titleMargin" />
+        <attr name="titleMarginBottom" />
+        <attr name="titleMarginEnd" />
+        <attr name="titleMarginStart" />
+        <attr name="titleMarginTop" />
+        <attr name="titleMargins" />
+        <attr name="titleTextAppearance" />
+        <attr name="titleTextColor" />
+    </declare-styleable>
+    <declare-styleable name="VideoLoadingProgressBar">
+        <attr name="direction" />
+        <attr name="inside_color" />
+        <attr name="max_progress" />
+        <attr name="outside_color" />
+        <attr name="outside_radius" />
+        <attr name="progress" />
+        <attr name="progress_text_color" />
+        <attr name="progress_text_size" />
+        <attr name="progress_width" />
+    </declare-styleable>
+    <declare-styleable name="View">
+        <attr name="theme" />
+        <attr name="focusable" />
+        <attr name="paddingEnd" />
+        <attr name="paddingStart" />
+        <attr name="theme" />
+    </declare-styleable>
+    <declare-styleable name="ViewAnimator">
+        <attr name="animateFirstView" />
+        <attr name="inAnimation" />
+        <attr name="outAnimation" />
+    </declare-styleable>
+    <declare-styleable name="ViewBackgroundHelper">
+        <attr name="background" />
+        <attr name="backgroundTint" />
+        <attr name="backgroundTintMode" />
+    </declare-styleable>
+    <declare-styleable name="ViewFlipper">
+        <attr name="autoStart" />
+        <attr name="flipInterval" />
+    </declare-styleable>
+    <declare-styleable name="ViewStubCompat">
+        <attr name="id" />
+        <attr name="layout" />
+        <attr name="inflatedId" />
+    </declare-styleable>
+</resources>

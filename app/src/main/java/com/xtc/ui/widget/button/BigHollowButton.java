@@ -5,7 +5,7 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.widget.Button;
 
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 
 /** Large hollow (outline) button. */
 public class BigHollowButton extends Button {

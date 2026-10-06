@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 import com.xtc.ui.widget.util.UiCommonUtil;
 
 /**

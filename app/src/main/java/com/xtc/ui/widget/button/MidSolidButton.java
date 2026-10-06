@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 
 /** Medium solid button; a {@link Button} wrapped in a fixed-size frame. */
 public class MidSolidButton extends FrameLayout {

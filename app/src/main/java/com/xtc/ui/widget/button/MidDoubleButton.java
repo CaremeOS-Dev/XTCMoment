@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 
 /** Two medium buttons side by side, dispatching through {@link OnClickListener}. */
 public class MidDoubleButton extends LinearLayout implements View.OnClickListener {

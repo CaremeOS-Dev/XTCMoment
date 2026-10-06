@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.xtc.log.LogUtil;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 import com.xtc.ui.widget.UiConstants;
 import com.xtc.ui.widget.util.UiBgUtil;
 import com.xtc.ui.widget.util.UiIconUtil;

@@ -94,7 +94,8 @@ public class BallSpinFadeAnimation extends AbstractAnimation {
     public ArrayList<ValueAnimator> onCreateAnimators() {
         LogUtil.i(TAG, "onCreateAnimators ---");
         ArrayList<ValueAnimator> animators = new ArrayList<ValueAnimator>();
-        for (final int i = 0; i < 6; i++) {
+        for (int index = 0; index < 6; index++) {
+            final int i = index;
             ValueAnimator scaleAnimator = ValueAnimator.ofFloat(1.0f, 0.4f, 1.0f);
             scaleAnimator.setDuration(1000L);
             scaleAnimator.setRepeatCount(-1);
