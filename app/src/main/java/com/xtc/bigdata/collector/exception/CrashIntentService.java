@@ -4,6 +4,7 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.text.TextUtils;
 
+import com.bumptech.glide.load.Key;
 import com.xtc.bigdata.collector.ShareHelper;
 import com.xtc.bigdata.collector.encapsulation.entity.event.ExceptionEvent;
 import com.xtc.bigdata.collector.utils.MD5Coder;
@@ -51,7 +52,7 @@ public class CrashIntentService extends IntentService {
                 printWriter.close();
                 LogUtil.d(TAG, "logTxt:" + stack);
                 try {
-                    stackMd5 = new MD5Coder().encode(stack.getBytes(Charset.forName("UTF-8")));
+                    stackMd5 = new MD5Coder().encode(stack.getBytes(Key.STRING_CHARSET_NAME));
                 } catch (Exception e) {
                     if (Constants.isDebug) {
                         LogUtil.e(TAG, e);

@@ -223,7 +223,7 @@ public class MediaUtils {
         try {
             String attribute = new ExifInterface(imageFilePath).getAttribute(android.support.media.ExifInterface.TAG_MAKER_NOTE);
             LogUtil.i(TAG, "attribute = " + attribute);
-            String photoNote = new String(Base64.decode(attribute, 0), Key.CHARSET);
+            String photoNote = new String(Base64.decode(attribute, 0), Key.STRING_CHARSET_NAME);
             LogUtil.i(TAG, "photoNote = " + photoNote);
             return photoNote;
         } catch (Exception e) {

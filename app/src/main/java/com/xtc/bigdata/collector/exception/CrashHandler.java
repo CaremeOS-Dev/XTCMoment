@@ -3,6 +3,7 @@ package com.xtc.bigdata.collector.exception;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.bumptech.glide.load.Key;
 import com.xtc.bigdata.collector.ShareHelper;
 import com.xtc.bigdata.collector.config.ConfigAgent;
 import com.xtc.bigdata.collector.config.DeviceInfo;
@@ -248,7 +249,7 @@ public final class CrashHandler implements Thread.UncaughtExceptionHandler {
         synchronized (this.lock) {
             stack = getStack(throwable);
             try {
-                stackMd5 = new MD5Coder().encode(stack.getBytes(Charset.forName("UTF-8")));
+                stackMd5 = new MD5Coder().encode(stack.getBytes(Key.STRING_CHARSET_NAME));
             } catch (Exception e) {
                 if (Constants.isDebug) {
                     LogUtil.e(TAG, e);
