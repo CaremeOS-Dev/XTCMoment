@@ -1,0 +1,35 @@
+package com.xtc.moment.constants;
+
+/**
+ * Identifiers for the launcher-managed feature switches ("module switches").
+ *
+ * <p>The launcher pushes a switch table at startup; the moment module consults
+ * these ids to decide which features are available.
+ */
+public interface ModuleSwitchConstant {
+    int MODULE_ILLEGAL_PUNISH = 2556;
+    int MODULE_PERSONAL_BADGE_SUPPORT = 2791;
+    int MODULE_REPORT_SUPPORT = 2785;
+    int MODULE_SWITCH_COMMUNITY_CONVERSATION = 3060;
+    int MODULE_SWITCH_DELETE_FRIEND = 116;
+    int MODULE_SWITCH_DRESS_HEAD = 2177;
+    int MODULE_SWITCH_LBS_PUBLISH = 2944;
+    int MODULE_SWITCH_MOMENT_CANCEL_PRAISE = 2550;
+    int MODULE_SWITCH_MOMENT_COMMENT = 120;
+    int MODULE_SWITCH_MOMENT_COMMENT_DELETE = 121;
+    int MODULE_SWITCH_MOMENT_CONTENT_SUPERVISION = 2147;
+    int MODULE_SWITCH_MOMENT_DELETE = 113;
+    int MODULE_SWITCH_MOMENT_FUN_PHOTO_IS_AVAILABLE = 3182;
+    int MODULE_SWITCH_MOMENT_PHOTO = 112;
+    int MODULE_SWITCH_MOMENT_PUBLISH_LOCATION = 2546;
+    int MODULE_SWITCH_MOMENT_REPORT_FUNCTION = 2403;
+    int MODULE_SWITCH_MOMENT_SEND_VIDEO_FUNCTION = 2460;
+    int MODULE_SWITCH_MOMENT_TEXT = 102;
+    int MODULE_SWITCH_PERSONAL_CENTER = 2908;
+    int MODULE_SWITCH_REAL_NAME = 2567;
+    int MODULE_SWITCH_SET_STATE = 3394;
+    int MODULE_SWITCH_TEXT_LENGTH = 3444;
+    int MODULE_VISIBLE_RANGE = 3456;
+    int MOMENT_MODULE_SWITCH = 115;
+    int MULTI_TYPE_COMBINED_DYNAMIC = 2835;
+}
