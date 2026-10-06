@@ -5,10 +5,13 @@ import android.support.v7.widget.AppCompatTextView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 
-/** 始终跑马灯滚动的 TextView。 */
+/** 永远获取焦点并跑马灯滚动的文本。 */
 public class MarqueeTextView extends AppCompatTextView {
 
-    private static final int MARQUEE_REPEAT_LIMIT = -1;
+    @Override
+    public boolean isFocused() {
+        return true;
+    }
 
     public MarqueeTextView(Context context) {
         super(context);
@@ -29,11 +32,6 @@ public class MarqueeTextView extends AppCompatTextView {
         setFocusableInTouchMode(true);
         setSingleLine();
         setEllipsize(TextUtils.TruncateAt.MARQUEE);
-        setMarqueeRepeatLimit(MARQUEE_REPEAT_LIMIT);
-    }
-
-    @Override
-    public boolean isFocused() {
-        return true;
+        setMarqueeRepeatLimit(-1);
     }
 }

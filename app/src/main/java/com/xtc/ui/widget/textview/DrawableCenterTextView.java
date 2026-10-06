@@ -6,7 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-/** 让左侧 drawable 与文字整体居中的 TextView。 */
+/** 左侧图标与文本整体居中的 TextView。 */
 public class DrawableCenterTextView extends TextView {
 
     public DrawableCenterTextView(Context context) {
@@ -24,12 +24,12 @@ public class DrawableCenterTextView extends TextView {
     @Override
     protected void onDraw(Canvas canvas) {
         Drawable[] compoundDrawables = getCompoundDrawables();
-        Drawable leftDrawable = compoundDrawables != null ? compoundDrawables[0] : null;
-        if (leftDrawable != null) {
-            float textWidth = getPaint().measureText(getText().toString());
-            float offset = (getWidth() - (textWidth + leftDrawable.getIntrinsicWidth()
-                    + getCompoundDrawablePadding())) / 2.0f;
-            canvas.translate(offset, 0.0f);
+        if (compoundDrawables != null) {
+            Drawable leftDrawable = compoundDrawables[0];
+            if (leftDrawable != null) {
+                canvas.translate((getWidth() - ((getPaint().measureText(getText().toString())
+                        + leftDrawable.getIntrinsicWidth()) + getCompoundDrawablePadding())) / 2.0f, 0.0f);
+            }
         }
         super.onDraw(canvas);
     }

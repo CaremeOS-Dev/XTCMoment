@@ -5,9 +5,8 @@ import android.graphics.drawable.AnimationDrawable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-/** 支持启动/停止帧动画的 ImageView。 */
+/** 播放帧动画的 ImageView，用于声波动画。 */
 public class WaveImageView extends ImageView {
-
     private AnimationDrawable mDrawable;
 
     public WaveImageView(Context context) {
@@ -32,7 +31,6 @@ public class WaveImageView extends ImageView {
         super.setBackgroundResource(resId);
     }
 
-    /** 启动帧动画。 */
     public void startAnimation() {
         if (getDrawable() == null || !(getDrawable() instanceof AnimationDrawable)) {
             return;
@@ -41,10 +39,9 @@ public class WaveImageView extends ImageView {
         this.mDrawable.start();
     }
 
-    /** 停止帧动画。 */
     public void stopAnimation() {
-        AnimationDrawable drawable = this.mDrawable;
-        if (drawable == null || !drawable.isRunning()) {
+        AnimationDrawable animationDrawable = this.mDrawable;
+        if (animationDrawable == null || !animationDrawable.isRunning()) {
             return;
         }
         this.mDrawable.stop();
