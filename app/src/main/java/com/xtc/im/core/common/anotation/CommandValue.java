@@ -5,8 +5,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-/** Marks an entity class with the IM command value it serialises to. */
-@Target({ElementType.TYPE})
+/** 标注 TLV 实体的命令字。 */
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CommandValue {
     int value() default 0;

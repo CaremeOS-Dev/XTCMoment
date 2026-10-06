@@ -1,0 +1,54 @@
+package com.xtc.im.core.common.request;
+
+/** IM 协议命令字。 */
+public interface Command {
+
+    int ACCOUNT_REQUEST = 5;
+    int ACCOUNT_RESPONSE = 6;
+    int ALL_SET_REQUEST = 18;
+    int ALL_SET_RESPONSE = 19;
+    int CLEAR_MSG_REQUEST = 30;
+    int CLEAR_MSG_RESPONSE = 31;
+    int COMMON_BUSINESS_REQ = 44;
+    int COMMON_BUSINESS_RESP = 45;
+    int ENCRYPT_SET_REQUEST = 33;
+    int ENCRYPT_SET_RESPONSE = 34;
+    int ENCRYPT_WAPPER = 32;
+    int ERROE_RESPONSE = 1000;
+    int HEART_BEAT_REQUEST = 7;
+    int HEART_BEAT_RESPONSE = 8;
+    int LOGIN_REQUEST = 3;
+    int LOGIN_RESPONSE = 4;
+    int MSG_MERGE_REQUEST = 29;
+    int MSG_MERGE_RESPONSE = 41;
+    int MSG_REQUEST = 9;
+    int MSG_RESPONSE = 10;
+    int PUBLICKEY_REQUEST = 22;
+    int PUBLICKEY_RESPONSE = 23;
+    int PUSH_RESPONSE = 35;
+    int PUSH_RESPONSE_ACK = 36;
+    int READ_ACK_REQUEST = 16;
+    int READ_ACK_RESPONSE = 17;
+    int REGIST_REQUEST = 1;
+    int REGIST_RESPONSE = 2;
+    int SINGLE_MSG_REQUEST = 40;
+    int SYNC_FINISH = 14;
+    int SYNC_FINISH_ACK = 15;
+    int SYNC_INFORM = 11;
+    int SYNC_REQUEST = 12;
+    int SYNC_RESPONSE = 13;
+    int SYNC_TRIGGER_REQUEST = 25;
+    int SYNC_TRIGGER_RESPONSE = 26;
+    int THIRD_ALIAS_AND_TAG_REQUEST = 100;
+    int THIRD_ALIAS_AND_TAG_RESPONSE = 101;
+    int THIRD_SYNC_FIN = 115;
+    int THIRD_SYNC_FIN_ACK = 116;
+    int THIRD_SYNC_INFORM = 112;
+    int THIRD_SYNC_REQUEST = 113;
+    int THIRD_SYNC_RESPONSE = 114;
+    int THIRD_SYNC_TRIGGER_REQUEST = 110;
+    int THIRD_SYNC_TRIGGER_RESPONSE = 111;
+    int TRANSPOND_REQUEST = 20;
+    int TRANSPOND_RESPONSE = 21;
+    int VOICE_SLICE = 24;
+}

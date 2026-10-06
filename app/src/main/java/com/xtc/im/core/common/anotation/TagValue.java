@@ -5,8 +5,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-/** Marks a field with the tag value used when the entity is serialised. */
-@Target({ElementType.FIELD})
+/** 标注 TLV 实体字段的 tag 值。 */
+@Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface TagValue {
     int value() default 0;
