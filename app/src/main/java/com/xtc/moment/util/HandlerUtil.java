@@ -8,13 +8,7 @@ import android.os.MessageQueue;
 
 import com.xtc.log.LogUtil;
 
-/**
- * Shared main/background handlers.
- *
- * <p>The background handler runs on a dedicated {@code background_thread} so
- * callers never block the UI thread; {@link #init()} is called during app
- * startup and lazily on first use.
- */
+/** Main/background handler helpers of the moment app. */
 public class HandlerUtil {
 
     private static final String TAG = "HandlerUtil";
@@ -23,6 +17,10 @@ public class HandlerUtil {
     private static boolean hasInit;
     private static Handler mainHandler = new Handler(Looper.getMainLooper());
 
+    private HandlerUtil() {
+    }
+
+    /** Initializes the main and background handlers. */
     public static void init() {
         synchronized (HandlerUtil.class) {
             if (hasInit) {
@@ -40,6 +38,7 @@ public class HandlerUtil {
         return hasInit;
     }
 
+    /** Runs [runnable] on the main thread, directly when already there. */
     public static void runOnUIThread(Runnable runnable) {
         if (ThreadCheck.isMainThread()) {
             runnable.run();
@@ -49,6 +48,7 @@ public class HandlerUtil {
         }
     }
 
+    /** Always posts [runnable] to the main thread. */
     public static void runOnUIThreadNoCheck(Runnable runnable) {
         checkHasInit();
         mainHandler.post(runnable);
@@ -64,9 +64,9 @@ public class HandlerUtil {
     }
 
     /**
-     * Runs {@code runnable} on the background thread.
+     * Runs [runnable] on the background thread.
      *
-     * @param forcePost when false and already off the main thread, runs inline
+     * @param forcePost when true the runnable is always posted instead of run inline
      */
     public static void runOnBackground(Runnable runnable, boolean forcePost) {
         if (runnable == null) {
@@ -106,8 +106,9 @@ public class HandlerUtil {
         init();
     }
 
+    /** Runs [runnable] when the main thread becomes idle. */
     public static void executeWhenMainThreadIdle(final Runnable runnable) {
-        if (Build.VERSION.SDK_INT >= 23) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             Looper.getMainLooper().getQueue().addIdleHandler(new MessageQueue.IdleHandler() {
                 @Override
                 public boolean queueIdle() {
