@@ -326,7 +326,7 @@ public class PhotoPreviewActivity extends Activity {
                 return;
             }
         }
-        this.mPvSmallPic.setVisibility(VISIBLE);
+        this.mPvSmallPic.setVisibility(View.VISIBLE);
         Glide.with(this.mPvSmallPic.getContext()).load(path)
                 .apply(requestOptions)
                 .listener(new RequestListener<Drawable>() {
@@ -339,7 +339,7 @@ public class PhotoPreviewActivity extends Activity {
                     @Override
                     public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target,
                                                    DataSource dataSource, boolean isFirstResource) {
-                        mIvLoading.setVisibility(GONE);
+                        mIvLoading.setVisibility(View.GONE);
                         return false;
                     }
                 })
@@ -387,7 +387,7 @@ public class PhotoPreviewActivity extends Activity {
                             int screenWidth = getScreenWidth();
                             int screenHeight = getScreenHeight();
                             if (bitmap.getWidth() > 0 && bitmap.getHeight() / bitmap.getWidth() <= screenHeight / screenWidth) {
-                                mPvSmallPic.setVisibility(VISIBLE);
+                                mPvSmallPic.setVisibility(View.VISIBLE);
                                 mPvSmallPic.setImageDrawable(drawable);
                                 return true;
                             }
@@ -397,16 +397,16 @@ public class PhotoPreviewActivity extends Activity {
                             @Override
                             public void run() {
                                 Matrix matrix = new Matrix();
-                                mPvPreview.getDisplayMatrix(matrix);
+                                mPvPreview.getAttacher().b(matrix);
                                 float[] values = new float[9];
                                 matrix.getValues(values);
                                 float translationX = Math.abs(values[2]);
                                 float translationY = Math.abs(values[5]);
                                 Matrix translate = new Matrix();
                                 translate.preTranslate(translationX, translationY);
-                                mPvPreview.setSuppMatrix(translate);
-                                mPvPreview.setVisibility(VISIBLE);
-                                mIvLoading.setVisibility(GONE);
+                                mPvPreview.getAttacher().a(translate);
+                                mPvPreview.setVisibility(View.VISIBLE);
+                                mIvLoading.setVisibility(View.GONE);
                             }
                         }, waitTime);
                         return false;
@@ -437,4 +437,6 @@ public class PhotoPreviewActivity extends Activity {
                                 com.xtc.ui.widget.util.DialogUtil.dismissDialog(dialog);
                             }
                         }));
-        com.xtc.ui.widget.util.D
+        com.xtc.ui.widget.util.DialogUtil.showDialog(this.deleteDialog);
+    }
+}

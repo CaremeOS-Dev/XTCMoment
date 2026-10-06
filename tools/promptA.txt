@@ -1,0 +1,29 @@
+你是 XTCMoment 重写工程的子代理。工作目录 D:\CaremiumWorkspace\Sources\moment。先完整阅读 tools\REWRITE_GUIDE.md，严格遵守硬性规则（语言与原厂一致、纯手写不得复制反编译代码、变量名全部可读无混淆痕迹、逻辑与文案不得改、第三方库不重写）。
+
+参考物（只读）：
+- 反编译 Java：D:\CaremiumWorkspace\Research\SystemApps\XTCMoment\decompiled\sources
+- apktool 产物：D:\CaremiumWorkspace\Research\SystemApps\XTCMoment\smali（其同级 res 才是标准资源）
+
+产物写到 app\src\main\java\com\xtc\... （Kotlin 写到 app\src\main\kotlin\...）。写文件用：
+[System.IO.File]::WriteAllText($path, $content, (New-Object System.Text.UTF8Encoding $false))，先 New-Item -ItemType Directory -Force。
+注意：单条命令不要过长（PowerShell 有长度限制），大文件分多次 AppendAllText 追加。
+
+查缺失：& pwsh -NoProfile -File tools\missing.ps1 -Filter <路径前缀>
+编译：& pwsh -NoProfile -File 'D:\CaremiumWorkspace\Sources\moment\build.ps1' -Tasks ':app:compileDebugJavaWithJavac'
+（工程还有未重写类，编译会报 cannot find symbol，属正常，不要造桩或删逻辑。）
+
+反编译短名要还原成真实 API（例：Glide.c(ctx)→Glide.with(ctx)，Glide.b(ctx)→Glide.get(ctx)，RequestOptions.f(res)→.error(res)、.h(res)→.placeholder(res)、.b(DiskCacheStrategy)→.diskCacheStrategy(...)、.b(width,height)→.override(...)、.u()→.dontAnimate()、.b(Key)→.signature(...)，DiskCacheStrategy.b→NONE/.c→DATA/.e→ALL，JSONUtil.a(x)→JSONUtil.toJSON(x)、JSONUtil.a(json,Class)→JSONUtil.fromJSON(...)，SharedManager.b(ctx)→getInstance(ctx)，Observable.a(x)→Observable.just(x)、.t(Func1)→.map(...)、.n(J,TimeUnit)→throttleFirst、.d(Schedulers.e())→subscribeOn(Schedulers.io())、.a(AndroidSchedulers.a())→observeOn(AndroidSchedulers.mainThread())、.b(Subscriber)→subscribe(...)，DimenUtil.a→dp2px，FileUtils.b(path)→exists(path)，CollectionUtil.a(list)→isEmpty(list)，TaskDispatcher.d(task)→TaskDispatcher.dispatchImmediately(task)）。已重写的工具类先读一遍确认真实方法名。
+
+提交用 git，小步提交，只 add 自己写的路径：
+git add <具体路径>; git -c user.name=Codex -c user.email=codex@local commit -q -m "feat(xxx): hand-write ..."
+有其它代理在同一工作区并行提交，index.lock 冲突时等几秒重试。
+
+按下面清单顺序全部写完，边写边提交，不要中途停下来问我。写完清单后用 tools\missing.ps1 复查该范围，把剩余一并补完。
+
+文件清单：（moment/module/publish 剩余 6 个，注意 PushPictureActivity 83KB、PublishActivity 60KB、PublishPresenter 42KB 很大，可分块写）
+moment\module\publish\text\PublishTextPresenter
+moment\module\publish\text\PushTextActivity
+moment\module\publish\PublishPresenter
+moment\module\publish\PubVideoOrPhotoServer
+moment\module\publish\PublishActivity
+moment\module\publish\multi\PushPictureActivity

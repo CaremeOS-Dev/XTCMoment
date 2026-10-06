@@ -1,0 +1,10 @@
+$ErrorActionPreference='Stop'
+function RepAll([string]$f,[string]$a,[string]$b){ if(Test-Path $f){ $t=[System.IO.File]::ReadAllText($f); if($t.Contains($a)){ $t=$t.Replace($a,$b); [System.IO.File]::WriteAllText($f,$t,(New-Object System.Text.UTF8Encoding $false)); Write-Output "fixed $f :: $a" } else { Write-Output "no-match $f :: $a" } } }
+RepAll 'app\src\main\java\com\xtc\moment\module\publish\multi\adapter\BigPictureAdapter.java' 'photoView.setSuppMatrix(target);' 'photoView.getAttacher().a(target);'
+RepAll 'app\src\main\java\com\xtc\moment\module\widget\PhotoPreviewActivity.java' 'mPvPreview.setSuppMatrix(translate);' 'mPvPreview.getAttacher().a(translate);'
+RepAll 'app\src\main\java\com\xtc\moment\module\widget\MomentVideoView.java' '.into(this.videoPlayLogo);' '.into(this.mContent);'
+RepAll 'app\src\main\java\com\xtc\moment\module\share\adapter\ShareAdapter.java' 'final VideoViewHolder videoHolder = holder instanceof ShareVideoViewHolder ? (ShareVideoViewHolder) holder : null;' 'final ShareVideoViewHolder videoHolder = holder instanceof ShareVideoViewHolder ? (ShareVideoViewHolder) holder : null;'
+RepAll 'app\src\main\java\com\xtc\moment\module\share\adapter\ShareAdapter.java' 'loadDiskPhoto(photoMsg, roundedCorner, moment, (AbsViewHolder) holder);' 'loadDiskPhoto(photoMsg, roundedCorner, moment, holder);'
+RepAll 'app\src\main\java\com\xtc\moment\share\presenter\ShareToMomentPresenter.java' 'ScreenshotUtils.b(imagePath, bundleManager.xtcShareMessage.getDescription())' 'ScreenshotUtils.buildCarryData(imagePath, bundleManager.xtcShareMessage.getDescription())'
+RepAll 'app\src\main\java\com\xtc\moment\share\presenter\ShareToMomentPresenter.java' 'ScreenshotUtils.c(imagePath)' 'ScreenshotUtils.getScreenshotMd5Json(imagePath)'
+RepAll 'app\src\main\java\com\xtc\dispatch\test\TestTaskSort.java' 'Iterator<IDepend> iterator = DependSortUtil.sort(tasks, taskTypes).iterator();' 'Iterator<IDepend> iterator = DependSortUtil.<AbsTask>sort(tasks, taskTypes).iterator();'

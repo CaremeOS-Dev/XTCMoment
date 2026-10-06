@@ -16,6 +16,7 @@ class DataSource {
     var isLooping: Boolean = false
 
     /** 设置根目录，自动补齐路径分隔符。 */
+    @JvmName("withBaseDir")
     fun setBaseDir(baseDir: String): DataSource {
         this.baseDir = if (!baseDir.contains(File.separator)) baseDir + File.separator else baseDir
         return this

@@ -129,8 +129,13 @@ public class CommentProvider extends ContentProvider {
     private void publishComment(final String momentId, final String content) {
         Observable.just(Boolean.FALSE).map(new Func1<Boolean, String>() {
             @Override
-            public String call(Boolean aBoolean) throws Throwable {
-                String config = AssetFileUtil.decodeConfigFile(mContext.getResources(), "MoodCommentConfig.json");
+            public String call(Boolean aBoolean) {
+                String config = null;
+                try {
+                    config = AssetFileUtil.decodeConfigFile(mContext.getResources(), "MoodCommentConfig.json");
+                } catch (Throwable throwable) {
+                    LogUtil.e(TAG, "decodeConfigFile error", throwable);
+                }
                 if (TextUtils.isEmpty(config)) {
                     return null;
                 }

@@ -28,7 +28,7 @@ public class CommunityConversationProxy extends HttpServiceProxy {
         ICommunityConversationHttp http = (ICommunityConversationHttp) this.httpClient
                 .request(BaseUrlManager.getGatewayUrl(this.context), ICommunityConversationHttp.class);
         return http.getConventionHome(new BaseRequestBean(MomentApp.getWatchId()))
-                .compose(new HttpRxJavaCallback());
+                .map(new HttpRxJavaCallback());
     }
 
     public Observable<List<CommunityDetailResponse>> getConventionContent(int chapterIndex) {
@@ -36,6 +36,6 @@ public class CommunityConversationProxy extends HttpServiceProxy {
                 .request(BaseUrlManager.getGatewayUrl(this.context), ICommunityConversationHttp.class);
         CommunityConversationReq request = new CommunityConversationReq(MomentApp.getWatchId());
         request.setChapterIndex(chapterIndex);
-        return http.getConventionContent(request).compose(new HttpRxJavaCallback());
+        return http.getConventionContent(request).map(new HttpRxJavaCallback());
     }
 }

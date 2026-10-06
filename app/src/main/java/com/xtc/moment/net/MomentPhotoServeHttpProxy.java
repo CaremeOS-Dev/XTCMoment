@@ -44,21 +44,21 @@ public class MomentPhotoServeHttpProxy extends HttpServiceProxy {
 
     public Observable<PhotoTokenVo> getUploadToken(PhotoTokenParam param) {
         checkBaseUrl();
-        return this.momentHttp.getUploadToken(param).compose(new HttpRxJavaCallback());
+        return this.momentHttp.getUploadToken(param).map(new HttpRxJavaCallback());
     }
 
     public Observable<List<PhotoTokenVo>> getUploadTokens(List<PhotoTokenParam> paramList) {
         checkBaseUrl();
-        return this.momentHttp.getUploadTokens(paramList).compose(new HttpRxJavaCallback());
+        return this.momentHttp.getUploadTokens(paramList).map(new HttpRxJavaCallback());
     }
 
     public Observable<DownloadUrlVo> getDownloadUrl(FileUrlParam param) {
         checkBaseUrl();
-        return this.momentHttp.getDownloadUrl(param).compose(new HttpRxJavaCallback());
+        return this.momentHttp.getDownloadUrl(param).map(new HttpRxJavaCallback());
     }
 
     public Observable<DownloadUrlVo> getDownloadBatchUrl(FileBatchUrlParam param) {
         checkBaseUrl();
-        return this.momentHttp.getDownloadBatchUrl(param).compose(new HttpRxJavaCallback());
+        return this.momentHttp.getDownloadBatchUrl(param).map(new HttpRxJavaCallback());
     }
 }

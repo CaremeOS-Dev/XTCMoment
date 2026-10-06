@@ -43,12 +43,12 @@ public class MomentCommentView extends AbsMomentCommentView implements View.OnCl
     /** Recycled comment text views, shared by every instance. */
     public static Queue<TextView> cachedTextViewQueue = new ArrayDeque<TextView>();
 
-    private final LinearLayout.LayoutParams layoutParams;
-    private final ForegroundColorSpan colorSpan;
-    private final ForegroundColorSpan colorSpan2;
-    private final String unknownName;
-    private final String replyString;
-    private final String separatorString;
+    private LinearLayout.LayoutParams layoutParams;;
+    private ForegroundColorSpan colorSpan;
+    private ForegroundColorSpan colorSpan2;
+    private String unknownName;
+    private String replyString;
+    private String separatorString;
 
     private final List<DbMomentComment> dbMomentComments = new ArrayList<DbMomentComment>();
 

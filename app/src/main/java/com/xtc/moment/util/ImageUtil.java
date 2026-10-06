@@ -49,7 +49,7 @@ public class ImageUtil {
         try {
             FileUtils.writeBytes(tmpFile, outputStream.toByteArray(), false);
             return tmpPath;
-        } catch (IOException e) {
+        } catch (Exception e) {
             LogUtil.e(TAG, "compressByScale: ", e);
             return null;
         }

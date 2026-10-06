@@ -43,7 +43,7 @@ public abstract class AbsAdapter<M, VH extends BaseHolder> extends RecyclerView.
         if (itemViewType == 1024 || itemViewType == 1025) {
             return;
         }
-        bindCustomViewHolder(holder, position);
+        bindCustomViewHolder((VH) holder, position);
     }
 
     public void addHeaderView(View view) {

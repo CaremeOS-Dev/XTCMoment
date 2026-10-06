@@ -139,7 +139,7 @@ public class MonitorInterceptor extends BaseInterceptor {
             setRequesting(subUrl, false);
             recordMonitorTime(dnsRecord, beforeRequestTime, responseTime);
             return response;
-        } catch (IOException e) {
+        } catch (Exception e) {
             LogUtil.e(TAG, "intercept e = " + e.getMessage());
             setRequesting(subUrl, false);
             recordMonitorTime(dnsRecord, beforeRequestTime, responseTime);

@@ -235,7 +235,7 @@ public class TakePhotoManager {
             data = new byte[inputStream.available()];
             inputStream.read(data);
             inputStream.close();
-        } catch (IOException e) {
+        } catch (Exception e) {
             LogUtil.w(TAG, "imageToBase64 error" + e);
             e.printStackTrace();
         }

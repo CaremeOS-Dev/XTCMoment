@@ -75,7 +75,7 @@ public class VideoAnimView extends FrameLayout {
         }
         LogUtil.d(TAG, "startAnimation: " + baseDir + fileName);
         DataSource dataSource = new DataSource();
-        dataSource.setBaseDir(baseDir);
+        dataSource.withBaseDir(baseDir);
         dataSource.setPortraitPath(fileName, ScaleType.ScaleAspectFitCenter.ordinal());
         dataSource.setLandscapePath(fileName, ScaleType.ScaleAspectFitCenter.ordinal());
         startDataSource(dataSource);

@@ -61,7 +61,7 @@ public class SensorUtils {
     private static String readFirstLine(String path) {
         try {
             return new BufferedReader(new FileReader(path)).readLine();
-        } catch (IOException e) {
+        } catch (Exception e) {
             Log.e(TAG, e.toString());
             return FALLBACK_VALUE;
         }

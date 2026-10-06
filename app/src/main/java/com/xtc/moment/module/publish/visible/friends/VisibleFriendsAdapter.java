@@ -41,7 +41,7 @@ public class VisibleFriendsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     private final Context context;
     private final List<Friend> friends;
     private final FriendsVisibleBean friendsVisibleBean;
-    private final List<String> selectedFriends;
+    private List<String> selectedFriends;
 
     private SelectedFriendsCallback friendsCallback;
 

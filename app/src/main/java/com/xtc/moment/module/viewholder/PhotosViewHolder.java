@@ -10,7 +10,7 @@ import com.xtc.moment.R;
 import com.xtc.moment.module.widget.CommentIconView;
 import com.xtc.moment.module.widget.MainMomentCommentView;
 import com.xtc.moment.module.widget.MomentLikeView;
-import com.xtc.moment.module.widget.MomentPhotosView;
+import com.xtc.moment.module.widget.livephotoView.MomentPhotosView;
 import com.xtc.moment.module.widget.MomentReminderView;
 import com.xtc.moment.widget.LbsLayout;
 /**

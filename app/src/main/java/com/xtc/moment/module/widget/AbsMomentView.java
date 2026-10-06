@@ -304,10 +304,10 @@ public abstract class AbsMomentView extends FrameLayout {
         }
         com.xtc.ui.widget.util.DialogUtil.showDialog(
                 com.xtc.ui.widget.util.DialogUtil.makeDoubleIconBtnDialog(this.context,
-                        new DoubleIconBtnBean(this.context, false, UiConstants.Color.GRAY, 0, R.string.cancel,
+                        new com.xtc.ui.widget.dialog.bean.icon.DoubleIconBtnBean(this.context, false, UiConstants.Color.GRAY, 0, R.string.cancel,
                                 new int[]{R.color.color_ffac35, R.color.color_ff6833},
                                 R.drawable.ic_chat_report, R.string.report_text_, true,
-                                new DoubleIconBtnBean.OnClickListener() {
+                                new com.xtc.ui.widget.dialog.bean.icon.DoubleIconBtnBean.OnClickListener() {
                                     @Override
                                     public void onBottomBtnClick(Dialog dialog, View view) {
                                     }

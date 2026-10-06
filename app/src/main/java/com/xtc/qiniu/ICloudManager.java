@@ -128,7 +128,7 @@ public abstract class ICloudManager {
                         LogUtil.i(TAG, "downloadForFile() onDownloadListener.onFinish download totalSize is : " + total);
                         listener.onFinish(null);
                     }
-                } catch (IOException e) {
+                } catch (Exception e) {
                     LogUtil.e(TAG, "downloadForFile() download error：" + e);
                     downloadFail(ErrorCode.DOWNLOAD_ERROR, "download error", listener);
                 } finally {
@@ -187,7 +187,7 @@ public abstract class ICloudManager {
                         LogUtil.i(TAG, "downloadForBytes() onProgressListener.onFinish downloadtotalSize is :" + total);
                         listener.onFinish(outputStream.toByteArray());
                     }
-                } catch (IOException e) {
+                } catch (Exception e) {
                     LogUtil.e(TAG, "downloadForBytes() download error：" + e);
                     downloadFail(ErrorCode.DOWNLOAD_ERROR, "download error", listener);
                 } finally {
@@ -212,7 +212,7 @@ public abstract class ICloudManager {
         }
         try {
             closeable.close();
-        } catch (IOException e) {
+        } catch (Exception e) {
             LogUtil.e(TAG, "close error: " + e);
         }
     }

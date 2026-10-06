@@ -31,7 +31,7 @@ class PrivateUtils {
                     closeable.close();
                 }
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -49,7 +49,7 @@ class PrivateUtils {
         }
         try {
             return file.createNewFile();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }

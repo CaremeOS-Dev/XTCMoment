@@ -405,7 +405,7 @@ public class SharedManager implements MMKVHandler {
             outputStream.close();
             makeWritable(new File(target));
             return true;
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -426,7 +426,7 @@ public class SharedManager implements MMKVHandler {
             targetChannel.close();
             makeWritable(new File(target));
             return true;
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }

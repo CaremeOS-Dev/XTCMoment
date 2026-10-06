@@ -37,7 +37,7 @@ public class ContactHeadManager {
     private final IContactHeadCache headCache;
     private final IContactDressCache dressCache;
     private Context context;
-    private final ContactHeadManagerConfig config;
+    private ContactHeadManagerConfig config;
 
     private ContactHeadManager(Context context) {
         this.context = context.getApplicationContext();

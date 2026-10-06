@@ -46,7 +46,7 @@ public class AITextFileUtil {
                 return allSuccess;
             }
             return writeFileFromStream(FileUtils.toFile(destPath), context.getAssets().open(assetPath), false, null);
-        } catch (IOException e) {
+        } catch (Exception e) {
             LogUtil.e(TAG, "copyFileFromAssets error ", e);
             return false;
         }
@@ -79,19 +79,19 @@ public class AITextFileUtil {
                 }
             }
             return true;
-        } catch (IOException e) {
+        } catch (Exception e) {
             LogUtil.e(TAG, "writeFileFromIS error ", e);
             return false;
         } finally {
             try {
                 inputStream.close();
-            } catch (IOException e) {
+            } catch (Exception e) {
                 LogUtil.e(TAG, "writeFileFromIS is close error ", e);
             }
             if (outputStream != null) {
                 try {
                     outputStream.close();
-                } catch (IOException e) {
+                } catch (Exception e) {
                     LogUtil.e(TAG, "writeFileFromIS os error ", e);
                 }
             }

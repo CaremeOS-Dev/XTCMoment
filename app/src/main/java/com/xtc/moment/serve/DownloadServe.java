@@ -90,7 +90,7 @@ public class DownloadServe {
         });
     }
 
-    public boolean startDownload(String url, String destPath, String suffix) throws Throwable {
+    public boolean startDownload(String url, String destPath, String suffix) {
         if (TextUtils.isEmpty(url) || TextUtils.isEmpty(destPath)) {
             return false;
         }
@@ -155,7 +155,7 @@ public class DownloadServe {
         });
     }
 
-    public boolean download(String url, String dirPath, String fileName) throws Throwable {
+    public boolean download(String url, String dirPath, String fileName) {
         try {
             Response response = okHttpClient.newCall(new Request.Builder().url(url).build()).execute();
             byte[] buffer = new byte[4096];
@@ -182,7 +182,7 @@ public class DownloadServe {
                 closeQuietly(inputStream);
                 closeQuietly(outputStream);
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             LogUtil.e(TAG, "download fail :", e);
             e.printStackTrace();
             return false;
@@ -195,7 +195,7 @@ public class DownloadServe {
         }
         try {
             closeable.close();
-        } catch (IOException ignored) {
+        } catch (Exception ignored) {
         }
     }
 }

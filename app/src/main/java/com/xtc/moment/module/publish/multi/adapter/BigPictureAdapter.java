@@ -181,14 +181,14 @@ public class BigPictureAdapter extends PagerAdapter {
             @Override
             public void run() {
                 Matrix matrix = new Matrix();
-                photoView.getDisplayMatrix(matrix);
+                photoView.getAttacher().b(matrix);
                 float[] values = new float[9];
                 matrix.getValues(values);
                 float translateX = Math.abs(values[2]);
                 float translateY = Math.abs(values[5]);
                 Matrix target = new Matrix();
                 target.preTranslate(translateX, translateY);
-                photoView.setSuppMatrix(target);
+                photoView.getAttacher().a(target);
             }
         }, 20L);
     }

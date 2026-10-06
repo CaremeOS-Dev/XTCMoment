@@ -75,7 +75,7 @@ public class SystemInfoUtils {
             if (reader != null) {
                 try {
                     reader.close();
-                } catch (IOException ignored) {
+                } catch (Exception ignored) {
                     // ignored
                 }
             }
@@ -92,7 +92,7 @@ public class SystemInfoUtils {
             }
             info[1] = info[1] + reader.readLine().split("\\s+")[2];
             reader.close();
-        } catch (IOException ignored) {
+        } catch (Exception ignored) {
             // ignored
         }
         return info[0] + " " + info[1];

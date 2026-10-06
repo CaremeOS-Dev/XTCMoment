@@ -63,7 +63,7 @@ public class MomentVideoView extends MomentPhotoView {
     private IAccountInfoServe accountInfoServe;
     private ExpandTextView expandTextView;
     private TextView mVideoText;
-    private ImageView videoPlayLogo;
+    protected ImageView videoPlayLogo;
     private String selfWatchId;
     private boolean isSelf;
 
@@ -325,7 +325,7 @@ public class MomentVideoView extends MomentPhotoView {
                                 .placeholder(R.drawable.pi_friends_default)
                                 .transform(new GlideRoundTransform(context, 6))
                                 .dontAnimate())
-                        .into(this.mContent);
+                        .into(mContent);
             }
         });
     }
@@ -371,7 +371,7 @@ public class MomentVideoView extends MomentPhotoView {
     @Override
     public void setContentOnLongClickListener(Context context, final DbMoment moment,
                                               final AbsMomentView.OnContentOnLongClickListener listener) {
-        if (this.mContent == null) {
+        if (this.videoPlayLogo == null) {
             LogUtil.d(TAG, "mContent == null");
             return;
         }

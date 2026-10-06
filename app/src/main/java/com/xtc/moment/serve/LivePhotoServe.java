@@ -28,7 +28,7 @@ public class LivePhotoServe {
                 return isExistVideoMapping(new File(path).getName());
             }
             return false;
-        } catch (IOException e) {
+        } catch (Exception e) {
             LogUtil.e(TAG, "isLivePhotoFile fail :", e);
             return false;
         }

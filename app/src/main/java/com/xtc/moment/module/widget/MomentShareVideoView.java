@@ -137,7 +137,7 @@ public class MomentShareVideoView extends MomentVideoView {
                 clickView(moment, listener);
             }
         });
-        this.videoPlayLogo.setOnClickListener(new View.OnClickListener() {
+        this.mContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 clickView(moment, listener);
@@ -181,7 +181,7 @@ public class MomentShareVideoView extends MomentVideoView {
                 return true;
             }
         });
-        this.videoPlayLogo.setOnLongClickListener(new View.OnLongClickListener() {
+        this.mContent.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
                 LogUtil.d(TAG, "setContentOnLongClickListener#onClick#momentBean:" + moment);

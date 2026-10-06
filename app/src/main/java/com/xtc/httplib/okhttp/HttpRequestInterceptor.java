@@ -109,7 +109,7 @@ public class HttpRequestInterceptor extends BaseInterceptor {
                 if (body.contentLength() <= 0) {
                     return true;
                 }
-            } catch (IOException e) {
+            } catch (Exception e) {
                 LogUtil.e(TAG, "isEncrypt: get contentLength error: ", e);
             }
         }

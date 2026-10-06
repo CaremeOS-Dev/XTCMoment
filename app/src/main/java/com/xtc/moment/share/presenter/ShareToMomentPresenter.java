@@ -316,7 +316,7 @@ public class ShareToMomentPresenter extends AbstractSharePresenter<IShareToMomen
         Observable.just(this.bundleManager.xtcShareMessage.getThumbData())
                 .map(new Func1<byte[], String>() {
                     @Override
-                    public String call(byte[] thumbData) throws Throwable {
+                    public String call(byte[] thumbData) {
                         long startTime = SystemClock.elapsedRealtime();
                         String savedPath = ShareUtils.saveBitmapToSdcard(thumbData);
                         DigitalManager.getInstance().getDigitalEntity().shareTransTime =
@@ -361,16 +361,20 @@ public class ShareToMomentPresenter extends AbstractSharePresenter<IShareToMomen
         Observable.just(imageObject)
                 .map(new Func1<XTCImageObject, String>() {
                     @Override
-                    public String call(XTCImageObject targetImage) throws Throwable {
+                    public String call(XTCImageObject targetImage) {
                         String imagePath = getShareImagePath(targetImage);
                         LogUtil.d(AbstractSharePresenter.TAG, "bundleManager.xtcShareMessage.getDescription()="
                                 + bundleManager.xtcShareMessage.getDescription());
                         if (TextUtils.isEmpty(targetImage.getImagePath())
                                 && !TextUtils.isEmpty(bundleManager.xtcShareMessage.getDescription())) {
-                            ScreenshotUtils.b(imagePath, bundleManager.xtcShareMessage.getDescription());
+                            ScreenshotUtils.buildCarryData(imagePath, bundleManager.xtcShareMessage.getDescription());
                         }
-                        ImageUtil.compressByScale(imagePath, PhotoTokenParam.WEBP_FORMAT,
-                                Constants.Camera.PhotoSize.WIDTH, Constants.Camera.PhotoSize.HEIGHT);
+                        try {
+                            ImageUtil.compressByScale(imagePath, PhotoTokenParam.WEBP_FORMAT,
+                                    Constants.Camera.PhotoSize.WIDTH, Constants.Camera.PhotoSize.HEIGHT);
+                        } catch (Throwable throwable) {
+                            LogUtil.e(AbstractSharePresenter.TAG, "compress share image error", throwable);
+                        }
                         return imagePath;
                     }
                 })
@@ -457,7 +461,7 @@ public class ShareToMomentPresenter extends AbstractSharePresenter<IShareToMomen
         Observable.just(this.bundleManager.xtcShareMessage.getThumbData())
                 .map(new Func1<byte[], String>() {
                     @Override
-                    public String call(byte[] thumbData) throws Throwable {
+                    public String call(byte[] thumbData) {
                         long startTime = SystemClock.elapsedRealtime();
                         String savedPath = ShareUtils.saveBitmapToSdcard(thumbData);
                         DigitalManager.getInstance().getDigitalEntity().shareTransTime =
@@ -640,7 +644,7 @@ public class ShareToMomentPresenter extends AbstractSharePresenter<IShareToMomen
         if (imageObject.getDialogBitmapArgs() != null) {
             shareImageMoment.setDialogBitmapArgs(imageObject.getDialogBitmapArgs());
         }
-        shareImageMoment.setTrackMd5Value(ScreenshotUtils.c(imagePath));
+        shareImageMoment.setTrackMd5Value(ScreenshotUtils.getScreenshotMd5Json(imagePath));
         this.publishService.sendPhotoMsg(shareImageMoment);
     }
 

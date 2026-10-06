@@ -408,7 +408,7 @@ public class ImageUtils {
                 return orientation != 8 ? 90 : 270;
             }
             return 180;
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return 0;
         }
@@ -907,7 +907,7 @@ public class ImageUtils {
                             if (!src.isRecycled()) {
                                 src.recycle();
                             }
-                        } catch (IOException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                             PrivateUtils.close(outputStream);
                         }
@@ -917,7 +917,7 @@ public class ImageUtils {
                     PrivateUtils.close(outputStream);
                     throw throwable;
                 }
-            } catch (IOException e) {
+            } catch (Exception e) {
                 compressed = false;
                 e.printStackTrace();
                 PrivateUtils.close(outputStream);
@@ -958,12 +958,12 @@ public class ImageUtils {
                 String type = getImageType(inputStream);
                 PrivateUtils.close(inputStream);
                 return type;
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 PrivateUtils.close(inputStream);
                 return null;
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             PrivateUtils.close(inputStream);
             return null;
         }
@@ -980,7 +980,7 @@ public class ImageUtils {
                 return getImageType(header);
             }
             return null;
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }

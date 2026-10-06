@@ -165,7 +165,7 @@ public final class CrashHandler implements Thread.UncaughtExceptionHandler {
                 }
                 return stringWriter.toString();
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             LogUtil.e(TAG, e);
             return stringWriter.toString();
         }
@@ -399,7 +399,7 @@ public final class CrashHandler implements Thread.UncaughtExceptionHandler {
         checkCacheSize();
         try {
             FileUtils.writeFile(new File(filePath), stackTrace, true);
-        } catch (IOException e) {
+        } catch (Exception e) {
             LogUtil.e(TAG, e);
         }
         return stackTrace;

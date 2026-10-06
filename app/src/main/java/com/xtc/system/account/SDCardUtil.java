@@ -62,7 +62,7 @@ class SDCardUtil {
             LogUtil.e(TAG, e);
             closeQuietly(outputStream);
             return false;
-        } catch (IOException e) {
+        } catch (Exception e) {
             LogUtil.e(TAG, e);
             closeQuietly(outputStream);
             return false;
@@ -208,7 +208,7 @@ class SDCardUtil {
         if (closeable != null) {
             try {
                 closeable.close();
-            } catch (IOException ignored) {
+            } catch (Exception ignored) {
                 // ignored
             }
         }

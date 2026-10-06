@@ -31,38 +31,38 @@ public class PersonInfoHttpProxy extends HttpServiceProxy {
     public Observable<PersonalInfoResponse> getPersonInfo(String watchId) {
         IPersonalInfoHttp http = (IPersonalInfoHttp) this.httpClient
                 .request(BaseUrlManager.getDefaultUrl(this.context), IPersonalInfoHttp.class);
-        return http.getPersonalInfo(new BaseRequestBean(watchId)).compose(new HttpRxJavaCallback());
+        return http.getPersonalInfo(new BaseRequestBean(watchId)).map(new HttpRxJavaCallback());
     }
 
     public Observable<PersonalInfoAndLikeRuleResponse> getSignatureAndLikeRule(String watchId, int level) {
         IPersonalInfoHttp http = (IPersonalInfoHttp) this.httpClient
                 .request(BaseUrlManager.getGatewayUrl(this.context), IPersonalInfoHttp.class);
         return http.getSignatureAndLikeRule(new PersonalInfoAndLikeRuleRequest(watchId, level))
-                .compose(new HttpRxJavaCallback());
+                .map(new HttpRxJavaCallback());
     }
 
     public Observable<GetBadgeResponse> getBadge(String watchId) {
         IPersonalInfoHttp http = (IPersonalInfoHttp) this.httpClient
                 .request(BaseUrlManager.getGatewayUrl(this.context), IPersonalInfoHttp.class);
-        return http.getBadge(new BaseRequestBean(watchId)).compose(new HttpRxJavaCallback());
+        return http.getBadge(new BaseRequestBean(watchId)).map(new HttpRxJavaCallback());
     }
 
     public Observable<String> deleteFriend(String watchId, String friendId) {
         IPersonalInfoHttp http = (IPersonalInfoHttp) this.httpClient
                 .request(BaseUrlManager.getChatUrl(this.context), IPersonalInfoHttp.class);
-        return http.deleteFriend(new DeleteFriendParam(watchId, friendId)).compose(new HttpRxJavaCallback());
+        return http.deleteFriend(new DeleteFriendParam(watchId, friendId)).map(new HttpRxJavaCallback());
     }
 
     public Observable<String> like(LikeRequest request) {
         IPersonalInfoHttp http = (IPersonalInfoHttp) this.httpClient
                 .request(BaseUrlManager.getGatewayUrl(this.context), IPersonalInfoHttp.class);
-        return http.like(request).compose(new HttpRxJavaCallback());
+        return http.like(request).map(new HttpRxJavaCallback());
     }
 
     public Observable<PersonalGradeResultBean> getPersonalGradeInfo(String watchId, String model) {
         IPersonalInfoHttp http = (IPersonalInfoHttp) this.httpClient
                 .request(BaseUrlManager.getPointsUrl(this.context), IPersonalInfoHttp.class);
-        return http.getPersonalGradeInfo(watchId, model).compose(new HttpRxJavaCallback());
+        return http.getPersonalGradeInfo(watchId, model).map(new HttpRxJavaCallback());
     }
 
     public Observable<RespPersonalInfoUnite> getPersonalInfoUnite(String watchId) {
@@ -70,6 +70,6 @@ public class PersonInfoHttpProxy extends HttpServiceProxy {
         request.setExwatchId(MomentApp.getWatchId());
         IPersonalInfoHttp http = (IPersonalInfoHttp) this.httpClient
                 .request(BaseUrlManager.getGatewayUrl(this.context), IPersonalInfoHttp.class);
-        return http.getPersonalInfoUnite(request).compose(new HttpRxJavaCallback());
+        return http.getPersonalInfoUnite(request).map(new HttpRxJavaCallback());
     }
 }

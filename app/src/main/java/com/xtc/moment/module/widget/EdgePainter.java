@@ -39,10 +39,10 @@ public class EdgePainter {
     private final View parentView;
     private final GestureDetector gestureDetector;
 
-    private final Paint curvePaint;
-    private final Path curvePath;
-    private final Paint arrowPaint;
-    private final Path arrowPath;
+    private Paint curvePaint;;
+    private Path curvePath;;
+    private Paint arrowPaint;;
+    private Path arrowPath;;
 
     private int viewWidth;
     private int viewHeight;

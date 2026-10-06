@@ -48,7 +48,7 @@ public class MomentFileUtils {
                 return allCopied;
             }
             return writeFileFromIS(FileUtils.toFile(targetPath), context.getAssets().open(assetPath), false, null);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -85,13 +85,13 @@ public class MomentFileUtils {
         } finally {
             try {
                 inputStream.close();
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             if (outputStream != null) {
                 try {
                     outputStream.close();
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }

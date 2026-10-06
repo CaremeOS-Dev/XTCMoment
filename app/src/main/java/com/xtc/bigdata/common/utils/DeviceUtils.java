@@ -136,7 +136,7 @@ public class DeviceUtils {
             total = Integer.parseInt(randomAccessFile.readLine().replaceAll("\\D+", ""));
             randomAccessFile.close();
             return total;
-        } catch (IOException e) {
+        } catch (Exception e) {
             if (!Constants.isDebug) {
                 return total;
             }
@@ -199,7 +199,7 @@ public class DeviceUtils {
         }
         try {
             closeable.close();
-        } catch (IOException e) {
+        } catch (Exception e) {
             if (Constants.isDebug) {
                 LogUtil.w(TAG, e + ":关闭io失败, 这不科学 - -");
             }

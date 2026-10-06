@@ -46,7 +46,7 @@ public class StaticVisualStrategy implements IGenerateVisualStrategy {
             return;
         }
         for (int index = 0; index < viewInfoList.size(); index++) {
-            ModelView.loadView((RelativeLayout) renderContainer, viewInfoList.get(index), Glide.get(this.context));
+            ModelView.loadView((RelativeLayout) renderContainer, viewInfoList.get(index), Glide.with(this.context));
         }
     }
 }

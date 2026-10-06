@@ -95,7 +95,7 @@ public class FileUtils {
         }
         try {
             return file.createNewFile();
-        } catch (IOException e) {
+        } catch (Exception e) {
             LogUtil.e(TAG, e);
             return false;
         }
@@ -114,7 +114,7 @@ public class FileUtils {
         }
         try {
             return file.createNewFile();
-        } catch (IOException e) {
+        } catch (Exception e) {
             LogUtil.e(TAG, e);
             return false;
         }
@@ -219,7 +219,7 @@ public class FileUtils {
                 outputStream.write(buffer, 0, read);
             }
             return true;
-        } catch (IOException e) {
+        } catch (Exception e) {
             LogUtil.e(TAG, e);
             return false;
         } finally {
@@ -237,7 +237,7 @@ public class FileUtils {
             writer.write(content);
             writer.flush();
             return true;
-        } catch (IOException e) {
+        } catch (Exception e) {
             LogUtil.e(TAG, e);
             return false;
         } finally {
@@ -255,7 +255,7 @@ public class FileUtils {
             outputStream.write(data);
             outputStream.flush();
             return true;
-        } catch (IOException e) {
+        } catch (Exception e) {
             LogUtil.e(TAG, e);
             return false;
         } finally {
@@ -295,7 +295,7 @@ public class FileUtils {
                 outputStream.write(buffer, 0, read);
             }
             return outputStream.toByteArray();
-        } catch (IOException e) {
+        } catch (Exception e) {
             LogUtil.e(TAG, e);
             return null;
         } finally {
@@ -374,7 +374,7 @@ public class FileUtils {
         if (!file.exists()) {
             try {
                 file.createNewFile();
-            } catch (IOException e) {
+            } catch (Exception e) {
                 LogUtil.e(TAG, e);
             }
         }
@@ -383,7 +383,7 @@ public class FileUtils {
             outputStream = new FileOutputStream(file);
             outputStream.write(content.getBytes());
             LogUtil.i(TAG, "save file to sdcard successful:" + file.getAbsolutePath());
-        } catch (IOException e) {
+        } catch (Exception e) {
             LogUtil.e(TAG, e);
         } finally {
             CloseableUtils.closeAllQuietly(outputStream);
@@ -406,7 +406,7 @@ public class FileUtils {
                 outputStream.write(buffer, 0, read);
             }
             return new String(outputStream.toByteArray(), "UTF-8");
-        } catch (IOException e) {
+        } catch (Exception e) {
             if (Constants.isDebug) {
                 LogUtil.e(TAG, e);
             }

@@ -103,7 +103,7 @@ public class DomainConfig {
                 inputStream.close();
                 throw t;
             }
-        } catch (IOException ignored) {
+        } catch (Exception ignored) {
             return null;
         }
     }
@@ -127,7 +127,7 @@ public class DomainConfig {
                 sink.close();
                 throw t;
             }
-        } catch (IOException ignored) {
+        } catch (Exception ignored) {
             return false;
         }
     }

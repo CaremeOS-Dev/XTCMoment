@@ -38,7 +38,7 @@ public class ResourceUsedUtil {
             long iowait = scanner.nextLong();
             result[0] = user + nice + system + idle + iowait + scanner.nextLong() + scanner.nextLong();
             result[1] = idle;
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             if (scanner != null) {
@@ -56,7 +56,7 @@ public class ResourceUsedUtil {
                 scanner.next();
             }
             return scanner.nextLong() + scanner.nextLong() + scanner.nextLong() + scanner.nextLong();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return 0L;
         } finally {
@@ -108,7 +108,7 @@ public class ResourceUsedUtil {
                 if (reader != null) {
                     try {
                         reader.close();
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }

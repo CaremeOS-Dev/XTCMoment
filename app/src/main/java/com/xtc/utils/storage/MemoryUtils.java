@@ -29,12 +29,12 @@ public class MemoryUtils {
             long total = ((long) Integer.parseInt(line.substring(line.indexOf("MemTotal:")).replaceAll("\\D+", ""))) * KB;
             reader.close();
             return total;
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             if (reader != null) {
                 try {
                     reader.close();
-                } catch (IOException ignored) {
+                } catch (Exception ignored) {
                     ignored.printStackTrace();
                 }
             }

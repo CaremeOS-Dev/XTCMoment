@@ -98,16 +98,18 @@ public class AsyncLayoutLoader {
     /**
      * @param filterFilling true 表示先过滤掉正在补充中的布局，避免重复预加载
      */
-    private void preLoadLayoutResource(final boolean filterFilling, final AsyncInflaterResource... resources) {
-        AsyncInflaterResource[] filtered = new AsyncInflaterResource[resources.length];
+    private void preLoadLayoutResource(final boolean filterFilling, final AsyncInflaterResource... inputResources) {
+        AsyncInflaterResource[] resources = inputResources;
         if (filterFilling) {
+            AsyncInflaterResource[] filtered = new AsyncInflaterResource[resources.length];
             filterFillingResource(filtered, resources);
             resources = filtered;
         }
+        final AsyncInflaterResource[] finalResources = resources;
         HandlerUtil.runOnBackground(new Runnable() {
             @Override
             public void run() {
-                for (AsyncInflaterResource resource : resources) {
+                for (AsyncInflaterResource resource : finalResources) {
                     if (resource == null) {
                         continue;
                     }

@@ -155,7 +155,7 @@ public class MediaUtils {
             } finally {
                 try {
                     outputStream.close();
-                } catch (IOException e) {
+                } catch (Exception e) {
                     LogUtil.e(TAG, "close videoFileOutputStream error", e);
                 }
             }
@@ -255,12 +255,12 @@ public class MediaUtils {
             outputStream.write(text.getBytes(StandardCharsets.UTF_8));
             outputStream.write(GIF_DETAIL_END.getBytes(StandardCharsets.UTF_8));
             outputStream.close();
-        } catch (IOException e) {
+        } catch (Exception e) {
             LogUtil.e(TAG, "appendString2Gif error ", e);
             if (outputStream != null) {
                 try {
                     outputStream.close();
-                } catch (IOException closeError) {
+                } catch (Exception closeError) {
                     closeError.printStackTrace();
                 }
             }
@@ -296,7 +296,7 @@ public class MediaUtils {
                     LogUtil.i(TAG, "substring = " + detail);
                     try {
                         randomAccessFile.close();
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                     return detail;
@@ -304,7 +304,7 @@ public class MediaUtils {
                 LogUtil.i(TAG, "index not valid");
                 try {
                     randomAccessFile.close();
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 return "";
@@ -312,7 +312,7 @@ public class MediaUtils {
             LogUtil.i(TAG, "getGifString not write value");
             try {
                 randomAccessFile.close();
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             return "";
@@ -321,7 +321,7 @@ public class MediaUtils {
             if (randomAccessFile != null) {
                 try {
                     randomAccessFile.close();
-                } catch (IOException closeError) {
+                } catch (Exception closeError) {
                     closeError.printStackTrace();
                 }
             }

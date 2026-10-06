@@ -108,8 +108,8 @@ public class GlideRoundImageView extends BitmapTransformation {
 
         int cropX = 0;
         int cropY = 0;
-        int cropWidth;
-        int cropHeight;
+        int cropWidth = width;
+        int cropHeight = height;
         if (this.scaleType == MATRIX_TOP) {
             cropWidth = width;
             cropHeight = height;

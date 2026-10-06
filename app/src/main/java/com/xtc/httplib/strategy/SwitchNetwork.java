@@ -23,7 +23,7 @@ public class SwitchNetwork implements RetryInterface {
         if (body != null) {
             try {
                 SwitchNetworkManager.getInstance().countUserNum(body.contentLength());
-            } catch (IOException ignored) {
+            } catch (Exception ignored) {
                 // content length is best effort only
             }
         }

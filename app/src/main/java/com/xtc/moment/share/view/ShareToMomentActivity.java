@@ -247,7 +247,7 @@ public class ShareToMomentActivity extends AbstractShareActivity<IShareToMomentV
         if (shareMessage.getType() == 4) {
             XTCVideoObject videoObject = (XTCVideoObject) shareMessage.getShareObject();
             String thumbnailPath = videoObject.getThumbnailPath();
-            final String videoPath = videoObject.getVideoPath();
+            String videoPath = videoObject.getVideoPath();
             final String videoName = ChatVideoUtil.getVideoName(videoPath);
             if (TextUtils.isEmpty(thumbnailPath)) {
                 String cachedThumbnail = FileManager.getVideoThumnailDir() + videoName + FileManager.WEBP_FORMAT;
@@ -265,10 +265,11 @@ public class ShareToMomentActivity extends AbstractShareActivity<IShareToMomentV
             if (TextUtils.isEmpty(videoPath)) {
                 videoPath = videoObject.getVideoDownloadUrl();
             } else {
+                final String preSaveVideoPath = videoPath;
                 HandlerUtil.runOnBackground(new Runnable() {
                     @Override
                     public void run() {
-                        presenter.preSaveThumbnailAndToken(videoPath, videoName);
+                        presenter.preSaveThumbnailAndToken(preSaveVideoPath, videoName);
                     }
                 });
             }

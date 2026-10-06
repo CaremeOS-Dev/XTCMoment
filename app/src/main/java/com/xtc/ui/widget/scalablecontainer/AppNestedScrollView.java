@@ -72,7 +72,7 @@ public class AppNestedScrollView extends NestedScrollView {
         this.isAnimScale = true;
         TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.AppNestedScrollView, 0, 0);
         if (attributes != null) {
-            this.isAnimScale = attributes.getBoolean(R.styleable.AppNestedScrollView_asv_anim_scale, true);
+            this.isAnimScale = attributes.getBoolean(R.styleable.AppNestedScrollView_ansv_anim_scale, true);
             this.enableStart = attributes.getBoolean(R.styleable.AppNestedScrollView_ansv_enable_start, true);
             this.enableEnd = attributes.getBoolean(R.styleable.AppNestedScrollView_ansv_enable_end, true);
             attributes.recycle();

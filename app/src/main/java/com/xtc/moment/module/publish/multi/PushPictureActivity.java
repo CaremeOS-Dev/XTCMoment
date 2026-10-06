@@ -757,7 +757,7 @@ public class PushPictureActivity extends BaseCtaPermissionActivity<IPublishView,
                 if (TextUtils.isEmpty(extra)) {
                     return PushPictureActivity.this.ALBUM_MAX_COUNT;
                 }
-                return ((Integer) JSONUtil.fromJSON(extra, ALBUM_NUM)).intValue();
+                return ((Integer) JSONUtil.getJSONValue(extra, ALBUM_NUM)).intValue();
             }
         })
                 .subscribeOn(Schedulers.io())

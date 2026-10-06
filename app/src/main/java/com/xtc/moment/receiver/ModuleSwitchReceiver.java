@@ -53,7 +53,7 @@ public class ModuleSwitchReceiver extends BroadcastReceiver {
             public void run() {
                 InitSwitchTask initSwitchTask = new InitSwitchTask(context.getApplicationContext());
                 if (switchType == FUN_SWITCH) {
-                    FunSwitchUtil.refresh();
+                    FunSwitchUtil.clearCache();
                     initSwitchTask.loadFunSwitch();
                 } else if (switchType == MODULE_SWITCH) {
                     ModuleSwitchUtil.clearCache();

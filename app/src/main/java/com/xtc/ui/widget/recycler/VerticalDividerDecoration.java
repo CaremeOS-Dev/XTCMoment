@@ -9,15 +9,15 @@ import android.support.v7.widget.RecyclerView;
 public class VerticalDividerDecoration extends DividerDecoration {
 
     public VerticalDividerDecoration(Context context) {
-        super(context, DividerDecoration.VERTICAL);
+        super(context, DividerDecoration.VERTICAL_LIST);
     }
 
     public VerticalDividerDecoration(Context context, int widthPx) {
-        super(context, DividerDecoration.VERTICAL, widthPx);
+        super(context, DividerDecoration.VERTICAL_LIST, widthPx);
     }
 
     public VerticalDividerDecoration(Context context, Drawable divider) {
-        super(context, DividerDecoration.VERTICAL, divider);
+        super(context, DividerDecoration.VERTICAL_LIST, divider);
     }
 
     @Override

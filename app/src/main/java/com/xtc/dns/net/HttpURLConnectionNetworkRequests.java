@@ -67,7 +67,7 @@ public class HttpURLConnectionNetworkRequests implements INetworkRequests {
             if (reader != null) {
                 try {
                     reader.close();
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }

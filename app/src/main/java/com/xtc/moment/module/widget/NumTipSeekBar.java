@@ -102,25 +102,25 @@ public class NumTipSeekBar extends View {
 
     private void init(Context context, AttributeSet attrs) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.NumTipSeekBar);
-        this.mTickBarHeight = typedArray.getDimensionPixelOffset(R.styleable.NumTipSeekBar_tickBarHeight, getDpValue(8));
-        this.mTickBarColor = typedArray.getColor(R.styleable.NumTipSeekBar_tickBarColor, -16777216);
-        this.mCircleButtonColor = typedArray.getColor(R.styleable.NumTipSeekBar_circleButtonColor, -1);
-        this.mCircleButtonTextColor = typedArray.getColor(R.styleable.NumTipSeekBar_circleButtonTextColor, -1);
-        this.mCircleButtonTextSize = typedArray.getDimension(R.styleable.NumTipSeekBar_circleButtonTextSize, 0.0f);
-        this.mCircleButtonRadius = typedArray.getDimensionPixelOffset(R.styleable.NumTipSeekBar_circleButtonRadius, 0);
-        this.mCircleApertureWidth = typedArray.getDimensionPixelOffset(R.styleable.NumTipSeekBar_circleApertureWidth, 0);
-        this.mCircleApertureColor = typedArray.getColor(R.styleable.NumTipSeekBar_circleApertureColor,
+        this.mTickBarHeight = typedArray.getDimensionPixelOffset(R.styleable.NumTipSeekBar_NumTipSeekBar_tickBarHeight, getDpValue(8));
+        this.mTickBarColor = typedArray.getColor(R.styleable.NumTipSeekBar_NumTipSeekBar_tickBarColor, -16777216);
+        this.mCircleButtonColor = typedArray.getColor(R.styleable.NumTipSeekBar_NumTipSeekBar_circleButtonColor, -1);
+        this.mCircleButtonTextColor = typedArray.getColor(R.styleable.NumTipSeekBar_NumTipSeekBar_circleButtonTextColor, -1);
+        this.mCircleButtonTextSize = typedArray.getDimension(R.styleable.NumTipSeekBar_NumTipSeekBar_circleButtonTextSize, 0.0f);
+        this.mCircleButtonRadius = typedArray.getDimensionPixelOffset(R.styleable.NumTipSeekBar_NumTipSeekBar_circleButtonRadius, 0);
+        this.mCircleApertureWidth = typedArray.getDimensionPixelOffset(R.styleable.NumTipSeekBar_NumTipSeekBar_circleApertureWidth, 0);
+        this.mCircleApertureColor = typedArray.getColor(R.styleable.NumTipSeekBar_NumTipSeekBar_circleApertureColor,
                 getResources().getColor(R.color.color_dc2323));
-        this.mProgressHeight = typedArray.getDimensionPixelOffset(R.styleable.NumTipSeekBar_progressHeight, 0);
-        this.mProgressColor = typedArray.getColor(R.styleable.NumTipSeekBar_progressColor, -1);
-        this.mSelectProgress = typedArray.getInt(R.styleable.NumTipSeekBar_selectProgress, 0);
-        this.mStartProgress = typedArray.getInt(R.styleable.NumTipSeekBar_startProgress, 0);
-        this.mMaxProgress = typedArray.getInt(R.styleable.NumTipSeekBar_maxProgress, DEFAULT_MAX_VALUE);
-        this.mIsShowButtonText = typedArray.getBoolean(R.styleable.NumTipSeekBar_isShowButtonText, false);
-        this.mIsShowButton = typedArray.getBoolean(R.styleable.NumTipSeekBar_isShowButton, false);
-        this.mIsRound = typedArray.getBoolean(R.styleable.NumTipSeekBar_isRound, false);
-        this.mBorderSize = typedArray.getDimensionPixelOffset(R.styleable.NumTipSeekBar_borderSize, 0);
-        this.mBorderColor = typedArray.getColor(R.styleable.NumTipSeekBar_borderColor, -1);
+        this.mProgressHeight = typedArray.getDimensionPixelOffset(R.styleable.NumTipSeekBar_NumTipSeekBar_progressHeight, 0);
+        this.mProgressColor = typedArray.getColor(R.styleable.NumTipSeekBar_NumTipSeekBar_progressColor, -1);
+        this.mSelectProgress = typedArray.getInt(R.styleable.NumTipSeekBar_NumTipSeekBar_selectProgress, 0);
+        this.mStartProgress = typedArray.getInt(R.styleable.NumTipSeekBar_NumTipSeekBar_startProgress, 0);
+        this.mMaxProgress = typedArray.getInt(R.styleable.NumTipSeekBar_NumTipSeekBar_maxProgress, DEFAULT_MAX_VALUE);
+        this.mIsShowButtonText = typedArray.getBoolean(R.styleable.NumTipSeekBar_NumTipSeekBar_isShowButtonText, false);
+        this.mIsShowButton = typedArray.getBoolean(R.styleable.NumTipSeekBar_NumTipSeekBar_isShowButton, false);
+        this.mIsRound = typedArray.getBoolean(R.styleable.NumTipSeekBar_NumTipSeekBar_isRound, false);
+        this.mBorderSize = typedArray.getDimensionPixelOffset(R.styleable.NumTipSeekBar_NumTipSeekBar_borderSize, 0);
+        this.mBorderColor = typedArray.getColor(R.styleable.NumTipSeekBar_NumTipSeekBar_borderColor, -1);
         initView();
         typedArray.recycle();
     }

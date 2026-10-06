@@ -152,7 +152,7 @@ public class HttpHelper {
             Buffer buffer = new Buffer();
             requestBody.writeTo(buffer);
             return buffer.readUtf8();
-        } catch (IOException e) {
+        } catch (Exception e) {
             LogUtil.e(e);
             return null;
         }
@@ -247,7 +247,7 @@ public class HttpHelper {
         outputStream.write(aesBytes, 0, aesBytes.length);
         try {
             outputStream.close();
-        } catch (IOException e) {
+        } catch (Exception e) {
             LogUtil.e(e);
         }
         return MD5Util.md5(outputStream.toByteArray());

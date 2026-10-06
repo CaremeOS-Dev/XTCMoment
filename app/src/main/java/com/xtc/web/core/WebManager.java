@@ -322,7 +322,7 @@ public class WebManager {
             connection.connect();
             return new WebResourceResponse(connection.getContentType(), connection.getHeaderField("encoding"),
                     connection.getInputStream());
-        } catch (IOException e) {
+        } catch (Exception e) {
             Log.e(TAG, "getDefaultWebResponse error", e);
             return null;
         }
@@ -399,7 +399,7 @@ public class WebManager {
         }
         try {
             return new WebResourceResponse("text/javascript", Constants.UTF_8, activity.getAssets().open(fileName));
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             LogUtil.d(TAG, "intercept common js error = " + e);
             return null;

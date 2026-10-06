@@ -120,7 +120,7 @@ public class DynamicsVisualStrategy implements IGenerateVisualStrategy {
                     @Override
                     public void call(List<ViewInfo> list) {
                         for (int index = 0; index < list.size(); index++) {
-                            ModelView.loadView((RelativeLayout) renderContainer, list.get(index), Glide.get(context));
+                            ModelView.loadView((RelativeLayout) renderContainer, list.get(index), Glide.with(context));
                         }
                     }
                 }, new Action1<Throwable>() {

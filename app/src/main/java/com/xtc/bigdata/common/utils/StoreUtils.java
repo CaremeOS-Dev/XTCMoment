@@ -144,21 +144,21 @@ public class StoreUtils {
                 return 0L;
             }
             return ((long) Integer.parseInt(line.substring(line.indexOf("MemTotal:")).replaceAll("\\D+", ""))) * PlaybackStateCompat.ACTION_PLAY_FROM_MEDIA_ID;
-        } catch (IOException e) {
+        } catch (Exception e) {
             LogUtil.e(TAG, e);
             return 0L;
         } finally {
             if (reader != null) {
                 try {
                     reader.close();
-                } catch (IOException e) {
+                } catch (Exception e) {
                     LogUtil.e(TAG, e);
                 }
             }
             if (fileReader != null) {
                 try {
                     fileReader.close();
-                } catch (IOException e) {
+                } catch (Exception e) {
                     LogUtil.e(TAG, e);
                 }
             }

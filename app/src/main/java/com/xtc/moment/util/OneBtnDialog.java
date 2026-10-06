@@ -42,8 +42,7 @@ public class OneBtnDialog extends Dialog {
         this.tvHint.setTextColor(color);
     }
 
-    @Override
-    public void setBackground(Drawable background) {
+    public void setBackgroundDrawable(Drawable background) {
         View contentRoot = this.root;
         if (contentRoot != null) {
             contentRoot.setBackground(background);

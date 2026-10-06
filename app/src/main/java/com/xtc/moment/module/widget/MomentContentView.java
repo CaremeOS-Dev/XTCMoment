@@ -26,7 +26,7 @@ public class MomentContentView extends RelativeLayout {
     private static final String TAG = "MomentContentView";
     private static final String EMPTY_TEXT = "null";
 
-    private final Context context;
+    private Context context;
     private ExpandTextView expandTextView;
     private ImageView ivMoodIcon;
     private TextView tvMoodContent;
@@ -42,7 +42,6 @@ public class MomentContentView extends RelativeLayout {
 
     public MomentContentView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        this.context = context;
         initView();
     }
 
@@ -94,9 +93,16 @@ public class MomentContentView extends RelativeLayout {
         }
     }
 
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
     private boolean isResourceInValid(Object resource) {
         if (resource == null) {
             return true;
+        }
+        if (resource instanceof Integer) {
+            return ((Integer) resource).intValue() == 0;
         }
         if (resource instanceof String) {
             return TextUtils.isEmpty((String) resource) || EMPTY_TEXT.equals(resource);

@@ -93,8 +93,13 @@ public class ShareUtil {
             Log.e(TAG, "get app icon error = " + e);
             return null;
         }
-        return BitmapUtil.scaleIcon(context, ((BitmapDrawable) packageManager.getApplicationIcon(
-                packageManager.getApplicationInfo(context.getPackageName(), 0))).getBitmap());
+        try {
+            return BitmapUtil.scaleIcon(context, ((BitmapDrawable) packageManager.getApplicationIcon(
+                    packageManager.getApplicationInfo(context.getPackageName(), 0))).getBitmap());
+        } catch (Exception e) {
+            Log.e(TAG, "get app icon error = " + e);
+            return null;
+        }
     }
 
     /** 当前网络是否已连接。 */

@@ -116,7 +116,7 @@ public class LogInterceptor implements Interceptor {
         }
         try {
             contentLength = body.contentLength();
-        } catch (IOException ignored) {
+        } catch (Exception ignored) {
             contentLength = 0;
         }
         return String.valueOf(contentLength >= 0 ? contentLength : 0L);

@@ -18,7 +18,7 @@ public class CloseableUtils {
             if (closeable != null) {
                 try {
                     closeable.close();
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -34,7 +34,7 @@ public class CloseableUtils {
             if (closeable != null) {
                 try {
                     closeable.close();
-                } catch (IOException ignored) {
+                } catch (Exception ignored) {
                     // ignored
                 }
             }

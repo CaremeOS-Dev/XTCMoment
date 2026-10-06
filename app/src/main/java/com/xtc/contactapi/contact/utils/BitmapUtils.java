@@ -27,12 +27,12 @@ public class BitmapUtils {
             outputStream.flush();
             outputStream.close();
             return Base64.encodeToString(outputStream.toByteArray(), Base64.NO_WRAP);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             try {
                 outputStream.flush();
                 outputStream.close();
-            } catch (IOException inner) {
+            } catch (Exception inner) {
                 inner.printStackTrace();
             }
             return null;
@@ -47,7 +47,7 @@ public class BitmapUtils {
         Bitmap bitmap = BitmapFactory.decodeByteArray(outputStream.toByteArray(), 0, outputStream.size());
         try {
             outputStream.close();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return bitmap;

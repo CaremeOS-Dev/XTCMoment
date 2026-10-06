@@ -60,7 +60,7 @@ public class ZipUtils {
             zipOutputStream.finish();
             PrivateUtils.close(zipOutputStream);
             return true;
-        } catch (IOException e) {
+        } catch (Exception e) {
             if (zipOutputStream != null) {
                 zipOutputStream.finish();
                 PrivateUtils.close(zipOutputStream);
@@ -95,7 +95,7 @@ public class ZipUtils {
             boolean success = zipEntry(srcFile, "", zipOutputStream, comment);
             PrivateUtils.close(zipOutputStream);
             return success;
-        } catch (IOException e) {
+        } catch (Exception e) {
             PrivateUtils.close(zipOutputStream);
             throw e;
         }
@@ -142,7 +142,7 @@ public class ZipUtils {
                 }
                 zipOutputStream.closeEntry();
                 PrivateUtils.close(inputStream);
-            } catch (IOException e) {
+            } catch (Exception e) {
                 PrivateUtils.close(inputStream);
                 throw e;
             }
@@ -194,7 +194,7 @@ public class ZipUtils {
             List<File> result = unzipInputStream(fileInputStream, destDir, filter);
             fileInputStream.close();
             return result;
-        } catch (IOException e) {
+        } catch (Exception e) {
             fileInputStream.close();
             throw e;
         }
@@ -233,7 +233,7 @@ public class ZipUtils {
                                 outputStream.write(buffer, 0, read);
                             }
                             PrivateUtils.close(outputStream);
-                        } catch (IOException e) {
+                        } catch (Exception e) {
                             PrivateUtils.close(outputStream);
                             throw e;
                         }
@@ -242,7 +242,7 @@ public class ZipUtils {
             }
             zipInputStream.close();
             return extractedFiles;
-        } catch (IOException e) {
+        } catch (Exception e) {
             zipInputStream.close();
             throw e;
         }

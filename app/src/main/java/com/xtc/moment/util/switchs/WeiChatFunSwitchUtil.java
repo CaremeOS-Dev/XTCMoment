@@ -109,7 +109,7 @@ public class WeiChatFunSwitchUtil {
         }
         List<FunSwitchChangeListener> listeners = funSwitchListenerMap.get(path);
         LogUtil.i(TAG, "dispatcherFunSwitchChange changeUriPath +" + path + " size:" + listeners);
-        FunSwitchUtil.refresh();
+        FunSwitchUtil.clearCache();
         if (CollectionUtil.isEmpty(listeners)) {
             return;
         }

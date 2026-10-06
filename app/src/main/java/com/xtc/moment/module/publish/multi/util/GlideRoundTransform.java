@@ -29,7 +29,6 @@ public class GlideRoundTransform extends CenterCrop {
     }
 
     public GlideRoundTransform(Context context, int radiusDp) {
-        super(context);
         radius = DimenUtil.dp2px(context, radiusDp);
     }
 

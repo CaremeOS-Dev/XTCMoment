@@ -1,0 +1,100 @@
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\aitext\weight\VideoAnimView.java:9: error: package com.ss.ugc.android.alpha_player does not exist
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\aitext\weight\VideoAnimView.java:10: error: package com.ss.ugc.android.alpha_player does not exist
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\aitext\weight\VideoAnimView.java:11: error: package com.ss.ugc.android.alpha_player.controller does not exist
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\aitext\weight\VideoAnimView.java:12: error: package com.ss.ugc.android.alpha_player.controller does not exist
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\aitext\weight\VideoAnimView.java:13: error: package com.ss.ugc.android.alpha_player.model does not exist
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\aitext\weight\VideoAnimView.java:14: error: package com.ss.ugc.android.alpha_player.model does not exist
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\aitext\weight\VideoAnimView.java:15: error: package com.ss.ugc.android.alpha_player.model does not exist
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\aitext\weight\VideoAnimView.java:16: error: package com.ss.ugc.android.alpha_player.model does not exist
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\aitext\weight\VideoAnimView.java:26: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\aitext\weight\VideoAnimView.java:86: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\aitext\weight\VideoAnimView.java:103: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\aitext\weight\VideoAnimView.java:136: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\ui\widget\scalablecontainer\AppRecyclerView.java:7: error: package android.support.animation does not exist
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\ui\widget\scalablecontainer\AppRecyclerView.java:8: error: package android.support.animation does not exist
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\ui\widget\scalablecontainer\AppRecyclerView.java:9: error: package android.support.animation does not exist
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\ui\widget\scalablecontainer\AppRecyclerView.java:26: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\ui\widget\scalablecontainer\AppRecyclerView.java:39: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\bigdata\monitor\anr\ANRMonitor.java:13: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\bigdata\monitor\anr\ANRWatchDog.java:9: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\bigdata\monitor\crash\DropboxScanner.java:22: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\contactapi\contact\constant\ContactApiConstant.java:6: error: package com.baidu.speech.asr does not exist
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\game\engine\support\SpineFunctionDelegate.java:5: error: package com.badlogic.gdx.backends.android.textureview does not exist
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\game\engine\support\SpineFunctionDelegate.java:47: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\base\BaseInteractPresenter.java:27: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\base\BaseInteractPresenter.java:34: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\base\BaseInteractPresenter.java:46: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\report\adapter\AbsInteractionAdapter.java:32: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\report\adapter\AbsInteractionAdapter.java:69: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\share\holder\AbsViewHolder.java:48: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\share\holder\AbsViewHolder.java:53: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\share\holder\AbsViewHolder.java:54: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\widget\MomentReminderView.java:14: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\share\holder\AbsViewHolder.java:106: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\share\holder\AbsViewHolder.java:154: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\share\adapter\ShareAdapter.java:68: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\share\adapter\ShareAdapter.java:70: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\share\adapter\ShareAdapter.java:92: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\share\adapter\ShareAdapter.java:97: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\share\adapter\ShareAdapter.java:98: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\share\adapter\ShareAdapter.java:101: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\share\holder\AbsViewHolder.java:297: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\share\holder\AbsViewHolder.java:343: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\share\holder\AbsViewHolder.java:363: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\share\adapter\ShareAdapter.java:155: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\share\adapter\ShareAdapter.java:191: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\db\dao\MomentDao.java:14: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\net\MomentHttpServiceProxy.java:36: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\net\MomentHttpServiceProxy.java:38: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\net\MomentHttp.java:24: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\net\MomentHttp.java:26: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\net\MomentHttpServiceProxy.java:236: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\net\MomentHttpServiceProxy.java:351: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\net\MomentHttp.java:70: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\net\MomentHttp.java:106: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\db\dao\MomentIMReminderDao.java:11: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\db\dao\MomentReminderDao.java:9: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\helper\UnreadHelper.java:7: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\manager\PhotoCompressManager.java:9: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\barrage\BarrageFragment.java:44: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\bean\SendPhotosParam.java:3: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\bean\SendPhotosParam.java:15: error: package PublishService does not exist
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\bean\SendPhotosParam.java:17: error: package PublishService does not exist
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\bean\SendPhotosParam.java:48: error: package PublishService does not exist
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\bean\SendPhotosParam.java:52: error: package PublishService does not exist
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\details\adapter\DetailsAdapter.java:34: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\details\adapter\DetailsAdapter.java:59: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\details\adapter\DetailsAdapter.java:93: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\details\MomentDetailsActivity.java:27: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\details\MomentDetailsActivity.java:30: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\details\MomentDetailsActivity.java:32: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\details\MomentDetailsPresenter.java:14: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\details\MomentDetailsPresenter.java:15: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\details\MomentDetailsActivity.java:410: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\like\likerule\LikeRuleShowActivity.java:15: error: package com.xtc.moment.module.personalinfo.bigdata does not exist
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\like\MomentLikePresenter.java:11: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\like\NewLikePresenter.java:14: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\publish\location\PublishLocationActivity.java:27: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\publish\location\PublishLocationActivity.java:30: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\publish\moodorstate\MoodOrStateActivity.java:23: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\publish\moodorstate\MoodOrStateActivity.java:26: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\publish\moodorstate\MoodOrStateActivity.java:31: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\publish\moodorstate\MoodOrStatePresenter.java:11: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\publish\moodorstate\MoodOrStateActivity.java:73: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\publish\moodorstate\MoodOrStateActivity.java:295: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\publish\multi\adapter\BigPictureAdapter.java:38: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\publish\multi\view\ThreeIconDialog.java:17: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\publish\StartCamera.java:9: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\publish\visible\VisibleTypePresenter.java:15: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\report\ReportPresenter.java:20: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\share\holder\PhotoViewHolder.java:46: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\share\ShareActivity.java:28: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\share\ShareActivity.java:37: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\share\SharePresenter.java:22: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\share\SharePresenter.java:23: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\share\SharePresenter.java:28: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\share\ShareActivity.java:188: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\share\SharePresenter.java:56: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\share\SharePresenter.java:391: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\viewholder\PhotosViewHolder.java:13: error: cannot find symbol
+D:\CaremiumWorkspace\Sources\moment\app\src\main\java\com\xtc\moment\module\widget\livephotoView\PlayLivePhotoPresenter.java:7: error: cannot find symbol

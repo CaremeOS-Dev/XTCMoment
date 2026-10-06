@@ -166,7 +166,7 @@ public class FileUtils {
         }
         try {
             return file.createNewFile();
-        } catch (IOException e) {
+        } catch (Exception e) {
             LogUtil.e(TAG, e);
             return false;
         }
@@ -187,7 +187,7 @@ public class FileUtils {
         }
         try {
             return file.createNewFile();
-        } catch (IOException e) {
+        } catch (Exception e) {
             LogUtil.e(TAG, e);
             return false;
         }
@@ -538,7 +538,7 @@ public class FileUtils {
             outputStream.flush();
             PrivateUtils.close(outputStream);
             return true;
-        } catch (IOException e) {
+        } catch (Exception e) {
             PrivateUtils.close(outputStream);
             LogUtil.e(TAG, e);
             return false;
@@ -567,7 +567,7 @@ public class FileUtils {
                 }
                 outputStream.write(buffer, 0, read);
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             LogUtil.e(TAG, e);
             PrivateUtils.close(inputStream, outputStream);
             return false;
@@ -590,7 +590,7 @@ public class FileUtils {
                 }
                 bufferedOutputStream.write(buffer, 0, read);
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             PrivateUtils.close(inputStream);
             PrivateUtils.close(bufferedOutputStream);
             throw e;
@@ -613,7 +613,7 @@ public class FileUtils {
             writer.write(content);
             PrivateUtils.close(writer);
             return true;
-        } catch (IOException e) {
+        } catch (Exception e) {
             LogUtil.e(TAG, e);
             PrivateUtils.close(writer);
             return false;
@@ -661,7 +661,7 @@ public class FileUtils {
             }
             PrivateUtils.close(reader);
             return lines;
-        } catch (IOException e) {
+        } catch (Exception e) {
             LogUtil.e(TAG, e);
             PrivateUtils.close(reader);
             return null;
@@ -701,7 +701,7 @@ public class FileUtils {
             String result = builder.delete(builder.length() - 2, builder.length()).toString();
             PrivateUtils.close(reader);
             return result;
-        } catch (IOException e) {
+        } catch (Exception e) {
             LogUtil.e(TAG, e);
             PrivateUtils.close(reader);
             return null;
@@ -757,7 +757,7 @@ public class FileUtils {
             boolean success = bitmap.compress(format, quality, outputStream);
             outputStream.close();
             return success;
-        } catch (IOException e) {
+        } catch (Exception e) {
             LogUtil.e(TAG, e);
             PrivateUtils.close(outputStream);
             return false;
@@ -787,7 +787,7 @@ public class FileUtils {
             outputStream.close();
             inputStream.close();
             return result;
-        } catch (IOException e) {
+        } catch (Exception e) {
             PrivateUtils.close(inputStream);
             LogUtil.e(TAG, e);
             return null;
@@ -816,7 +816,7 @@ public class FileUtils {
             Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
             inputStream.close();
             return bitmap;
-        } catch (IOException e) {
+        } catch (Exception e) {
             PrivateUtils.close(inputStream);
             LogUtil.e(TAG, e);
             return null;
@@ -854,11 +854,11 @@ public class FileUtils {
                 zipInputStream.closeEntry();
                 zipInputStream.close();
                 return true;
-            } catch (IOException e) {
+            } catch (Exception e) {
                 zipInputStream.close();
                 throw e;
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             LogUtil.e(TAG, e);
             if (destDir.isDirectory()) {
                 deleteDirectory(destDir);
@@ -910,7 +910,7 @@ public class FileUtils {
             }
             zipOutputStream.close();
             return true;
-        } catch (IOException e) {
+        } catch (Exception e) {
             LogUtil.e(TAG, e);
             return false;
         }
@@ -955,7 +955,7 @@ public class FileUtils {
             inputStream = new BufferedInputStream(new FileInputStream(file));
             head = (inputStream.read() << 8) + inputStream.read();
             PrivateUtils.close(inputStream);
-        } catch (IOException e) {
+        } catch (Exception e) {
             LogUtil.e(TAG, e);
             PrivateUtils.close(inputStream);
             head = 0;
@@ -993,7 +993,7 @@ public class FileUtils {
                 }
             }
             PrivateUtils.close(inputStream);
-        } catch (IOException e) {
+        } catch (Exception e) {
             LogUtil.e(TAG, e);
             PrivateUtils.close(inputStream);
             return count;
@@ -1242,7 +1242,7 @@ public class FileUtils {
             String text = new String(data);
             Log.d(TAG, text);
             return text;
-        } catch (IOException e) {
+        } catch (Exception e) {
             LogUtil.e(TAG, e);
             return null;
         }

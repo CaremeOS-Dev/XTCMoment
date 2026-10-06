@@ -94,7 +94,7 @@ public class QiNiuManager extends ICloudManager {
             String parent = recordFile.getParent();
             LogUtil.d(TAG, "HXQ-qiniu, create record file = " + recordFile.getAbsolutePath());
             recorder = new FileRecorder(parent);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             recorder = null;
         }

@@ -418,7 +418,7 @@ public class PublishActivity extends BaseCtaPermissionActivity<IPublishView, Pub
         if (TextUtils.isEmpty(extra)) {
             return;
         }
-        this.maxAlbumNum = ((Integer) JSONUtil.fromJSON(extra, ALBUM_NUM)).intValue();
+        this.maxAlbumNum = ((Integer) JSONUtil.getJSONValue(extra, ALBUM_NUM)).intValue();
     }
 
     @Override

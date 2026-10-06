@@ -91,7 +91,7 @@ public class MomentApplication extends Application {
     }
 
     private void initCover() {
-        JacocoUtils.getInstance().init(BuildConfig.GitSHA, BuildConfig.BaseLine);
+        JacocoUtils.getInstance().init("17c225e", "34d2ece");
     }
 
     private void initRxJavaSchedulerManager() {
@@ -177,7 +177,7 @@ public class MomentApplication extends Application {
         CrashHandler.setCrashListener(new CrashListener() {
             @Override
             public void onUncaughtException(Thread thread, Throwable throwable) {
-                BehaviorCollector.getInstance().onCrash(throwable);
+                BehaviorCollector.getInstance().uploadSystemCrash();
             }
         });
         BehaviorUtil.init(new BehaviorCollector.Builder(this)

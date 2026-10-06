@@ -49,7 +49,7 @@ public class TLVObject {
         try {
             this.baos.write(TLVEncoder.encode(TLVEncoder.PrimitiveFrame, TLVEncoder.ConstructedData, tagValue,
                     value.toByteArray()).toByteArray());
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

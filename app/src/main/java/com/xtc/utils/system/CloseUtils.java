@@ -21,7 +21,7 @@ public class CloseUtils {
                     closeable.close();
                 }
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -37,7 +37,7 @@ public class CloseUtils {
                     closeable.close();
                 }
             }
-        } catch (IOException ignored) {
+        } catch (Exception ignored) {
             // ignored on purpose
         }
     }

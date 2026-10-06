@@ -54,7 +54,7 @@ public class DesUtils {
         byte[] rawBytes = null;
         try {
             rawBytes = hex.getBytes(Key.CHARSET);
-        } catch (UnsupportedEncodingException e) {
+        } catch (Exception e) {
             LogUtil.e(TAG, e);
         }
         if (rawBytes == null) {
@@ -64,7 +64,7 @@ public class DesUtils {
         for (int i = 0; i < rawBytes.length; i += 2) {
             try {
                 result[i / 2] = (byte) Integer.parseInt(new String(rawBytes, i, 2, Key.CHARSET), 16);
-            } catch (UnsupportedEncodingException e) {
+            } catch (Exception e) {
                 LogUtil.e(TAG, e);
             }
         }

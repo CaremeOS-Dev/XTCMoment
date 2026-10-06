@@ -690,8 +690,13 @@ public class PublishService extends Service {
             @Override
             public String call(String path) {
                 long startTime = SystemClock.elapsedRealtime();
-                String compressedPath = ImageUtil.compressByScale(path, PhotoTokenParam.WEBP_FORMAT,
-                        Constants.Camera.PhotoSize.WIDTH, Constants.Camera.PhotoSize.HEIGHT);
+                String compressedPath = null;
+                try {
+                    compressedPath = ImageUtil.compressByScale(path, PhotoTokenParam.WEBP_FORMAT,
+                            Constants.Camera.PhotoSize.WIDTH, Constants.Camera.PhotoSize.HEIGHT);
+                } catch (Throwable throwable) {
+                    LogUtil.e(TAG, "compress photo error", throwable);
+                }
                 DigitalManager.getInstance().getDigitalEntity().compressTime = String.valueOf(SystemClock.elapsedRealtime() - startTime);
                 printUploadPhotoTime("compressTime");
                 return compressedPath;

@@ -80,17 +80,17 @@ public class ShareUtils {
             outputStream.flush();
             outputStream.close();
             return FileManager.getShareFolderPath() + fileName;
-        } catch (IOException e) {
+        } catch (Exception e) {
             LogUtil.e(TAG, "save bitmap to sdcard error = " + e);
             if (outputStream != null) {
                 try {
                     outputStream.flush();
-                } catch (IOException flushError) {
+                } catch (Exception flushError) {
                     flushError.printStackTrace();
                 }
                 try {
                     outputStream.close();
-                } catch (IOException closeError) {
+                } catch (Exception closeError) {
                     closeError.printStackTrace();
                 }
             }

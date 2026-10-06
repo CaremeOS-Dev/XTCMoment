@@ -53,7 +53,8 @@ public class LimitCoreThreadPool implements IThreadPool {
                         MonitorUtil.d(TAG, "rejectedTask: error", message);
                         rejectedExecutionException(message);
                     }
-                });
+                }) {
+        };
         priorityQueue.setThreadPoolExecutor(this.mMainThreadPoolExecutor);
         this.mMainThreadPoolExecutor.allowCoreThreadTimeOut(allowCoreThreadTimeOut);
         return this;

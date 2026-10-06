@@ -499,7 +499,7 @@ public abstract class BaseSpineAdapter extends ApplicationAdapter implements Inp
                 LogUtil.w(TAG, "setSlotAttachmentIntoSkin slotAttachmentBean is null continue");
             } else {
                 Log.w(TAG, "设置皮肤咯~~ 插槽要设置的皮肤数据是 :" + bean);
-                skin.addAttachment(bean.getSlotIndex(), bean.getSlotName(), bean.getAttachment());
+                skin.setAttachment(bean.getSlotIndex(), bean.getSlotName(), bean.getAttachment());
             }
         }
     }

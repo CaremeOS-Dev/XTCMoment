@@ -26,14 +26,14 @@ public class GzipUtil {
                 byte[] result = outputStream.toByteArray();
                 outputStream.close();
                 return result;
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 byte[] result = outputStream.toByteArray();
                 outputStream.close();
                 gzipOutputStream.close();
                 return result;
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return outputStream.toByteArray();
         }
@@ -60,18 +60,18 @@ public class GzipUtil {
                 byte[] result = outputStream.toByteArray();
                 outputStream.close();
                 return result;
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 byte[] result = outputStream.toByteArray();
                 outputStream.close();
                 try {
                     gzipInputStream.close();
-                } catch (IOException ignored) {
+                } catch (Exception ignored) {
                     // ignored, mirroring the original behaviour
                 }
                 return result;
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return outputStream.toByteArray();
         }

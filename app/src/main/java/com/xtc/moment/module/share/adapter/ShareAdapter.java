@@ -98,6 +98,7 @@ import com.xtc.moment.util.LikeDrawableCache;
 import com.xtc.moment.util.MomentLikeViewWindow;
 import com.xtc.moment.util.MomentTypeUtil;
 import com.xtc.moment.util.RxUtils;
+import com.xtc.moment.util.ShareAppStartUtil;
 import com.xtc.moment.util.StartWebUtils;
 import com.xtc.moment.util.SystemUtil;
 import com.xtc.moment.util.ToastUtil;
@@ -182,10 +183,6 @@ public class ShareAdapter extends AbsInteractionAdapter<AbsViewHolder>
         return TAG;
     }
 
-    @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position, List<Object> payloads) {
-        onBindViewHolder((AbsViewHolder) viewHolder, position, payloads);
-    }
 
     public ShareAdapter(Activity activity, boolean isSelf, String name, String iconPath,
             VerticallyLinearLayoutManager layoutManager, String watchId, LikeDrawableCache likeDrawableCache) {
@@ -1424,13 +1421,13 @@ public class ShareAdapter extends AbsInteractionAdapter<AbsViewHolder>
                 .override(imageView.getWidth(), imageView.getHeight())
                 .dontAnimate()
                 .signature(new ObjectKey(Integer.valueOf(R.drawable.pi_friends_default)));
-        VideoViewHolder videoHolder = null;
+        ShareVideoViewHolder videoHolder = null;
         if ((moment.getType().intValue() == 6 || moment.getType().intValue() == 24
-                || moment.getType().intValue() == 27) && (holder instanceof VideoViewHolder)) {
-            videoHolder = (VideoViewHolder) holder;
+                || moment.getType().intValue() == 27) && (holder instanceof ShareVideoViewHolder)) {
+            videoHolder = (ShareVideoViewHolder) holder;
             videoHolder.videoPlayLogo.setVisibility(View.VISIBLE);
         }
-        final VideoViewHolder playLogoHolder = videoHolder;
+        final ShareVideoViewHolder playLogoHolder = videoHolder;
         if (roundedCorner) {
             options = options.transform((Transformation<Bitmap>) new MultiTransformation(
                     new CenterCrop(), new RoundedCorners(DimenUtil.dp2px(context, 4.0f))));
@@ -1741,8 +1738,8 @@ public class ShareAdapter extends AbsInteractionAdapter<AbsViewHolder>
             loadImageWithKey(mContext, this.ivContent, resource, "1", moment, roundedCorner, holder);
         }
 
-        private void loadDiskPhoto(PhotoMsg photoMsg, boolean roundedCorner, final DbMoment moment,
-                final AbsViewHolder holder) {
+        void loadDiskPhoto(PhotoMsg photoMsg, boolean roundedCorner, final DbMoment moment,
+                final RecyclerView.ViewHolder holder) {
             String resource = moment.getResource();
             this.ivContent.setImageDrawable(null);
             RequestOptions options = new RequestOptions().error(R.drawable.ic_selfie_album_default)
@@ -1792,7 +1789,7 @@ public class ShareAdapter extends AbsInteractionAdapter<AbsViewHolder>
                                     dialogBitmapArgs.getCutTop()));
                 }
             }
-            final VideoViewHolder videoHolder = holder instanceof VideoViewHolder ? (VideoViewHolder) holder : null;
+            final ShareVideoViewHolder videoHolder = holder instanceof ShareVideoViewHolder ? (ShareVideoViewHolder) holder : null;
             Glide.with(mContext).load(photoMsg.getLocalPath()).apply(options)
                     .listener(new RequestListener<Drawable>() {
                         @Override
@@ -1808,7 +1805,7 @@ public class ShareAdapter extends AbsInteractionAdapter<AbsViewHolder>
                                 @Override
                                 public void run() {
                                     pullNewUrl(mContext, moment.getResource(), ShareInnerPhotoViewHolder.this.ivContent,
-                                            false, moment, holder, Long.MAX_VALUE, null, null);
+                                            false, moment, (AbsViewHolder) holder, Long.MAX_VALUE, null, null);
                                 }
                             });
                             return true;

@@ -1,0 +1,4 @@
+$ErrorActionPreference='Stop'
+function Rep([string]$f,[string]$a,[string]$b){ if(Test-Path $f){ $t=[System.IO.File]::ReadAllText($f); if($t.Contains($a)){ $t=$t.Replace($a,$b); [System.IO.File]::WriteAllText($f,$t,(New-Object System.Text.UTF8Encoding $false)); Write-Output "fixed $f" } else { Write-Output "no-match $f :: $a" } } }
+Rep 'app\src\main\java\com\xtc\moment\module\publish\PublishActivity.java' '((Integer) JSONUtil.fromJSON(extra, ALBUM_NUM))' '((Integer) JSONUtil.getJSONValue(extra, ALBUM_NUM))'
+Rep 'app\src\main\java\com\xtc\moment\module\publish\multi\PushPictureActivity.java' 'JSONUtil.fromJSON(extra, ALBUM_NUM)' 'JSONUtil.getJSONValue(extra, ALBUM_NUM)'

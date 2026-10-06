@@ -263,7 +263,7 @@ public class ForbidScrollViewPager extends ViewGroup {
         if (ViewCompat.getImportantForAccessibility(this) == 0) {
             ViewCompat.setImportantForAccessibility(this, 1);
         }
-        ViewCompat.setOnApplyWindowInsetsListener(this, new OnApplyWindowInsetsListener() {
+        ViewCompat.setOnApplyWindowInsetsListener(this, new android.support.v4.view.OnApplyWindowInsetsListener() {
             private final Rect mTempRect = new Rect();
 
             @Override

@@ -537,12 +537,12 @@ public class DropboxScanner {
         return saveToFile(dirPath, stackTrace, fileTime + ".txt");
     }
 
-    private String saveToFile(String dirPath, String content, String name) throws Throwable {
+    private String saveToFile(String dirPath, String content, String name) {
         FileUtils.saveFile(dirPath, content, name);
         return dirPath + name;
     }
 
-    private String readFileContent(File file) throws Throwable {
+    private String readFileContent(File file) {
         int length = (int) file.length();
         if (length <= 0) {
             return "";
@@ -552,13 +552,13 @@ public class DropboxScanner {
         try {
             inputStream = new FileInputStream(file);
             inputStream.read(buffer, 0, length);
-        } catch (IOException e) {
+        } catch (Exception e) {
             LogUtil.e(TAG, e);
         } finally {
             if (inputStream != null) {
                 try {
                     inputStream.close();
-                } catch (IOException e) {
+                } catch (Exception e) {
                     LogUtil.e(TAG, e);
                 }
             }

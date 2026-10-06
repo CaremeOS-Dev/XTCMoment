@@ -30,7 +30,7 @@ class PrivateUtils {
                     closeable.close();
                 }
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -77,7 +77,7 @@ class PrivateUtils {
                     return outputStream;
                 }
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             close(inputStream);
             return null;

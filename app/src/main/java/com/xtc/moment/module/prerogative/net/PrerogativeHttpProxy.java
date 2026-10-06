@@ -29,7 +29,7 @@ public class PrerogativeHttpProxy extends HttpServiceProxy {
     public Observable<List<ResourceNetResponse>> getPrerogativeResource() {
         IPrerogativeHttp http = (IPrerogativeHttp) this.httpClient
                 .request(BaseUrlManager.getGatewayUrl(this.context), IPrerogativeHttp.class);
-        return http.getResource().compose(new HttpRxJavaCallback())
+        return http.getResource().map(new HttpRxJavaCallback())
                 .onErrorReturn(new Func1<Throwable, List<ResourceNetResponse>>() {
                     @Override
                     public List<ResourceNetResponse> call(Throwable throwable) {
@@ -42,6 +42,6 @@ public class PrerogativeHttpProxy extends HttpServiceProxy {
     public Observable<PersonalResponse> getPersonalData(String watchId) {
         IPrerogativeHttp http = (IPrerogativeHttp) this.httpClient
                 .request(BaseUrlManager.getGatewayUrl(this.context), IPrerogativeHttp.class);
-        return http.getPersonalData(new LoadPersonalReq(watchId)).compose(new HttpRxJavaCallback());
+        return http.getPersonalData(new LoadPersonalReq(watchId)).map(new HttpRxJavaCallback());
     }
 }

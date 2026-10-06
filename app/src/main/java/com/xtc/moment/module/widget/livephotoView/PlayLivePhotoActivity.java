@@ -164,8 +164,8 @@ public class PlayLivePhotoActivity extends BaseActivity<IPlayLivePhotoView, Play
         if (this.hasVideoDownload) {
             return;
         }
-        this.ivLivePhoto.setVisibility(GONE);
-        this.llPlayLoading.setVisibility(VISIBLE);
+        this.ivLivePhoto.setVisibility(View.GONE);
+        this.llPlayLoading.setVisibility(View.VISIBLE);
         this.loadingAnim = new LoadingAnim(this).createAnim();
         this.viewLoading.setBackground(this.loadingAnim);
         this.loadingAnim.start();
@@ -186,7 +186,7 @@ public class PlayLivePhotoActivity extends BaseActivity<IPlayLivePhotoView, Play
             LogUtil.i(TAG, "hideVideoMask but now video not playing return");
             return;
         }
-        this.ivVideoMask.setVisibility(GONE);
+        this.ivVideoMask.setVisibility(View.GONE);
     }
 
     private void showVideoMask() {
@@ -194,7 +194,7 @@ public class PlayLivePhotoActivity extends BaseActivity<IPlayLivePhotoView, Play
             LogUtil.i(TAG, "showVideoMask but now video playing return");
             return;
         }
-        this.ivVideoMask.setVisibility(VISIBLE);
+        this.ivVideoMask.setVisibility(View.VISIBLE);
     }
 
     private void playLivePhoto() {
@@ -209,7 +209,7 @@ public class PlayLivePhotoActivity extends BaseActivity<IPlayLivePhotoView, Play
                     @Override
                     public void run() {
                         hideVideoMask();
-                        plVideoTextureView.setVisibility(VISIBLE);
+                        plVideoTextureView.setVisibility(View.VISIBLE);
                         LivePhotoDelayTimeUtil.resetPlayMaskTime();
                     }
                 }, LivePhotoDelayTimeUtil.getDelayPlayMaskTime());
@@ -237,7 +237,7 @@ public class PlayLivePhotoActivity extends BaseActivity<IPlayLivePhotoView, Play
                 MainHandlerUtil.postDelay(new Runnable() {
                     @Override
                     public void run() {
-                        plVideoTextureView.setVisibility(VISIBLE);
+                        plVideoTextureView.setVisibility(View.VISIBLE);
                         hideVideoMask();
                     }
                 }, LivePhotoDelayTimeUtil.getDelayPrePlayMaskTime());
@@ -271,8 +271,8 @@ public class PlayLivePhotoActivity extends BaseActivity<IPlayLivePhotoView, Play
     @Override
     public void downLoadSuccess(String path) {
         LogUtil.i(TAG, "downLoadSuccess  filePath:" + path);
-        this.ivLivePhoto.setVisibility(VISIBLE);
-        this.llPlayLoading.setVisibility(GONE);
+        this.ivLivePhoto.setVisibility(View.VISIBLE);
+        this.llPlayLoading.setVisibility(View.GONE);
         this.filePath = path;
         AnimationDrawable anim = this.loadingAnim;
         if (anim != null && anim.isRunning()) {
@@ -284,8 +284,8 @@ public class PlayLivePhotoActivity extends BaseActivity<IPlayLivePhotoView, Play
     @Override
     public void downLoadError(String message) {
         LogUtil.i(TAG, "downLoadError  filePath:" + message);
-        this.llPlayLoading.setVisibility(GONE);
-        this.ivLivePhoto.setVisibility(GONE);
+        this.llPlayLoading.setVisibility(View.GONE);
+        this.ivLivePhoto.setVisibility(View.GONE);
         AnimationDrawable anim = this.loadingAnim;
         if (anim != null && anim.isRunning()) {
             this.loadingAnim.stop();

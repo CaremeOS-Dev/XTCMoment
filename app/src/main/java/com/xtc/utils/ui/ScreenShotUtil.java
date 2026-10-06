@@ -40,16 +40,16 @@ public class ScreenShotUtil {
                         try {
                             outputStream.flush();
                             outputStream.close();
-                        } catch (IOException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
                     throw throwable;
                 }
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

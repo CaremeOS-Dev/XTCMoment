@@ -109,9 +109,9 @@ public class TestTaskSort {
         register(tasks, taskTypes, new TaskD());
         register(tasks, taskTypes, new TaskE());
         register(tasks, taskTypes, new TaskF());
-        Iterator<IDepend> iterator = DependSortUtil.sort(tasks, taskTypes).iterator();
+        java.util.Iterator iterator = DependSortUtil.sort(tasks, taskTypes).iterator();
         while (iterator.hasNext()) {
-            Log.d(TAG, "task:" + iterator.next().getClass());
+            Log.d(TAG, "task:" + ((IDepend) iterator.next()).getClass());
         }
     }
 

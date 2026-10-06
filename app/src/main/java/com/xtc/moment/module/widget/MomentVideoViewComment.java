@@ -314,13 +314,13 @@ public class MomentVideoViewComment extends MomentPhotoView {
         this.mContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                clickView(moment, listener);
+                clickView(getContext(), moment, listener);
             }
         });
         this.videoPlayLogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                clickView(moment, listener);
+                clickView(getContext(), moment, listener);
             }
         });
     }

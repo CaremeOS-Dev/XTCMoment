@@ -126,7 +126,7 @@ public class DeviceUtils {
             totalMemory = Integer.parseInt(randomAccessFile.readLine().replaceAll("\\D+", ""));
             randomAccessFile.close();
             return totalMemory;
-        } catch (IOException ignored) {
+        } catch (Exception ignored) {
             return totalMemory;
         }
     }
@@ -200,7 +200,7 @@ public class DeviceUtils {
         }
         try {
             closeable.close();
-        } catch (IOException ignored) {
+        } catch (Exception ignored) {
         }
     }
 
