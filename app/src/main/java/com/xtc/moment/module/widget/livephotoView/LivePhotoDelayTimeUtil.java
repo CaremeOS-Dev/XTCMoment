@@ -1,36 +1,42 @@
 package com.xtc.moment.module.widget.livephotoView;
 
-import com.qiniu.android.dns.Record;
-
 /**
- * 实况照片播放遮罩延时工具。
+ * Delay constants used by the live photo mask animation.
+ *
+ * <p>The first pre-play is intentionally slower so the mask is not flashed while the clip warms up.
  */
 public class LivePhotoDelayTimeUtil {
 
-    private static int DELAY_PLAY_MASK_TIME = 50;
-    private static int DELAY_PRE_PLAY_MASK_TIME = 400;
+    /** Milliseconds the mask stays visible after a normal play starts. */
+    private static final int DEFAULT_DELAY_PLAY_MASK_TIME = 50;
+    /** Extra milliseconds added to the first pre-play mask. */
+    private static final int DEFAULT_DELAY_PRE_PLAY_MASK_TIME = 400;
+    /** Extra delay applied only to the very first pre-play of the process. */
+    private static final int FIRST_PRE_PLAY_EXTRA_DELAY = 300;
+    /** Longer mask time used when the clip is known to load slowly (qiniu Record.TTL_MIN_SECONDS). */
+    private static final int LENGTHENED_PLAY_MASK_TIME = 600;
 
+    private static int delayPlayMaskTime = DEFAULT_DELAY_PLAY_MASK_TIME;
     private static boolean isFirstPrePlay = true;
-    private static String watchInnerModel;
 
     public static int getDelayPrePlayMaskTime() {
         if (isFirstPrePlay) {
             isFirstPrePlay = false;
-            return DELAY_PRE_PLAY_MASK_TIME + 300;
+            return DEFAULT_DELAY_PRE_PLAY_MASK_TIME + FIRST_PRE_PLAY_EXTRA_DELAY;
         }
-        return DELAY_PRE_PLAY_MASK_TIME;
+        return DEFAULT_DELAY_PRE_PLAY_MASK_TIME;
     }
 
     public static int getDelayPlayMaskTime() {
-        return DELAY_PLAY_MASK_TIME;
+        return delayPlayMaskTime;
     }
 
     public static void lengthenPlayMaskTime() {
-        DELAY_PLAY_MASK_TIME = Record.TTL_MIN_SECONDS;
+        delayPlayMaskTime = LENGTHENED_PLAY_MASK_TIME;
     }
 
     public static void resetPlayMaskTime() {
-        DELAY_PLAY_MASK_TIME = 50;
+        delayPlayMaskTime = DEFAULT_DELAY_PLAY_MASK_TIME;
     }
 
     public static void resetFirstPrePlayFlag() {
