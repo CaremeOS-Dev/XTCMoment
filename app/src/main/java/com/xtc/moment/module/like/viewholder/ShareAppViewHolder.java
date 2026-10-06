@@ -1,0 +1,17 @@
+package com.xtc.moment.module.like.viewholder;
+
+import android.view.View;
+
+import com.xtc.moment.R;
+import com.xtc.moment.module.widget.CommentPraiseView;
+import com.xtc.moment.module.widget.MomentShareAppViewComment;
+/**
+ * ShareAppViewHolder 列表项 ViewHolder。
+ */
+public class ShareAppViewHolder extends AbsViewHolder {
+    public ShareAppViewHolder(View view) {
+        super(view);
+        this.commentPraiseView = (CommentPraiseView) this.itemView.findViewById(R.id.comment_praise);
+        this.momentView = (MomentShareAppViewComment) itemView.findViewById(R.id.moment);
+    }
+}
