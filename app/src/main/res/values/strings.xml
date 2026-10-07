@@ -161,6 +161,8 @@
     <string name="integral">积分</string>
     <string name="ipc_information">ICP备案号</string>
     <string name="ipc_information_extra">粤ICP备15092747号-11A</string>
+    <string name="open_source_license">开源协议</string>
+    <string name="open_source_license_extra">GPLv3 or later</string>
     <string name="last_update">上次更新: </string>
     <string name="lbs_friend_star_label">{0}个好友</string>
     <string name="lbs_friend_star_label1">推荐过这里</string>
