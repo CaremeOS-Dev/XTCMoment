@@ -160,7 +160,7 @@
     <string name="install_web_core_tip">当前页面加载失败，请升级系统版本或前往应用中心搜索并下载“系统网页浏览”后再试</string>
     <string name="integral">积分</string>
     <string name="ipc_information">ICP备案号</string>
-    <string name="ipc_information_extra">粤ICP备15092747号-11A</string>
+    <string name="ipc_information_extra">无</string>
     <string name="open_source_license">开源协议</string>
     <string name="open_source_license_extra">GPLv3 or later</string>
     <string name="last_update">上次更新: </string>
