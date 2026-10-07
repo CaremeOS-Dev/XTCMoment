@@ -105,7 +105,7 @@ public final class Base64Util {
                 g1 ^= 240;
             }
             byte group1 = (byte) g1;
-            int g2 = (b2 & 0x80) == 0 ? b2 >> 6 : (b2 >> 6) ^ 192;
+            int g2 = (b2 & 0x80) == 0 ? b2 >> 6 : (b2 >> 6) ^ 252;
             int o0 = outIndex + 1;
             out[outIndex] = ENCODE_TABLE[group0];
             int o1 = o0 + 1;
