@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.xtc.aitext.R;
+import com.xtc.moment.R;
 import com.xtc.aitext.bean.AIRecordDetailBean;
 import com.xtc.aitext.util.AIModuleUtil;
 import com.xtc.database.ormlite.CollectionUtil;

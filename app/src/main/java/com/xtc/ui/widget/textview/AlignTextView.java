@@ -73,9 +73,9 @@ public class AlignTextView extends TextView {
         this.lineSpacingAdd = lineSpacingAttrs.getDimensionPixelSize(0, 0);
         lineSpacingAttrs.recycle();
         this.originalPaddingBottom = getPaddingBottom();
-        TypedArray alignAttrs = context.obtainStyledAttributes(attrs, com.xtc.ui.widget.R.styleable.AlignTextView);
-        this.maxLines = alignAttrs.getInt(com.xtc.ui.widget.R.styleable.AlignTextView_maxLines, 0);
-        int alignValue = alignAttrs.getInt(com.xtc.ui.widget.R.styleable.AlignTextView_align, 0);
+        TypedArray alignAttrs = context.obtainStyledAttributes(attrs, com.xtc.moment.R.styleable.AlignTextView);
+        this.maxLines = alignAttrs.getInt(com.xtc.moment.R.styleable.AlignTextView_maxLines, 0);
+        int alignValue = alignAttrs.getInt(com.xtc.moment.R.styleable.AlignTextView_align, 0);
         if (alignValue == 1) {
             this.align = Align.ALIGN_CENTER;
         } else if (alignValue == 2) {

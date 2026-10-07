@@ -10,7 +10,7 @@ import android.renderscript.Allocation;
 import android.renderscript.Element;
 import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 
 /** 高斯模糊工具（已废弃）：使用 RenderScript 对位图做模糊并叠加蒙层。 */
 @Deprecated

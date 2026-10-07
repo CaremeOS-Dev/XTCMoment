@@ -11,7 +11,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
 import com.xtc.log.LogUtil;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 import java.util.regex.Pattern;
 
 /** 未读提醒控件：按内容类型绘制圆点、圆形数字或圆角矩形数字/文本。 */

@@ -29,7 +29,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.xtc.aitext.R;
+import com.xtc.moment.R;
 import com.xtc.aitext.activity.view.IAIEditedView;
 import com.xtc.aitext.adapter.AwardAdapter;
 import com.xtc.aitext.bean.AICreatStatusBean;

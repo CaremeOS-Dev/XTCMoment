@@ -7,7 +7,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.xtc.aitext.R;
+import com.xtc.moment.R;
 import com.xtc.aitext.activity.view.ISelectStyleView;
 import com.xtc.aitext.adapter.SelectStyleAdapter;
 import com.xtc.aitext.bean.AIStyleTextBean;

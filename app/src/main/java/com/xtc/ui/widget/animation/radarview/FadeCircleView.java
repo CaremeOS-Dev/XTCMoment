@@ -6,7 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 
 /** 雷达中心的淡出圆形（包内可见）。 */
 class FadeCircleView extends View {

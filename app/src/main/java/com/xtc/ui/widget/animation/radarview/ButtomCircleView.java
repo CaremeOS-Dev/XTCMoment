@@ -9,7 +9,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import com.xtc.httplib.netstate.SwitchNetworkManager;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 
 /** 雷达底部同心圆背景（包内可见）。 */
 class ButtomCircleView extends View {

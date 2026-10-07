@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 
 /** 页头视图：标题 + 新增按钮 + 未读红点。 */
 public class HeadView extends RelativeLayout implements View.OnClickListener {

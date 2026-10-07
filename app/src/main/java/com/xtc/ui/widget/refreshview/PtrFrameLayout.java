@@ -16,7 +16,7 @@ import android.widget.GridView;
 import android.widget.Scroller;
 import android.widget.TextView;
 import com.xtc.log.LogUtil;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 import com.xtc.ui.widget.refreshview.difviewhandler.GridViewHandler;
 import com.xtc.ui.widget.refreshview.difviewhandler.ListViewHandler;
 import com.xtc.ui.widget.refreshview.difviewhandler.RecyclerViewHandler;

@@ -14,7 +14,7 @@ import android.view.animation.LinearInterpolator;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import com.xtc.log.LogUtil;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 import com.xtc.ui.widget.ptrrefresh.header.material.SuccCircleView;
 import com.xtc.ui.widget.ptrrefresh.indicator.Indicator;
 import com.xtc.ui.widget.ptrrefresh.layout.BaseFrameLayout;

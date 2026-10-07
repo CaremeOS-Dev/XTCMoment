@@ -12,7 +12,7 @@ import android.graphics.Xfermode;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 import com.xtc.utils.ui.DimenUtil;
 
 /** 圆形头像 ImageView，支持描边颜色与宽度。 */

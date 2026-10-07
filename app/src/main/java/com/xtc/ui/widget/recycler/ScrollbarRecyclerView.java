@@ -19,7 +19,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.animation.PathInterpolator;
 import com.xtc.log.LogUtil;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 
 /** 自绘滚动条的 RecyclerView：滚动时显示并在停止后淡出。 */
 public class ScrollbarRecyclerView extends RecyclerView {

@@ -12,7 +12,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 import com.xtc.utils.ui.DimenUtil;
 import com.xtc.virtualselfapi.constants.Constants;
 

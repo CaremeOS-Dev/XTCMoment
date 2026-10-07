@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Scroller;
 import android.widget.TextView;
 import com.xtc.log.LogUtil;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 import com.xtc.ui.widget.ptrrefresh.header.UIRefreshHandler;
 import com.xtc.ui.widget.ptrrefresh.header.UIRefreshHandlerHolder;
 import com.xtc.ui.widget.ptrrefresh.header.UIRefreshHandlerHook;

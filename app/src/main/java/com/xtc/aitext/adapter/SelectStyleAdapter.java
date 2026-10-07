@@ -13,7 +13,7 @@ import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
-import com.xtc.aitext.R;
+import com.xtc.moment.R;
 import com.xtc.aitext.bean.AIStyleTextBean;
 import com.xtc.database.ormlite.CollectionUtil;
 import com.xtc.ui.widget.util.TypedValueCompat;

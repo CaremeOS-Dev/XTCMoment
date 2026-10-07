@@ -8,7 +8,7 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 
 /** 自绘的圆角条状页面指示器，选中项更宽且为白色。 */
 public class OSHeadViewIndicator extends View {

@@ -8,7 +8,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.xtc.aitext.R;
+import com.xtc.moment.R;
 import com.xtc.log.LogUtil;
 
 /**

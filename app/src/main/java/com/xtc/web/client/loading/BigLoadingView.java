@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.xtc.ui.widget.animation.sprite.LoadingAnimSprite;
-import com.xtc.web.client.R;
+import com.xtc.moment.R;
 import com.xtc.web.core.loading.LoadingView;
 
 /** 大号加载动画遮罩（精灵动画）。 */

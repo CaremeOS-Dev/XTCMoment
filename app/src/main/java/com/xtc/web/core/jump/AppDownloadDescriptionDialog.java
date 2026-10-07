@@ -12,7 +12,7 @@ import com.xtc.log.LogUtil;
 import com.xtc.ui.widget.button.DoubleFlatButton;
 import com.xtc.ui.widget.dialog.bean.noIcon.DoubleFlatBtnWithTitleBean;
 import com.xtc.ui.widget.util.UiCommonUtil;
-import com.xtc.web.core.R;
+import com.xtc.moment.R;
 
 /** 引导用户去应用市场下载应用的全屏弹窗。 */
 public class AppDownloadDescriptionDialog extends Dialog {

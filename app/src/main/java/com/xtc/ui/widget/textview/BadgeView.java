@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 import com.xtc.utils.ui.DimenUtil;
 
 /** 未读数量角标：根据数量调整宽高并切换显示/隐藏。 */

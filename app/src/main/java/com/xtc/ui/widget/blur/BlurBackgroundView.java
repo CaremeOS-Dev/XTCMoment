@@ -8,7 +8,7 @@ import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
 import com.xtc.log.LogUtil;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 
 /** 模糊背景视图：绘制全局模糊位图或半透明遮罩。 */
 public class BlurBackgroundView extends View {

@@ -11,7 +11,7 @@ import android.view.animation.AnimationSet;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 import com.xtc.ui.widget.animation.radarview.interfaces.ScannerInterface;
 import com.xtc.virtualselfapi.constants.Constants;
 

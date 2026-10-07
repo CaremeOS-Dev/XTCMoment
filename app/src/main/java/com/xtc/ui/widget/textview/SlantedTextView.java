@@ -16,7 +16,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import com.xtc.log.LogUtil;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 
 /** 斜角标签控件：绘制不同方位的斜角背景并叠加旋转文字。 */
 public class SlantedTextView extends View {

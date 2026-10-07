@@ -17,7 +17,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.google.gson.reflect.TypeToken;
-import com.xtc.contactapi.R;
+import com.xtc.moment.R;
 import com.xtc.contactapi.base.BaseResponse;
 import com.xtc.contactapi.contact.bean.ContactBean;
 import com.xtc.contactapi.contact.constant.ContactApiConstant;

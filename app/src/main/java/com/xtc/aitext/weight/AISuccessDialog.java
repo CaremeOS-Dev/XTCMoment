@@ -10,7 +10,7 @@ import android.view.WindowManager;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.xtc.aitext.R;
+import com.xtc.moment.R;
 import com.xtc.aitext.behavior.AIBehaviorUtil;
 import com.xtc.aitext.manager.AITextManager;
 import com.xtc.aitext.weight.callback.AISuccessCallback;

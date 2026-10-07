@@ -15,7 +15,7 @@ import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.util.AttributeSet;
 import android.view.View;
 import com.xtc.log.LogUtil;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 import com.xtc.ui.widget.util.UiCommonUtil;
 
 /** 圆形进度条：支持纯色、逐段渐变、扫描渐变三种进度弧样式，并带入场动画。 */

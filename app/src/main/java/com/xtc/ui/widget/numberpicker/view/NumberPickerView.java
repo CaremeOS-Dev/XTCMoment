@@ -19,7 +19,7 @@ import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewConfiguration;
 import com.xtc.log.LogUtil;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 import com.xtc.ui.widget.numberpicker.interfaces.IValueChangeListener;
 import com.xtc.ui.widget.numberpicker.interfaces.IValueChangeListenerRelativeToRaw;
 import com.xtc.ui.widget.numberpicker.interfaces.OnClickItemListener;

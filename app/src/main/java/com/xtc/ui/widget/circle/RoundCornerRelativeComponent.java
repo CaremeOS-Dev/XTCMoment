@@ -8,7 +8,7 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.RelativeLayout;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 
 /** 支持四角独立圆角裁剪的相对布局。 */
 public class RoundCornerRelativeComponent extends RelativeLayout {

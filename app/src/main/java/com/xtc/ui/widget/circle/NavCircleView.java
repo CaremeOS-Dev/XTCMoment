@@ -6,7 +6,7 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 import com.xtc.utils.ui.DimenUtil;
 
 /** 导航点圆环视图。 */

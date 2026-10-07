@@ -13,7 +13,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.xtc.shareapi.R;
+import com.xtc.moment.R;
 import com.xtc.shareapi.share.bean.AppInfo;
 import com.xtc.shareapi.share.bean.ModuleSwitch;
 import com.xtc.shareapi.share.communication.SendMessageToXTC;

@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
 import com.xtc.log.LogUtil;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 
 /** 横向预览画廊：滚动停止后自动把子项吸附到中心。 */
 public class PreviewGallery extends RecyclerView {

@@ -7,7 +7,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
-import com.xtc.shareapi.R;
+import com.xtc.moment.R;
 import com.xtc.shareapi.share.bean.JumpToMomentRequest;
 import com.xtc.shareapi.share.constant.OpenApiConstant;
 import com.xtc.shareapi.share.interfaces.IJumpToMomentObject;

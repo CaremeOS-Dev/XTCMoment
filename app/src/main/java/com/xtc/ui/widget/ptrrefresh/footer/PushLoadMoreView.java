@@ -4,7 +4,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.TextView;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 import com.xtc.ui.widget.animation.loadinganim.CircleLoadingView;
 
 /** 上推加载更多的底部视图：圆形加载动画 + 提示文字。 */

@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 import com.xtc.ui.widget.util.PressAnimHelper;
 import com.xtc.ui.widget.util.TypeArrayUtils;
 import com.xtc.ui.widget.util.UiTouchPointUtil;

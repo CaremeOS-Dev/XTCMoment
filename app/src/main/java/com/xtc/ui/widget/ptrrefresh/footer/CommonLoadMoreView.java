@@ -3,7 +3,7 @@ package com.xtc.ui.widget.ptrrefresh.footer;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 
 /** 默认的加载更多视图：文字 + 进度条。 */
 public class CommonLoadMoreView implements LoadMoreView {

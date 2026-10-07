@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.xtc.aitext.R;
+import com.xtc.moment.R;
 import com.xtc.ui.widget.button.DoubleFlatButton;
 
 /**

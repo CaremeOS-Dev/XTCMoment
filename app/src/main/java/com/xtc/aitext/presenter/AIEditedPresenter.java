@@ -3,7 +3,7 @@ package com.xtc.aitext.presenter;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.xtc.aitext.R;
+import com.xtc.moment.R;
 import com.xtc.aitext.activity.view.IAIEditedView;
 import com.xtc.aitext.bean.AICreatStatusBean;
 import com.xtc.aitext.bean.AIDataBean;

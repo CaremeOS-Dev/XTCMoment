@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 import com.xtc.ui.widget.animation.progressview.HorizontalProgressBar;
 
 /** 支持文本或进度条展示的自定义 Toast。 */

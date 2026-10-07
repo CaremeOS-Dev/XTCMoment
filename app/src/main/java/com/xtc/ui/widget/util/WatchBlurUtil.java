@@ -13,7 +13,7 @@ import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
 import android.view.View;
 import com.xtc.log.LogUtil;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 
 /** 手表高斯模糊工具（已废弃）：截取 View 画面并做模糊处理。 */
 @Deprecated

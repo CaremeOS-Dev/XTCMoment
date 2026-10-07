@@ -7,7 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 
 /** RecyclerView 分割线装饰。 */
 public class DividerDecoration extends RecyclerView.ItemDecoration {

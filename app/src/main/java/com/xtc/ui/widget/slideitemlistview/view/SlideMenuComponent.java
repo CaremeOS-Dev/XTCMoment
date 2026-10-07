@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 import java.util.Objects;
 
 /** 可侧滑展开菜单的条目容器。 */

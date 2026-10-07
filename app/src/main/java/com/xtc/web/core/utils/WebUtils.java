@@ -18,7 +18,7 @@ import com.xtc.utils.encode.JSONUtil;
 import com.xtc.utils.system.SystemPropertyUtil;
 import com.xtc.utils.system.WatchModelUtil;
 import com.xtc.web.core.CoreConstants;
-import com.xtc.web.core.R;
+import com.xtc.moment.R;
 import com.xtc.web.core.data.bean.CacheModuleSwitchExtra;
 
 import java.io.File;

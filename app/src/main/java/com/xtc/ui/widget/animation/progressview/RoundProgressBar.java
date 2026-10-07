@@ -6,7 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.AttributeSet;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 
 /** 圆环进度条：先画背景整圆，再按进度画起始角度可控的圆弧。 */
 public class RoundProgressBar extends BaseProgressBar {

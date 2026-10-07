@@ -3,7 +3,7 @@ package com.xtc.ui.widget.refreshview.loadmorefooter;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 import com.xtc.ui.widget.refreshview.interfaces.PtlmUIHandler;
 
 /** 经典的加载更多页脚实现：文字 + 进度条。 */

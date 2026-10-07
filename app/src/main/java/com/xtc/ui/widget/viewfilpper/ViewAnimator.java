@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 
 /** 一次只显示一个子视图的 FrameLayout，支持切换时的进出动画。 */
 public class ViewAnimator extends FrameLayout {

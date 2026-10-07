@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.xtc.log.LogUtil;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 import com.xtc.ui.widget.scalablecontainer.AppLinearLayout;
 
 /** 左右两侧都带图标、且带副标题的按压反馈列表项。 */

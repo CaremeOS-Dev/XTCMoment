@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.xtc.aitext.R;
+import com.xtc.moment.R;
 import com.xtc.aitext.bean.ButtonDescriptionBean;
 import com.xtc.aitext.bean.UserAccessBean;
 import com.xtc.database.ormlite.CollectionUtil;

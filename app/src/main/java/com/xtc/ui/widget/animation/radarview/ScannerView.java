@@ -15,7 +15,7 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.RotateAnimation;
 import com.xtc.httplib.netstate.SwitchNetworkManager;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 import com.xtc.ui.widget.animation.radarview.interfaces.ScannerInterface;
 
 /** 雷达扫描扇形视图，通过定时旋转矩阵实现扫描动画（包内可见）。 */

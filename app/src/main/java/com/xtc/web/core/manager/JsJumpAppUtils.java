@@ -18,7 +18,7 @@ import com.xtc.ui.widget.button.DoubleFlatButton;
 import com.xtc.ui.widget.dialog.bean.noIcon.DoubleFlatBtnWithTitleBean;
 import com.xtc.ui.widget.util.DialogUtil;
 import com.xtc.web.core.CoreConstants;
-import com.xtc.web.core.R;
+import com.xtc.moment.R;
 import com.xtc.web.core.callback.CompletionHandler;
 import com.xtc.web.core.data.req.ReqJsStartApp;
 import com.xtc.web.core.data.resp.RespAppState;

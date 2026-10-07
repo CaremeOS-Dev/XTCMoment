@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 
 /** 轮播文本：按固定间隔循环切换文案。 */
 public class SwitchTextView extends TextSwitcher implements ViewSwitcher.ViewFactory {

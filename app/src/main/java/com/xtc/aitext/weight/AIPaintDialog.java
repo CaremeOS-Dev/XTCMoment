@@ -13,7 +13,7 @@ import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.xtc.aitext.R;
+import com.xtc.moment.R;
 import com.xtc.aitext.constant.Constant;
 import com.xtc.aitext.util.AITextFileUtil;
 import com.xtc.aitext.util.AITextHandlerUtil;

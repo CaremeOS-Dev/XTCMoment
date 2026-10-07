@@ -13,7 +13,7 @@ import android.graphics.drawable.shapes.RoundRectShape;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.widget.TextView;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 
 /** 带左侧箭头的圆角气泡文本。 */
 public class ArrowTextView extends TextView {

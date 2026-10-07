@@ -3,7 +3,7 @@ package com.xtc.ui.widget.viewfilpper;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 
 /** 支持自动定时轮播子视图的 ViewAnimator。 */
 public class ViewFlipper extends ViewAnimator {

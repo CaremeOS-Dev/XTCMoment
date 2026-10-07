@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.xtc.ui.widget.animation.indicator.LoadingAnim;
-import com.xtc.web.client.R;
+import com.xtc.moment.R;
 import com.xtc.web.core.loading.LoadingView;
 
 /** 小号加载动画遮罩（帧动画），H5 页面默认使用。 */

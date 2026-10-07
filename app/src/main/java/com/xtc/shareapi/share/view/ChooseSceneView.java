@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
-import com.xtc.shareapi.R;
+import com.xtc.moment.R;
 import com.xtc.shareapi.share.interfaces.IChooseSceneCallback;
 
 /**

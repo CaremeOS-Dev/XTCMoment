@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.xtc.aitext.R;
+import com.xtc.moment.R;
 import com.xtc.aitext.activity.view.IAIRecordView;
 import com.xtc.aitext.adapter.AIRecordAdapter;
 import com.xtc.aitext.bean.AIRecordDetailBean;

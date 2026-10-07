@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import com.xtc.log.LogUtil;
 import com.xtc.moment.module.Constants;
 import com.xtc.web.core.CoreConstants;
-import com.xtc.web.core.R;
+import com.xtc.moment.R;
 import com.xtc.web.core.provider.JumpContentProvider;
 
 import java.net.URISyntaxException;

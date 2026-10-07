@@ -6,7 +6,7 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 import com.xtc.utils.ui.DimenUtil;
 
 /** 录音按钮圆环：外圈白色空心圆 + 内部红色实心圆。 */

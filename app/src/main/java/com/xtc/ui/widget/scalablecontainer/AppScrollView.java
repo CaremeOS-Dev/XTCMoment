@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.ScrollView;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 import com.xtc.ui.widget.util.SpringAnimationUtils;
 import com.xtc.ui.widget.util.ViewUtils;
 import java.util.ArrayList;

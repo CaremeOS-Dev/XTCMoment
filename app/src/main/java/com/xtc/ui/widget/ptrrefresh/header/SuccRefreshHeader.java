@@ -9,7 +9,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 import com.xtc.ui.widget.animation.loadinganim.CircleLoadingView;
 import com.xtc.ui.widget.ptrrefresh.indicator.Indicator;
 import com.xtc.ui.widget.ptrrefresh.layout.BaseFrameLayout;

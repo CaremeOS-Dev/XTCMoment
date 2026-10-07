@@ -7,7 +7,7 @@ import android.graphics.Paint;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.TextView;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 
 /** 简易两端对齐文本：按宽度逐字换行绘制，支持自定义文字大小与颜色。 */
 public class AlignTextViewTwo extends TextView {

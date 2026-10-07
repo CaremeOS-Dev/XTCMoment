@@ -2,7 +2,7 @@ package com.xtc.ui.widget.drawable;
 
 import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 import com.xtc.ui.widget.util.UiCommonUtil;
 
 /** 空心圆角渐变背景构建器（默认绿色描边）。 */

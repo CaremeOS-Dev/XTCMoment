@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 
 /** 未读提示控件：支持小红点、数字、99+ 三种展示形态。 */
 public class UnreadView extends TextView {

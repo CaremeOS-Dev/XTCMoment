@@ -15,7 +15,7 @@ import com.xtc.moment.module.Constants;
 import com.xtc.utils.encode.Base64Util;
 import com.xtc.utils.system.CameraUtils;
 import com.xtc.web.core.CoreConstants;
-import com.xtc.web.core.R;
+import com.xtc.moment.R;
 import com.xtc.web.core.callback.CompletionHandler;
 import com.xtc.web.core.data.req.CameraStickerData;
 import com.xtc.web.core.data.req.ReqBtnText;

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.text.InputFilter;
 import android.text.Spanned;
 
-import com.xtc.aitext.R;
+import com.xtc.moment.R;
 import com.xtc.ui.widget.toast.view.ToastUtil;
 
 import java.util.regex.Pattern;

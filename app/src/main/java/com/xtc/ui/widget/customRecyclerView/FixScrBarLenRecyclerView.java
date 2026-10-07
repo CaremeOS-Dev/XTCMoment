@@ -13,7 +13,7 @@ import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import com.xtc.log.LogUtil;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 
 /** 固定长度滚动条的 RecyclerView：滚动条长度按内容总高换算。 */
 public class FixScrBarLenRecyclerView extends RecyclerView {

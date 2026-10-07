@@ -7,7 +7,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
-import com.xtc.contactapi.R;
+import com.xtc.moment.R;
 import com.xtc.contactapi.contact.bean.ContactBean;
 import com.xtc.contactapi.contact.manager.ContactApi;
 import com.xtc.contactapi.contacthead.bean.DressBean;

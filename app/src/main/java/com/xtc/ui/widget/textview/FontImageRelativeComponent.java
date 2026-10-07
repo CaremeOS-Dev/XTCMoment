@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 import com.xtc.ui.widget.UiConstants;
 import com.xtc.ui.widget.util.UiBgUtil;
 import com.xtc.ui.widget.util.UiIconUtil;

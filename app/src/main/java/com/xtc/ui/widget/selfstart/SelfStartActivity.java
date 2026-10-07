@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.view.View;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 import com.xtc.ui.widget.dialog.DoubleFlatBtnDialog;
 
 /** 自启动权限引导页：展示对话框并跳转到系统自启动设置。 */

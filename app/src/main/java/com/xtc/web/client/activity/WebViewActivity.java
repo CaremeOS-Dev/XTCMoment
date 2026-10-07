@@ -7,7 +7,7 @@ import android.util.Log;
 import android.widget.RelativeLayout;
 
 import com.xtc.log.LogUtil;
-import com.xtc.web.client.R;
+import com.xtc.moment.R;
 import com.xtc.web.client.WebClientManager;
 import com.xtc.web.client.data.Constants;
 import com.xtc.web.client.loading.SmallLoadingView;

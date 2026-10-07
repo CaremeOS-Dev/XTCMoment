@@ -2,7 +2,7 @@ package com.xtc.ui.widget.recycler;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 
 /** 为 RecyclerView 添加条目点击/长按支持的工具。 */
 public class ItemClickSupport {

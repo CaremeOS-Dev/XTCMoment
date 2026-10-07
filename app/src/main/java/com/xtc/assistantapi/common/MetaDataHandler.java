@@ -13,7 +13,7 @@ import android.util.Log;
 import com.xtc.assistantapi.DeviceModuleManager;
 import com.xtc.assistantapi.DirectiveHandlerManager;
 import com.xtc.assistantapi.LogTag;
-import com.xtc.assistantapi.R;
+import com.xtc.moment.R;
 import com.xtc.assistantapi.core.DirectiveCallback;
 import com.xtc.assistantapi.core.DirectiveHandler;
 import com.xtc.assistantapi.core.IntentAction;

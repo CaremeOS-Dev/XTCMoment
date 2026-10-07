@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.xtc.log.LogUtil;
-import com.xtc.virtualselfapi.R;
+import com.xtc.moment.R;
 import com.xtc.virtualselfapi.interfaces.ViewLoadCallBack;
 import com.xtc.virtualselfapi.load.BaseViewLoader;
 import com.xtc.virtualselfapi.load.FriendVirtualViewLoader;

@@ -10,7 +10,7 @@ import android.graphics.RectF;
 import android.graphics.SweepGradient;
 import android.util.AttributeSet;
 import android.view.View;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 
 /** 速度环形进度控件：背景环 + 渐变前景环，进度变化时带动画过渡。 */
 public class SpeedOfProgress extends View {

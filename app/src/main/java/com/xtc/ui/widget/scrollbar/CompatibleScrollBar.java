@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-import com.xtc.ui.widget.R;
+import com.xtc.moment.R;
 
 /** 兼容滚动条：根据滚动距离按比例移动滑块。 */
 public class CompatibleScrollBar extends RelativeLayout {
