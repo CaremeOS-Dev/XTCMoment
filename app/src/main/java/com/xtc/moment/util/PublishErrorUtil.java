@@ -20,8 +20,6 @@ public final class PublishErrorUtil {
     private static final String ERROR_CODE_FREQUENT_REQUEST = "1003";
     /** 账号异常（主错误码）。 */
     private static final String ERROR_CODE_ACCOUNT_ABNORMAL = "000007";
-    /** 账号异常（备用错误码，服务端部分场景返回）。 */
-    private static final String ERROR_CODE_ACCOUNT_ABNORMAL_ALT = "000002";
 
     private PublishErrorUtil() {
     }
@@ -39,7 +37,7 @@ public final class PublishErrorUtil {
         if (message.contains(ERROR_CODE_REQUESTING) || message.contains(ERROR_CODE_FREQUENT_REQUEST)) {
             return R.string.frequent_request;
         }
-        if (message.contains(ERROR_CODE_ACCOUNT_ABNORMAL) || message.contains(ERROR_CODE_ACCOUNT_ABNORMAL_ALT)) {
+        if (message.contains(ERROR_CODE_ACCOUNT_ABNORMAL)) {
             return R.string.account_abnormal;
         }
         return R.string.publish_fail;
