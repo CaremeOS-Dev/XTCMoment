@@ -27,6 +27,7 @@ import com.xtc.moment.serve.AccountInfoServerImpl;
 import com.xtc.moment.serve.MomentServeImpl;
 import com.xtc.moment.serve.MomentTemplateServeImpl;
 import com.xtc.moment.util.BeanConverterUtil;
+import com.xtc.moment.util.PublishErrorUtil;
 import com.xtc.moment.util.TimeUtils;
 import com.xtc.moment.util.ToastUtil;
 import com.xtc.utils.encode.JSONUtil;
@@ -251,7 +252,9 @@ public class MomentProvider extends ContentProvider {
                 } else if (!NetworkUtils.isNetworkAvailable(mContext)) {
                     ToastUtil.showShortCover(mContext, mContext.getString(R.string.net_work_exception));
                 } else if (TextUtils.isEmpty(message) || (!message.contains("1003") && !message.contains("1002"))) {
-                    ToastUtil.showShortCover(mContext, mContext.getString(R.string.publish_fail));
+                    // 复用统一映射：000007 账号异常，其余未识别码仍提示发布失败。
+                    ToastUtil.showShortCover(mContext,
+                            mContext.getString(PublishErrorUtil.getFailMessageRes(message)));
                 } else {
                     ToastUtil.showShortCover(mContext, mContext.getString(R.string.frequent_request));
                 }
@@ -313,7 +316,9 @@ public class MomentProvider extends ContentProvider {
                 } else if (!NetworkUtils.isNetworkAvailable(mContext)) {
                     ToastUtil.showShortCover(mContext, mContext.getString(R.string.net_work_exception));
                 } else if (TextUtils.isEmpty(message) || (!message.contains("1003") && !message.contains("1002"))) {
-                    ToastUtil.showShortCover(mContext, mContext.getString(R.string.publish_fail));
+                    // 复用统一映射：000007 账号异常，其余未识别码仍提示发布失败。
+                    ToastUtil.showShortCover(mContext,
+                            mContext.getString(PublishErrorUtil.getFailMessageRes(message)));
                 } else {
                     ToastUtil.showShortCover(mContext, mContext.getString(R.string.frequent_request));
                 }

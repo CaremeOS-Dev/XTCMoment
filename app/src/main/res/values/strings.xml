@@ -275,6 +275,7 @@
     <string name="ptr_load_complete">已经加载完毕</string>
     <string name="publish">发布</string>
     <string name="publish_comment_limit">今天评论已达上限</string>
+    <string name="account_abnormal">账号异常，请自查违规行为</string>
     <string name="publish_fail">发布失败</string>
     <string name="publish_invalidate">"发布内容包
 含非法内容"</string>

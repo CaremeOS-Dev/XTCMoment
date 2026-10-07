@@ -62,6 +62,7 @@ import com.xtc.moment.util.HandlerUtil;
 import com.xtc.moment.util.IntentUtils;
 import com.xtc.moment.util.ModuleSwitch;
 import com.xtc.moment.util.PermissionStringUtils;
+import com.xtc.moment.util.PublishErrorUtil;
 import com.xtc.moment.util.SharedTool;
 import com.xtc.moment.util.SystemUtil;
 import com.xtc.moment.util.ToastUtil;
@@ -1189,11 +1190,8 @@ public class PublishActivity extends BaseCtaPermissionActivity<IPublishView, Pub
         this.mRv.setVisibility(View.VISIBLE);
         if (!NetworkUtils.isConnected(this)) {
             toastNoNet();
-        } else if (!TextUtils.isEmpty(message)
-                && (message.contains("1003") || message.contains("1002"))) {
-            ToastUtil.showShortCover(this, getString(R.string.frequent_request));
         } else {
-            ToastUtil.showShortCover(this, getString(R.string.publish_fail));
+            PublishErrorUtil.showFailMessage(this, message);
         }
     }
 
@@ -1239,11 +1237,8 @@ public class PublishActivity extends BaseCtaPermissionActivity<IPublishView, Pub
         }
         if (!NetworkUtils.isConnected(this)) {
             toastNoNet();
-        } else if (!TextUtils.isEmpty(message)
-                && (message.contains("1003") || message.contains("1002"))) {
-            ToastUtil.showShortCover(this, getString(R.string.frequent_request));
         } else {
-            ToastUtil.showShortCover(this, getString(R.string.publish_fail));
+            PublishErrorUtil.showFailMessage(this, message);
         }
     }
 

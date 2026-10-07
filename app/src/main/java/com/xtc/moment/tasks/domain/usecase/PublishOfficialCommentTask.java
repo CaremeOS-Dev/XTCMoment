@@ -56,7 +56,8 @@ public class PublishOfficialCommentTask extends AbsTask<PublishOfficialCommentTa
                 LogUtil.e("AbsTask", "publishMoment ErrorMessage = ", throwable);
                 TaskCallback<AbsTask.ResponseValue> callback = PublishOfficialCommentTask.this.getTaskCallback();
                 if (callback != null) {
-                    callback.uiError();
+                    // 同 PublishCommentTask：保留服务端业务错误码，供 View 层区分账号异常等场景。
+                    callback.uiError(new ErrorResponseValue(throwable == null ? null : throwable.getMessage()));
                 }
             }
 

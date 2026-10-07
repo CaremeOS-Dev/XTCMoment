@@ -38,6 +38,7 @@ import com.xtc.moment.util.EventData;
 import com.xtc.moment.util.GlideUtils;
 import com.xtc.moment.util.HandlerUtil;
 import com.xtc.moment.util.PermissionStringUtils;
+import com.xtc.moment.util.PublishErrorUtil;
 import com.xtc.moment.util.ToastUtil;
 import com.xtc.ui.widget.animation.indicator.LoadingAnim;
 import com.xtc.utils.system.NetworkUtils;
@@ -631,10 +632,8 @@ public class ShareActivity extends BaseInteractActivity<IShareView, SharePresent
         dismissLoading();
         if (!NetworkUtils.isConnected(this)) {
             ToastUtil.showShortCover(this, getString(R.string.net_work_exception));
-        } else if (!TextUtils.isEmpty(message) && (message.contains("1003") || message.contains("1002"))) {
-            ToastUtil.showShortCover(this, getString(R.string.frequent_request));
         } else {
-            ToastUtil.showShortCover(this, getString(R.string.publish_fail));
+            PublishErrorUtil.showFailMessage(this, message);
         }
     }
 

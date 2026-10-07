@@ -29,6 +29,7 @@ import com.xtc.moment.module.report.adapter.AbsInteractionAdapter;
 import com.xtc.moment.module.widget.LoadingPupWindowHolder;
 import com.xtc.moment.util.EventData;
 import com.xtc.moment.util.HandlerUtil;
+import com.xtc.moment.util.PublishErrorUtil;
 import com.xtc.moment.util.StartWebUtils;
 import com.xtc.moment.util.ToastUtil;
 import com.xtc.ui.widget.animation.indicator.LoadingAnim;
@@ -332,11 +333,8 @@ public class MomentDetailsActivity extends BaseInteractActivity<IMomentDetailsVi
         dismissLoading();
         if (!NetworkUtils.isConnected(this)) {
             ToastUtil.showShortCover(this, getString(R.string.net_work_exception));
-        } else if (!TextUtils.isEmpty(message)
-                && (message.contains("1003") || message.contains("1002"))) {
-            ToastUtil.showShortCover(this, getString(R.string.frequent_request));
         } else {
-            ToastUtil.showShortCover(this, getString(R.string.publish_fail));
+            PublishErrorUtil.showFailMessage(this, message);
         }
     }
 

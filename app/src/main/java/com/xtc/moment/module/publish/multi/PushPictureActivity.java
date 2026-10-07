@@ -72,6 +72,7 @@ import com.xtc.moment.util.AppProcessUtil;
 import com.xtc.moment.util.ClickUtils;
 import com.xtc.moment.util.HandlerUtil;
 import com.xtc.moment.util.PermissionStringUtils;
+import com.xtc.moment.util.PublishErrorUtil;
 import com.xtc.moment.util.SystemUtil;
 import com.xtc.moment.util.ToastUtil;
 import com.xtc.moment.util.switchs.ModuleSwitchUtil;
@@ -1186,7 +1187,7 @@ public class PushPictureActivity extends BaseCtaPermissionActivity<IPublishView,
                             if (ERROR_CODE_VIDEO_INVALID.equals(throwable.getMessage())) {
                                 PushPictureActivity.this.publishInvalidate();
                             } else {
-                                PushPictureActivity.this.publishNormalFial();
+                                PushPictureActivity.this.publishNormalFial(throwable.getMessage());
                             }
                         }
                     });
@@ -1342,13 +1343,12 @@ public class PushPictureActivity extends BaseCtaPermissionActivity<IPublishView,
             isNetValid();
             return;
         }
-        if (!TextUtils.isEmpty(message) && (message.contains("1003") || message.contains("1002"))) {
-            ToastUtil.showShortCover(this, getString(R.string.frequent_request));
-        } else if (message.contains("000061")) {
+        // 000061 单独处理，其余（1003/1002、000007 等）走统一映射；同时避免 message 为 null 时崩溃。
+        if (!TextUtils.isEmpty(message) && message.contains("000061")) {
             ToastUtil.showShortCover(this, getString(R.string.publish_invalidate));
-        } else {
-            ToastUtil.showShortCover(this, getString(R.string.publish_fail));
+            return;
         }
+        PublishErrorUtil.showFailMessage(this, message);
     }
 
     @Override
@@ -1382,12 +1382,12 @@ public class PushPictureActivity extends BaseCtaPermissionActivity<IPublishView,
         LogUtil.d(TAG, "发布内容包含铭感内容");
     }
 
-    public void publishNormalFial() {
+    public void publishNormalFial(String message) {
         LoadingPupWindowHolder holder = this.loadingPupWindowHolder;
         if (holder != null) {
             holder.dismissLoading();
         }
-        ToastUtil.showShortCover(this, getString(R.string.publish_fail));
+        PublishErrorUtil.showFailMessage(this, message);
     }
 
     public void chooseVideoItemSuccess(boolean fromAlbum, String videoPath, final String videoText) {

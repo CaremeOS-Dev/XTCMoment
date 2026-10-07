@@ -49,12 +49,16 @@ public class PublishCommentTask extends AbsTask<PublishCommentTask.RequestValues
             public void onError(Throwable throwable) {
                 LogUtil.e("AbsTask", "publishMoment ErrorMessage = ", throwable);
                 TaskCallback<AbsTask.ResponseValue> callback = PublishCommentTask.this.getTaskCallback();
-                if (callback != null) {
-                    if (throwable != null && throwable.getMessage().contains("000005")) {
-                        callback.uiError(new ErrorResponseValue("000005"));
-                    } else {
-                        callback.uiError();
-                    }
+                if (callback == null) {
+                    return;
+                }
+                // 异常 message 即服务端业务错误码（如 000007 账号异常），必须原样透传，
+                // 否则 View 层只能拿到空串，一律提示「发布失败」。
+                String errorCode = throwable == null ? null : throwable.getMessage();
+                if (errorCode != null && errorCode.contains("000005")) {
+                    callback.uiError(new ErrorResponseValue("000005"));
+                } else {
+                    callback.uiError(new ErrorResponseValue(errorCode));
                 }
             }
 

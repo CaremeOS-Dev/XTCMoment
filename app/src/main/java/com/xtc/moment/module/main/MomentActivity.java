@@ -119,6 +119,7 @@ import com.xtc.moment.util.GlideUtils;
 import com.xtc.moment.util.HandlerUtil;
 import com.xtc.moment.util.ModuleSwitch;
 import com.xtc.moment.util.PermissionStringUtils;
+import com.xtc.moment.util.PublishErrorUtil;
 import com.xtc.moment.util.SharedTool;
 import com.xtc.moment.util.StartWebUtils;
 import com.xtc.moment.util.SystemUtil;
@@ -1489,7 +1490,7 @@ public class MomentActivity extends BaseInteractActivity<IMomentActivityView, Mo
                     MomentActivity.this.dismissPublishView();
                 }
             });
-            String message = throwable.getMessage();
+            String message = throwable == null ? null : throwable.getMessage();
             if (Objects.equals("000008", message)) {
                 publishInvalidateWithTip();
                 return;
@@ -1500,10 +1501,11 @@ public class MomentActivity extends BaseInteractActivity<IMomentActivityView, Mo
             }
             if (!TextUtils.isEmpty(message) && (message.contains("1003") || message.contains("1002"))) {
                 ToastUtil.showShort(MomentApp.getAppContext(), R.string.frequent_request);
-            } else if (message.contains("000061")) {
+            } else if (!TextUtils.isEmpty(message) && message.contains("000061")) {
                 ToastUtil.showShort(MomentApp.getAppContext(), R.string.publish_invalidate);
             } else {
-                ToastUtil.showShort(MomentApp.getAppContext(), R.string.publish_fail);
+                // 兜底走统一映射，保证 000007 账号异常等错误码有对应文案；同时避免 message 为 null 时崩溃。
+                ToastUtil.showShort(MomentApp.getAppContext(), PublishErrorUtil.getFailMessageRes(message));
             }
         }
     }
@@ -2228,10 +2230,8 @@ public class MomentActivity extends BaseInteractActivity<IMomentActivityView, Mo
         dismissLoading();
         if (!NetworkUtils.isConnected(this)) {
             ToastUtil.showShortCover(this, getString(R.string.net_work_exception));
-        } else if (!TextUtils.isEmpty(message) && (message.contains("1003") || message.contains("1002"))) {
-            ToastUtil.showShortCover(this, getString(R.string.frequent_request));
         } else {
-            ToastUtil.showShortCover(this, getString(R.string.publish_fail));
+            PublishErrorUtil.showFailMessage(this, message);
         }
     }
 

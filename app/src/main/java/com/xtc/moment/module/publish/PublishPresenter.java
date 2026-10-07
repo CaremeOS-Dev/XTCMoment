@@ -539,7 +539,7 @@ public class PublishPresenter extends MvpBasePresenter<IPublishView> {
                         PublishPresenter.this.getView().publishInvalidate();
                     } else {
                         LogUtil.e(TAG, " 发布失败 ");
-                        PublishPresenter.this.getView().publishFail("发布失败");
+                        PublishPresenter.this.getView().publishFail(throwable.getMessage());
                     }
                 }
             });

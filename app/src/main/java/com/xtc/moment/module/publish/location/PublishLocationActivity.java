@@ -30,6 +30,7 @@ import com.xtc.moment.module.widget.LoadingViewHolder;
 import com.xtc.moment.util.EventData;
 import com.xtc.moment.util.HandlerUtil;
 import com.xtc.moment.util.PermissionStringUtils;
+import com.xtc.moment.util.PublishErrorUtil;
 import com.xtc.moment.util.SharedTool;
 import com.xtc.moment.util.ToastUtil;
 import com.xtc.system.location.LocationClient;
@@ -239,10 +240,8 @@ public class PublishLocationActivity extends BaseActivity<IPublishLocationView, 
         this.loadingPupWindowHolder.dismissLoading();
         if (!NetworkUtils.isNetworkAvailable(this)) {
             ToastUtil.showShortCover(this, R.string.net_work_exception);
-        } else if (!TextUtils.isEmpty(message) && (message.contains("1003") || message.contains("1002"))) {
-            ToastUtil.showShortCover(this, R.string.frequent_request);
         } else {
-            ToastUtil.showShortCover(this, R.string.publish_fail);
+            PublishErrorUtil.showFailMessage(this, message);
         }
     }
 
