@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:background="@color/color_black" android:layout_width="fill_parent" android:layout_height="wrap_content"
+<RelativeLayout android:background="@android:color/transparent" android:layout_width="fill_parent" android:layout_height="wrap_content"
   xmlns:android="http://schemas.android.com/apk/res/android">
     <View android:id="@id/view_divider" android:background="@drawable/view_item_seperator" android:layout_width="fill_parent" android:layout_height="@dimen/divider_height_0.5dp" />
     <TextView android:textSize="14.0sp" android:textColor="@color/color_888888" android:ellipsize="end" android:id="@id/tv_account_name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="14.0dip" android:maxLines="1" android:layout_below="@id/view_divider" android:layout_marginStart="3.0dip" />

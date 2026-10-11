@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.xtc.moment.R;
 import com.xtc.moment.constants.ModuleSwitchConstant;
+import com.xtc.moment.module.theme.ThemeSettingActivity;
 import com.xtc.moment.util.switchs.ModuleSwitchUtil;
 import com.xtc.ui.widget.item.clickScale.RightIconItem;
 import com.xtc.ui.widget.privacy.PrivacyUriActivity;
@@ -51,6 +52,12 @@ public class AboutMomentActivity extends AbstractSettingActivity {
             @Override
             public void onClick(View view) {
                 PrivacyUriActivity.start(AboutMomentActivity.this, getString(R.string.https_privacy));
+            }
+        });
+        setItemViewStateByViewId(R.id.about_rii_theme, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ThemeSettingActivity.start(AboutMomentActivity.this);
             }
         });
     }

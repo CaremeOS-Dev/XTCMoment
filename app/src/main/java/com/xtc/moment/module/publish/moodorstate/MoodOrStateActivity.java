@@ -23,6 +23,7 @@ import com.xtc.moment.module.Constants;
 import com.xtc.moment.module.publish.text.PushTextActivity;
 import com.xtc.moment.module.widget.MomentContentView;
 import com.xtc.moment.third.behavior.MomentBehavior;
+import com.xtc.moment.module.theme.ThemeBackgroundHelper;
 import com.xtc.moment.util.EventData;
 import com.xtc.moment.util.HandlerUtil;
 import com.xtc.moment.util.SystemUtil;
@@ -91,7 +92,7 @@ public class MoodOrStateActivity extends BaseActivity<IMoodOrStateView, MoodOrSt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AsyncLayoutLoader.getInstance().setContentView(this, R.layout.activity_mood_state);
-        getWindow().setBackgroundDrawable(null);
+        ThemeBackgroundHelper.apply(this);
         this.enterTime = System.currentTimeMillis();
         this.mType = getIntent().getIntExtra(Constants.INTENT_EXTRA_PUBLISH_TYPE, -1);
         this.presenter.getTemplatesByTypeFromDb(this.mType);

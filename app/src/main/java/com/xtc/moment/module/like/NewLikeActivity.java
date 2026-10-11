@@ -18,6 +18,7 @@ import com.xtc.moment.module.bean.EventType;
 import com.xtc.moment.module.bean.Friend;
 import com.xtc.moment.module.bean.MomentNewMsgBean;
 import com.xtc.moment.third.behavior.MomentBehavior;
+import com.xtc.moment.module.theme.ThemeBackgroundHelper;
 import com.xtc.moment.util.HandlerUtil;
 import com.xtc.moment.util.NotifyUtils;
 
@@ -58,7 +59,7 @@ public class NewLikeActivity extends BaseActivity<INewLikeView, NewLikePresenter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AsyncLayoutLoader.getInstance().setContentView(this, R.layout.activity_new_like);
-        getWindow().setBackgroundDrawable(null);
+        ThemeBackgroundHelper.apply(this);
         this.enterTime = System.currentTimeMillis();
         EventBus.getDefault().register(this);
         this.noNewLike = (TextView) findViewById(R.id.no_new_like);

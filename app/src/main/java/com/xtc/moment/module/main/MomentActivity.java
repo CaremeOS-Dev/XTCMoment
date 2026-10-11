@@ -76,6 +76,7 @@ import com.xtc.moment.module.bean.EventType;
 import com.xtc.moment.module.bean.Friend;
 import com.xtc.moment.module.bean.LbsStarEvent;
 import com.xtc.moment.module.bean.SendVideoParam;
+import com.xtc.moment.module.community.AboutMomentActivity;
 import com.xtc.moment.module.illegal.handler.IllegalMessageHandler;
 import com.xtc.moment.module.illegal.widget.HintIllegalContentDialog;
 import com.xtc.moment.module.illegal.widget.HintSensitiveContentDialog;
@@ -90,6 +91,8 @@ import com.xtc.moment.module.publish.text.PushTextActivity;
 import com.xtc.moment.module.report.adapter.AbsInteractionAdapter;
 import com.xtc.moment.module.search.SearchMomentActivity;
 import com.xtc.moment.module.share.ShareActivity;
+import com.xtc.moment.module.theme.ThemeBackgroundHelper;
+import com.xtc.moment.module.theme.ThemeChangedEvent;
 import com.xtc.moment.module.viewholder.AbsViewHolder;
 import com.xtc.moment.module.widget.LoadingPupWindowHolder;
 import com.xtc.moment.module.widget.NumTipSeekBar;
@@ -662,7 +665,7 @@ public class MomentActivity extends BaseInteractActivity<IMomentActivityView, Mo
     @Override
     public void initView() {
         AsyncLayoutLoader.getInstance().setContentView(this, R.layout.fragment_moment);
-        getWindow().setBackgroundDrawable(null);
+        ThemeBackgroundHelper.apply(this);
         this.llRoot = (ViewGroup) findViewById(R.id.ll_root);
         View cachedRoot = this.rootView;
         if (cachedRoot == null) {
@@ -866,6 +869,21 @@ public class MomentActivity extends BaseInteractActivity<IMomentActivityView, Mo
             adapter.onResume();
         }
         UnreadHelper.getInstance(this).refreshRedPoint();
+        ThemeBackgroundHelper.refresh(this);
+        ThemeBackgroundHelper.apply(this);
+        if (this.rvAdapter != null) {
+            refreshHeaderBackground(this.rvAdapter.getHeaderView());
+        }
+    }
+
+    /** 主题设置变化后刷新背景与顶部大图。 */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onThemeChanged(ThemeChangedEvent event) {
+        ThemeBackgroundHelper.refresh(this);
+        ThemeBackgroundHelper.apply(this);
+        if (this.rvAdapter != null) {
+            refreshHeaderBackground(this.rvAdapter.getHeaderView());
+        }
     }
 
     @Override
@@ -969,6 +987,25 @@ public class MomentActivity extends BaseInteractActivity<IMomentActivityView, Mo
         UnreadHelper.getInstance(this).showUnreadNumber();
     }
 
+    /**
+     * 按当前主题设置刷新顶部大图背景：启用自定义背景时隐藏，避免遮挡壁纸。
+     */
+    private void refreshHeaderBackground(View headerView) {
+        if (headerView == null) {
+            return;
+        }
+        ImageView headBg = (ImageView) headerView.findViewById(R.id.iv_head_bg);
+        if (headBg == null) {
+            return;
+        }
+        if (ThemeBackgroundHelper.isEnabled(this)) {
+            headBg.setVisibility(View.GONE);
+        } else {
+            headBg.setVisibility(View.VISIBLE);
+            Glide.with(this).load(R.drawable.bg_head_view).into(headBg);
+        }
+    }
+
     private void initRvHeaderView() {
         View headerView = AsyncLayoutLoader.getInstance().inflateView(R.layout.header_recycle_moment,
                 LayoutInflater.from(this), this.rv);
@@ -977,6 +1014,17 @@ public class MomentActivity extends BaseInteractActivity<IMomentActivityView, Mo
         this.ivChampion = (ImageView) headerView.findViewById(R.id.iv_champion);
         this.mVsViewNewLike = (ViewStub) headerView.findViewById(R.id.vs_view_new_like);
         this.ivBanner = (TextView) headerView.findViewById(R.id.tv_moment_banner);
+        // 点击顶部“好友圈”标题直接进入“关于好友圈”页面。
+        this.ivBanner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (SystemUtil.isFastDoubleClick()) {
+                    LogUtil.i(TAG, "onClick: click too fast.");
+                    return;
+                }
+                AboutMomentActivity.jumpIntent(MomentActivity.this);
+            }
+        });
         headerView.findViewById(R.id.iv_moment_search).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -987,7 +1035,7 @@ public class MomentActivity extends BaseInteractActivity<IMomentActivityView, Mo
                 SearchMomentActivity.start(MomentActivity.this);
             }
         });
-        Glide.with(this).load(R.drawable.bg_head_view).into((ImageView) headerView.findViewById(R.id.iv_head_bg));
+        refreshHeaderBackground(headerView);
         refreshMyHeadIcon();
         this.publishLl = (AppLinearLayout) headerView.findViewById(R.id.ll_publish_btn);
         this.ivPublishAdd = (ImageView) headerView.findViewById(R.id.ivPublishAdd);

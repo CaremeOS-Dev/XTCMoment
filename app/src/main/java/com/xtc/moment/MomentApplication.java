@@ -26,6 +26,7 @@ import com.xtc.moment.db.MomentDbManager;
 import com.xtc.moment.module.illegal.handler.IllegalMessageHandler;
 import com.xtc.moment.monitor.IOMonitorManager;
 import com.xtc.moment.monitor.LimitCoreThreadPool;
+import com.xtc.moment.module.theme.ThemeActivityLifecycleCallbacks;
 import com.xtc.moment.prerogative.MomentPrerogativeServeImpl;
 import com.xtc.moment.receiver.BindWatchReceiver;
 import com.xtc.moment.receiver.IConChangeReceiver;
@@ -78,6 +79,7 @@ public class MomentApplication extends Application {
         cacheProcessName();
         com.xtc.moment.util.RawDump.init(this);
         MomentApp.init(this);
+        registerActivityLifecycleCallbacks(new ThemeActivityLifecycleCallbacks());
         startBlockCanaryMonitor();
         initRxJavaSchedulerManager();
         initLog();

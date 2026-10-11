@@ -34,6 +34,7 @@ import com.xtc.moment.module.report.adapter.AbsInteractionAdapter;
 import com.xtc.moment.module.share.adapter.ShareAdapter;
 import com.xtc.moment.module.widget.VerticallyLinearLayoutManager;
 import com.xtc.moment.third.behavior.MomentBehavior;
+import com.xtc.moment.module.theme.ThemeBackgroundHelper;
 import com.xtc.moment.util.EventData;
 import com.xtc.moment.util.GlideUtils;
 import com.xtc.moment.util.HandlerUtil;
@@ -97,7 +98,7 @@ public class ShareActivity extends BaseInteractActivity<IShareView, SharePresent
     @Override
     public void beforeDealPermission() {
         AsyncLayoutLoader.getInstance().setContentView(this, R.layout.activity_share);
-        getWindow().setBackgroundDrawable(null);
+        ThemeBackgroundHelper.apply(this);
         this.enterTime = System.currentTimeMillis();
         EventBus.getDefault().register(this);
         this.mWatchId = getIntent().getStringExtra(Constants.INTENT_EXTRA_WATCH_ID);

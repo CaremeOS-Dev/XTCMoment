@@ -47,6 +47,7 @@ import com.xtc.moment.module.illegal.handler.IllegalMessageHandler;
 import com.xtc.moment.module.illegal.widget.HintIllegalContentDialog;
 import com.xtc.moment.module.illegal.widget.HintSensitiveContentDialog;
 import com.xtc.moment.module.main.MomentActivity;
+import com.xtc.moment.module.theme.ThemeBackgroundHelper;
 import com.xtc.moment.module.playvideo.PlayVideoActivity;
 import com.xtc.moment.module.publish.IPublishView;
 import com.xtc.moment.module.publish.PublishPresenter;
@@ -228,6 +229,7 @@ public class PushPictureActivity extends BaseCtaPermissionActivity<IPublishView,
     @Override
     public void afterDealPermission() {
         getWindow().getDecorView().setBackground(null);
+        ThemeBackgroundHelper.apply(this);
     }
 
     @Override

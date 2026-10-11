@@ -15,4 +15,10 @@ public class Constant {
         String FIRST_USE_MOMENT_VIDEO = "first_use_moment_video";
         String IS_COPY_ASSETS_FILE = "is_copy_assets_file";
     }
+
+    /** 主题设置相关键值。 */
+    interface ThemeSetting {
+        String ENABLE_CUSTOM_BACKGROUND = "theme_enable_custom_background";
+        String CUSTOM_BACKGROUND_PATH = "theme_custom_background_path";
+    }
 }

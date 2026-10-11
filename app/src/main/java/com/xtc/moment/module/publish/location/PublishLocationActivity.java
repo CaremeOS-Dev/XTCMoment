@@ -27,6 +27,7 @@ import com.xtc.moment.module.publish.multi.SaveDynamic;
 import com.xtc.moment.module.publish.text.PushTextActivity;
 import com.xtc.moment.module.widget.LoadingPupWindowHolder;
 import com.xtc.moment.module.widget.LoadingViewHolder;
+import com.xtc.moment.module.theme.ThemeBackgroundHelper;
 import com.xtc.moment.util.EventData;
 import com.xtc.moment.util.HandlerUtil;
 import com.xtc.moment.util.PermissionStringUtils;
@@ -93,7 +94,7 @@ public class PublishLocationActivity extends BaseActivity<IPublishLocationView, 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AsyncLayoutLoader.getInstance().setContentView(this, R.layout.activity_publish_location);
-        getWindow().setBackgroundDrawable(null);
+        ThemeBackgroundHelper.apply(this);
         EventBus.getDefault().register(this);
         this.handler = new Handler();
         initView();
