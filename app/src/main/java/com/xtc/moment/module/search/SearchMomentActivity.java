@@ -62,7 +62,6 @@ public class SearchMomentActivity extends BaseInteractActivity<ISearchMomentView
 
     private EditText etSearchKeyword;
     private TextView tvSearchAction;
-    private TextView tvSearchResultTitle;
     private TextView tvSearchEmpty;
     private TextView tvSearchEmptyHint;
     private RecyclerView rvSearch;
@@ -202,7 +201,6 @@ public class SearchMomentActivity extends BaseInteractActivity<ISearchMomentView
         this.adapter.initSwitch();
         initCommonRvListener(this.adapter);
         initShareViewRvListener(this.adapter);
-        setHeaderView();
         setFooterView();
         setEmptyView();
         this.rvSearch.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -218,14 +216,6 @@ public class SearchMomentActivity extends BaseInteractActivity<ISearchMomentView
                 GlideUtils.setImageDelayedLoad(SearchMomentActivity.this, newState);
             }
         });
-    }
-
-    /** 列表头部：标题胶囊，未搜索时是页面名，搜索后是「"关键词"的搜索结果」。 */
-    private void setHeaderView() {
-        View headerView = LayoutInflater.from(this).inflate(R.layout.header_recycle_search, this.rvSearch, false);
-        this.adapter.setHeaderView(headerView);
-        this.tvSearchResultTitle = (TextView) headerView.findViewById(R.id.tv_search_result_title);
-        this.tvSearchResultTitle.setText(R.string.search_moment);
     }
 
     private void setFooterView() {
@@ -350,9 +340,6 @@ public class SearchMomentActivity extends BaseInteractActivity<ISearchMomentView
         this.presenter.cancelSearch();
         this.isRunning = false;
         hideFooter();
-        if (this.tvSearchResultTitle != null) {
-            this.tvSearchResultTitle.setText(R.string.search_moment);
-        }
         if (this.tvSearchEmpty != null) {
             this.tvSearchEmpty.setText(R.string.search_moment_idle);
             this.tvSearchEmptyHint.setVisibility(View.GONE);
@@ -366,9 +353,6 @@ public class SearchMomentActivity extends BaseInteractActivity<ISearchMomentView
         if (this.adapter.getData() != null && !this.adapter.getData().isEmpty()) {
             this.adapter.getData().clear();
             this.adapter.notifyDataSetChanged();
-        }
-        if (this.tvSearchResultTitle != null) {
-            this.tvSearchResultTitle.setText(getString(R.string.search_moment_result_title, keyword));
         }
         if (this.tvSearchEmpty != null) {
             // 列表还空着，用空态区域当加载提示，避免闪出「没有找到相关动态」。

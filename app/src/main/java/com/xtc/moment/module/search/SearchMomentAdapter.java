@@ -60,9 +60,6 @@ public class SearchMomentAdapter extends ShareAdapter {
         if (holder == null || holder.itemView == null) {
             return;
         }
-        if (position <= 0 || position >= getItemCount() - 1) {
-            return;
-        }
         int dataPosition = getDataItemPosition(position);
         if (dataPosition < 0 || dataPosition >= this.mData.size()) {
             return;
