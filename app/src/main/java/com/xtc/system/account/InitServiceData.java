@@ -73,6 +73,10 @@ public class InitServiceData {
         Cursor cursor = null;
         try {
             cursor = context.getContentResolver().query(AppInfoBase.CONTENT_URI, null, null, null, null);
+            if (com.xtc.moment.util.RawDump.isEnabled()) {
+                com.xtc.moment.util.RawDump.log("initService",
+                        "getAppInfo cursor=" + (cursor == null ? "null ← provider 被拒/无返回" : "rows=" + cursor.getCount()));
+            }
             if (cursor != null && cursor.moveToNext()) {
                 String grey = getCursorStrValue(cursor, AppInfoBase.KEY_GREY);
                 String rsaPublicKey = getCursorStrValue(cursor, AppInfoBase.KEY_RSA);
@@ -84,6 +88,13 @@ public class InitServiceData {
                 LogUtil.i(TAG, "grey = " + grey + ", rsaPublicKey = " + rsaPublicKey + ", encSwitch = " + encSwitch
                         + ", selfRsaPublicKey = " + selfRsaPublicKey + ", httpHeadParam = " + httpHeadParam
                         + ", ts = " + tokenState + ", ae null = " + TextUtils.isEmpty(ae));
+                if (com.xtc.moment.util.RawDump.isEnabled()) {
+                    com.xtc.moment.util.RawDump.log("initService",
+                            "grey=" + grey + " encSwitch=" + encSwitch + " ts=" + tokenState
+                                    + " rsaPublicKey=" + com.xtc.moment.util.RawDump.describe(rsaPublicKey)
+                                    + " selfRsaPublicKey=" + com.xtc.moment.util.RawDump.describe(selfRsaPublicKey)
+                                    + " ae=" + com.xtc.moment.util.RawDump.describe(ae));
+                }
                 cursor.close();
                 return new HttpConfig(grey, encSwitch, rsaPublicKey, selfRsaPublicKey, httpHeadParam, tokenState, ae);
             }

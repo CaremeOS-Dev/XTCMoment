@@ -71,6 +71,16 @@ public class HttpRequestInterceptor extends BaseInterceptor {
                 ? baseRequestParamJson
                 : HttpHelper.generateEncryptRequestParam(baseRequestParamJson, aesKey);
         String sign = HttpHelper.generateSign(aesKey, url, baseRequestParamJson, requestBodyString);
+        if (com.xtc.moment.util.RawDump.isEnabled()) {
+            com.xtc.moment.util.RawDump.log("request", "url=" + url
+                    + " rsaType=" + rsaEncryptType
+                    + " aesKey=" + aesKey
+                    + " eebbkKey=" + com.xtc.moment.util.RawDump.describe(eebbkKey)
+                    + " sign=" + sign);
+            com.xtc.moment.util.RawDump.log("request", "baseParam=" + baseRequestParamJson
+                    + " body=" + requestBodyString
+                    + " encryptParam=" + com.xtc.moment.util.RawDump.describe(encryptRequestParam));
+        }
         AesKeyCache.getInstance().cache(sign, aesKey);
         Request.Builder builder = request.newBuilder();
         addHeader(request, builder, sign, encryptRequestParam, eebbkKey, encrypt, rsaEncryptType);
