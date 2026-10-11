@@ -123,6 +123,7 @@
             </intent-filter>
         </activity>
         <activity android:exported="true" android:name="com.xtc.moment.module.community.AboutMomentActivity"/>
+        <activity android:launchMode="singleTask" android:name="com.xtc.moment.module.theme.ThemeSettingActivity"/>
         <meta-data android:name="required_permissions" android:value="[                 &quot;android.permission.ACCESS_FINE_LOCATION&quot;,                 &quot;android.permission.ACCESS_COARSE_LOCATION&quot;,                 &quot;android.permission.READ_CONTACTS&quot;,                 &quot;android.permission.READ_EXTERNAL_STORAGE&quot;,                 &quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;]"/>
         <meta-data android:name="privacy_url" android:value="https://static.watch.okii.com/watch/privacy_explain/index.html"/>
         <activity android:launchMode="singleTop" android:name="com.xtc.moment.module.publish.location.PublishPoiActivity"/>

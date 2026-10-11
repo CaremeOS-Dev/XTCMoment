@@ -21,6 +21,8 @@ public class FileManager {
     public static String WEBP_FORMAT = ".webp";
     public static String NAME_MOMENT_BACKGROUND = "moment_background";
     public static String NAME_MOMENT_LIKE = "moment_like";
+    public static final String NAME_MOMENT_THEME = "moment_theme";
+    public static final String THEME_WALLPAPER_NAME = "theme_wallpaper.jpg";
 
     private static final String TAG = "FileManager";
     private static final String NAME_ALBUM = "Camera";
@@ -41,6 +43,7 @@ public class FileManager {
     private static String livePhotoCachePath;
     private static String momentBackgroundRootPath;
     private static String momentLikeRootPath;
+    private static String momentThemeRootPath;
     private static String momentPath;
     private static String myIconPath;
     private static String thirdVideoPath;
@@ -54,6 +57,7 @@ public class FileManager {
     public static void initFolder() {
         FileUtils.makeDirs(momentLikeRootPath);
         FileUtils.makeDirs(momentBackgroundRootPath);
+        FileUtils.makeDirs(momentThemeRootPath);
     }
 
     /** Resolves every managed directory for [context]. */
@@ -70,6 +74,7 @@ public class FileManager {
         thirdVideoThumnailPath = cameraThirdRootPath + NAME_THIRD_VIDEO_THUMNAIL + File.separator;
         momentLikeRootPath = momentPath + NAME_MOMENT_LIKE + File.separator;
         momentBackgroundRootPath = momentPath + NAME_MOMENT_BACKGROUND + File.separator;
+        momentThemeRootPath = momentPath + NAME_MOMENT_THEME + File.separator;
         SHARE_FOLDER_PATH = momentPath + "share" + File.separator;
         LogUtil.d(TAG, "init");
     }
@@ -124,6 +129,11 @@ public class FileManager {
 
     public static String getMomentLikeRootPath() {
         return momentLikeRootPath;
+    }
+
+    /** @return 主题自定义背景（壁纸）目录，独立于特权动效背景目录，避免被整目录清理。 */
+    public static String getMomentThemeRootPath() {
+        return momentThemeRootPath;
     }
 
     public static String getMomentPath() {

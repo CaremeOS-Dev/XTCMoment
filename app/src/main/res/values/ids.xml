@@ -2,6 +2,7 @@
 <resources>
     <item type="id" name="Loading_anim_view" />
     <item type="id" name="about_rii_privacy" />
+    <item type="id" name="about_rii_theme" />
     <item type="id" name="action0" />
     <item type="id" name="action_bar" />
     <item type="id" name="action_bar_activity_content" />
@@ -481,6 +482,9 @@
     <item type="id" name="succeed_animation_view" />
     <item type="id" name="sv_root" />
     <item type="id" name="tag_view_holder" />
+    <item type="id" name="theme_background_applied" />
+    <item type="id" name="theme_custom_bg_rii" />
+    <item type="id" name="theme_enable_switch_item" />
     <item type="id" name="text" />
     <item type="id" name="text2" />
     <item type="id" name="textSpacerNoButtons" />

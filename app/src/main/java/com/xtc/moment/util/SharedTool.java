@@ -177,4 +177,23 @@ public class SharedTool {
     public static void saveReminderLabelCount(Context context, String key, int count) {
         SharedManager.getInstance(context).putInt(key, count);
     }
+
+    /** @return 是否启用自定义背景（主题设置）。 */
+    public static boolean isEnableCustomBackground(Context context) {
+        return SharedManager.getInstance(context)
+                .getBoolean(Constant.ThemeSetting.ENABLE_CUSTOM_BACKGROUND, false);
+    }
+
+    public static void saveEnableCustomBackground(Context context, boolean value) {
+        SharedManager.getInstance(context).putBoolean(Constant.ThemeSetting.ENABLE_CUSTOM_BACKGROUND, value);
+    }
+
+    /** @return 自定义背景图片的本地路径，未设置时为空串。 */
+    public static String getCustomBackgroundPath(Context context) {
+        return SharedManager.getInstance(context).getString(Constant.ThemeSetting.CUSTOM_BACKGROUND_PATH, "");
+    }
+
+    public static void saveCustomBackgroundPath(Context context, String path) {
+        SharedManager.getInstance(context).putString(Constant.ThemeSetting.CUSTOM_BACKGROUND_PATH, path);
+    }
 }

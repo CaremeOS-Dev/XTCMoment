@@ -55,6 +55,7 @@ import com.xtc.moment.serve.LivePhotoServe;
 import com.xtc.moment.service.PublishService;
 import com.xtc.moment.third.bean.PushVideoBean;
 import com.xtc.moment.third.behavior.MomentBehavior;
+import com.xtc.moment.module.theme.ThemeBackgroundHelper;
 import com.xtc.moment.util.AppProcessUtil;
 import com.xtc.moment.util.BeanConverterUtil;
 import com.xtc.moment.util.EventData;
@@ -1246,7 +1247,7 @@ public class PublishActivity extends BaseCtaPermissionActivity<IPublishView, Pub
     public void initView() {
         LogUtil.d(TAG, "initView");
         AsyncLayoutLoader.getInstance().setContentView(this, R.layout.activity_publish);
-        getWindow().setBackgroundDrawable(null);
+        ThemeBackgroundHelper.apply(this);
         initRecyclerView();
         HandlerUtil.runOnBackground(new Runnable() {
             @Override

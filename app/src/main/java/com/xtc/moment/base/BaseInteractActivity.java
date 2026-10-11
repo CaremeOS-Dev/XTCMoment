@@ -13,6 +13,7 @@ import com.xtc.moment.constants.ModuleSwitchConstant;
 import com.xtc.moment.db.bean.DbMoment;
 import com.xtc.moment.db.bean.DbMomentComment;
 import com.xtc.moment.module.report.adapter.AbsInteractionAdapter;
+import com.xtc.moment.module.theme.ThemeBackgroundHelper;
 import com.xtc.moment.module.widget.LoadingPupWindowHolder;
 import com.xtc.moment.module.widget.MaxLengthWatcher;
 import com.xtc.moment.serve.AccountInfoServerImpl;
@@ -309,6 +310,7 @@ public abstract class BaseInteractActivity<V extends IBaseInteractView, P extend
     @Override
     public void afterDealPermission() {
         getWindow().getDecorView().setBackground(null);
+        ThemeBackgroundHelper.apply(this);
     }
 
     @Override

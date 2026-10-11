@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <com.xtc.ui.widget.textview.RightIconTextView app:ritv_title="@string/theme_setting" app:ritv_title_color="@color/color_ffbe0b" style="@style/RightIconTextViewTitle" />
+        <com.xtc.ui.widget.item.clickScale.RightSwitchItemWithExtraInfo android:id="@id/theme_enable_switch_item" style="@style/RightIconItem" />
+        <com.xtc.ui.widget.item.clickScale.RightIconItem android:id="@id/theme_custom_bg_rii" app:ri_icon="@drawable/next_icon" app:ri_title="@string/set_custom_background" style="@style/RightIconItem" />
+    </LinearLayout>
+</ScrollView>
