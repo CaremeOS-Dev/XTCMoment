@@ -1,10 +1,18 @@
 version: 2
 
 updates:
-  # Gradle 依赖更新
+  # Gradle 依赖更新。
+  #
+  # 本项目是原厂 APK 的 1:1 复刻：app/build.gradle 里的依赖版本刻意对齐原厂
+  # 实际打包的版本（support 库 25.4.0、Glide 4.9.0、okio 1.15.0 等），不能
+  # 按「最新版」升级，否则会改变行为/资源 id，与复刻目标冲突。
+  #
+  # 因此这里把常规版本更新的 PR 上限设为 0（关闭版本更新），只保留安全更新：
+  # Dependabot 的安全更新不受 open-pull-requests-limit 限制、也不计入该上限，
+  # 所以仍然会在某个依赖出现漏洞时开 PR，且只会升到「修复该漏洞的最低版本」。
   - package-ecosystem: "gradle"
     directory: "/"
     schedule:
       interval: "weekly"
       day: "monday"
-    open-pull-requests-limit: 10
+    open-pull-requests-limit: 0
