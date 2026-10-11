@@ -142,15 +142,15 @@ public interface IMomentServe {
 
     Observable<DefaultResponse> praiseMoment(String momentId, String momentWatchId);
 
-    Observable<Moment> publishMoment(int type, String content, int resourceId, String resource, FriendsVisibleBean friendsVisibleBean);
+    Observable<Moment> publishMoment(int type, String resource, int resourceId, String content, FriendsVisibleBean friendsVisibleBean);
 
-    Observable<Moment> publishMoment(int type, String content, int resourceId, String resource, PoiBean poiBean, FriendsVisibleBean friendsVisibleBean);
+    Observable<Moment> publishMoment(int type, String resource, int resourceId, String content, PoiBean poiBean, FriendsVisibleBean friendsVisibleBean);
 
-    Observable<Moment> publishMoment(int type, String content, int resourceId, String resource, String packageName, PoiBean poiBean, FriendsVisibleBean friendsVisibleBean);
+    Observable<Moment> publishMoment(int type, String resource, int resourceId, String content, String packageName, PoiBean poiBean, FriendsVisibleBean friendsVisibleBean);
 
-    Observable<Moment> publishMoment(int type, String content, int resourceId, String resource, String packageName, List<Integer> visibleTypes, PoiBean poiBean);
+    Observable<Moment> publishMoment(int type, String resource, int resourceId, String content, String packageName, List<Integer> visibleTypes, PoiBean poiBean);
 
-    Observable<Moment> publishMoment(int type, String content, int resourceId, String resource, List<Integer> visibleTypes);
+    Observable<Moment> publishMoment(int type, String resource, int resourceId, String content, List<Integer> visibleTypes);
 
     List<DbReminder> queryAllReminders();
 
