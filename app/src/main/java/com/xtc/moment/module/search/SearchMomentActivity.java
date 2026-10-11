@@ -224,6 +224,8 @@ public class SearchMomentActivity extends BaseInteractActivity<ISearchMomentView
         this.adapter.setFooterView(this.footerView);
         this.loading = (ImageView) this.footerView.findViewById(R.id.iv_loading);
         this.tvLoadMore = (TextView) this.footerView.findViewById(R.id.tv_load_more);
+        // 进页没有加载动作，footer 默认收起，避免空态下方挂一个「加载中」。
+        this.footerView.setVisibility(View.GONE);
     }
 
     /** 空态：图 + 主文案 + 副文案（未搜索与搜索无结果共用，文案不同）。 */
