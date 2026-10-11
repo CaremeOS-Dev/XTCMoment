@@ -72,6 +72,13 @@ public class AppInfo {
 
     /** @return the RSA strategy to apply for the next request. */
     public int getRsaEncryptType() {
+        if (com.xtc.moment.util.RawDump.isEnabled()) {
+            com.xtc.moment.util.RawDump.log("appInfo", "getRsaEncryptType encSwitch=" + this.encSwitch
+                    + " aesKey=" + com.xtc.moment.util.RawDump.describe(this.aesKey)
+                    + " encryptEebbkKey=" + com.xtc.moment.util.RawDump.describe(this.encryptEebbkKey)
+                    + " keyId=" + this.keyId
+                    + " selfRsaPublicKey=" + com.xtc.moment.util.RawDump.describe(this.selfRsaPublicKey));
+        }
         if (!isEncrypt()) {
             return 0;
         }
@@ -152,6 +159,13 @@ public class AppInfo {
             return;
         }
         String[] parts = decrypted.split(COLON, 3);
+        if (com.xtc.moment.util.RawDump.isEnabled()) {
+            com.xtc.moment.util.RawDump.log("appInfo", "setEncryptEebbkKey decrypted=" + decrypted
+                    + " parts=" + parts.length
+                    + " keyId=" + (parts.length > 0 ? parts[0] : "?")
+                    + " aesKey=" + (parts.length > 1 ? parts[1] : "?")
+                    + " eebbkKey=" + (parts.length > 2 ? com.xtc.moment.util.RawDump.describe(parts[2]) : "?"));
+        }
         if (parts.length < 3 || TextUtils.isEmpty(parts[0]) || TextUtils.isEmpty(parts[1]) || TextUtils.isEmpty(parts[2])) {
             LogUtil.e(TAG, "setEncryptEebbkKey 解析异常");
             RsaKeyBigData.uploadKeyError(ContextUtils.getContext(), 3);
@@ -183,6 +197,11 @@ public class AppInfo {
     /** AES key used to encrypt the request bodies. */
     public String getAesKey() {
         if (TextUtils.isEmpty(this.encryptEebbkKey) || TextUtils.isEmpty(this.aesKey)) {
+            if (com.xtc.moment.util.RawDump.isEnabled()) {
+                com.xtc.moment.util.RawDump.log("appInfo", "getAesKey 降级为随机 ENCRYPT_KEY ← 服务端必然解不开(000016)"
+                        + " aesKey=" + com.xtc.moment.util.RawDump.describe(this.aesKey)
+                        + " encryptEebbkKey=" + com.xtc.moment.util.RawDump.describe(this.encryptEebbkKey));
+            }
             return BaseInterceptor.ENCRYPT_KEY;
         }
         return this.aesKey;

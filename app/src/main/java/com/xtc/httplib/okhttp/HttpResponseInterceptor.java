@@ -55,14 +55,29 @@ public class HttpResponseInterceptor extends BaseInterceptor {
             return response;
         }
         String body = response.peekBody(PlaybackStateCompat.ACTION_SET_CAPTIONING_ENABLED).string();
+        if (com.xtc.moment.util.RawDump.isEnabled()) {
+            com.xtc.moment.util.RawDump.log("response", "url=" + response.request().url()
+                    + " httpCode=" + response.code()
+                    + " encryptedHeader=" + response.header(ConfigOptions.HeaderKey.ENCRYPTED)
+                    + " respSign=" + response.header(ConfigOptions.HeaderKey.EEBBK_SIGN)
+                    + " eebbkKeyEmpty=" + TextUtils.isEmpty(eebbkKey)
+                    + " rawBody=" + body);
+        }
         if (!TextUtils.isEmpty(body) && !TextUtils.isEmpty(eebbkKey)) {
             String encrypted = response.header(ConfigOptions.HeaderKey.ENCRYPTED);
             String sign = response.header(ConfigOptions.HeaderKey.EEBBK_SIGN);
             if (encrypted != null && encrypted.contains(ConfigOptions.HeaderKey.ENCRYPTED)) {
-                body = HttpHelper.decodeHttpResponseBody(eebbkKey, body, AesKeyCache.getInstance().getKey(sign));
+                String cachedAesKey = AesKeyCache.getInstance().getKey(sign);
+                if (com.xtc.moment.util.RawDump.isEnabled()) {
+                    com.xtc.moment.util.RawDump.log("response", "cachedAesKey=" + cachedAesKey + " respSign=" + sign);
+                }
+                body = HttpHelper.decodeHttpResponseBody(eebbkKey, body, cachedAesKey);
             }
         } else {
             LogUtil.w(TAG, "result or eebbkKey is null");
+        }
+        if (com.xtc.moment.util.RawDump.isEnabled()) {
+            com.xtc.moment.util.RawDump.log("response", "decodedBody=" + body);
         }
         Response.Builder builder = response.newBuilder();
         builder.body(ResponseBody.create(MediaType.parse(ConfigOptions.HeaderKey.MEDIA_TYPE), body));
