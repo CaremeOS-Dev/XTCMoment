@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:id="@id/layout" android:background="@color/color_black" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cube_base="http://schemas.android.com/apk/res-auto">
+    <EditText android:textSize="@dimen/sp_0" android:id="@id/et_hint" android:background="@color/color_black" android:layout_width="1.0dip" android:layout_height="1.0dip" android:cursorVisible="false" android:inputType="text" android:imeOptions="actionSend" />
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/ll_search_bar" android:background="@drawable/default_list_item_normal" android:layout_width="fill_parent" android:layout_height="@dimen/dp_36" android:layout_marginTop="@dimen/dp_5" android:layout_marginStart="@dimen/dp_6" android:layout_marginEnd="@dimen/dp_6" android:paddingStart="@dimen/dp_8" android:paddingEnd="@dimen/dp_2">
+            <ImageView android:id="@id/iv_search_icon" android:layout_width="@dimen/dp_16" android:layout_height="@dimen/dp_16" android:src="@drawable/ic_moment_search" android:alpha="0.7" />
+            <EditText android:textSize="@dimen/sp_14" android:textColor="@color/color_ffffff" android:textColorHint="@color/color_999999" android:ellipsize="end" android:id="@id/et_search_keyword" android:background="@null" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0" android:hint="@string/search_moment_hint" android:maxLength="30" android:singleLine="true" android:imeOptions="actionSearch" android:inputType="text" android:paddingStart="@dimen/dp_6" android:paddingEnd="@dimen/dp_6" />
+            <TextView android:textSize="@dimen/sp_14" android:textColor="@color/hl_text" android:gravity="center" android:id="@id/tv_search_action" android:layout_width="wrap_content" android:layout_height="fill_parent" android:minWidth="@dimen/dp_44" android:text="@string/search_moment_action" android:paddingStart="@dimen/dp_6" android:paddingEnd="@dimen/dp_6" />
+        </LinearLayout>
+        <com.xtc.ui.widget.scalablecontainer.AppRecyclerView android:id="@id/rv_search_moment" android:background="@color/color_black" android:scrollbars="vertical" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0" cube_base:thumbColor="@color/white_start" />
+    </LinearLayout>
+</FrameLayout>

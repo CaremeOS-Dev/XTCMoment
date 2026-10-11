@@ -104,6 +104,7 @@
     <item type="id" name="et_editable_content_normal_dialog" />
     <item type="id" name="et_hint" />
     <item type="id" name="et_push_picture_text" />
+    <item type="id" name="et_search_keyword" />
     <item type="id" name="ev_text" />
     <item type="id" name="example_vp" />
     <item type="id" name="expand_activities_button" />
@@ -204,6 +205,7 @@
     <item type="id" name="iv_moment_comment" />
     <item type="id" name="iv_moment_range" />
     <item type="id" name="iv_moment_scene" />
+    <item type="id" name="iv_moment_search" />
     <item type="id" name="iv_mood_icon" />
     <item type="id" name="iv_official_enterprise" />
     <item type="id" name="iv_official_enterprise_bg" />
@@ -230,6 +232,8 @@
     <item type="id" name="iv_selected" />
     <item type="id" name="iv_send_egg" />
     <item type="id" name="iv_send_flower" />
+    <item type="id" name="iv_search_empty" />
+    <item type="id" name="iv_search_icon" />
     <item type="id" name="iv_share_account_report" />
     <item type="id" name="iv_share_item_video_logo" />
     <item type="id" name="iv_share_video" />
@@ -291,6 +295,7 @@
     <item type="id" name="ll_right" />
     <item type="id" name="ll_root" />
     <item type="id" name="ll_root_dialog" />
+    <item type="id" name="ll_search_bar" />
     <item type="id" name="ll_share_content" />
     <item type="id" name="ll_star" />
     <item type="id" name="ll_style" />
@@ -430,6 +435,7 @@
     <item type="id" name="rv_poi" />
     <item type="id" name="rv_report_proof_view" />
     <item type="id" name="rv_report_reasons" />
+    <item type="id" name="rv_search_moment" />
     <item type="id" name="rv_visible_friends_list" />
     <item type="id" name="rv_visible_type_list" />
     <item type="id" name="sb__right_switch" />
@@ -598,6 +604,10 @@
     <item type="id" name="tv_report_reasons_item" />
     <item type="id" name="tv_report_topic_content" />
     <item type="id" name="tv_right_normal_dialog" />
+    <item type="id" name="tv_search_action" />
+    <item type="id" name="tv_search_empty" />
+    <item type="id" name="tv_search_empty_hint" />
+    <item type="id" name="tv_search_result_title" />
     <item type="id" name="tv_show_more" />
     <item type="id" name="tv_signature_bubbling" />
     <item type="id" name="tv_string" />

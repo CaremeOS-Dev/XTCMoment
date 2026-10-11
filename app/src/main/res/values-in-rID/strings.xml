@@ -145,6 +145,14 @@ Coba besok"</string>
     <string name="report_text_">Laporan</string>
     <string name="retake">Ambil lagi</string>
     <string name="retry_load">Muat Lagi</string>
+    <string name="search_moment">Cari momen</string>
+    <string name="search_moment_action">Cari</string>
+    <string name="search_moment_empty">Momen tidak ditemukan</string>
+    <string name="search_moment_empty_hint">Coba kata kunci lain</string>
+    <string name="search_moment_hint">Masukkan kata kunci</string>
+    <string name="search_moment_idle">Cari momen teman</string>
+    <string name="search_moment_keyword_empty">Masukkan kata kunci</string>
+    <string name="search_moment_result_title">Hasil untuk “%1$s”</string>
     <string name="second">Detik>></string>
     <string name="second_to_record">Mendukung perekaman lainnya</string>
     <string name="seconds">Detik>></string>

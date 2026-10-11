@@ -262,6 +262,14 @@
     <string name="sagittarius">射手座</string>
     <string name="scorpio">天蠍座</string>
     <string name="search_menu_title">搜尋</string>
+    <string name="search_moment">搜尋動態</string>
+    <string name="search_moment_action">搜尋</string>
+    <string name="search_moment_empty">找不到相關動態</string>
+    <string name="search_moment_empty_hint">試下其他關鍵字</string>
+    <string name="search_moment_hint">輸入關鍵字</string>
+    <string name="search_moment_idle">搜尋好友的動態</string>
+    <string name="search_moment_keyword_empty">請輸入搜尋內容</string>
+    <string name="search_moment_result_title">“%1$s”的搜尋結果</string>
     <string name="second">秒>></string>
     <string name="second_to_record">還可錄音</string>
     <string name="seconds">秒>></string>

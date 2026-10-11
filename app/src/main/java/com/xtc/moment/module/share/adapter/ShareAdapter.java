@@ -150,7 +150,7 @@ public class ShareAdapter extends AbsInteractionAdapter<AbsViewHolder>
     private boolean isSupportPersonalCenter;
     private LifecycleRegistry lifecycleRegistry;
     private String mAccountWatchId;
-    private Context mContext;
+    protected Context mContext;
     private String mIconPath;
     private boolean mIsSelf;
     private LikeDrawableCache mLikeDrawableCache;
@@ -754,7 +754,7 @@ public class ShareAdapter extends AbsInteractionAdapter<AbsViewHolder>
         holder.momentReminderView.setVisibility(View.GONE);
     }
 
-    private void setMomentIcon(DbMoment moment, AbsViewHolder holder, boolean isSelf, String iconPath) {
+    protected void setMomentIcon(DbMoment moment, AbsViewHolder holder, boolean isSelf, String iconPath) {
         if (MomentTypeUtil.isOfficialType(moment.getType().intValue())) {
             if (com.xtc.log.util.TextUtils.isEmpty(moment.getIconPath())) {
                 holder.setIvIcon(R.drawable.i11_genius_rabbit, isSelf);
@@ -776,7 +776,7 @@ public class ShareAdapter extends AbsInteractionAdapter<AbsViewHolder>
         }
     }
 
-    private void setMomentName(DbMoment moment, AbsViewHolder holder, boolean isSelf, String name) {
+    protected void setMomentName(DbMoment moment, AbsViewHolder holder, boolean isSelf, String name) {
         if (MomentTypeUtil.isOfficialType(moment.getType().intValue())) {
             if (com.xtc.log.util.TextUtils.isEmpty(moment.getName())) {
                 holder.setTvName(false, this.mContext.getString(R.string.rabbit));

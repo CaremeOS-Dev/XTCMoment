@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:paddingTop="@dimen/dp_20" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/iv_search_empty" android:layout_width="@dimen/dp_44" android:layout_height="@dimen/dp_44" android:src="@drawable/ic_moment_search" android:alpha="0.35" />
+    <TextView android:textSize="@dimen/sp_15" android:textColor="@color/color_fafafa" android:gravity="center" android:id="@id/tv_search_empty" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dp_6" android:text="@string/search_moment_idle" />
+    <TextView android:textSize="@dimen/sp_12" android:textColor="@color/color_999999" android:gravity="center" android:id="@id/tv_search_empty_hint" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dp_3" android:text="@string/search_moment_empty_hint" />
+</LinearLayout>

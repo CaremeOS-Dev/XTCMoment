@@ -174,6 +174,14 @@ public class MomentServeImpl extends BaseServe implements IMomentServe {
     /**
      * 给动态补上最近 5 条本地评论，并过滤掉已删除的评论。
      */
+    @Override
+    public List<DbMoment> attachCommentsForMoments(List<DbMoment> moments) {
+        if (moments == null || moments.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return addCommentForMoment(moments);
+    }
+
     private List<DbMoment> addCommentForMoment(List<DbMoment> moments) {
         if (moments == null || moments.size() <= 0) {
             LogUtil.d(TAG, "moments == null || moments.size() <= 0");
@@ -204,27 +212,27 @@ public class MomentServeImpl extends BaseServe implements IMomentServe {
     }
 
     @Override
-    public Observable<Moment> publishMoment(int type, String content, int resourceId, String resource, FriendsVisibleBean friendsVisibleBean) {
+    public Observable<Moment> publishMoment(int type, String resource, int resourceId, String content, FriendsVisibleBean friendsVisibleBean) {
         return this.momentHttpServiceProxy.publishMoment(this.iAccountInfoServe.getWatchAccountInfo().getWatchId(this.mContext), resource, resourceId, content, type, null, friendsVisibleBean).throttleFirst(1000L, TimeUnit.MILLISECONDS);
     }
 
     @Override
-    public Observable<Moment> publishMoment(int type, String content, int resourceId, String resource, PoiBean poiBean, FriendsVisibleBean friendsVisibleBean) {
+    public Observable<Moment> publishMoment(int type, String resource, int resourceId, String content, PoiBean poiBean, FriendsVisibleBean friendsVisibleBean) {
         return this.momentHttpServiceProxy.publishMoment(this.iAccountInfoServe.getWatchAccountInfo().getWatchId(this.mContext), resource, resourceId, content, type, null, poiBean, friendsVisibleBean).throttleFirst(1000L, TimeUnit.MILLISECONDS);
     }
 
     @Override
-    public Observable<Moment> publishMoment(int type, String content, int resourceId, String resource, List<Integer> visibleTypes) {
+    public Observable<Moment> publishMoment(int type, String resource, int resourceId, String content, List<Integer> visibleTypes) {
         return this.momentHttpServiceProxy.publishMoment(this.iAccountInfoServe.getWatchAccountInfo().getWatchId(this.mContext), resource, resourceId, content, type, null, visibleTypes).throttleFirst(1000L, TimeUnit.MILLISECONDS);
     }
 
     @Override
-    public Observable<Moment> publishMoment(int type, String content, int resourceId, String resource, String packageName, PoiBean poiBean, FriendsVisibleBean friendsVisibleBean) {
+    public Observable<Moment> publishMoment(int type, String resource, int resourceId, String content, String packageName, PoiBean poiBean, FriendsVisibleBean friendsVisibleBean) {
         return this.momentHttpServiceProxy.publishMoment(this.iAccountInfoServe.getWatchAccountInfo().getWatchId(this.mContext), resource, resourceId, content, type, packageName, poiBean, friendsVisibleBean).throttleFirst(1000L, TimeUnit.MILLISECONDS);
     }
 
     @Override
-    public Observable<Moment> publishMoment(int type, String content, int resourceId, String resource, String packageName, List<Integer> visibleTypes, PoiBean poiBean) {
+    public Observable<Moment> publishMoment(int type, String resource, int resourceId, String content, String packageName, List<Integer> visibleTypes, PoiBean poiBean) {
         return this.momentHttpServiceProxy.publishMoment(this.iAccountInfoServe.getWatchAccountInfo().getWatchId(this.mContext), resource, resourceId, content, type, packageName, visibleTypes, poiBean).throttleFirst(1000L, TimeUnit.MILLISECONDS);
     }
     @Override
@@ -634,6 +642,11 @@ public class MomentServeImpl extends BaseServe implements IMomentServe {
     @Override
     public List<DbMoment> queryMessageForPages(long offset, long limit, boolean ascending) {
         return this.momentDao.queryForPagesByOrder("id", ascending, Long.valueOf(offset), Long.valueOf(limit));
+    }
+
+    @Override
+    public List<DbMoment> searchMomentCandidates(String keyword, long offset, long limit) {
+        return this.momentDao.searchMomentCandidates(keyword, offset, limit);
     }
 
     @Override

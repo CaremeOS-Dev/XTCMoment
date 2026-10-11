@@ -100,6 +100,40 @@ public class MomentDao extends OrmLiteDao<DbMoment> {
         return queryByColumnName("watchId", watchId);
     }
 
+    /**
+     * 「搜索动态」的候选分页查询：按关键词对文本类字段做 LIKE 粗筛，创建时间倒序返回。
+     *
+     * <p>粗筛只负责缩小范围（LIKE 对 JSON 内容会连键名一起命中），命中与否由
+     * {@code MomentSearchTextUtil} 在内存里精确校验，因此这里多召回是安全的。
+     *
+     * @param keyword 关键词，调用方需保证非空
+     * @param offset  起始行号
+     * @param limit   本次最多返回行数
+     * @return 候选动态；查询失败返回 {@code null}
+     */
+    public List<DbMoment> searchMomentCandidates(String keyword, long offset, long limit) {
+        if (com.xtc.log.util.TextUtils.isEmpty(keyword)) {
+            return null;
+        }
+        try {
+            // 注意：Where 的 like/or 都是链式返回自身，不能把同一个 Where 实例拆开传参。
+            String pattern = "%" + keyword + "%";
+            QueryBuilder<DbMoment, Integer> builder = this.ormLiteDao.queryBuilder();
+            builder.where()
+                    .like("content", pattern)
+                    .or().like("publishContent", pattern)
+                    .or().like("description", pattern)
+                    .or().like("location", pattern)
+                    .or().like("name", pattern);
+            builder.orderBy("createTime", false).orderBy("id", false);
+            builder.offset(Long.valueOf(offset)).limit(Long.valueOf(limit));
+            return builder.query();
+        } catch (SQLException e) {
+            LogUtil.e(TAG, "searchMomentCandidates error: keyword=" + keyword + ", offset=" + offset, e);
+            return null;
+        }
+    }
+
     public void addMoments(final List<DbMoment> moments) {
         try {
             new TransactionManager(this.ormLiteDao.getConnectionSource()).callInTransaction(new Callable<Void>() {

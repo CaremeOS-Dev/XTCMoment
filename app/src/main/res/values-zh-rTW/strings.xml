@@ -93,6 +93,14 @@
     <string name="report_guidelines_content" formatted="false">嚴禁隨意舉報，請保證舉報的真實性。每人每天有%s次舉報機會。小天才官方會對舉報信息進行審核，審核通過後，被舉報的相關功能將被禁言%s天。但如果官方發現有人惡意舉報，將對舉報人進行嚴懲。</string>
     <string name="report_text_">舉報</string>
     <string name="search_menu_title">搜尋</string>
+    <string name="search_moment">搜尋動態</string>
+    <string name="search_moment_action">搜尋</string>
+    <string name="search_moment_empty">找不到相關動態</string>
+    <string name="search_moment_empty_hint">試試其他關鍵字</string>
+    <string name="search_moment_hint">輸入關鍵字</string>
+    <string name="search_moment_idle">搜尋好友的動態</string>
+    <string name="search_moment_keyword_empty">請輸入搜尋內容</string>
+    <string name="search_moment_result_title">“%1$s”的搜尋結果</string>
     <string name="send_btn_text">發送</string>
     <string name="send_to_moment">發送到好友圈</string>
     <string name="share_success">分享成功</string>

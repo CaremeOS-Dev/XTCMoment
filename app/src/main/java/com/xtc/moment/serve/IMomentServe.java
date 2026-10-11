@@ -142,15 +142,15 @@ public interface IMomentServe {
 
     Observable<DefaultResponse> praiseMoment(String momentId, String momentWatchId);
 
-    Observable<Moment> publishMoment(int type, String content, int resourceId, String resource, FriendsVisibleBean friendsVisibleBean);
+    Observable<Moment> publishMoment(int type, String resource, int resourceId, String content, FriendsVisibleBean friendsVisibleBean);
 
-    Observable<Moment> publishMoment(int type, String content, int resourceId, String resource, PoiBean poiBean, FriendsVisibleBean friendsVisibleBean);
+    Observable<Moment> publishMoment(int type, String resource, int resourceId, String content, PoiBean poiBean, FriendsVisibleBean friendsVisibleBean);
 
-    Observable<Moment> publishMoment(int type, String content, int resourceId, String resource, String packageName, PoiBean poiBean, FriendsVisibleBean friendsVisibleBean);
+    Observable<Moment> publishMoment(int type, String resource, int resourceId, String content, String packageName, PoiBean poiBean, FriendsVisibleBean friendsVisibleBean);
 
-    Observable<Moment> publishMoment(int type, String content, int resourceId, String resource, String packageName, List<Integer> visibleTypes, PoiBean poiBean);
+    Observable<Moment> publishMoment(int type, String resource, int resourceId, String content, String packageName, List<Integer> visibleTypes, PoiBean poiBean);
 
-    Observable<Moment> publishMoment(int type, String content, int resourceId, String resource, List<Integer> visibleTypes);
+    Observable<Moment> publishMoment(int type, String resource, int resourceId, String content, List<Integer> visibleTypes);
 
     List<DbReminder> queryAllReminders();
 
@@ -169,6 +169,12 @@ public interface IMomentServe {
     List<DbIMReminder> queryIMRemindersByStatus(String status);
 
     List<DbMoment> queryMessageForPages(long offset, long limit, boolean ascending);
+
+    /** 「搜索动态」候选分页查询，见 {@code MomentDao#searchMomentCandidates}。 */
+    List<DbMoment> searchMomentCandidates(String keyword, long offset, long limit);
+
+    /** 给一批动态补上本地评论（并过滤已删除评论），供列表直接渲染。 */
+    List<DbMoment> attachCommentsForMoments(List<DbMoment> moments);
 
     DbReminder queryReminderByLabel(String label);
 

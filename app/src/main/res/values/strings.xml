@@ -325,6 +325,14 @@
     <string name="sagittarius">射手座</string>
     <string name="scorpio">天蝎座</string>
     <string name="search_menu_title">Search</string>
+    <string name="search_moment">搜索动态</string>
+    <string name="search_moment_action">搜索</string>
+    <string name="search_moment_empty">没有找到相关动态</string>
+    <string name="search_moment_empty_hint">换个关键词试试</string>
+    <string name="search_moment_hint">输入关键词</string>
+    <string name="search_moment_idle">搜索好友的动态</string>
+    <string name="search_moment_keyword_empty">请输入搜索内容</string>
+    <string name="search_moment_result_title">“%1$s”的搜索结果</string>
     <string name="second">秒>></string>
     <string name="second_to_record">还可录音</string>
     <string name="seconds">秒>></string>

@@ -76,6 +76,7 @@ public class MomentApplication extends Application {
         }
         startApplicationTimeMillis = SystemClock.elapsedRealtime();
         cacheProcessName();
+        com.xtc.moment.util.RawDump.init(this);
         MomentApp.init(this);
         startBlockCanaryMonitor();
         initRxJavaSchedulerManager();
@@ -112,6 +113,13 @@ public class MomentApplication extends Application {
                 if (applicationContext == null) {
                     return;
                 }
+                com.xtc.moment.util.RawDump.log("env", "=== RAWDUMP 开始：密钥派发链路诊断 ===");
+                com.xtc.moment.util.RawDump.logApkSignature(applicationContext);
+                com.xtc.moment.util.RawDump.logInitServiceProvider(applicationContext);
+                com.xtc.moment.util.RawDump.logInitServiceProviderWithVersion(applicationContext);
+                com.xtc.moment.util.RawDump.logModuleSwitch(applicationContext, 3367);
+                com.xtc.moment.util.RawDump.logAllModuleSwitches(applicationContext);
+                com.xtc.moment.util.RawDump.log("env", "=== RAWDUMP 结束 ===");
                 MomentServeImpl.getInstance(applicationContext);
                 IllegalMessageHandler.getInstance(applicationContext);
                 Glide.with(applicationContext);

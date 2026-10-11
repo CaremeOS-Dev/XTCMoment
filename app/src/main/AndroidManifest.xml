@@ -49,6 +49,7 @@
             </intent-filter>
         </activity>
         <activity android:launchMode="singleTop" android:name="com.xtc.moment.module.details.MomentDetailsActivity" android:windowSoftInputMode="stateUnchanged"/>
+        <activity android:exported="false" android:launchMode="singleTop" android:name="com.xtc.moment.module.search.SearchMomentActivity"/>
         <activity android:name="com.xtc.moment.module.details.MemoryTextAllActivity"/>
         <activity android:name="com.xtc.moment.module.publish.moodorstate.MoodOrStateActivity"/>
         <activity android:name="com.xtc.moment.module.publish.location.PublishLocationActivity"/>

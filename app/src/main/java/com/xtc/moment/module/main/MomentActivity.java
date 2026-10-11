@@ -88,6 +88,7 @@ import com.xtc.moment.module.publish.multi.SaveDynamic;
 import com.xtc.moment.module.publish.text.PublishTextBean;
 import com.xtc.moment.module.publish.text.PushTextActivity;
 import com.xtc.moment.module.report.adapter.AbsInteractionAdapter;
+import com.xtc.moment.module.search.SearchMomentActivity;
 import com.xtc.moment.module.share.ShareActivity;
 import com.xtc.moment.module.viewholder.AbsViewHolder;
 import com.xtc.moment.module.widget.LoadingPupWindowHolder;
@@ -976,6 +977,16 @@ public class MomentActivity extends BaseInteractActivity<IMomentActivityView, Mo
         this.ivChampion = (ImageView) headerView.findViewById(R.id.iv_champion);
         this.mVsViewNewLike = (ViewStub) headerView.findViewById(R.id.vs_view_new_like);
         this.ivBanner = (TextView) headerView.findViewById(R.id.tv_moment_banner);
+        headerView.findViewById(R.id.iv_moment_search).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (SystemUtil.isFastDoubleClick()) {
+                    LogUtil.i(TAG, "onClick: click too fast.");
+                    return;
+                }
+                SearchMomentActivity.start(MomentActivity.this);
+            }
+        });
         Glide.with(this).load(R.drawable.bg_head_view).into((ImageView) headerView.findViewById(R.id.iv_head_bg));
         refreshMyHeadIcon();
         this.publishLl = (AppLinearLayout) headerView.findViewById(R.id.ll_publish_btn);

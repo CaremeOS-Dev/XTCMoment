@@ -140,6 +140,14 @@
     <string name="retake">แต่ะที่จอเพื่อส่ง</string>
     <string name="retry_load">ดาวน์โหลดใหม่</string>
     <string name="search_menu_title">ค้นหา</string>
+    <string name="search_moment">ค้นหาโมเมนต์</string>
+    <string name="search_moment_action">ค้นหา</string>
+    <string name="search_moment_empty">ไม่พบโมเมนต์ที่เกี่ยวข้อง</string>
+    <string name="search_moment_empty_hint">ลองคำค้นหาอื่น</string>
+    <string name="search_moment_hint">ป้อนคำค้นหา</string>
+    <string name="search_moment_idle">ค้นหาโมเมนต์ของเพื่อน</string>
+    <string name="search_moment_keyword_empty">กรุณาป้อนคำค้นหา</string>
+    <string name="search_moment_result_title">ผลการค้นหา “%1$s”</string>
     <string name="second">วินาที>></string>
     <string name="second_to_record">ยังบันทึกได้อีก</string>
     <string name="seconds">วินาที>></string>

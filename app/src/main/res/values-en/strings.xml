@@ -241,6 +241,14 @@ Please try tomorrow"</string>
     <string name="retry_load">Load Again</string>
     <string name="sagittarius">Sagittarius</string>
     <string name="scorpio">Scorpio</string>
+    <string name="search_moment">Search moments</string>
+    <string name="search_moment_action">Search</string>
+    <string name="search_moment_empty">No matching moments</string>
+    <string name="search_moment_empty_hint">Try another keyword</string>
+    <string name="search_moment_hint">Enter keyword</string>
+    <string name="search_moment_idle">Search friends\' moments</string>
+    <string name="search_moment_keyword_empty">Enter a keyword</string>
+    <string name="search_moment_result_title">Results for “%1$s”</string>
     <string name="second">Seconds>></string>
     <string name="second_to_record">Supporting recording another</string>
     <string name="seconds">Seconds>></string>

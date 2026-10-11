@@ -54,7 +54,8 @@ The home page (`MomentActivity`) is the social loop in one screen.
 | **Load more** | Incremental paging as you scroll, with a visible-item listener driving prefetch |
 | **Unread reminders** | Unread likes/comments surfaced as badges, plus a reminder switch you can turn off |
 | **Live updates** | IM push receiver updates the list and the badges without reopening the app |
-| **Feed entries** | Publish button, likes inbox, personal page, settings, assistant and share targets |
+| **Feed entries** | Publish button, moment search, likes inbox, personal page, settings, assistant and share targets |
+| **Search moments** | Keyword search over cached moments from the header entry (`SearchMomentActivity`): matches text, shared-content captions, locations and author names, and the results are the usual moment cards — like, comment and open details right there |
 | **Empty / error states** | Friendly empty views, retry paths and version-mismatch hints |
 
 ## 2 · Publishing a moment
