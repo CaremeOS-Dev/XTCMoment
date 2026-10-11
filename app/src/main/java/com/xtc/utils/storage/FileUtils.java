@@ -145,7 +145,7 @@ public class FileUtils {
 
     /** Creates the directory (and parents); true when it exists afterwards. */
     public static boolean makeDirs(File file) {
-        return file != null && (!file.exists() ? !file.mkdirs() : !file.isDirectory());
+        return file != null && (file.exists() ? file.isDirectory() : file.mkdirs());
     }
 
     /** Creates the file (and parents) if missing; true when it exists afterwards. */

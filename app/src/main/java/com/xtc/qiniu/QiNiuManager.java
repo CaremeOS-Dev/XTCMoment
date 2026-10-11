@@ -88,7 +88,7 @@ public class QiNiuManager extends ICloudManager {
     /** Builds an upload manager with the app upload configuration. */
     public UploadManager createUploadManager(String ucServer) {
         FileRecorder recorder;
-        FolderManager.getInstance().checkFreeSpace();
+        FolderManager.getInstance().getCommonDir();
         try {
             File recordFile = File.createTempFile(QINIU_UPLOAD_RECORD_FILE, ".tmp");
             String parent = recordFile.getParent();

@@ -57,6 +57,6 @@ class PrivateUtils {
 
     /** Creates the directory (and parents) if needed; true when it exists afterwards. */
     public static boolean makeDirs(File file) {
-        return file != null && (!file.exists() ? !file.mkdirs() : !file.isDirectory());
+        return file != null && (file.exists() ? file.isDirectory() : file.mkdirs());
     }
 }

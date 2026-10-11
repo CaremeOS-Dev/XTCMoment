@@ -22,8 +22,9 @@ public class FolderManager {
     private static final String FACTORY_RESET_DIR = "factoryreset";
     private static final String FALLBACK_LAUNCHER_DIR = "/mnt/sdcard/xtc/ibwatch/launcher/";
     private static final String FALLBACK_COMMON_DIR = "/mnt/sdcard/xtc/ibwatch/common/";
-    private static final int MIN_FREE_SPACE_GB = 10;
-    private static final long BYTES_PER_GB = 1073741824L;
+    /** 原厂阈值 10，单位是 MB（smali 里连续两次 div-long 0x400）。 */
+    private static final int MIN_FREE_SPACE_MB = 10;
+    private static final long BYTES_PER_MB = 1048576L;
     private static volatile FolderManager instance;
     private static String externalRoot = DEFAULT_ROOT;
 
@@ -194,9 +195,9 @@ public class FolderManager {
         return FileUtils.makeDirs(path) ? path : "";
     }
 
-    /** Warns (via toast) when the SD card has less than 10 GB free. */
+    /** Warns (via toast) when the SD card has less than 10 MB free. */
     public boolean checkFreeSpace() {
-        if (getFreeSpaceGb() >= MIN_FREE_SPACE_GB) {
+        if (getFreeSpaceMb() >= MIN_FREE_SPACE_MB) {
             return false;
         }
         new Thread(new Runnable() {
@@ -210,10 +211,10 @@ public class FolderManager {
         return true;
     }
 
-    /** Free space on the external storage, in gigabytes. */
-    private long getFreeSpaceGb() {
+    /** Free space on the external storage, in megabytes. */
+    private long getFreeSpaceMb() {
         StatFs statFs = new StatFs(Environment.getExternalStorageDirectory().getPath());
-        return ((((long) statFs.getAvailableBlocks()) * ((long) statFs.getBlockSize())) / BYTES_PER_GB) / BYTES_PER_GB;
+        return (((long) statFs.getAvailableBlocks()) * ((long) statFs.getBlockSize())) / BYTES_PER_MB;
     }
 
     /** Recovery directory used for the last app config. */
