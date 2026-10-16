@@ -4,6 +4,7 @@
     <include layout="@layout/layout_share_icon_and_name" />
     <TextView android:textSize="@dimen/sp_15" android:id="@id/share_content" android:visibility="gone" android:layout_width="@dimen/dp_150" android:layout_height="wrap_content" />
     <com.xtc.moment.module.publish.multi.view.PointerViewPager android:id="@id/share_vp" android:layout_width="@dimen/dp_125" android:layout_height="@dimen/dp_109" android:layout_marginTop="4.0dip" android:scaleType="centerCrop" />
+    <TextView android:textSize="@dimen/sp_13" android:id="@id/tv_topic" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dp_4" />
     <com.xtc.moment.widget.LbsLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/ll_lbs" android:background="@drawable/default_list_item_normal" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="4.0dip" android:minHeight="31.0dip" />
     <ImageView android:id="@id/iv_moment_range" style="@style/moment_range" />
     <com.xtc.moment.module.widget.MomentReminderView android:id="@id/moment_reminder" style="@style/moment_reminder" />

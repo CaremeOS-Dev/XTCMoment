@@ -12,9 +12,13 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.support.constraint.ConstraintLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.InputFilter;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -37,6 +41,9 @@ import com.xtc.moment.behavior.DigitalManager;
 import com.xtc.moment.constants.ModuleSwitchConstant;
 import com.xtc.moment.db.bean.DbMoment;
 import com.xtc.moment.module.Constants;
+import com.xtc.moment.module.publish.topic.ShowTopicAdapter;
+import com.xtc.moment.module.publish.topic.TopicActivity;
+import com.xtc.moment.net.bean.TopicListBean;
 import com.xtc.moment.module.bean.FriendsVisibleBean;
 import com.xtc.moment.module.bean.LivePhotoMsg;
 import com.xtc.moment.module.bean.MaxTextLengthBean;
@@ -76,6 +83,8 @@ import com.xtc.moment.util.PermissionStringUtils;
 import com.xtc.moment.util.PublishErrorUtil;
 import com.xtc.moment.util.SystemUtil;
 import com.xtc.moment.util.ToastUtil;
+import com.xtc.moment.util.SharedTool;
+import com.xtc.moment.util.SharedTool;
 import com.xtc.moment.util.switchs.ModuleSwitchUtil;
 import com.xtc.system.account.WatchAccountBase;
 import com.xtc.system.account.constant.NotificationFlag;
@@ -165,6 +174,13 @@ public class PushPictureActivity extends BaseCtaPermissionActivity<IPublishView,
     private TextView tvLocation;
     private TextView tvVisibleRange;
     private TextView tvVisibleRangeDetails;
+    private LinearLayout llTopic;
+    private LinearLayout llLocation;
+    private RecyclerView rvTopicList;
+    private ShowTopicAdapter showTopicAdapter;
+    private final ArrayList<TopicListBean> topicList = new ArrayList<>();
+    private boolean topicModuleSwitch = true;
+    private String topicSourceType = null;
     private Bundle videoBundle;
     private ImageView videoImage;
     private RelativeLayout videoRoot;
@@ -382,7 +398,8 @@ public class PushPictureActivity extends BaseCtaPermissionActivity<IPublishView,
             return;
         }
         this.loadingPupWindowHolder.showLoading(getWindow().getDecorView());
-        this.presenter.publishMoment(this.poiBean, this.friendsVisibleBean);
+        this.presenter.publishMoment(this.poiBean, this.friendsVisibleBean,
+                this.topicList, this.topicSourceType);
         clearCache();
     }
 
@@ -616,6 +633,11 @@ public class PushPictureActivity extends BaseCtaPermissionActivity<IPublishView,
         ArrayList<String> photoPaths = SaveDynamic.getPhotoPath(this);
         this.poiBean = SaveDynamic.getSavePoi(this);
         this.friendsVisibleBean = SaveDynamic.getSaveFriendVisible(this);
+        List<TopicListBean> savedTopicList = SaveDynamic.getSaveTopic(this);
+        if (!CollectionUtil.isEmpty(savedTopicList) && this.topicModuleSwitch) {
+            this.topicList.addAll(savedTopicList);
+            this.showTopicAdapter.setData(this.topicList);
+        }
         if (this.poiBean == null) {
             this.tvLocation.setText(R.string.dont_show_location);
         } else {
@@ -638,6 +660,107 @@ public class PushPictureActivity extends BaseCtaPermissionActivity<IPublishView,
         loadVideoPictures(savedVideo);
         this.add.setVisibility(View.INVISIBLE);
         this.dynamicViewPager.setVisibility(View.INVISIBLE);
+    }
+
+    /**
+     * 初始化已选「小括号」横向列表。
+     */
+    private void initShowTopicAdapter() {
+        this.topicList.clear();
+        this.rvTopicList = (RecyclerView) findViewById(R.id.rv_topic_list);
+        this.showTopicAdapter = new ShowTopicAdapter();
+        this.rvTopicList.setLayoutManager(new LinearLayoutManager(this));
+        this.rvTopicList.setAdapter(this.showTopicAdapter);
+        this.showTopicAdapter.setOnDeleteItemListener(new ShowTopicAdapter.OnDeleteItemListener() {
+            @Override
+            public void onDeleteItem(int position) {
+                if (!CollectionUtil.isEmpty(PushPictureActivity.this.topicList)) {
+                    PushPictureActivity.this.topicList.remove(position);
+                }
+                PushPictureActivity.this.showTopicAdapter.setData(PushPictureActivity.this.topicList);
+            }
+        });
+    }
+
+    /**
+     * 根据开关显示或隐藏「小括号」入口。
+     */
+    private void showOrHideTopicModule(boolean show) {
+        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) this.llLocation.getLayoutParams();
+        if (show) {
+            this.rvTopicList.setVisibility(View.VISIBLE);
+            this.llTopic.setVisibility(View.VISIBLE);
+            layoutParams.topMargin = getResources().getDimensionPixelOffset(R.dimen.dp_6);
+        } else {
+            this.rvTopicList.setVisibility(View.GONE);
+            this.llTopic.setVisibility(View.GONE);
+            layoutParams.topMargin = getResources().getDimensionPixelOffset(R.dimen.dp_100);
+        }
+        this.llLocation.setLayoutParams(layoutParams);
+    }
+
+    /**
+     * 处理外部传入的「小括号」json。
+     */
+    private void dealTopicJson() {
+        if (getIntent() == null) {
+            return;
+        }
+        String topicJson = getIntent().getStringExtra(Constants.INTENT_EXTRA_TOPIC);
+        this.topicSourceType = getIntent().getStringExtra(Constants.INTENT_EXTRA_TOPIC_SOURCE);
+        if (TextUtils.isEmpty(topicJson)) {
+            return;
+        }
+        if (SharedTool.getMaxTopicCount(this) <= this.topicList.size()) {
+            ToastUtil.showShort(this, getString(R.string.string_add_topic_max));
+            return;
+        }
+        ArrayList<String> topicNames = (ArrayList<String>) JSONUtil.fromJSON(topicJson, ArrayList.class, String.class);
+        if (CollectionUtil.isEmpty(topicNames)) {
+            return;
+        }
+        for (String topicName : topicNames) {
+            if (TextUtils.isEmpty(topicName)) {
+                continue;
+            }
+            if (!topicName.contains(Constants.TOPIC_PREFIX)) {
+                topicName = Constants.TOPIC_PREFIX + topicName + Constants.TOPIC_SUFFIX;
+            }
+            boolean exists = false;
+            for (TopicListBean topicListBean : this.topicList) {
+                if (topicListBean != null && TextUtils.equals(topicListBean.getTopicName(), topicName)) {
+                    exists = true;
+                    break;
+                }
+            }
+            if (!exists) {
+                TopicListBean topicListBean = new TopicListBean();
+                topicListBean.setTopicName(topicName);
+                this.topicList.add(topicListBean);
+            }
+        }
+        this.showTopicAdapter.setData(this.topicList);
+    }
+
+    /**
+     * 处理「小括号」选择页返回结果。
+     */
+    private void dealTopicResult(Intent data) {
+        ArrayList<TopicListBean> chooseList = data.getParcelableArrayListExtra(TopicActivity.INTENT_CHOOSE_DATA);
+        if (!CollectionUtil.isEmpty(chooseList)) {
+            this.topicList.clear();
+            this.topicList.addAll(chooseList);
+        }
+        TopicListBean topicListBean = data.getParcelableExtra(TopicActivity.INTENT_TOPIC_DATA);
+        if (topicListBean != null) {
+            if (data.getIntExtra(TopicActivity.INTENT_MAX_TOPIC_COUNT, 0) > this.topicList.size()) {
+                this.topicList.add(topicListBean);
+            } else {
+                MomentBehavior.clickTopicMaxToast();
+                ToastUtil.showShort(this, getString(R.string.string_add_topic_max));
+            }
+        }
+        this.showTopicAdapter.setData(this.topicList);
     }
 
     @Override
@@ -668,12 +791,22 @@ public class PushPictureActivity extends BaseCtaPermissionActivity<IPublishView,
         this.videoRoot = (RelativeLayout) findViewById(R.id.video_clued);
         this.videoImage = (ImageView) this.videoRoot.findViewById(R.id.chat_msg_item_photo_iv);
         this.tvLocation = (TextView) findViewById(R.id.tv_location);
-        LinearLayout llLocation = (LinearLayout) findViewById(R.id.ll_location);
         this.rlVisibleRange = (AppRelativeLayout) findViewById(R.id.ll_visible_range);
         this.tvVisibleRange = (TextView) findViewById(R.id.tv_visible_range);
         this.tvVisibleRangeDetails = (TextView) findViewById(R.id.tv_visible_range_details);
         this.ivVisibleRange = (ImageView) findViewById(R.id.iv_visible_range);
-        llLocation.setOnClickListener(new View.OnClickListener() {
+        this.llTopic = (LinearLayout) findViewById(R.id.ll_topic);
+        this.llTopic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PushPictureActivity.this, TopicActivity.class);
+                intent.putParcelableArrayListExtra(TopicActivity.INTENT_CHOOSE_DATA,
+                        PushPictureActivity.this.topicList);
+                PushPictureActivity.this.startActivityForResult(intent,
+                        Constants.StartActivityOnResultCode.MOMENT_TOPIC_REQUEST_CODE);
+            }
+        });
+        this.llLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 PushPictureActivity.this.startPublishPoiActivity();
@@ -688,7 +821,7 @@ public class PushPictureActivity extends BaseCtaPermissionActivity<IPublishView,
         });
         if (ModuleSwitchUtil.queryModuleSwitchByBoolean(this,
                 ModuleSwitchConstant.MODULE_SWITCH_LBS_PUBLISH, false)) {
-            llLocation.setVisibility(View.VISIBLE);
+            this.llLocation.setVisibility(View.VISIBLE);
         } else {
             ConstraintLayout.LayoutParams layoutParams =
                     (ConstraintLayout.LayoutParams) this.rlVisibleRange.getLayoutParams();
@@ -700,6 +833,7 @@ public class PushPictureActivity extends BaseCtaPermissionActivity<IPublishView,
                 ModuleSwitchConstant.MODULE_VISIBLE_RANGE, false)) {
             this.rlVisibleRange.setVisibility(View.VISIBLE);
         }
+        initShowTopicAdapter();
         findViewById(R.id.layout_root).requestFocus();
         this.shareText.setFilters(new InputFilter[]{
                 new InputFilter.LengthFilter(MaxTextLengthBean.getInstance(this).getMaxLength())});
@@ -775,6 +909,11 @@ public class PushPictureActivity extends BaseCtaPermissionActivity<IPublishView,
                         PushPictureActivity.this.dealIntent();
                         PushPictureActivity.this.setSwipeBack();
                         PushPictureActivity.this.recoverLastState();
+                        PushPictureActivity.this.topicModuleSwitch = ModuleSwitchUtil.queryModuleSwitchByBoolean(
+                                PushPictureActivity.this.getApplicationContext(),
+                                ModuleSwitchConstant.MODULE_SWITCH_TOPIC, true);
+                        PushPictureActivity.this.showOrHideTopicModule(PushPictureActivity.this.topicModuleSwitch);
+                        PushPictureActivity.this.dealTopicJson();
                         PushPictureActivity.this.dealCurrentPushBtnBackground();
                         PushPictureActivity.this.initOnclickListener();
                         PushPictureActivity.this.setCenterViewPager();
@@ -945,6 +1084,11 @@ public class PushPictureActivity extends BaseCtaPermissionActivity<IPublishView,
                 LogUtil.d(TAG, "friend bean:" + this.friendsVisibleBean);
                 MomentVisibleShowUtil.dealVisibleRange(this.context, this.friendsVisibleBean,
                         this.ivVisibleRange, this.tvVisibleRange, this.tvVisibleRangeDetails);
+                break;
+            case Constants.StartActivityOnResultCode.MOMENT_TOPIC_REQUEST_CODE:
+                if (this.topicModuleSwitch) {
+                    dealTopicResult(data);
+                }
                 break;
             default:
                 break;
@@ -1170,7 +1314,7 @@ public class PushPictureActivity extends BaseCtaPermissionActivity<IPublishView,
                         BehaviorEvent.publishLbs(PushPictureActivity.this);
                     }
                     PushPictureActivity.this.presenter.publishMoment(photoMsg, videoTokenVoResponse,
-                            PushPictureActivity.this.friendsVisibleBean);
+                            PushPictureActivity.this.friendsVisibleBean, PushPictureActivity.this.topicList);
                 }
 
                 @Override

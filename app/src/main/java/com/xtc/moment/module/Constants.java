@@ -36,6 +36,10 @@ public interface Constants {
     int MOMENT_LENGTH = 40;
     String MOMENT_OFFICIAL_ADVERT_ID = "advertId";
     String MOMENT_TAG = "XTC_MOMENT_";
+    String INTENT_EXTRA_TOPIC = "INTENT_EXTRA_TOPIC";
+    String INTENT_EXTRA_TOPIC_SOURCE = "INTENT_EXTRA_TOPIC_SOURCE";
+    String TOPIC_PREFIX = "（";
+    String TOPIC_SUFFIX = "）";
     int MOMENT_WATCHID_OFFICiAL_LENGTH = 40;
     String PATH_ASSETS_RESOURCE = "video";
     String POSITION_LOCATE = "position_locate";
@@ -443,10 +447,12 @@ public interface Constants {
         String SP_MOMENT_USING_PREROGATIVE_BACKGROUND = "moment_using_prerogative_background";
         String SP_MOMENT_USING_PREROGATIVE_LIKE = "moment_using_prerogative_like";
         String SP_PULL_REMINDER_CONFIG_TIME = "sp_pull_reminder_config_time";
+        String MAX_TOPIC_COUNT = "max_topic_count";
     }
 
     /** Request codes for activities started for a result. */
     interface StartActivityOnResultCode {
+        int MOMENT_TOPIC_REQUEST_CODE = 8;
         int MOMENT_FRIENDS_SEE_REQUEST_CODE = 6;
         int MOMENT_FRIENDS_VISIBLE_LIST = 7;
         int MOMENT_OPEN_ALBUM_REQUEST_CODE = 2;
@@ -476,6 +482,14 @@ public interface Constants {
     /** Misc string keys. */
     interface Strings {
         String STRING_SOURCE = "source";
+    }
+
+    /** 「小括号」跳转链接追加的 source 取值。 */
+    interface TopicSource {
+        String ALL = "1";
+        String PHOTO = "3";
+        String SHARE = "4";
+        String OFFICIAL = "5";
     }
 
     /** File suffix constants. */

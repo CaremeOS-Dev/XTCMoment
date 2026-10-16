@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout android:orientation="vertical" android:background="#ff000000" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView android:textSize="@dimen/sp_17" android:textColor="#ffffaa22" android:layout_gravity="center" android:id="@id/tv_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="@dimen/dp_4" android:text="@string/string_topic" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
+    <android.support.v7.widget.RecyclerView android:id="@id/rv_list" android:layout_width="0.0dip" android:layout_height="0.0dip" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/tv_title" />
+    <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@id/ll_loading" android:background="@color/color_black" android:visibility="gone" android:layout_width="0.0dip" android:layout_height="0.0dip" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/tv_title">
+        <View android:id="@id/loading_ll" android:layout_width="@dimen/dp_26" android:layout_height="@dimen/dp_26" />
+        <TextView android:textSize="@dimen/sp_13" android:textColor="@color/color_ffffff" android:id="@id/tv_loading_video" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/tips_loading" />
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:id="@id/ll_no_data" android:visibility="gone" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dp_5" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/tv_title">
+        <ImageView android:layout_width="fill_parent" android:layout_height="@dimen/dp_102" android:src="@drawable/ic_not_topic" />
+        <TextView android:textSize="@dimen/sp_14" android:textColor="@color/white" android:layout_gravity="center_horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dp_10" android:text="@string/string_not_topic_list" />
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

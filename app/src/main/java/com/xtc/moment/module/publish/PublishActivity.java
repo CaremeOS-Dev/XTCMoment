@@ -663,7 +663,7 @@ public class PublishActivity extends BaseCtaPermissionActivity<IPublishView, Pub
                 public void onUploadPhotoSuccess(PhotoMsg photoMsg, VideoTokenVoResponse videoTokenVoResponse) {
                     LogUtil.i(TAG, "onUploadPhotoSuccess");
                     PublishActivity.this.presenter.publishMoment(photoMsg, videoTokenVoResponse,
-                            (FriendsVisibleBean) null);
+                            (FriendsVisibleBean) null, null);
                 }
 
                 @Override

@@ -9,6 +9,8 @@ import com.xtc.moment.db.bean.DbLikeMessage;
 import com.xtc.moment.db.bean.DbMoment;
 import com.xtc.moment.db.bean.DbMomentComment;
 import com.xtc.moment.module.bean.LivePhotoMsg;
+import com.xtc.moment.module.Constants;
+import com.xtc.moment.net.bean.TopicListBean;
 import com.xtc.moment.module.bean.MomentNewMsgBean;
 import com.xtc.moment.module.bean.PhotoMsg;
 import com.xtc.moment.module.bean.PoiBean;
@@ -22,6 +24,7 @@ import com.xtc.moment.serve.bean.MomentDeleteBean;
 import com.xtc.moment.serve.bean.MomentMessageData;
 import com.xtc.moment.util.switchs.ModuleSwitchUtil;
 import com.xtc.utils.common.CollectionUtil;
+import com.xtc.utils.encode.JSONUtil;
 import com.xtc.utils_screenshot_carry_data.ScreenshotUtils;
 
 import java.util.ArrayList;
@@ -90,6 +93,15 @@ public class BeanConverterUtil {
         dbMoment.setMomentLbs(new MomentLbs(0, 0, 0, 0));
         dbMoment.setLocation(moment.getLocation());
         dbMoment.setLbsSwitch(ModuleSwitchUtil.queryModuleSwitchByBoolean(MomentApp.getAppContext(), ModuleSwitchConstant.MODULE_SWITCH_LBS_PUBLISH, false));
+        if (!CollectionUtil.isEmpty(moment.getTopicList())) {
+            for (TopicListBean topicListBean : moment.getTopicList()) {
+                if (!TextUtils.isEmpty(topicListBean.getTopicName())
+                        && !topicListBean.getTopicName().contains(Constants.TOPIC_PREFIX)) {
+                    topicListBean.setTopicName(Constants.TOPIC_PREFIX + topicListBean.getTopicName() + Constants.TOPIC_SUFFIX);
+                }
+            }
+        }
+        dbMoment.setTopicListJson(JSONUtil.toJSON(moment.getTopicList()));
         return dbMoment;
     }
 

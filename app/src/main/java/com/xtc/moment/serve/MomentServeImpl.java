@@ -43,6 +43,7 @@ import com.xtc.moment.net.bean.Moments;
 import com.xtc.moment.net.bean.NormalResultBean;
 import com.xtc.moment.net.bean.OfficialCommentResultBean;
 import com.xtc.moment.net.bean.PraiseResponse;
+import com.xtc.moment.net.bean.TopicListBean;
 import com.xtc.moment.net.bean.VideoTokenVoResponse;
 import com.xtc.moment.util.EventData;
 import com.xtc.moment.util.LongLog;
@@ -218,7 +219,12 @@ public class MomentServeImpl extends BaseServe implements IMomentServe {
 
     @Override
     public Observable<Moment> publishMoment(int type, String resource, int resourceId, String content, PoiBean poiBean, FriendsVisibleBean friendsVisibleBean) {
-        return this.momentHttpServiceProxy.publishMoment(this.iAccountInfoServe.getWatchAccountInfo().getWatchId(this.mContext), resource, resourceId, content, type, null, poiBean, friendsVisibleBean).throttleFirst(1000L, TimeUnit.MILLISECONDS);
+        return publishMoment(type, resource, resourceId, content, poiBean, friendsVisibleBean, null);
+    }
+
+    @Override
+    public Observable<Moment> publishMoment(int type, String resource, int resourceId, String content, PoiBean poiBean, FriendsVisibleBean friendsVisibleBean, List<TopicListBean> topicList) {
+        return this.momentHttpServiceProxy.publishMoment(this.iAccountInfoServe.getWatchAccountInfo().getWatchId(this.mContext), resource, resourceId, content, type, null, poiBean, friendsVisibleBean, topicList).throttleFirst(1000L, TimeUnit.MILLISECONDS);
     }
 
     @Override
@@ -228,7 +234,12 @@ public class MomentServeImpl extends BaseServe implements IMomentServe {
 
     @Override
     public Observable<Moment> publishMoment(int type, String resource, int resourceId, String content, String packageName, PoiBean poiBean, FriendsVisibleBean friendsVisibleBean) {
-        return this.momentHttpServiceProxy.publishMoment(this.iAccountInfoServe.getWatchAccountInfo().getWatchId(this.mContext), resource, resourceId, content, type, packageName, poiBean, friendsVisibleBean).throttleFirst(1000L, TimeUnit.MILLISECONDS);
+        return publishMoment(type, resource, resourceId, content, packageName, poiBean, friendsVisibleBean, null);
+    }
+
+    @Override
+    public Observable<Moment> publishMoment(int type, String resource, int resourceId, String content, String packageName, PoiBean poiBean, FriendsVisibleBean friendsVisibleBean, List<TopicListBean> topicList) {
+        return this.momentHttpServiceProxy.publishMoment(this.iAccountInfoServe.getWatchAccountInfo().getWatchId(this.mContext), resource, resourceId, content, type, packageName, poiBean, friendsVisibleBean, topicList).throttleFirst(1000L, TimeUnit.MILLISECONDS);
     }
 
     @Override

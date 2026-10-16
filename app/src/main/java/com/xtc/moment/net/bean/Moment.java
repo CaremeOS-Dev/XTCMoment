@@ -1,5 +1,7 @@
 package com.xtc.moment.net.bean;
 
+import java.util.List;
+
 /** A moment as returned by the server after publishing. */
 public class Moment {
     private String content;
@@ -14,6 +16,16 @@ public class Moment {
     private int resourceId;
     private int type;
     private String watchId;
+
+    private List<TopicListBean> topicList;
+
+    public List<TopicListBean> getTopicList() {
+        return this.topicList;
+    }
+
+    public void setTopicList(List<TopicListBean> topicList) {
+        this.topicList = topicList;
+    }
 
     public int getId() {
         return this.id;
@@ -113,6 +125,6 @@ public class Moment {
 
     @Override
     public String toString() {
-        return "Moment{id=" + this.id + ", momentId='" + this.momentId + "', watchId='" + this.watchId + "', type=" + this.type + ", content='" + this.content + "', resource=" + this.resource + ", resourceId=" + this.resourceId + ", createTime=" + this.createTime + ", lookupId='" + this.lookupId + "', parentId='" + this.parentId + "', emotionId=" + this.emotionId + ", location=" + this.location + '}';
+        return "Moment{id=" + this.id + ", momentId='" + this.momentId + "', watchId='" + this.watchId + "', type=" + this.type + ", content='" + this.content + "', resource=" + this.resource + ", resourceId=" + this.resourceId + ", createTime=" + this.createTime + ", lookupId='" + this.lookupId + "', parentId='" + this.parentId + "', emotionId=" + this.emotionId + ", location=" + this.location + ", topicList=" + this.topicList + '}';
     }
 }

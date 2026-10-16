@@ -10,6 +10,7 @@ import com.xtc.dispatch.task.AbsTask;
 import com.xtc.log.LogUtil;
 import com.xtc.moment.behavior.DigitalBigDateSender;
 import com.xtc.moment.behavior.DigitalManager;
+import com.xtc.moment.behavior.DigitalEntity;
 import com.xtc.moment.constants.ModuleSwitchConstant;
 import com.xtc.moment.data.IMomentsDataSource;
 import com.xtc.moment.data.MomentsRepository;
@@ -17,19 +18,26 @@ import com.xtc.moment.data.local.MomentsLocalDataSource;
 import com.xtc.moment.data.remote.MomentsRemoteDataSource;
 import com.xtc.moment.db.bean.DbMoment;
 import com.xtc.moment.db.bean.prerogative.DbMomentPrerogativeBackground;
+import com.xtc.moment.module.Constants;
 import com.xtc.moment.module.bean.FriendsVisibleBean;
 import com.xtc.moment.module.bean.PoiBean;
 import com.xtc.moment.net.bean.Moment;
+import com.xtc.moment.net.bean.TopicListBean;
 import com.xtc.moment.prerogative.MomentPrerogativeServeImpl;
 import com.xtc.moment.serve.AccountInfoServerImpl;
 import com.xtc.moment.serve.IMomentServe;
 import com.xtc.moment.serve.MomentServeImpl;
 import com.xtc.moment.tasks.domain.usecase.PublishMomentTask;
 import com.xtc.moment.third.behavior.MomentBehavior;
+import com.xtc.moment.third.bean.TopicBehaviorBean;
 import com.xtc.moment.util.BeanConverterUtil;
 import com.xtc.moment.util.HandlerUtil;
 import com.xtc.moment.util.switchs.ModuleSwitchUtil;
+import com.xtc.utils.common.CollectionUtil;
+import com.xtc.utils.encode.JSONUtil;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Callable;
 
 import rx.Observable;
@@ -70,9 +78,11 @@ public class PublishTextPresenter extends MvpPresenter<IPublishTextView> {
      * 发布心情/状态类动态：直接调用 IMomentServe 的发布接口。
      */
     public void publishMoodOrStateMoment(int type, String resource, int resourceId, String content,
-                                         PoiBean poiBean, FriendsVisibleBean visibleBean) {
+                                         PoiBean poiBean, FriendsVisibleBean visibleBean,
+                                         List<TopicListBean> topicList, String topicSourceType) {
         DigitalManager.getInstance().getDigitalEntity().momentType = String.valueOf(type);
-        this.momentServe.publishMoment(type, resource, resourceId, content, poiBean, visibleBean)
+        dealTopicBehavior(topicList, topicSourceType);
+        this.momentServe.publishMoment(type, resource, resourceId, content, poiBean, visibleBean, topicList)
                 .subscribeOn(Schedulers.io())
                 .subscribe(new PublishResultSubscriber(SystemClock.elapsedRealtime(), visibleBean));
     }
@@ -80,9 +90,11 @@ public class PublishTextPresenter extends MvpPresenter<IPublishTextView> {
     /**
      * 发布纯位置动态：先查询 LBS 开关，再决定是否携带位置信息发布。
      */
-    public void publishMoment(final PoiBean poiBean, final FriendsVisibleBean visibleBean) {
+    public void publishMoment(final PoiBean poiBean, final FriendsVisibleBean visibleBean,
+                              final List<TopicListBean> topicList, String topicSourceType) {
         final long startPublishTime = SystemClock.elapsedRealtime();
         DigitalManager.getInstance().getDigitalEntity().momentType = String.valueOf(2);
+        dealTopicBehavior(topicList, topicSourceType);
         Observable.fromCallable(new Callable<Boolean>() {
             @Override
             public Boolean call() throws Exception {
@@ -95,7 +107,7 @@ public class PublishTextPresenter extends MvpPresenter<IPublishTextView> {
                     @Override
                     public Observable<Moment> call(Boolean lbsSwitchEnabled) {
                         return PublishTextPresenter.this.momentServe.publishMoment(2, null, 0,
-                                poiBean.getAddressDesc(), lbsSwitchEnabled.booleanValue() ? poiBean : null, visibleBean);
+                                poiBean.getAddressDesc(), lbsSwitchEnabled.booleanValue() ? poiBean : null, visibleBean, topicList);
                     }
                 })
                 .subscribeOn(Schedulers.io())
@@ -105,15 +117,18 @@ public class PublishTextPresenter extends MvpPresenter<IPublishTextView> {
     /**
      * 发布纯文字动态（带资源类型与资源 id）。
      */
-    public void publishMoment(String content, int resourceId, int type, PoiBean poiBean, FriendsVisibleBean visibleBean) {
-        publishMomentText(content, resourceId, type, poiBean, visibleBean);
+    public void publishMoment(String content, int resourceId, int type, PoiBean poiBean,
+                              FriendsVisibleBean visibleBean, List<TopicListBean> topicList, String topicSourceType) {
+        publishMomentText(content, resourceId, type, poiBean, visibleBean, topicList, topicSourceType);
     }
 
     /**
      * 通过 {@link PublishMomentTask} 发布文字动态，携带位置与可见范围参数。
      */
     public void publishMomentText(String content, int resourceId, int type, PoiBean poiBean,
-                                  final FriendsVisibleBean visibleBean) {
+                                  final FriendsVisibleBean visibleBean, List<TopicListBean> topicList,
+                                  String topicSourceType) {
+        dealTopicBehavior(topicList, topicSourceType);
         PublishMomentTask publishMomentTask = new PublishMomentTask(this.momentsDataSource, this.context);
         PublishMomentTask.RequestValues requestValues = new PublishMomentTask.RequestValues(
                 AccountInfoServerImpl.getInstance(this.context).getWatchAccountInfo().getWatchId(this.context),
@@ -128,6 +143,13 @@ public class PublishTextPresenter extends MvpPresenter<IPublishTextView> {
         if (visibleBean != null) {
             requestValues.setPermissionType(visibleBean.getType());
             requestValues.setLookupIds(visibleBean.getFriends());
+        }
+        if (!CollectionUtil.isEmpty(topicList)) {
+            for (TopicListBean topicListBean : topicList) {
+                topicListBean.setTopicName(topicListBean.getTopicName()
+                        .replace(Constants.TOPIC_PREFIX, "").replace(Constants.TOPIC_SUFFIX, ""));
+            }
+            requestValues.setTopicList(topicList);
         }
         publishMomentTask.setRequestValues(requestValues);
         publishMomentTask.setTaskCallback(new AbsTask.TaskCallback<AbsTask.ResponseValue>() {
@@ -247,5 +269,22 @@ public class PublishTextPresenter extends MvpPresenter<IPublishTextView> {
                 PublishTextPresenter.this.getView().publishFail(message);
             }
         }
+    }
+
+    /**
+     * 上报本次发布携带的「小括号」埋点。
+     */
+    private void dealTopicBehavior(List<TopicListBean> topicList, String topicSourceType) {
+        if (CollectionUtil.isEmpty(topicList)) {
+            return;
+        }
+        ArrayList<TopicBehaviorBean> behaviorList = new ArrayList<>();
+        for (TopicListBean topicListBean : topicList) {
+            behaviorList.add(new TopicBehaviorBean(topicListBean.getTopicType(),
+                    topicListBean.getTopicName(), topicListBean.getTopicName().length()));
+        }
+        DigitalEntity digitalEntity = DigitalManager.getInstance().getDigitalEntity();
+        digitalEntity.topicList = JSONUtil.toJSON(behaviorList);
+        digitalEntity.topicSourceType = topicSourceType;
     }
 }

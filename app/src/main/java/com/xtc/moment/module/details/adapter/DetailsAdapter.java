@@ -59,6 +59,7 @@ import com.xtc.moment.util.HandlerUtil;
 import com.xtc.moment.util.MomentLikeViewWindow;
 import com.xtc.moment.util.MomentTypeUtil;
 import com.xtc.moment.util.SystemUtil;
+import com.xtc.moment.util.TopicSpanUtil;
 import com.xtc.moment.util.TimeUtils;
 import com.xtc.moment.util.ToastUtil;
 import com.xtc.moment.util.switchs.ModuleSwitchUtil;
@@ -537,6 +538,7 @@ public class DetailsAdapter extends AbsInteractionAdapter<RecyclerView.ViewHolde
         } else {
             setUnknownData(absHolder, this.momentBean);
         }
+        TopicSpanUtil.setTopicSpanText(this.mContext, absHolder.tvTopic, this.momentBean, isSelf);
         int likeTotal = this.momentBean.getLikeTotal() == null ? 0 : this.momentBean.getLikeTotal().intValue();
         if (isSelf) {
             absHolder.momentLike.setLike(this.mContext, false);

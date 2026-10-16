@@ -3,6 +3,9 @@ package com.xtc.moment.module.publish.text;
 import com.xtc.moment.db.bean.DbTemplate;
 import com.xtc.moment.module.bean.FriendsVisibleBean;
 import com.xtc.moment.module.bean.PoiBean;
+import com.xtc.moment.net.bean.TopicListBean;
+
+import java.util.List;
 
 /** Data carried between the text publish pages. */
 public class PublishTextBean {
@@ -12,6 +15,15 @@ public class PublishTextBean {
     private DbTemplate dbTemplate;
     private String text;
     private PoiBean poiBean;
+    private List<TopicListBean> topicList;
+
+    public List<TopicListBean> getTopicList() {
+        return this.topicList;
+    }
+
+    public void setTopicList(List<TopicListBean> topicList) {
+        this.topicList = topicList;
+    }
 
     public int getType() {
         return this.type;
@@ -56,6 +68,7 @@ public class PublishTextBean {
     @Override
     public String toString() {
         return "PublishTextBean{type=" + this.type + ", friendsVisibleBean=" + this.friendsVisibleBean
-                + ", dbTemplate=" + this.dbTemplate + ", text='" + this.text + "', poiBean=" + this.poiBean + '}';
+                + ", dbTemplate=" + this.dbTemplate + ", text='" + this.text + "', poiBean=" + this.poiBean
+                + ", topicList=" + this.topicList + '}';
     }
 }

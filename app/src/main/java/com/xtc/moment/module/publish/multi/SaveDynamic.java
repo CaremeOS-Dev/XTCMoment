@@ -13,11 +13,13 @@ import com.xtc.moment.module.bean.PoiBean;
 import com.xtc.moment.module.publish.multi.bean.FunVideoParms;
 import com.xtc.moment.module.publish.multi.bean.PhotoBean;
 import com.xtc.moment.module.publish.text.PublishTextBean;
+import com.xtc.moment.net.bean.TopicListBean;
 import com.xtc.utils.common.CollectionUtil;
 import com.xtc.utils.encode.JSONUtil;
 import com.xtc.utils.storage.SharedManager;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Persists the half finished publish draft so the flow survives a process restart.
@@ -37,6 +39,17 @@ public class SaveDynamic {
     private static final String IS_FROM_FUN_VIDEO = "isFromFunVideo";
     private static final String SAVE_FUN_VIDEO_PARMS = "saveFunVideoParms";
     private static final String HAS_LBS_PUBLISHED = "has_lbs_published";
+    private static final String SAVE_TOPIC = "save_topic";
+
+    public static boolean saveTopic(Context context, List<TopicListBean> topicList) {
+        return SharedManager.getInstance(context).putString(SAVE_TOPIC, JSONUtil.toJSON(topicList));
+    }
+
+    public static List<TopicListBean> getSaveTopic(Context context) {
+        return (List<TopicListBean>) JSONUtil.fromJSON(
+                SharedManager.getInstance(context).getString(SAVE_TOPIC, ""),
+                ArrayList.class, TopicListBean.class);
+    }
 
     public static boolean saveTextDynamic(Context context, String text) {
         return SharedManager.getInstance(context).putString(SET_SAVE_TEXT_DYNAMIC, text);

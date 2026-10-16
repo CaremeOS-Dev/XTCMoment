@@ -84,6 +84,7 @@ import com.xtc.moment.util.MomentLikeViewWindow;
 import com.xtc.moment.util.MomentTypeUtil;
 import com.xtc.moment.util.OfficialMomentTypeUtil;
 import com.xtc.moment.util.SystemUtil;
+import com.xtc.moment.util.TopicSpanUtil;
 import com.xtc.moment.util.TimeUtils;
 import com.xtc.moment.util.ToastUtil;
 import com.xtc.moment.util.Utils;
@@ -753,8 +754,10 @@ public class MomentAdapter extends AbsInteractionAdapter<AbsViewHolder>
         viewHolder.momentView.setContent(moment.getResource(), moment.getContent(),
                 this.mContext.getResources().getColor(R.color.normal_text));
         LogUtil.d(TAG, "setTextData() : isSelf means owner or adverting : isSelf = " + isSelf);
+        TopicSpanUtil.setTopicSpanText(this.mContext, viewHolder.tvTopic, moment, isSelf);
         dealMomentBackground(viewHolder, moment);
         setContentOnLongLister(viewHolder, moment, isSelf, this.mContext);
+        TopicSpanUtil.setTopicSpanText(this.mContext, viewHolder.tvTopic, moment, isSelf);
         dealMomentVisible(viewHolder, moment, isSelf);
     }
 
@@ -762,6 +765,7 @@ public class MomentAdapter extends AbsInteractionAdapter<AbsViewHolder>
     private void setOfficialTextData(AbsViewHolder viewHolder, DbMoment moment, boolean isSelf) {
         viewHolder.momentView.setContent(moment.getResource(), moment.getDescription(),
                 this.mContext.getResources().getColor(R.color.normal_text));
+        TopicSpanUtil.setTopicSpanText(this.mContext, viewHolder.tvTopic, moment, isSelf);
         dealMomentBackground(viewHolder, moment);
         setContentOnLongLister(viewHolder, moment, isSelf, this.mContext);
     }
@@ -896,6 +900,7 @@ public class MomentAdapter extends AbsInteractionAdapter<AbsViewHolder>
         }
         setContentOnClickListener(context, viewHolder, moment);
         setContentOnLongLister(viewHolder, moment, isSelf, context);
+        TopicSpanUtil.setTopicSpanText(context, viewHolder.tvTopic, moment, isSelf);
         dealMomentBackground(viewHolder, moment);
         dealMomentVisible(viewHolder, moment, isSelf);
     }
@@ -1004,6 +1009,7 @@ public class MomentAdapter extends AbsInteractionAdapter<AbsViewHolder>
             });
         }
         setContentOnLongLister(viewHolder, moment, isSelf, this.mContext);
+        TopicSpanUtil.setTopicSpanText(this.mContext, viewHolder.tvTopic, moment, isSelf);
         dealMomentVisible(viewHolder, moment, isSelf);
     }
 

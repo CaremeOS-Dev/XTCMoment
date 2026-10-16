@@ -24,6 +24,7 @@ public class PhotosViewHolder extends AbsViewHolder {
         this.ivLbs = (ImageView) view.findViewById(R.id.iv_lbs);
         this.llLbs = (LbsLayout) view.findViewById(R.id.ll_lbs);
         this.tvTime = (TextView) view.findViewById(R.id.tv_time);
+        this.tvTopic = (TextView) view.findViewById(R.id.tv_topic);
         this.momentLike = (MomentLikeView) view.findViewById(R.id.moment_like);
         this.momentReminderView = (MomentReminderView) view.findViewById(R.id.moment_reminder);
         this.ivMomentComment = (CommentIconView) view.findViewById(R.id.iv_moment_comment);

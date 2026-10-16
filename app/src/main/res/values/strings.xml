@@ -499,4 +499,7 @@
     <string name="custom_background_not_set">未设置</string>
     <string name="custom_background_failed">设置失败，请重试</string>
     <string name="custom_background_live_not_support">暂不支持实况照片</string>
+    <string name="string_topic">小括号</string>
+    <string name="string_add_topic_max">小括号数量已达上限</string>
+    <string name="string_not_topic_list">啊哦，还没有小括号哦~</string>
 </resources>

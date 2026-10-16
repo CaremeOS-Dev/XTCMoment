@@ -1,6 +1,7 @@
 package com.xtc.moment.serve;
 
 import com.xtc.moment.db.bean.DbTemplate;
+import com.xtc.moment.net.bean.RespTopicConfig;
 import com.xtc.moment.net.bean.TemplateResponseBean;
 
 import java.util.List;
@@ -23,4 +24,7 @@ public interface IMomentTemplateServe {
     long getTemplatesCount();
 
     int deleteAllTemplates();
+
+    /** 拉取「小括号」推荐话题配置。 */
+    Observable<RespTopicConfig> getTopicConfigData();
 }

@@ -40,6 +40,7 @@
         <activity android:exported="true" android:launchMode="singleTask" android:name="com.xtc.moment.module.publish.PublishActivity" android:theme="@style/MainActivity" android:windowSoftInputMode="stateUnchanged"/>
         <activity android:exported="false" android:launchMode="singleTop" android:name="com.xtc.moment.module.publish.visible.VisibleTypeActivity"/>
         <activity android:exported="false" android:launchMode="singleTask" android:name="com.xtc.moment.module.publish.text.PushTextActivity"/>
+        <activity android:launchMode="singleTop" android:name="com.xtc.moment.module.publish.topic.TopicActivity"/>
         <activity android:exported="true" android:launchMode="singleTop" android:name="com.xtc.moment.module.publish.visible.friends.VisibleFriendsListActivity"/>
         <activity android:exported="false" android:launchMode="singleTop" android:name="com.xtc.moment.module.scope.FriendsVisibleRangeActivity"/>
         <activity android:exported="true" android:launchMode="singleTask" android:name="com.xtc.moment.module.share.ShareActivity" android:windowSoftInputMode="adjustNothing">

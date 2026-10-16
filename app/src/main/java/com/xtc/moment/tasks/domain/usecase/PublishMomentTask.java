@@ -13,6 +13,7 @@ import com.xtc.moment.data.IMomentsDataSource;
 import com.xtc.moment.db.bean.DbMoment;
 import com.xtc.moment.db.bean.prerogative.DbMomentPrerogativeBackground;
 import com.xtc.moment.net.bean.Moment;
+import com.xtc.moment.net.bean.TopicListBean;
 import com.xtc.moment.prerogative.MomentPrerogativeServeImpl;
 import com.xtc.moment.util.BeanConverterUtil;
 import com.xtc.utils.encode.JSONUtil;
@@ -98,6 +99,7 @@ public class PublishMomentTask extends AbsTask<PublishMomentTask.RequestValues, 
         private String resource;
         private int resourceId;
         private int type;
+        private List<TopicListBean> topicList;
         private String watchId;
 
         public RequestValues(String watchId, int resourceId, String resource, String content, int type, String packageName, int emotionId) {
@@ -182,9 +184,17 @@ public class PublishMomentTask extends AbsTask<PublishMomentTask.RequestValues, 
             this.lookupIds = lookupIds;
         }
 
+        public List<TopicListBean> getTopicList() {
+            return this.topicList;
+        }
+
+        public void setTopicList(List<TopicListBean> topicList) {
+            this.topicList = topicList;
+        }
+
         @Override
         public String toString() {
-            return "RequestValues{watchId='" + this.watchId + "', resourceId=" + this.resourceId + ", resource='" + this.resource + "', content='" + this.content + "', type=" + this.type + ", packageName='" + this.packageName + "', permissionType=" + this.permissionType + "', lookupIds='" + this.lookupIds + "', emotionId=" + this.emotionId + '}';
+            return "RequestValues{watchId='" + this.watchId + "', resourceId=" + this.resourceId + ", resource='" + this.resource + "', content='" + this.content + "', type=" + this.type + ", packageName='" + this.packageName + "', permissionType=" + this.permissionType + "', lookupIds='" + this.lookupIds + "', emotionId=" + this.emotionId + ", topicList=" + this.topicList + '}';
         }
     }
 

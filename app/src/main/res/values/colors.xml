@@ -535,4 +535,5 @@
     <color name="yellow_circle">#fffebb33</color>
     <color name="yellow_end">#ffff9500</color>
     <color name="yellow_start">#ffffa200</color>
+    <color name="color_FFFFFFCC">#FFFFFFCC</color>
 </resources>

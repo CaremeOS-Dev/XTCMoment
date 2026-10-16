@@ -16,6 +16,7 @@ import com.xtc.moment.module.bean.FriendsVisibleBean;
 import com.xtc.moment.module.bean.FriendsVisibleBeanReq;
 import com.xtc.moment.module.bean.PoiBean;
 import com.xtc.moment.module.bean.VideoTokenParam;
+import com.xtc.moment.module.Constants;
 import com.xtc.moment.module.report.bean.ReportDataBean;
 import com.xtc.moment.module.report.bean.ReportInformParam;
 import com.xtc.moment.module.report.bean.StartReportRequest;
@@ -42,6 +43,7 @@ import com.xtc.moment.net.bean.OfficialCommentResultBean;
 import com.xtc.moment.net.bean.PraiseMomentBody;
 import com.xtc.moment.net.bean.PraiseResponse;
 import com.xtc.moment.net.bean.PublishMomentBody;
+import com.xtc.moment.net.bean.RespTopicConfig;
 import com.xtc.moment.net.bean.ReminderConfig;
 import com.xtc.moment.net.bean.ReportMomentReq;
 import com.xtc.moment.net.bean.SearchAllCommentRequest;
@@ -56,6 +58,7 @@ import com.xtc.moment.net.bean.SearchOfficialCommentResponse;
 import com.xtc.moment.net.bean.SendGiftRequest;
 import com.xtc.moment.net.bean.TemplateRequestBean;
 import com.xtc.moment.net.bean.TemplateResponseBean;
+import com.xtc.moment.net.bean.TopicListBean;
 import com.xtc.moment.net.bean.VideoTokenVoResponse;
 import com.xtc.moment.prerogative.MomentPrerogativeServeImpl;
 import com.xtc.moment.serve.AccountInfoServerImpl;
@@ -63,6 +66,7 @@ import com.xtc.moment.serve.ServerCache;
 import com.xtc.moment.tasks.domain.usecase.PublishMomentTask;
 import com.xtc.moment.util.switchs.ModuleSwitchUtil;
 import com.xtc.utils.encode.JSONUtil;
+import com.xtc.utils.common.CollectionUtil;
 
 import java.util.List;
 
@@ -124,7 +128,7 @@ public class MomentHttpServiceProxy extends HttpServiceProxy {
         return this.momentHttp.publishMoment(body).map(new HttpRxJavaCallback<Moment>());
     }
 
-    public Observable<Moment> publishMoment(String watchId, String resource, int resourceId, String content, int type, String packageName, PoiBean poiBean, FriendsVisibleBean friendsVisibleBean) {
+    public Observable<Moment> publishMoment(String watchId, String resource, int resourceId, String content, int type, String packageName, PoiBean poiBean, FriendsVisibleBean friendsVisibleBean, List<TopicListBean> topicList) {
         checkBaseUrl();
         PublishMomentBody body = new PublishMomentBody();
         body.setWatchId(watchId);
@@ -147,6 +151,13 @@ public class MomentHttpServiceProxy extends HttpServiceProxy {
                 body.setLocationTag(poiBean.getDetail_info().getTag());
                 LogUtil.i(TAG, "locationTag = " + poiBean.getDetail_info().getTag());
             }
+        }
+        if (!CollectionUtil.isEmpty(topicList)) {
+            for (TopicListBean topicListBean : topicList) {
+                topicListBean.setTopicName(topicListBean.getTopicName()
+                        .replace(Constants.TOPIC_PREFIX, "").replace(Constants.TOPIC_SUFFIX, ""));
+            }
+            body.setTopicList(topicList);
         }
         return this.momentHttp.publishMoment(body).map(new HttpRxJavaCallback<Moment>());
     }
@@ -445,5 +456,13 @@ public class MomentHttpServiceProxy extends HttpServiceProxy {
 
     public Observable<ReminderConfig> getReminderConfig() {
         return this.httpClient.request(BaseUrlManager.getGatewayUrl(this.context), MomentHttp.class).getReminderConfig().map(new HttpRxJavaCallback<ReminderConfig>());
+    }
+
+    /**
+     * 拉取「小括号」推荐话题列表。
+     */
+    public Observable<RespTopicConfig> getTopicConfigData() {
+        checkBaseUrl();
+        return this.momentHttp.getTopicConfigData().map(new HttpRxJavaCallback<RespTopicConfig>());
     }
 }
