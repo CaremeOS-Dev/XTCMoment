@@ -44,6 +44,7 @@ import com.xtc.moment.net.bean.PraiseMomentBody;
 import com.xtc.moment.net.bean.PraiseResponse;
 import com.xtc.moment.net.bean.PublishMomentBody;
 import com.xtc.moment.net.bean.RespTopicConfig;
+import com.xtc.moment.net.bean.ReviewRequestBean;
 import com.xtc.moment.net.bean.ReminderConfig;
 import com.xtc.moment.net.bean.ReportMomentReq;
 import com.xtc.moment.net.bean.SearchAllCommentRequest;
@@ -464,5 +465,16 @@ public class MomentHttpServiceProxy extends HttpServiceProxy {
     public Observable<RespTopicConfig> getTopicConfigData() {
         return this.httpClient.request(BaseUrlManager.getGatewayUrl(this.context), MomentHttp.class)
                 .getTopicConfigData().map(new HttpRxJavaCallback<RespTopicConfig>());
+    }
+
+    /**
+     * 提交封禁申诉。
+     *
+     * <p>走 moment 域名而不是网关：自建服务端把两个域名都指向同一个地址，
+     * 而封禁账号的网关请求会先被 000007 拦掉。</p>
+     */
+    public Observable<String> submitReviewRequest(ReviewRequestBean body) {
+        return this.httpClient.request(BaseUrlManager.getMomentUrl(this.context), MomentHttp.class)
+                .submitReviewRequest(body).map(new HttpRxJavaCallback<String>());
     }
 }

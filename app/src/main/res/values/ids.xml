@@ -667,4 +667,9 @@
     <item type="id" name="iv_delete" />
     <item type="id" name="cl_publish_root" />
     <item type="id" name="ll_content" />
+    <item type="id" name="tv_ban_title" />
+    <item type="id" name="tv_ban_content" />
+    <item type="id" name="btn_ban_appeal" />
+    <item type="id" name="btn_ban_download" />
+    <item type="id" name="btn_ban_confirm" />
 </resources>

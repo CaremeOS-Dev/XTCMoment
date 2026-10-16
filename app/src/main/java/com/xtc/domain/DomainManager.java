@@ -14,6 +14,7 @@ import com.xtc.domain.provider.MemoryDomainProvider;
 import com.xtc.httplib.HttpManager;
 import com.xtc.httplib.net.BaseUrlManager;
 import com.xtc.httplib.net.HttpRxJavaCallback;
+import com.xtc.moment.config.NetBuildConfig;
 import com.xtc.system.account.WatchDevice;
 import com.xtc.utils.system.WatchModelUtil;
 
@@ -47,21 +48,40 @@ public class DomainManager {
                 new BuiltInDomainClient());
     }
 
+    /**
+     * 编译期指定了 baseUrl 时，所有服务域名都指向它。
+     *
+     * <p>由 {@link NetBuildConfig#OVERRIDE_BASE_URL} 决定，默认关闭，行为与原来一致。</p>
+     */
+    private static String overrideHost() {
+        return NetBuildConfig.OVERRIDE_BASE_URL ? NetBuildConfig.HOST : null;
+    }
+
     /** @return true when the built-in environment is active. */
     public boolean isBuiltInEnv() {
-        Integer envId = this.provider.getEnvId();
+        Integer envId = getEnvId();
         return envId != null && envId.intValue() == BuiltInDomainClient.ENV_ID;
     }
 
     public String getDataCenterCode() {
+        if (NetBuildConfig.OVERRIDE_BASE_URL) {
+            // 指向自建服务端时不需要数据中心标识，同时避免触发路由配置拉取。
+            return null;
+        }
         return this.provider.getDataCenterCode();
     }
 
     public Integer getEnvId() {
+        if (NetBuildConfig.OVERRIDE_BASE_URL) {
+            return BuiltInDomainClient.ENV_ID;
+        }
         return this.provider.getEnvId();
     }
 
     public String getEnvName() {
+        if (NetBuildConfig.OVERRIDE_BASE_URL) {
+            return "自建环境";
+        }
         return this.provider.getEnvName();
     }
 
@@ -85,6 +105,10 @@ public class DomainManager {
 
     /** All domains of the given service. */
     public List<String> getDomainList(String name) {
+        String override = overrideHost();
+        if (override != null) {
+            return Arrays.asList(override);
+        }
         String value = this.provider.getDomain(name);
         if (value == null) {
             return null;
@@ -94,6 +118,10 @@ public class DomainManager {
 
     /** Fetches the route configuration from the server. */
     public Single<List<DomainConfig>> fetchRouteConfigs() {
+        if (NetBuildConfig.OVERRIDE_BASE_URL) {
+            // 域名已被编译期写死，没必要再去路由服务拉配置。
+            return Single.just(Collections.<DomainConfig>emptyList());
+        }
         return Single.fromCallable(new Callable<RouteReq>() {
             @Override
             public RouteReq call() {

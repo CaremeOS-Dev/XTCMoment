@@ -50,6 +50,12 @@ public class UploadLimitAgent {
     public String upLoadFileByCover(Context context, int spaceType, String key, File file,
             ICloudManager.OnUpLoadListener listener) {
         String tag = UUIDUtil.randomUUID();
+        if (SelfHostedUploader.isEnabled()) {
+            // 自建服务端：key 由调用方给出，token 用同一个 key 现造。
+            SelfHostedUploader.upload(file == null ? null : file.getAbsolutePath(), key,
+                    SelfHostedUploader.tokenFor(key), new CommonOnUpLoadListener(listener));
+            return tag;
+        }
         if (isLimit()) {
             this.mNeedUploadQueue.offer(new UploadBean(tag, Constants.UploadMethod.UPLOAD_COVER, context, spaceType,
                     key, file, listener));
@@ -63,6 +69,11 @@ public class UploadLimitAgent {
     public String upLoadFile(Context context, int spaceType, String key, File file,
             ICloudManager.OnUpLoadListener listener) {
         String tag = UUIDUtil.randomUUID();
+        if (SelfHostedUploader.isEnabled()) {
+            SelfHostedUploader.upload(file == null ? null : file.getAbsolutePath(), key,
+                    SelfHostedUploader.tokenFor(key), new CommonOnUpLoadListener(listener));
+            return tag;
+        }
         if (isLimit()) {
             this.mNeedUploadQueue.offer(new UploadBean(tag, Constants.UploadMethod.UPLOAD_SPACE, context, spaceType,
                     key, file, listener));
@@ -76,6 +87,11 @@ public class UploadLimitAgent {
     public String uploadFile(Context context, String filePath, String key, String token,
             ICloudManager.OnUpLoadListener listener) {
         String tag = UUIDUtil.randomUUID();
+        if (SelfHostedUploader.isEnabled()) {
+            // 自建服务端：直接上传到自己的 media 目录，不再走七牛。
+            SelfHostedUploader.upload(filePath, key, token, new CommonOnUpLoadListener(listener));
+            return tag;
+        }
         if (isLimit()) {
             this.mNeedUploadQueue.offer(new UploadBean(tag, Constants.UploadMethod.UPLOAD_NO_SPACE, context, key,
                     filePath, token, listener));

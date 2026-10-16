@@ -6,6 +6,7 @@ import com.xtc.domain.Domain;
 import com.xtc.domain.DomainManager;
 import com.xtc.httplib.ConfigOptions;
 import com.xtc.httplib.LogTag;
+import com.xtc.moment.config.NetBuildConfig;
 import com.xtc.moment.module.Constants;
 
 /** Builds the base url of each service. */
@@ -87,11 +88,32 @@ public class BaseUrlManager {
 
     /** {@code protocol + domain + "/"} for the given service. */
     public static String getProtocolUrl(Context context, Domain domain) {
+        if (NetBuildConfig.OVERRIDE_BASE_URL) {
+            // 编译期指定了 baseUrl：协议与主机都取自它，忽略线上域名配置。
+            return NetBuildConfig.SCHEME + NetBuildConfig.HOST
+                    + Constants.ProviderConstants.SEPARATOR_CONTENT_PROVIDER;
+        }
         return PROTOCOL_TYPE + DomainManager.getInstance(context).getDomain(domain.getName())
                 + Constants.ProviderConstants.SEPARATOR_CONTENT_PROVIDER;
     }
 
     public static boolean isHttps() {
+        if (NetBuildConfig.OVERRIDE_BASE_URL) {
+            return ConfigOptions.ProtocolType.HTTPS.equals(NetBuildConfig.SCHEME);
+        }
         return PROTOCOL_TYPE.equals(ConfigOptions.ProtocolType.HTTPS);
+    }
+
+    /**
+     * 编译期指定的自建服务端根地址，形如 {@code http://127.0.0.1:8000/}。
+     *
+     * @return 未指定 baseUrl 时为 null。
+     */
+    public static String getSelfHostedBaseUrl() {
+        if (!NetBuildConfig.OVERRIDE_BASE_URL) {
+            return null;
+        }
+        return NetBuildConfig.SCHEME + NetBuildConfig.HOST
+                + Constants.ProviderConstants.SEPARATOR_CONTENT_PROVIDER;
     }
 }

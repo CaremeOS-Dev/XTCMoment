@@ -791,6 +791,7 @@ public class PushPictureActivity extends BaseCtaPermissionActivity<IPublishView,
         this.videoRoot = (RelativeLayout) findViewById(R.id.video_clued);
         this.videoImage = (ImageView) this.videoRoot.findViewById(R.id.chat_msg_item_photo_iv);
         this.tvLocation = (TextView) findViewById(R.id.tv_location);
+        this.llLocation = (LinearLayout) findViewById(R.id.ll_location);
         this.rlVisibleRange = (AppRelativeLayout) findViewById(R.id.ll_visible_range);
         this.tvVisibleRange = (TextView) findViewById(R.id.tv_visible_range);
         this.tvVisibleRangeDetails = (TextView) findViewById(R.id.tv_visible_range_details);

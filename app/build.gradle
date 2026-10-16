@@ -73,6 +73,14 @@ android {
         checkReleaseBuilds false
     }
 
+    // 原厂 APK 里有 com.xtc.moment.BuildConfig，com.xtc.database.ormlite.DatabaseHelper
+    // 会反射读它的 VERSION_CODE 来决定数据库版本。AGP 8 默认不再生成这个类，缺了它
+    // 版本号会退化成 1，表结构新增字段后 onUpgrade 永远不会触发（曾导致 moment 表
+    // 缺少 topicListJson，动态读写全部抛 SQLException）。这里恢复生成。
+    buildFeatures {
+        buildConfig true
+    }
+
     packagingOptions {
         jniLibs { useLegacyPackaging true }
         resources {
@@ -80,6 +88,102 @@ android {
         }
     }
 }
+
+// ---------------------------------------------------------------------------
+// 编译期网络开关
+//
+//   gradlew :app:assembleDebug -Pmoment.baseUrl=http://127.0.0.1:8000 -Pmoment.encrypt=false
+//
+// 两个参数都留空时行为与原来完全一致（走线上域名 + 加密）。
+// 也可以用环境变量 MOMENT_BASE_URL / MOMENT_ENCRYPT，方便脚本调用。
+//
+// moment.baseUrl 会把所有服务域名统一替换成这个地址；不带 scheme 时按 http 处理。
+// 配合 `adb reverse tcp:8000 tcp:8000` 即可让手表直接连本机服务端。
+// moment.encrypt=false 会强制走明文：Base-Request-Param 与请求体都不加密，
+// 响应也不解密（对应自建服务端只接受不加密请求的约定）。
+// ---------------------------------------------------------------------------
+def momentBaseUrlRaw = (project.findProperty('moment.baseUrl')
+        ?: System.getenv('MOMENT_BASE_URL') ?: '').toString().trim()
+def momentEncryptRaw = (project.findProperty('moment.encrypt')
+        ?: System.getenv('MOMENT_ENCRYPT') ?: '').toString().trim().toLowerCase(java.util.Locale.ROOT)
+
+def momentOverrideUrl = !momentBaseUrlRaw.isEmpty()
+def momentScheme = ''
+def momentHost = ''
+if (momentOverrideUrl) {
+    def normalized = momentBaseUrlRaw
+    if (!normalized.contains('://')) {
+        normalized = 'http://' + normalized
+    }
+    while (normalized.endsWith('/')) {
+        normalized = normalized.substring(0, normalized.length() - 1)
+    }
+    int split = normalized.indexOf('://')
+    momentScheme = normalized.substring(0, split + 3)
+    momentHost = normalized.substring(split + 3)
+    if (momentHost.isEmpty()) {
+        throw new GradleException("moment.baseUrl 不是可用的地址: " + momentBaseUrlRaw)
+    }
+}
+
+def momentOverrideEncrypt = !momentEncryptRaw.isEmpty()
+def momentEncrypt = !(momentEncryptRaw in ['false', '0', 'no', 'off'])
+
+def momentConfigDir = new File(layout.buildDirectory.get().asFile, 'generated/momentNetConfig/java')
+
+tasks.register('generateMomentNetConfig') {
+    def outputDir = momentConfigDir
+    inputs.property('scheme', momentScheme)
+    inputs.property('host', momentHost)
+    inputs.property('overrideUrl', momentOverrideUrl)
+    inputs.property('overrideEncrypt', momentOverrideEncrypt)
+    inputs.property('encrypt', momentEncrypt)
+    outputs.dir(outputDir)
+    doLast {
+        def packageDir = new File(outputDir, 'com/xtc/moment/config')
+        packageDir.mkdirs()
+        new File(packageDir, 'NetBuildConfig.java').text = """\
+// 由 :app:generateMomentNetConfig 生成，请勿手工修改。
+package com.xtc.moment.config;
+
+/** 编译期确定的网络开关，取值来自 Gradle 参数。 */
+public final class NetBuildConfig {
+
+    /** 所有服务域名都会被替换成它；为空表示使用真实域名。 */
+    public static final String HOST = "${momentHost}";
+
+    /** {@link #HOST} 的协议前缀，含 "://"。 */
+    public static final String SCHEME = "${momentScheme}";
+
+    /** 为 true 时所有请求都发往 {@link #HOST}。 */
+    public static final boolean OVERRIDE_BASE_URL = ${momentOverrideUrl};
+
+    /** 为 true 时表示加密开关已在编译期固定。 */
+    public static final boolean OVERRIDE_ENCRYPT = ${momentOverrideEncrypt};
+
+    /** 为 false 时强制明文收发。 */
+    public static final boolean ENCRYPT = ${momentEncrypt};
+
+    private NetBuildConfig() {
+    }
+}
+"""
+    }
+}
+
+android.sourceSets.main.java.srcDirs += [momentConfigDir.absolutePath]
+
+// 生成目录同时被 Java 和 Kotlin 编译读取，两边都要显式声明依赖，
+// 否则 Gradle 会报 implicit dependency。
+tasks.withType(JavaCompile).configureEach { task ->
+    task.dependsOn tasks.named('generateMomentNetConfig')
+}
+tasks.matching { it.name.startsWith('compile') && it.name.endsWith('Kotlin') }.configureEach { task ->
+    task.dependsOn tasks.named('generateMomentNetConfig')
+}
+
+logger.lifecycle("moment: baseUrl=" + (momentOverrideUrl ? momentScheme + momentHost : "(默认线上)")
+        + " encrypt=" + (momentOverrideEncrypt ? momentEncrypt : "(跟随服务端)"))
 
 dependencies {
     // 原厂 APK 使用 25.4.0 的 support 库，保持同版本以免资源 id 与行为变化。
