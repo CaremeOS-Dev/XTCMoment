@@ -462,7 +462,7 @@ public class MomentHttpServiceProxy extends HttpServiceProxy {
      * 拉取「小括号」推荐话题列表。
      */
     public Observable<RespTopicConfig> getTopicConfigData() {
-        checkBaseUrl();
-        return this.momentHttp.getTopicConfigData().map(new HttpRxJavaCallback<RespTopicConfig>());
+        return this.httpClient.request(BaseUrlManager.getGatewayUrl(this.context), MomentHttp.class)
+                .getTopicConfigData().map(new HttpRxJavaCallback<RespTopicConfig>());
     }
 }
