@@ -121,6 +121,8 @@ public class PublishActivity extends BaseCtaPermissionActivity<IPublishView, Pub
 
     private String aiContent;
     private String assistantContent;
+    private String topicJson;
+    private String topicSourceType;
     private boolean bindSucceed;
     private Intent cacheIntent;
     private boolean combinedDynamic;
@@ -345,6 +347,8 @@ public class PublishActivity extends BaseCtaPermissionActivity<IPublishView, Pub
         intent.putExtra(extraKey, bundle);
         intent.putExtra(albumFlagKey, fromAlbum);
         intent.putExtra(IS_FUN_VIDEO, isFunVideo);
+        intent.putExtra(Constants.INTENT_EXTRA_TOPIC, this.topicJson);
+        intent.putExtra(Constants.INTENT_EXTRA_TOPIC_SOURCE, this.topicSourceType);
         startActivity(intent);
     }
 
@@ -397,6 +401,10 @@ public class PublishActivity extends BaseCtaPermissionActivity<IPublishView, Pub
     @Override
     public void initData() {
         LogUtil.d(TAG, "initData");
+        if (getIntent() != null) {
+            this.topicJson = getIntent().getStringExtra(Constants.INTENT_EXTRA_TOPIC);
+            this.topicSourceType = getIntent().getStringExtra(Constants.INTENT_EXTRA_TOPIC_SOURCE);
+        }
         this.isAlbumForbid = SystemPropertyUtil.getBoolean(SystemPropertyConstant.PROPERTY_ALBUM_FORBID, false);
         this.presenter.getMomentTemplateFromNet();
         this.presenter.updateBanState();
@@ -1005,6 +1013,8 @@ public class PublishActivity extends BaseCtaPermissionActivity<IPublishView, Pub
     private void startActivityForResult(Class<?> activityClass, int publishType) {
         Intent intent = new Intent(this, activityClass);
         intent.putExtra(Constants.INTENT_EXTRA_PUBLISH_TYPE, publishType);
+        intent.putExtra(Constants.INTENT_EXTRA_TOPIC, this.topicJson);
+        intent.putExtra(Constants.INTENT_EXTRA_TOPIC_SOURCE, this.topicSourceType);
         startActivityForResult(intent, REQUEST_PUBLISH_ENTRY);
     }
 
