@@ -129,6 +129,7 @@ public class MomentServeImpl extends BaseServe implements IMomentServe {
                         }
                         for (DbMoment moment : watchMoments) {
                             moment.setMomentLbs(moment.getMomentLbs());
+                            moment.setTopicListJson(JSONUtil.toJSON(moment.getTopicList()));
                         }
                         return watchMoments;
                     }

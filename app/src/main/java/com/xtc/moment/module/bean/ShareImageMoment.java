@@ -2,6 +2,9 @@ package com.xtc.moment.module.bean;
 
 import com.xtc.shareapi.share.bean.DialogBitmapArgs;
 import com.xtc.shareapi.share.bean.MessageBitmapArgs;
+import com.xtc.moment.net.bean.TopicListBean;
+
+import java.util.List;
 
 /**
  * 图片分享到动态的展示模型。
@@ -16,6 +19,15 @@ public class ShareImageMoment extends PhotoMsg {
     private String textMsg;
     private MessageBitmapArgs messageBitmapArgs;
     private DialogBitmapArgs dialogBitmapArgs;
+    private List<TopicListBean> topicList;
+
+    public List<TopicListBean> getTopicList() {
+        return this.topicList;
+    }
+
+    public void setTopicList(List<TopicListBean> topicList) {
+        this.topicList = topicList;
+    }
 
     public String getDesc() {
         return this.desc;

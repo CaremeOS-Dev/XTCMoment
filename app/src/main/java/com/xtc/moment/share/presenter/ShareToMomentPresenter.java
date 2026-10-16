@@ -13,6 +13,7 @@ import com.xtc.moment.MomentApp;
 import com.xtc.moment.behavior.DigitalBigDateSender;
 import com.xtc.moment.behavior.DigitalConstant;
 import com.xtc.moment.behavior.DigitalManager;
+import com.xtc.moment.behavior.DigitalEntity;
 import com.xtc.moment.db.bean.DbMoment;
 import com.xtc.moment.module.Constants;
 import com.xtc.moment.module.StringConstant;
@@ -37,6 +38,8 @@ import com.xtc.moment.module.illegal.config.IllegalConfigHandler;
 import com.xtc.moment.module.illegal.handler.IllegalMessageHandler;
 import com.xtc.moment.module.illegal.widget.HintIllegalContentDialog;
 import com.xtc.moment.net.bean.Moment;
+import com.xtc.moment.net.bean.TopicListBean;
+import com.xtc.moment.third.bean.TopicBehaviorBean;
 import com.xtc.moment.net.bean.VideoTokenVoResponse;
 import com.xtc.moment.serve.IMomentServe;
 import com.xtc.moment.serve.MomentServeImpl;
@@ -45,6 +48,7 @@ import com.xtc.moment.share.callback.ICheckBundleCallback;
 import com.xtc.moment.share.callback.IShareToMomentView;
 import com.xtc.moment.share.other.BehaviorEvent;
 import com.xtc.moment.share.other.ShareUtils;
+import com.xtc.moment.share.model.bean.ReqExtInfo;
 import com.xtc.moment.util.BeanConverterUtil;
 import com.xtc.moment.util.ChatVideoUtil;
 import com.xtc.moment.util.FileManager;
@@ -644,8 +648,32 @@ public class ShareToMomentPresenter extends AbstractSharePresenter<IShareToMomen
         if (imageObject.getDialogBitmapArgs() != null) {
             shareImageMoment.setDialogBitmapArgs(imageObject.getDialogBitmapArgs());
         }
+        shareImageMoment.setTopicList(parseShareTopicList());
         shareImageMoment.setTrackMd5Value(ScreenshotUtils.getScreenshotMd5Json(imagePath));
         this.publishService.sendPhotoMsg(shareImageMoment);
+    }
+
+    /**
+     * 解析分享请求 ext 中携带的「小括号」标签，并转换为话题列表。
+     */
+    private List<TopicListBean> parseShareTopicList() {
+        ReqExtInfo reqExtInfo = JSONUtil.fromJSON(
+                this.bundleManager.xtcShareMessage.getExt(), ReqExtInfo.class);
+        if (reqExtInfo == null || TextUtils.isEmpty(reqExtInfo.getTags())) {
+            return null;
+        }
+        List<String> tags = JSONUtil.fromJSON(reqExtInfo.getTags(), List.class, String.class);
+        if (CollectionUtil.isEmpty(tags)) {
+            return null;
+        }
+        ArrayList<TopicListBean> topicList = new ArrayList<>();
+        for (String tag : tags) {
+            TopicListBean topicListBean = new TopicListBean();
+            topicListBean.setTopicName(tag);
+            topicListBean.setTopicType(1);
+            topicList.add(topicListBean);
+        }
+        return topicList;
     }
 
     private void uploadShareAppSource(String imagePath) {
@@ -710,7 +738,8 @@ public class ShareToMomentPresenter extends AbstractSharePresenter<IShareToMomen
     }
 
     private void publishShareImageMoment(ShareImagePublish shareImagePublish, CloudFileResource source) {
-        publishMoment(8, source.getKey(), JSONUtil.toJSON(shareImagePublish));
+        publishMoment(8, source.getKey(), JSONUtil.toJSON(shareImagePublish), null,
+                shareImageMoment == null ? null : shareImageMoment.getTopicList());
     }
 
     private void publishShareAppMoment(ShareAppPublish shareAppPublish, CloudFileResource source) {
@@ -734,10 +763,16 @@ public class ShareToMomentPresenter extends AbstractSharePresenter<IShareToMomen
     }
 
     private void publishMoment(int type, String resource, String content, PoiBean poiBean) {
+        publishMoment(type, resource, content, poiBean, null);
+    }
+
+    private void publishMoment(int type, String resource, String content, PoiBean poiBean,
+                               List<TopicListBean> topicList) {
         final long startTime = SystemClock.elapsedRealtime();
         DigitalManager.getInstance().getDigitalEntity().momentType = String.valueOf(type);
+        dealTopicBehavior(topicList);
         this.iMomentServe.publishMoment(type, resource, 0, content, this.bundleManager.packageName, poiBean,
-                (FriendsVisibleBean) null)
+                (FriendsVisibleBean) null, topicList)
                 .subscribe(new Action1<Moment>() {
                     @Override
                     public void call(Moment moment) {
@@ -818,6 +853,23 @@ public class ShareToMomentPresenter extends AbstractSharePresenter<IShareToMomen
             moment.setContent(JSONUtil.toJSON(this.shareImageMoment));
         }
         this.iMomentServe.insertMomentByMomentId(moment);
+    }
+
+    /**
+     * 上报分享动态携带的「小括号」埋点。
+     */
+    private void dealTopicBehavior(List<TopicListBean> topicList) {
+        if (CollectionUtil.isEmpty(topicList)) {
+            return;
+        }
+        ArrayList<TopicBehaviorBean> behaviorList = new ArrayList<>();
+        for (TopicListBean topicListBean : topicList) {
+            behaviorList.add(new TopicBehaviorBean(topicListBean.getTopicType(),
+                    topicListBean.getTopicName(), topicListBean.getTopicName().length()));
+        }
+        DigitalEntity digitalEntity = DigitalManager.getInstance().getDigitalEntity();
+        digitalEntity.topicList = JSONUtil.toJSON(behaviorList);
+        digitalEntity.topicSourceType = Constants.TopicSource.PHOTO;
     }
 
     private void shareEvent() {
