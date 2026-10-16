@@ -101,6 +101,7 @@ import com.xtc.moment.util.RxUtils;
 import com.xtc.moment.util.ShareAppStartUtil;
 import com.xtc.moment.util.StartWebUtils;
 import com.xtc.moment.util.SystemUtil;
+import com.xtc.moment.util.TopicSpanUtil;
 import com.xtc.moment.util.ToastUtil;
 import com.xtc.moment.util.Utils;
 import com.xtc.moment.util.switchs.ModuleSwitchUtil;
@@ -613,6 +614,7 @@ public class ShareAdapter extends AbsInteractionAdapter<AbsViewHolder>
         DressUtil.setNicknameSource(moment.getWatchId(), holder.tvName);
         holder.setTvTime(this.mContext, moment.getCreateTime().longValue());
         holder.setTvLikes(moment, this.praiseRecordMap, this.mAccountWatchId, this.mLikeDrawableCache);
+        TopicSpanUtil.setTopicSpanText(this.mContext, holder.tvTopic, moment, this.mIsSelf);
         int type = moment.getType().intValue();
         if (holder.ivMomentRange != null && -1 != moment.getPermissionType() && moment.getPermissionType() != 0
                 && this.mIsSelf && MomentTypeUtil.ableChangeVisibleRangeType(type) && this.rangeSwitch) {
@@ -1647,6 +1649,7 @@ public class ShareAdapter extends AbsInteractionAdapter<AbsViewHolder>
             this.ivIcon = (ImageView) view.findViewById(R.id.iv_icon);
             this.tvName = (TextView) view.findViewById(R.id.tv_name);
             this.tvTime = (TextView) view.findViewById(R.id.tv_time);
+            this.tvTopic = (TextView) view.findViewById(R.id.tv_topic);
             this.llLbs = (LbsLayout) view.findViewById(R.id.ll_lbs);
             this.ivContent = (ImageView) view.findViewById(R.id.chat_msg_item_photo_iv);
             this.ivContent.setImageResource(R.drawable.pi_friends_default);
@@ -2261,6 +2264,7 @@ public class ShareAdapter extends AbsInteractionAdapter<AbsViewHolder>
             this.ivIcon = (ImageView) view.findViewById(R.id.iv_icon);
             this.tvName = (TextView) view.findViewById(R.id.tv_name);
             this.tvTime = (TextView) view.findViewById(R.id.tv_time);
+            this.tvTopic = (TextView) view.findViewById(R.id.tv_topic);
             this.tvContent = (MomentContentView) view.findViewById(R.id.tv_content);
             this.tvLikes = (TextView) view.findViewById(R.id.tv_likes);
             this.llLbs = (LbsLayout) view.findViewById(R.id.ll_lbs);
@@ -2342,6 +2346,7 @@ public class ShareAdapter extends AbsInteractionAdapter<AbsViewHolder>
             this.ivIcon = (ImageView) view.findViewById(R.id.iv_icon);
             this.tvName = (TextView) view.findViewById(R.id.tv_name);
             this.tvTime = (TextView) view.findViewById(R.id.tv_time);
+            this.tvTopic = (TextView) view.findViewById(R.id.tv_topic);
             this.vp = (PointerViewPager) view.findViewById(R.id.share_vp);
             this.tvLikes = (TextView) view.findViewById(R.id.tv_likes);
             this.llLbs = (LbsLayout) view.findViewById(R.id.ll_lbs);

@@ -24,6 +24,7 @@ public class ShareViewHolder extends AbsViewHolder {
         this.ivIcon = (ImageView) view.findViewById(R.id.iv_icon);
         this.tvName = (TextView) view.findViewById(R.id.tv_name);
         this.tvTime = (TextView) view.findViewById(R.id.tv_time);
+        this.tvTopic = (TextView) view.findViewById(R.id.tv_topic);
         this.tvContent = (MomentContentView) view.findViewById(R.id.tv_content);
         this.tvLikes = (TextView) view.findViewById(R.id.tv_likes);
         this.ivBanner = (ImageView) view.findViewById(R.id.iv_banner);

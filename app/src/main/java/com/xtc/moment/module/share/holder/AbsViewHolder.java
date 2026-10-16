@@ -95,6 +95,7 @@ public abstract class AbsViewHolder extends RecyclerView.ViewHolder {
     public TextView tvLikes;
     public TextView tvName;
     public TextView tvTime;
+    public TextView tvTopic;
 
     private int cancelLikeSuccessDelayMillis = CANCEL_LIKE_SUCCESS_DELAY_MILLIS;
     private ContactManager contactManager;
