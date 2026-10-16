@@ -402,8 +402,8 @@ public class PublishActivity extends BaseCtaPermissionActivity<IPublishView, Pub
     public void initData() {
         LogUtil.d(TAG, "initData");
         if (getIntent() != null) {
-            this.topicJson = getIntent().getStringExtra(Constants.INTENT_EXTRA_TOPIC);
-            this.topicSourceType = getIntent().getStringExtra(Constants.INTENT_EXTRA_TOPIC_SOURCE);
+            this.topicJson = getIntent().getStringExtra(Constants.ExternalIntent.TOPIC);
+            this.topicSourceType = getIntent().getStringExtra(Constants.ExternalIntent.SOURCE);
         }
         this.isAlbumForbid = SystemPropertyUtil.getBoolean(SystemPropertyConstant.PROPERTY_ALBUM_FORBID, false);
         this.presenter.getMomentTemplateFromNet();

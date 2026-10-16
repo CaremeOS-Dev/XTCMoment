@@ -492,6 +492,12 @@ public interface Constants {
         String OFFICIAL = "5";
     }
 
+    /** 第三方跳转发布页时携带「小括号」的外部 extra key。 */
+    interface ExternalIntent {
+        String TOPIC = "topic";
+        String SOURCE = "source";
+    }
+
     /** File suffix constants. */
     interface Suffix {
         String SUFFIX_AUDIO = ".amr";
