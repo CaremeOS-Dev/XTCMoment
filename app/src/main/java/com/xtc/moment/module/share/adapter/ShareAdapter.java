@@ -86,6 +86,7 @@ import com.xtc.moment.module.widget.VerticallyLinearLayoutManager;
 import com.xtc.moment.module.widget.livephotoView.PlayLivePhotoActivity;
 import com.xtc.moment.net.MomentPhotoServeHttpProxy;
 import com.xtc.moment.serve.AccountInfoServerImpl;
+import com.xtc.moment.serve.FriendInfoServeImpl;
 import com.xtc.moment.serve.bean.DownloadUrlVo;
 import com.xtc.moment.serve.bean.FileBatchUrlParam;
 import com.xtc.moment.serve.bean.FileUrlParam;
@@ -597,7 +598,13 @@ public class ShareAdapter extends AbsInteractionAdapter<AbsViewHolder>
             holder.momentCommentView.setOnCommentDeleteListener(new MomentCommentAdapter.OnCommentDeleteListener() {
                 @Override
                 public void onCommentDeleteClick(int index, DbMomentComment comment) {
-                    dealCommentDeleteClick(holder.getDbMoment(), comment, selfWatchId, mIsSelf);
+                    DbMoment moment = holder.getDbMoment();
+                    boolean isOwnComment = selfWatchId != null
+                            && selfWatchId.equals(comment.getWatchId());
+                    boolean isOwnMoment = selfWatchId != null
+                            && selfWatchId.equals(moment.getWatchId());
+                    dealCommentDeleteClick(moment, comment, selfWatchId,
+                            isOwnComment || isOwnMoment);
                 }
             });
         } else {
@@ -790,7 +797,18 @@ public class ShareAdapter extends AbsInteractionAdapter<AbsViewHolder>
             if (this.contactManager == null) {
                 this.contactManager = ContactManager.getInstance(this.mContext);
             }
-            holder.setIvIcon(this.contactManager.getContactWithoutShortNumberByWatchIdSync(moment.getWatchId()), isSelf);
+            ContactBean contactBean = this.contactManager
+                    .getContactWithoutShortNumberByWatchIdSync(moment.getWatchId());
+            com.xtc.moment.module.bean.Friend serverFriend = FriendInfoServeImpl
+                    .getInstance(this.mContext).getFriendByWatchId(moment.getWatchId());
+            if (serverFriend != null
+                    && !com.xtc.log.util.TextUtils.isEmpty(serverFriend.getFriendIcon())) {
+                if (contactBean == null) {
+                    contactBean = new ContactBean();
+                }
+                contactBean.setPhotoPath(serverFriend.getFriendIcon());
+            }
+            holder.setIvIcon(contactBean, isSelf);
         } else {
             ContactBean contactBean = new ContactBean();
             contactBean.setContactServerId(moment.getWatchId());

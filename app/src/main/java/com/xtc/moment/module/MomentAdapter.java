@@ -74,6 +74,7 @@ import com.xtc.moment.module.widget.PhotoPreviewActivity;
 import com.xtc.moment.module.widget.VerticallyLinearLayoutManager;
 import com.xtc.moment.module.widget.livephotoView.PlayLivePhotoActivity;
 import com.xtc.moment.serve.AccountInfoServerImpl;
+import com.xtc.moment.serve.FriendInfoServeImpl;
 import com.xtc.moment.serve.IAccountInfoServe;
 import com.xtc.moment.third.behavior.MomentBehavior;
 import com.xtc.moment.util.ClickUtils;
@@ -329,9 +330,13 @@ public class MomentAdapter extends AbsInteractionAdapter<AbsViewHolder>
                     LogUtil.d(TAG, "index: 删除" + position + ";dbMomentComment:" + comment
                             + viewHolder.getDbMoment().getType());
                     DbMoment moment = viewHolder.getDbMoment();
-                    boolean isSelf = MomentAdapter.this.selfWatchId != null
+                    // 删除权限 = 自己发的评论，或自己动态下的任意评论。
+                    boolean isOwnComment = MomentAdapter.this.selfWatchId != null
+                            && MomentAdapter.this.selfWatchId.equals(comment.getWatchId());
+                    boolean isOwnMoment = MomentAdapter.this.selfWatchId != null
                             && MomentAdapter.this.selfWatchId.equals(moment.getWatchId());
-                    dealCommentDeleteClick(moment, comment, MomentAdapter.this.selfWatchId, isSelf);
+                    dealCommentDeleteClick(moment, comment, MomentAdapter.this.selfWatchId,
+                            isOwnComment || isOwnMoment);
                 }
             });
         }
@@ -556,14 +561,20 @@ public class MomentAdapter extends AbsInteractionAdapter<AbsViewHolder>
         } else {
             ContactBean matched = ContactManager.getInstance(this.mContext)
                     .getContactWithoutShortNumberByWatchIdSync(moment.getWatchId());
+            Friend serverFriend = FriendInfoServeImpl.getInstance(this.mContext)
+                    .getFriendByWatchId(moment.getWatchId());
             if (matched != null) {
                 displayName = matched.getName();
                 contactBean = matched;
-                displayIconPath = matched.getPhotoPath();
+                displayIconPath = serverFriend != null
+                        && !TextUtils.isEmpty(serverFriend.getFriendIcon())
+                        ? serverFriend.getFriendIcon() : matched.getPhotoPath();
             } else if (!advertisement(moment.getType().intValue())) {
                 LogUtil.d(TAG, "showContact is null");
-                displayName = moment.getName();
-                displayIconPath = "";
+                displayName = serverFriend != null && !TextUtils.isEmpty(serverFriend.getName())
+                        ? serverFriend.getName() : moment.getName();
+                displayIconPath = serverFriend != null && !TextUtils.isEmpty(serverFriend.getFriendIcon())
+                        ? serverFriend.getFriendIcon() : moment.getIconPath();
                 contactBean = matched;
             } else {
                 LogUtil.d(TAG, "show advertisement");
@@ -714,7 +725,7 @@ public class MomentAdapter extends AbsInteractionAdapter<AbsViewHolder>
         }
         if (!isSelf && contactBean != null) {
             Glide.with(this.mContext)
-                    .load(contactBean.getPhotoPath())
+                    .load(TextUtils.isEmpty(iconPath) ? contactBean.getPhotoPath() : iconPath)
                     .apply(new RequestOptions()
                             .centerCrop()
                             .diskCacheStrategy(DiskCacheStrategy.NONE)

@@ -72,8 +72,13 @@ public abstract class BaseInteractActivity<V extends IBaseInteractView, P extend
                     if (keyCode != KeyEvent.KEYCODE_DEL) {
                         return false;
                     }
-                    Utils.hideSoftInputFromWindow(BaseInteractActivity.this.getInputMethodManager(), view);
-                    return true;
+                    // 退格交给输入框正常处理：原实现在这里直接隐藏输入法，
+                    // 导致用户按一次退格就被迫重新唤起键盘。这里不再拦截，
+                    // 同时保证输入框仍然持有焦点。
+                    if (view != null) {
+                        view.requestFocus();
+                    }
+                    return false;
                 }
                 Utils.hideSoftInputFromWindow(BaseInteractActivity.this.getInputMethodManager(), view);
                 if (BaseInteractActivity.this.etHint == null) {

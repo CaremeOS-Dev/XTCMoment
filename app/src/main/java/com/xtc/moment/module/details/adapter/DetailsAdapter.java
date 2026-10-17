@@ -52,6 +52,7 @@ import com.xtc.moment.module.viewholder.ViewHolder;
 import com.xtc.moment.module.viewholder.comment.MomentCommentAdapter;
 import com.xtc.moment.module.widget.AbsMomentView;
 import com.xtc.moment.serve.AccountInfoServerImpl;
+import com.xtc.moment.serve.FriendInfoServeImpl;
 import com.xtc.moment.serve.IAccountInfoServe;
 import com.xtc.moment.third.behavior.MomentBehavior;
 import com.xtc.moment.util.ClickUtils;
@@ -293,8 +294,11 @@ public class DetailsAdapter extends AbsInteractionAdapter<RecyclerView.ViewHolde
                                 || DetailsAdapter.this.checkMomentIsNull("onMomentCommentClick")) {
                             return;
                         }
+                        // 以适配器持有的 momentBean 为准：headerHolder 上的副本
+                        // 在某些刷新路径中可能还没同步，拿它会出现 momentId=null，
+                        // 评论请求随即被服务端以 000005 拒绝。
                         DetailsAdapter.this.momentCommentListener.reply(
-                                DetailsAdapter.this.headerHolder.getDbMoment(), comment);
+                                DetailsAdapter.this.momentBean, comment);
                     }
                 });
                 this.headerHolder.commentAdapter.setOnCommentDeleteListener(new MomentCommentAdapter.OnCommentDeleteListener() {
@@ -302,11 +306,14 @@ public class DetailsAdapter extends AbsInteractionAdapter<RecyclerView.ViewHolde
                     public void onCommentDeleteClick(int position, DbMomentComment comment) {
                         LogUtil.d(TAG, "index: 详情" + position + ";dbMomentComment:" + comment + "===="
                                 + DetailsAdapter.this.headerHolder.getDbMoment().getType());
-                        DbMoment moment = DetailsAdapter.this.headerHolder.getDbMoment();
-                        boolean isSelf = DetailsAdapter.this.selfWatchId != null
+                        DbMoment moment = DetailsAdapter.this.momentBean;
+                        // 删除权限 = 自己发的评论，或自己动态下的任意评论。
+                        boolean isOwnComment = DetailsAdapter.this.selfWatchId != null
+                                && DetailsAdapter.this.selfWatchId.equals(comment.getWatchId());
+                        boolean isOwnMoment = DetailsAdapter.this.selfWatchId != null
                                 && DetailsAdapter.this.selfWatchId.equals(moment.getWatchId());
                         DetailsAdapter.this.dealCommentDeleteClick(moment, comment,
-                                DetailsAdapter.this.selfWatchId, isSelf);
+                                DetailsAdapter.this.selfWatchId, isOwnComment || isOwnMoment);
                     }
                 });
             }
@@ -324,7 +331,7 @@ public class DetailsAdapter extends AbsInteractionAdapter<RecyclerView.ViewHolde
                             return;
                         }
                         DetailsAdapter.this.momentCommentListener.comment(
-                                DetailsAdapter.this.headerHolder.getDbMoment());
+                                DetailsAdapter.this.momentBean);
                     }
                 });
             }
@@ -511,14 +518,27 @@ public class DetailsAdapter extends AbsInteractionAdapter<RecyclerView.ViewHolde
             contactBean = null;
         } else {
             ContactBean friendContact = this.contactManager.getContactByWatchIdSync(this.momentBean.getWatchId());
+            com.xtc.moment.module.bean.Friend serverFriend = FriendInfoServeImpl
+                    .getInstance(this.mContext).getFriendByWatchId(this.momentBean.getWatchId());
             if (friendContact != null) {
                 friendName = friendContact.getName();
-                photoPath = friendContact.getPhotoPath();
+                photoPath = serverFriend != null
+                        && !com.xtc.log.util.TextUtils.isEmpty(serverFriend.getFriendIcon())
+                        ? serverFriend.getFriendIcon() : friendContact.getPhotoPath();
             } else if (MomentTypeUtil.isOfficialType(this.momentBean.getType().intValue())) {
                 photoPath = "";
             } else {
                 LogUtil.d(TAG, "showContact is null");
-                return;
+                // 好友来自自建服务端时本机通讯录里可能没有这条记录。
+                // 以前这里直接 return，整个详情页正文就不会绑定，表现为
+                // “打开部分动态查看全文里面没东西”。改用动态自带的昵称
+                // 继续渲染，与列表页 MomentAdapter 的处理保持一致。
+                friendName = serverFriend != null
+                        && !com.xtc.log.util.TextUtils.isEmpty(serverFriend.getName())
+                        ? serverFriend.getName() : this.momentBean.getName();
+                photoPath = serverFriend != null
+                        && !com.xtc.log.util.TextUtils.isEmpty(serverFriend.getFriendIcon())
+                        ? serverFriend.getFriendIcon() : this.momentBean.getIconPath();
             }
             LogUtil.i(TAG, "moment adapter friend name:" + friendName + ",iconPath:" + photoPath);
             contactBean = friendContact;
@@ -529,6 +549,13 @@ public class DetailsAdapter extends AbsInteractionAdapter<RecyclerView.ViewHolde
         absHolder.setDbMoment(this.momentBean);
         absHolder.momentView.setContext(this.mContext);
         absHolder.showRecyclerComment();
+        // 详情页必须显式显示评论入口：列表页会在绑定末尾按开关 showComment，
+        // 详情页原来漏了这一步，导致评论图标一直是布局里的默认隐藏状态。
+        if (this.commentSwitch) {
+            absHolder.showComment();
+        } else {
+            absHolder.hideComment();
+        }
         absHolder.momentView.rlMomentSender.setVisibility(View.VISIBLE);
         if (absHolder.commentRecyclerView != null && absHolder.commentAdapter != null) {
             List<DbMomentComment> comments = this.dbMomentComments;

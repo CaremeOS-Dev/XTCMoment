@@ -214,7 +214,9 @@ public abstract class BaseInteractPresenter<M extends IBaseInteractView> extends
             return;
         }
         final String watchId = AccountInfoServerImpl.getInstance(this.mContext).getWatchAccountInfo().getWatchId(this.mContext);
-        comment.setWatchId(watchId);
+        // 不要覆盖评论作者：服务端按 commentId 定位评论并校验“评论作者或
+        // 动态作者”的删除权限，把 watchId 改成自己会让权限判断和本地
+        // 数据都失真（删除后刷新又出现）。
         this.iMomentServe.deleteServerComment(comment).map(new Func1<NormalResultBean, Boolean>() {
             @Override
             public Boolean call(NormalResultBean result) {

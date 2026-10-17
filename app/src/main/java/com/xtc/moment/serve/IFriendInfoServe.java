@@ -10,6 +10,9 @@ import java.util.List;
 public interface IFriendInfoServe {
     List<Friend> getAllFriendInfo();
 
+    /** One friend from the cached server/provider list, or {@code null}. */
+    Friend getFriendByWatchId(String watchId);
+
     String getDefaultHead();
 
     void onContactChange();

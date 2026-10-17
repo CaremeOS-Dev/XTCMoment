@@ -493,7 +493,16 @@ public abstract class AbsInteractionAdapter<T extends RecyclerView.ViewHolder> e
 
     /** 点击评论的删除入口。 */
     public void dealCommentDeleteClick(DbMoment moment, final DbMomentComment comment, String myWatchId, boolean isSelf) {
+        // isSelf 由调用方给出，语义是「可以删除这条评论」：既包括自己在
+        // 别人动态下发的评论，也包括自己动态下的任意评论。
         if (!(myWatchId != null && myWatchId.equals(comment.getWatchId()))) {
+            if (isSelf) {
+                // 自己发的动态：下面任何人的评论都可以删。
+                if (this.deleteCommentListener != null) {
+                    this.deleteCommentListener.onDeleteComment(comment, moment, true);
+                }
+                return;
+            }
             handleCommentDelete(new IOnDialogClickLister() {
                 @Override
                 public void onRightBtnClick() {

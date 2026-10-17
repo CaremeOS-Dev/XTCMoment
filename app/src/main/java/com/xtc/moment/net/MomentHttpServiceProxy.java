@@ -15,6 +15,7 @@ import com.xtc.moment.db.bean.DbMomentComment;
 import com.xtc.moment.module.bean.FriendsVisibleBean;
 import com.xtc.moment.module.bean.FriendsVisibleBeanReq;
 import com.xtc.moment.module.bean.Friend;
+import com.xtc.moment.module.bean.FriendAvatar;
 import com.xtc.moment.module.bean.PoiBean;
 import com.xtc.moment.module.bean.VideoTokenParam;
 import com.xtc.moment.module.Constants;
@@ -47,6 +48,7 @@ import com.xtc.moment.net.bean.PublishMomentBody;
 import com.xtc.moment.net.bean.RespTopicConfig;
 import com.xtc.moment.net.bean.ReviewRequestBean;
 import com.xtc.moment.net.bean.GetFriendListBean;
+import com.xtc.moment.net.bean.GetFriendAvatarBean;
 import com.xtc.moment.net.bean.ReminderConfig;
 import com.xtc.moment.net.bean.ReportMomentReq;
 import com.xtc.moment.net.bean.SearchAllCommentRequest;
@@ -489,5 +491,16 @@ public class MomentHttpServiceProxy extends HttpServiceProxy {
     public Observable<List<Friend>> getFriendList(GetFriendListBean body) {
         return this.httpClient.request(BaseUrlManager.getDefaultUrl(this.context), MomentHttp.class)
                 .getFriendList(body).map(new HttpRxJavaCallback<List<Friend>>());
+    }
+
+    /**
+     * 批量读取自建服务端设置的好友头像。
+     *
+     * <p>只覆盖头像，不改变 provider 提供的好友关系和昵称；这样本地
+     * provider 有记录时也优先显示 dashboard 设置的头像。</p>
+     */
+    public Observable<List<FriendAvatar>> getFriendAvatar(GetFriendAvatarBean body) {
+        return this.httpClient.request(BaseUrlManager.getDefaultUrl(this.context), MomentHttp.class)
+                .getFriendAvatar(body).map(new HttpRxJavaCallback<List<FriendAvatar>>());
     }
 }

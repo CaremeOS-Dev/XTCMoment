@@ -151,10 +151,12 @@ public class MomentDao extends OrmLiteDao<DbMoment> {
                             }
                         } else {
                             DbMoment local = localMoments.get(0);
-                            if (MomentTypeUtil.isOfficialType(moment)) {
-                                moment.setEnableLike(local.isEnableLike());
-                                moment.setLikeTotal(local.getLikeTotal());
-                            }
+                            // The server's ``enableLike`` is per requesting
+                            // account and is authoritative for both official
+                            // and friend moments.  Preserving only the official
+                            // local value made a friend moment turn grey again
+                            // after every refresh, which also blocked the
+                            // cancel-like branch.
                             int type = moment.getType().intValue();
                             String localContent = local.getContent();
                             if (!com.xtc.log.util.TextUtils.isEmpty(localContent)) {
