@@ -94,7 +94,7 @@ public final class PublishErrorUtil {
     }
 
     /**
-     * 展示「你的账户已被封禁」弹窗。
+     * 展示「封禁通知」弹窗。
      *
      * <p>文案与线上一致：标题、正文，以及「申请复核」「下载我发布过的动态」
      * 「我知道了」三个按钮。申请复核会调用 {@code /extra/review-request}；

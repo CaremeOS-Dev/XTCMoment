@@ -10,7 +10,7 @@ import android.widget.Button;
 import com.xtc.moment.R;
 
 /**
- * 「你的账户已被封禁」弹窗。
+ * 「封禁通知」弹窗。
  *
  * <p>服务端对封禁账号的每个请求都返回 {@code 000007}（见 {@code PublishErrorUtil}），
  * 登录接口同样如此，因此客户端只要拿到这个错误码就弹本弹窗。</p>

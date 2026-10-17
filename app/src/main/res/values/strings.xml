@@ -276,7 +276,7 @@
     <string name="publish">发布</string>
     <string name="publish_comment_limit">今天评论已达上限</string>
     <string name="account_abnormal">账号异常，请自查违规行为</string>
-    <string name="account_banned_title">你的账户已被封禁</string>
+    <string name="account_banned_title">封禁通知</string>
     <string name="account_banned_content">经过我们的内部调查，您可能存在违反我们的用户协议的行为，如果你觉得这是一个错误，请点击申请复核，否则您可以下载您所发布过的动态</string>
     <string name="account_banned_appeal">申请复核</string>
     <string name="account_banned_download">下载我发布过的动态</string>
