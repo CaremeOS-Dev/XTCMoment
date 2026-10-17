@@ -5,6 +5,7 @@ import android.content.Context;
 import com.xtc.database.ormlite.DatabaseHelper;
 import com.xtc.log.LogUtil;
 import com.xtc.moment.db.bean.DbAdvertCloseRecord;
+import com.xtc.moment.db.bean.DbFavoriteMoment;
 import com.xtc.moment.db.bean.DbGiftRecord;
 import com.xtc.moment.db.bean.DbHead;
 import com.xtc.moment.db.bean.DbIMReminder;
@@ -61,6 +62,7 @@ public class MomentDbManager {
         LogUtil.d(TAG, "registerTable: start");
         this.databaseHelper.registerTable(DbLikeMessage.class);
         this.databaseHelper.registerTable(DbMoment.class);
+        this.databaseHelper.registerTable(DbFavoriteMoment.class);
         this.databaseHelper.registerTable(DbMomentComment.class);
         this.databaseHelper.registerTable(DbSexyPhotoDistinguish.class);
         this.databaseHelper.registerTable(DbTemplate.class);

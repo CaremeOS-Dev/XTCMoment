@@ -146,7 +146,7 @@ public class ShareAdapter extends AbsInteractionAdapter<AbsViewHolder>
     private static final int ITEM_TYPE_VOICE = 5;
     private static final String TAG = "XTC_MOMENT_ShareAdapter";
 
-    private boolean commentSwitch;
+    protected boolean commentSwitch;
     private ContactManager contactManager;
     private boolean isSupportPersonalCenter;
     private LifecycleRegistry lifecycleRegistry;
@@ -154,6 +154,8 @@ public class ShareAdapter extends AbsInteractionAdapter<AbsViewHolder>
     protected Context mContext;
     private String mIconPath;
     private boolean mIsSelf;
+    /** 为 true 时列表条目不响应长按（收藏列表使用）。默认 false，既有页面行为不变。 */
+    protected boolean longClickDisabled;
     private LikeDrawableCache mLikeDrawableCache;
     private String mName;
     private ContactHeadManager manager;
@@ -497,6 +499,12 @@ public class ShareAdapter extends AbsInteractionAdapter<AbsViewHolder>
                     onMomentLikeClick(holder, view);
                 }
             });
+            holder.momentLike.setCollectClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    toggleCollect(holder.getDbMoment());
+                }
+            });
         }
         return holder;
     }
@@ -527,6 +535,10 @@ public class ShareAdapter extends AbsInteractionAdapter<AbsViewHolder>
                     holder.momentLike.setCount(moment.getLikeTotal() != null ? moment.getLikeTotal().intValue() : 0);
                 }
                 holder.setTvLikes(moment, this.praiseRecordMap, this.mAccountWatchId, this.mLikeDrawableCache);
+            } else if (AbsInteractionAdapter.PART_REFRESH_FAVORITE.equals(payload)) {
+                if (holder.momentLike != null) {
+                    holder.momentLike.setCollected(isCollected(moment));
+                }
             } else if ("part_refresh_comment".equals(payload)) {
                 List<DbMomentComment> comments = moment.getComments();
                 this.mAccountWatchId = AccountInfoServerImpl.getInstance(this.mContext).getWatchAccountInfo()
@@ -558,14 +570,22 @@ public class ShareAdapter extends AbsInteractionAdapter<AbsViewHolder>
                 setMomentReminder(holder, moment);
             }
         }
-        if (this.commentSwitch) {
+        if (this.commentSwitch && shouldShowCommentIcon(holder.getDbMoment())) {
             holder.showCommentIcon();
         } else {
             holder.hideCommentIcon();
         }
     }
 
-    private boolean checkTypeIsHandle(int position) {
+    /**
+     * 是否展示评论入口图标。默认跟随评论开关；
+     * 收藏列表里已被删除的动态覆写为 false（删掉的动态不能再评论）。
+     */
+    protected boolean shouldShowCommentIcon(DbMoment moment) {
+        return true;
+    }
+
+    protected boolean checkTypeIsHandle(int position) {
         int viewType = getItemViewType(position);
         return viewType == ITEM_TYPE_HEADER || viewType == ITEM_TYPE_FOOTER || viewType == ITEM_TYPE_EMPTY;
     }
@@ -692,6 +712,7 @@ public class ShareAdapter extends AbsInteractionAdapter<AbsViewHolder>
             holder.momentLike.setLike(this.mContext, !moment.isEnableLike());
         }
         holder.momentLike.setCount(likeTotal);
+        holder.momentLike.setCollected(isCollected(moment));
     }
 
     @Override
@@ -1023,6 +1044,21 @@ public class ShareAdapter extends AbsInteractionAdapter<AbsViewHolder>
         }
     }
 
+    /** 收藏态变化后只刷新收藏图标。 */
+    public void refreshFavoriteData(DbMoment moment) {
+        if (moment == null || this.mData == null || this.mData.isEmpty()) {
+            return;
+        }
+        for (int index = 0; index < this.mData.size(); index++) {
+            DbMoment item = this.mData.get(index);
+            if (item != null && item.getMomentId() != null
+                    && item.getMomentId().equals(moment.getMomentId())) {
+                notifyItemChanged(getHolderPosition(item), AbsInteractionAdapter.PART_REFRESH_FAVORITE);
+                return;
+            }
+        }
+    }
+
     public void addData(List<DbMoment> moments) {
         if (moments == null || moments.isEmpty()) {
             return;
@@ -1048,6 +1084,14 @@ public class ShareAdapter extends AbsInteractionAdapter<AbsViewHolder>
             notifyItemChanged(startPosition, Integer.valueOf(addedCount));
             this.verticallyLinearLayoutManager.setScrollEnabled(true);
         }
+    }
+
+    /** 重新渲染点赞文案（收藏列表在禁用互动后会重画一次，去掉可点击的点赞片段）。 */
+    protected void refreshTvLikes(AbsViewHolder holder, DbMoment moment) {
+        if (holder == null || moment == null) {
+            return;
+        }
+        holder.setTvLikes(moment, this.praiseRecordMap, this.mAccountWatchId, this.mLikeDrawableCache);
     }
 
     public void refreshPraiseRecordMap(Map<String, List<DbLikeMessage>> map) {
@@ -2312,6 +2356,11 @@ public class ShareAdapter extends AbsInteractionAdapter<AbsViewHolder>
     }
 
     private void onLongClick(View view, final DbMoment moment, final OnContentOnLongClickListener listener) {
+        if (this.longClickDisabled) {
+            // 收藏列表不支持长按：不挂监听，长按自然没有反应。
+            view.setOnLongClickListener(null);
+            return;
+        }
         view.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view2) {
@@ -2438,6 +2487,14 @@ public class ShareAdapter extends AbsInteractionAdapter<AbsViewHolder>
         @Override
         public void setContentOnLongClickListener(final DbMoment moment, final OnContentOnLongClickListener listener) {
             super.setContentOnLongClickListener(moment, listener);
+            if (longClickDisabled) {
+                // 收藏列表不支持长按：多图/多资源动态的长按举报、删除入口一并摘掉。
+                if (this.simpleOverlayAdapter != null) {
+                    this.simpleOverlayAdapter.setOnClickReport(null);
+                }
+                this.tvContent.setOnLongClickListener(null);
+                return;
+            }
             BaseOverlayPageAdapter overlayAdapter = this.simpleOverlayAdapter;
             if (overlayAdapter != null) {
                 overlayAdapter.setOnClickReport(new BaseOverlayPageAdapter.onClickReport() {

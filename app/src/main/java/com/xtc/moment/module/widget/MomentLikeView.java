@@ -30,7 +30,9 @@ public class MomentLikeView extends RelativeLayout {
     private static final String TAG = "MomentLikeView";
 
     private ImageView mIvLike;
+    private ImageView mIvCollect;
     private TextView mTvLikeCount;
+    private int mCollectResId = -1;
     private int color1;
     private int color2;
     private int usingLikeResId = -1;
@@ -54,12 +56,45 @@ public class MomentLikeView extends RelativeLayout {
     private void initView() {
         View content = LayoutInflater.from(getContext()).inflate(R.layout.view_moment_like, this);
         this.mIvLike = (ImageView) content.findViewById(R.id.iv_like);
+        this.mIvCollect = (ImageView) content.findViewById(R.id.iv_collect);
         this.mTvLikeCount = (TextView) content.findViewById(R.id.tv_like_count);
         this.color1 = content.getResources().getColor(R.color.tv_like_text_color);
         this.color2 = content.getResources().getColor(R.color.tv_like_text_color_2);
         this.instance = MomentPrerogativeServeImpl.getInstance(getContext().getApplicationContext());
         this.currentUseLikeEmotionId = this.instance.getCurrentUseLikeEmotionId();
         this.likeByEmotionId = this.instance.getPrerogativeLikeByEmotionId(this.currentUseLikeEmotionId);
+        if (this.mIvCollect != null) {
+            // 收藏图标自己消费点击，避免点收藏时把事件冒泡成点赞。
+            this.mIvCollect.setClickable(true);
+            // 默认未收藏，避免列表绑定前出现空白图标。
+            this.mCollectResId = R.drawable.ic_to_collect;
+            this.mIvCollect.setImageResource(this.mCollectResId);
+        }
+    }
+
+    /**
+     * 设置收藏态图标：已收藏用实心图标，未收藏用空心图标。
+     */
+    public void setCollected(boolean collected) {
+        ImageView imageView = this.mIvCollect;
+        if (imageView == null) {
+            return;
+        }
+        int resId = collected ? R.drawable.ic_collected : R.drawable.ic_to_collect;
+        if (this.mCollectResId == resId) {
+            return;
+        }
+        this.mCollectResId = resId;
+        imageView.setImageResource(resId);
+    }
+
+    /** 收藏按钮的点击回调，由各列表适配器注入。 */
+    public void setCollectClickListener(OnClickListener listener) {
+        ImageView imageView = this.mIvCollect;
+        if (imageView == null) {
+            return;
+        }
+        imageView.setOnClickListener(listener);
     }
 
     public void setLike(Context context, boolean liked) {

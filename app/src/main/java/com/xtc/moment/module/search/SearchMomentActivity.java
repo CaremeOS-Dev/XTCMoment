@@ -420,6 +420,13 @@ public class SearchMomentActivity extends BaseInteractActivity<ISearchMomentView
                 return;
             }
             this.adapter.addComment((DbMomentComment) eventData.getData());
+            return;
+        }
+        if (eventData.getType() == EventData.CHANGE_FAVORITE) {
+            if (eventData.getData() == null || !(eventData.getData() instanceof DbMoment)) {
+                return;
+            }
+            this.adapter.refreshFavoriteData((DbMoment) eventData.getData());
         }
     }
 

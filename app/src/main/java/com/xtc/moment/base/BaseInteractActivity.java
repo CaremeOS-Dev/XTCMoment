@@ -229,6 +229,19 @@ public abstract class BaseInteractActivity<V extends IBaseInteractView, P extend
                 BaseInteractActivity.this.presenter.cancelLikeMoment(momentId, momentWatchId, moment, true);
             }
         });
+        adapter.setOnCollectMomentListener(new AbsInteractionAdapter.OnCollectMomentListener() {
+            @Override
+            public void collect(DbMoment moment) {
+                LogUtil.d(BaseInteractActivity.this.getLogTag(), "collect moment :" + moment.getMomentId());
+                BaseInteractActivity.this.presenter.collectMoment(moment);
+            }
+
+            @Override
+            public void uncollect(DbMoment moment) {
+                LogUtil.d(BaseInteractActivity.this.getLogTag(), "uncollect moment :" + moment.getMomentId());
+                BaseInteractActivity.this.presenter.uncollectMoment(moment);
+            }
+        });
         adapter.setOnDeleteItemListener(new AbsInteractionAdapter.OnDeleteItemListener() {
             @Override
             public void onDeleteItem(DbMoment moment) {

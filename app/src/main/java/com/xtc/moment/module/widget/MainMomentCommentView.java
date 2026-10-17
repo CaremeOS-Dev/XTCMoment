@@ -54,6 +54,9 @@ public class MainMomentCommentView extends LinearLayout implements View.OnClickL
     private List<DbMomentComment> momentComments;
     private boolean isLoadMoreComment;
 
+    /** 为 false 时评论行不响应点击/长按（收藏列表里已删除的动态使用）。默认 true。 */
+    private boolean interactionEnabled = true;
+
     private MomentCommentAdapter.OnMomentCommentListener listener;
     private MomentCommentAdapter.OnCommentDeleteListener deleteListener;
 
@@ -219,6 +222,10 @@ public class MainMomentCommentView extends LinearLayout implements View.OnClickL
 
     @Override
     public void onClick(View view) {
+        if (!this.interactionEnabled) {
+            LogUtil.i(TAG, "onClick: interaction disabled");
+            return;
+        }
         if (SystemUtil.isFastDoubleClick()) {
             LogUtil.i(TAG, "onClick: click too fast.");
             return;
@@ -254,6 +261,9 @@ public class MainMomentCommentView extends LinearLayout implements View.OnClickL
 
     @Override
     public boolean onLongClick(View view) {
+        if (!this.interactionEnabled) {
+            return false;
+        }
         if (this.deleteListener == null || this.momentComments == null || this.momentComments.isEmpty()) {
             return false;
         }
@@ -273,6 +283,11 @@ public class MainMomentCommentView extends LinearLayout implements View.OnClickL
 
     public void setOnCommentDeleteListener(MomentCommentAdapter.OnCommentDeleteListener listener) {
         this.deleteListener = listener;
+    }
+
+    /** 收藏列表里已删除的动态：评论只读，不做回复、删除与「展开」跳转。 */
+    public void setInteractionEnabled(boolean enabled) {
+        this.interactionEnabled = enabled;
     }
 
     public void refreshVisible(int permissionType) {

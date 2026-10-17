@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.xtc.moment.R;
 import com.xtc.moment.constants.ModuleSwitchConstant;
+import com.xtc.moment.module.favorite.FavoriteMomentActivity;
 import com.xtc.moment.module.theme.ThemeSettingActivity;
 import com.xtc.moment.util.switchs.ModuleSwitchUtil;
 import com.xtc.ui.widget.item.clickScale.RightIconItem;
@@ -48,6 +49,12 @@ public class AboutMomentActivity extends AbstractSettingActivity {
                 }
             });
         }
+        setItemViewStateByViewId(R.id.about_rii_favorite, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FavoriteMomentActivity.start(AboutMomentActivity.this);
+            }
+        });
         setItemViewStateByViewId(R.id.about_rii_privacy, new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -3,4 +3,5 @@
   xmlns:android="http://schemas.android.com/apk/res/android">
     <android.support.v7.widget.RecyclerView android:id="@id/moment_comment_rec" android:background="@drawable/bg_comment" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" />
     <com.xtc.moment.module.widget.MainMomentCommentView android:id="@id/moment_comment" android:background="@drawable/bg_comment" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+    <TextView android:textSize="12.0sp" android:textColor="@color/time_text" android:id="@id/tv_moment_deleted_hint" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginStart="14.0dip" android:layout_marginTop="6.0dip" android:text="@string/favorite_moment_deleted" />
 </LinearLayout>

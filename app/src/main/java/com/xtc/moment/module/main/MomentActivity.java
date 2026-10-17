@@ -1858,6 +1858,13 @@ public class MomentActivity extends BaseInteractActivity<IMomentActivityView, Mo
             }
             return;
         }
+        if (eventData.getType() == EventData.CHANGE_FAVORITE) {
+            if (eventData.getData() instanceof DbMoment) {
+                LogUtil.i(TAG, "receive change favorite event:" + eventData);
+                this.rvAdapter.refreshFavoriteData((DbMoment) eventData.getData());
+            }
+            return;
+        }
         if (eventData.getType() == EventData.CHANGE_VISIBLE_MOMENT) {
             if (eventData.getData() instanceof DbMoment) {
                 DbMoment moment = (DbMoment) eventData.getData();

@@ -227,6 +227,14 @@ public class DetailsAdapter extends AbsInteractionAdapter<RecyclerView.ViewHolde
         refreshData(this.momentBean, PART_REFRESH_PRAISE);
     }
 
+    /** 收藏态变化时只重绘收藏图标，不动其它内容。 */
+    public void refreshFavoriteData() {
+        if (this.momentBean == null) {
+            return;
+        }
+        refreshData(this.momentBean, PART_REFRESH_FAVORITE);
+    }
+
     private void refreshData(DbMoment moment, String payload) {
         notifyItemChanged(0, payload);
     }
@@ -384,6 +392,12 @@ public class DetailsAdapter extends AbsInteractionAdapter<RecyclerView.ViewHolde
                                 moment);
                     }
                 });
+                this.headerHolder.momentLike.setCollectClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        DetailsAdapter.this.toggleCollect(DetailsAdapter.this.momentBean);
+                    }
+                });
             }
             return this.headerHolder;
         }
@@ -417,6 +431,11 @@ public class DetailsAdapter extends AbsInteractionAdapter<RecyclerView.ViewHolde
             }
             absHolder.momentLike.setCount(this.momentBean.getLikeTotal() != null
                     ? this.momentBean.getLikeTotal().intValue() : 0);
+            absHolder.momentLike.setCollected(isCollected(this.momentBean));
+            return;
+        }
+        if (PART_REFRESH_FAVORITE.equals(payload)) {
+            absHolder.momentLike.setCollected(isCollected(this.momentBean));
             return;
         }
         if (PART_REFRESH_COMMENT.equals(payload)) {
@@ -547,6 +566,7 @@ public class DetailsAdapter extends AbsInteractionAdapter<RecyclerView.ViewHolde
         }
         absHolder.tvTime.setText(TimeUtils.getTime(this.mContext, this.momentBean.getCreateTime().longValue()));
         absHolder.momentLike.setCount(likeTotal);
+        absHolder.momentLike.setCollected(isCollected(this.momentBean));
         absHolder.momentView.setIconOnClickListener(this.momentBean);
     }
 
