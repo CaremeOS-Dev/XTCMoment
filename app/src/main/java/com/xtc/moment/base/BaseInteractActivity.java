@@ -165,6 +165,10 @@ public abstract class BaseInteractActivity<V extends IBaseInteractView, P extend
             this.arguedId = replyWatchId;
             this.arguedName = replyName;
         }
+        // etHint 是 1x1 的隐藏输入框，必须先把焦点拿过来再拉输入法。
+        // 搜索结果页的列表（RecyclerView）会持有焦点，直接 showSoftInput 会静默失败，
+        // 表现就是「点了评论按钮没反应」。这里先 requestFocus，把焦点从列表抢回来。
+        this.etHint.requestFocus();
         getInputMethodManager().showSoftInput(this.etHint, 0);
     }
 

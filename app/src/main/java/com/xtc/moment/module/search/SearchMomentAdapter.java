@@ -142,10 +142,16 @@ public class SearchMomentAdapter extends ShareAdapter {
         return contact.getName();
     }
 
-    /** 头像路径：自己取账号头像，好友取联系人头像。 */
+    /**
+     * 头像路径：自己取账号头像，好友取联系人头像。
+     *
+     * <p>自己的头像必须走 {@code getMyHeadIconPath()}：它读的是本地已经落盘的头像文件，
+     * 主列表也是用它。{@code WatchAccountInfo.getIcon()} 取的是账号库里那个字段，
+     * 经常是空的，用它会让卡片退回默认头像。
+     */
     private String resolveIconPath(boolean isSelf, String watchId) {
         if (isSelf) {
-            return AccountInfoServerImpl.getInstance(this.mContext).getWatchAccountInfo().getIcon();
+            return AccountInfoServerImpl.getInstance(this.mContext).getMyHeadIconPath();
         }
         ContactBean contact = this.contactManager.getContactWithoutShortNumberByWatchIdSync(watchId);
         return contact == null ? null : contact.getPhotoPath();

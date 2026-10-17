@@ -24,7 +24,11 @@ public class GlideUtils {
                     return;
                 }
             }
-            if (state != 0 && state != 1) {
+            // state 是 RecyclerView 的滚动状态：0 = 停止、1 = 手指拖动、2 = 惯性滑动。
+            // 只有彻底停下来（0）才恢复加载；拖动和惯性滑动期间一律暂停，避免快速滑动时
+            // 把图片请求堆在后台。之前 0/1 走暂停、2 走恢复，导致一停手就被暂停，
+            // 停下来之后新绑定的卡片永远等不到加载，必须再滑一下（进入 2）才会恢复。
+            if (state == 0) {
                 Glide.with(context).resumeRequests();
                 return;
             }

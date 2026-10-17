@@ -230,8 +230,7 @@ public class FavoriteMomentAdapter extends ShareAdapter {
         }
         boolean self = isSelfMoment(moment);
         if (self) {
-            holder.setIvIcon(AccountInfoServerImpl.getInstance(this.mContext).getWatchAccountInfo()
-                    .getIcon(), true);
+            holder.setIvIcon(AccountInfoServerImpl.getInstance(this.mContext).getMyHeadIconPath(), true);
             return;
         }
         ContactBean contactBean = this.contactManager
@@ -262,10 +261,16 @@ public class FavoriteMomentAdapter extends ShareAdapter {
         return this.mContext.getString(R.string.unknown_watch);
     }
 
-    /** 头像路径：自己取账号头像，好友取联系人头像，联系人被删时回退快照里的路径。 */
+    /**
+     * 头像路径：自己取账号头像，好友取联系人头像，联系人被删时回退快照里的路径。
+     *
+     * <p>自己的头像必须走 {@code getMyHeadIconPath()}：它读的是本地已经落盘的头像文件，
+     * 主列表也是用它。{@code WatchAccountInfo.getIcon()} 取的是账号库里那个字段，
+     * 经常是空的，用它会让卡片退回默认头像。
+     */
     private String resolveIconPath(DbMoment moment, boolean isSelf) {
         if (isSelf) {
-            return AccountInfoServerImpl.getInstance(this.mContext).getWatchAccountInfo().getIcon();
+            return AccountInfoServerImpl.getInstance(this.mContext).getMyHeadIconPath();
         }
         ContactBean contact = this.contactManager
                 .getContactWithoutShortNumberByWatchIdSync(moment.getWatchId());
