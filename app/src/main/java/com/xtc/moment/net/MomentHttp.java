@@ -42,6 +42,8 @@ import com.xtc.moment.net.bean.SearchOfficialCommentResponse;
 import com.xtc.moment.net.bean.SendGiftRequest;
 import com.xtc.moment.net.bean.TemplateRequestBean;
 import com.xtc.moment.net.bean.TemplateResponseBean;
+import com.xtc.moment.net.bean.GetFriendListBean;
+import com.xtc.moment.module.bean.Friend;
 import com.xtc.moment.net.bean.RespTopicConfig;
 import com.xtc.moment.net.bean.ReviewRequestBean;
 import com.xtc.moment.net.bean.VideoTokenVoResponse;
@@ -148,4 +150,13 @@ public interface MomentHttp {
      */
     @POST("/extra/review-request")
     Observable<NetBaseResult<String>> submitReviewRequest(@Body ReviewRequestBean body);
+
+    /**
+     * 自建服务端的好友列表。
+     *
+     * <p>本机通讯录 provider 查询失败或返回空时，客户端回退到这里；
+     * 服务端返回 {@code Friend} 数组（watchId / name / friendIcon）。</p>
+     */
+    @POST("/extra/getFriendList")
+    Observable<NetBaseResult<List<Friend>>> getFriendList(@Body GetFriendListBean body);
 }
