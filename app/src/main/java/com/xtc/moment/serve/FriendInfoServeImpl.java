@@ -13,22 +13,30 @@ import com.xtc.moment.module.bean.Friend;
 import com.xtc.moment.net.MomentHttpServiceProxy;
 import com.xtc.moment.net.bean.GetFriendListBean;
 import com.xtc.moment.util.ContactUtil;
+import com.xtc.moment.util.HandlerUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**
- * 好友信息服务：缓存通讯录转换后的好友列表，并在联系人变化时刷新。
+ * 好友信息服务。
+ *
+ * <p>好友来源按优先级取：先问自建服务端（{@code /extra/getFriendList}），
+ * 服务端拿不到或返回空时才回退到本机通讯录 provider。调用方
+ * （动态过滤、可见范围、点赞列表、分享列表）都依赖本方法同步返回结果，
+ * 因此服务端请求在这里阻塞等待，并带一个较短的超时兜底。</p>
  */
 public class FriendInfoServeImpl extends BaseServe implements ContactChangeListener, IFriendInfoServe {
 
     private static final String TAG = "FriendInfoServeImpl";
+
+    /** 服务端好友请求的最长等待时间，超时即回退本机通讯录。 */
+    private static final long SERVER_TIMEOUT_MILLIS = 3000L;
 
     private ContactManager contactManager;
     private List<Friend> friends;
@@ -57,45 +65,41 @@ public class FriendInfoServeImpl extends BaseServe implements ContactChangeListe
             return new ArrayList<>();
         }
         if (this.friends == null || isUpdate) {
-            this.friends = ContactUtil.convertToFriend(this.contactManager.getAllContactsSync());
-            // 本机通讯录 provider 可能没有好友数据（新装机、未同步联系人），
-            // 这时回退到自建服务端的好友列表；本地有数据时保持原逻辑不变。
-            if (this.friends == null || this.friends.isEmpty()) {
-                loadFriendsFromServer();
+            List<Friend> serverFriends = loadFriendsFromServer();
+            if (serverFriends != null && !serverFriends.isEmpty()) {
+                this.friends = serverFriends;
+            } else {
+                // 服务端没有好友数据时才走本机通讯录 provider。
+                this.friends = ContactUtil.convertToFriend(this.contactManager.getAllContactsSync());
             }
         }
         return this.friends;
     }
 
-    /** 异步从服务端补好友列表，成功后替换本地缓存并通知界面刷新。 */
-    private void loadFriendsFromServer() {
+    /**
+     * 同步向服务端请求好友列表。
+     *
+     * <p>返回 {@code null} 表示请求失败或超时，调用方据此回退本机通讯录。</p>
+     */
+    private List<Friend> loadFriendsFromServer() {
         if (this.momentHttpServiceProxy == null) {
-            return;
+            return null;
         }
-        GetFriendListBean body = new GetFriendListBean();
-        body.setWatchId(MomentApp.getWatchId());
-        this.momentHttpServiceProxy.getFriendList(body)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<Friend>>() {
-                    @Override
-                    public void onCompleted() {
-                    }
-
-                    @Override
-                    public void onError(Throwable throwable) {
-                        LogUtil.e(TAG, "loadFriendsFromServer#error", throwable);
-                    }
-
-                    @Override
-                    public void onNext(List<Friend> serverFriends) {
-                        if (serverFriends == null || serverFriends.isEmpty()) {
-                            return;
-                        }
-                        FriendInfoServeImpl.this.friends = serverFriends;
-                        EventBus.getDefault().post(new EventType(2));
-                    }
-                });
+        try {
+            GetFriendListBean body = new GetFriendListBean();
+            body.setWatchId(MomentApp.getWatchId());
+            List<Friend> serverFriends = this.momentHttpServiceProxy.getFriendList(body)
+                    .subscribeOn(Schedulers.io())
+                    .timeout(SERVER_TIMEOUT_MILLIS, TimeUnit.MILLISECONDS)
+                    .toBlocking()
+                    .firstOrDefault(null);
+            LogUtil.i(TAG, "loadFriendsFromServer size = "
+                    + (serverFriends == null ? "null" : serverFriends.size()));
+            return serverFriends;
+        } catch (Exception e) {
+            LogUtil.e(TAG, "loadFriendsFromServer#error", e);
+            return null;
+        }
     }
 
     @Override
@@ -124,8 +128,15 @@ public class FriendInfoServeImpl extends BaseServe implements ContactChangeListe
 
     @Override
     public void onContactChange() {
-        getAllFriendInfo(true);
-        EventBus.getDefault().post(new EventType(2));
+        // 联系人变化回调在主线程，不能在这里阻塞等网络；放到后台刷新，
+        // 完成后重新通知界面。刷新期间继续使用上一份缓存。
+        HandlerUtil.runOnBackground(new Runnable() {
+            @Override
+            public void run() {
+                getAllFriendInfo(true);
+                EventBus.getDefault().post(new EventType(2));
+            }
+        });
     }
 
     public String getContactName(ContactBean contactBean) {
