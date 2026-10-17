@@ -3,6 +3,15 @@ package com.xtc.httplib;
 /** Tunables and header names used by the HTTP stack. */
 public interface ConfigOptions {
 
+    /**
+     * 上报给服务端的包版本号（packageVersion 请求头）。
+     *
+     * <p>服务端会校验这个版本号，上报一个云端不存在的版本有封号风险。本项目是重写版，
+     * BuildConfig.VERSION_CODE 会为了本地数据库建表而单独递增，所以请求头这里不跟随它，
+     * 固定上报云端已存在的版本号。
+     */
+    int FAKE_VERSION = 53110;
+
     interface HeaderKey {
         String ACCEPT_LANGUAGE = "Accept-Language";
         String AUTH_ID = "authId";

@@ -25,6 +25,7 @@ import com.xtc.moment.base.BaseInteractActivity;
 import com.xtc.moment.db.bean.DbLikeMessage;
 import com.xtc.moment.db.bean.DbMoment;
 import com.xtc.moment.db.bean.DbMomentComment;
+import com.xtc.moment.module.bean.CommentEvent;
 import com.xtc.moment.module.report.adapter.AbsInteractionAdapter;
 import com.xtc.moment.module.widget.VerticallyLinearLayoutManager;
 import com.xtc.moment.util.EventData;
@@ -420,6 +421,13 @@ public class SearchMomentActivity extends BaseInteractActivity<ISearchMomentView
                 return;
             }
             this.adapter.addComment((DbMomentComment) eventData.getData());
+            return;
+        }
+        if (eventData.getType() == EventData.CHANGE_FAVORITE) {
+            if (eventData.getData() == null || !(eventData.getData() instanceof DbMoment)) {
+                return;
+            }
+            this.adapter.refreshFavoriteData((DbMoment) eventData.getData());
         }
     }
 
@@ -465,7 +473,11 @@ public class SearchMomentActivity extends BaseInteractActivity<ISearchMomentView
 
     @Override
     public void publishSuccess(DbMomentComment comment, String extra) {
+        // 和其它页面一致：先切成功动画，动画结束后自动关掉「发布中」弹窗，
+        // 再补上这条评论，最后广播出去让主列表/详情页同步。
+        showLoadingSuccess();
         this.adapter.addCommentData(comment);
+        EventBus.getDefault().post(new CommentEvent(extra, comment));
     }
 
     @Override

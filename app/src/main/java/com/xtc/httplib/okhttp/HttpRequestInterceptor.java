@@ -147,7 +147,7 @@ public class HttpRequestInterceptor extends BaseInterceptor {
             addHeader(request, builder, ConfigOptions.HeaderKey.MODEL, WatchModelUtil.getWatchInnerModel());
             addHeader(request, builder, ConfigOptions.HeaderKey.IM_SDK_VERSION_CODE, String.valueOf(102));
             addHeader(request, builder, ConfigOptions.HeaderKey.PACKAGE_VERSION,
-                    String.valueOf(this.httpClient.getVersionCode()));
+                    String.valueOf(ConfigOptions.FAKE_VERSION));
             addHeader(request, builder, ConfigOptions.HeaderKey.PACKAGE_NAME, this.httpClient.getPackageName());
             builder.header(ConfigOptions.HeaderKey.EEBBK_SIGN, sign);
             builder.header(ConfigOptions.HeaderKey.BASE_REQUEST_PARAM, encryptRequestParam);

@@ -26,11 +26,13 @@ import com.xtc.moment.module.widget.NormalThreeIconDialog;
 import com.xtc.moment.module.widget.VerticallyLinearLayoutManager;
 import com.xtc.moment.net.bean.MomentLbs;
 import com.xtc.moment.serve.AccountInfoServerImpl;
+import com.xtc.moment.serve.favorite.MomentFavoriteServe;
 import com.xtc.moment.third.bean.PushReportBean;
 import com.xtc.moment.third.behavior.MomentBehavior;
 import com.xtc.moment.util.ClickUtils;
 import com.xtc.moment.util.MomentLikeViewWindow;
 import com.xtc.moment.util.MomentTypeUtil;
+import com.xtc.moment.util.SystemUtil;
 import com.xtc.moment.util.ToastUtil;
 import com.xtc.moment.util.switchs.ModuleSwitchUtil;
 import com.xtc.moment.widget.LbsLayout;
@@ -51,6 +53,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public abstract class AbsInteractionAdapter<T extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<T> {
 
     public static final String PART_REFRESH_PRAISE = "part_refresh_praise";
+    public static final String PART_REFRESH_FAVORITE = "part_refresh_favorite";
     protected static final String PART_REFRESH_COMMENT = "part_refresh_comment";
     protected static final String PART_REFRESH_VISIBLE_PIC = "part_refresh_visible_pic";
     protected static final String PART_REFRESH_SHARE_REMINDER = "part_refresh_share_reminder";
@@ -76,6 +79,7 @@ public abstract class AbsInteractionAdapter<T extends RecyclerView.ViewHolder> e
     public OnMomentCommentListener momentCommentListener;
     public OnPreviewMomentListener previewMomentListener;
     protected OnLikeClickListener onLikeClickListener;
+    public OnCollectMomentListener collectListener;
 
     public interface IOnDialogClickLister {
         void onRightBtnClick();
@@ -119,6 +123,13 @@ public abstract class AbsInteractionAdapter<T extends RecyclerView.ViewHolder> e
         void onClick(DbMoment moment);
 
         void cancelLike(DbMoment moment);
+    }
+
+    /** 收藏按钮回调：已收藏则取消收藏，否则加入收藏。 */
+    public interface OnCollectMomentListener {
+        void collect(DbMoment moment);
+
+        void uncollect(DbMoment moment);
     }
 
     public abstract String getLogTag();
@@ -296,6 +307,10 @@ public abstract class AbsInteractionAdapter<T extends RecyclerView.ViewHolder> e
         this.onLikeClickListener = listener;
     }
 
+    public void setOnCollectMomentListener(OnCollectMomentListener listener) {
+        this.collectListener = listener;
+    }
+
     /** 评论数量变化后局部刷新对应的动态条目。 */
     protected void refreshCommentData(DbMomentComment comment, boolean isAdd) {
         LogUtil.d(this.TAG, "refreshCommentData dbMomentComment = " + comment + " null? "
@@ -439,13 +454,55 @@ public abstract class AbsInteractionAdapter<T extends RecyclerView.ViewHolder> e
         this.mListener.cancelLikeMoment(moment.getMomentId(), moment.getWatchId(), moment);
     }
 
+    /** 收藏态判断：列表绑定与点击都走内存集合，不逐条查库。 */
+    protected boolean isCollected(DbMoment moment) {
+        return moment != null && MomentFavoriteServe.getInstance(this.mContext)
+                .isCollected(moment.getMomentId());
+    }
+
+    /**
+     * 收藏按钮点击：已收藏则取消收藏，否则加入收藏。
+     *
+     * <p>回调可能为空（例如收藏列表页没有接入 presenter），这里必须自行兜底，
+     * 否则会出现和点赞一样的空指针。
+     */
+    public void toggleCollect(DbMoment moment) {
+        if (SystemUtil.isFastDoubleClick()) {
+            LogUtil.i(this.TAG, "toggleCollect: click too fast");
+            return;
+        }
+        if (moment == null || TextUtils.isEmpty(moment.getMomentId())) {
+            LogUtil.w(this.TAG, "toggleCollect: moment is invalid");
+            return;
+        }
+        OnCollectMomentListener listener = this.collectListener;
+        if (listener == null) {
+            LogUtil.w(this.TAG, "toggleCollect: collectListener is null");
+            return;
+        }
+        if (isCollected(moment)) {
+            listener.uncollect(moment);
+            return;
+        }
+        listener.collect(moment);
+    }
+
     public int getDataItemPosition(int adapterPosition) {
         return this.mHeaderView != null ? adapterPosition - 1 : adapterPosition;
     }
 
     /** 点击评论的删除入口。 */
     public void dealCommentDeleteClick(DbMoment moment, final DbMomentComment comment, String myWatchId, boolean isSelf) {
+        // isSelf 由调用方给出，语义是「可以删除这条评论」：既包括自己在
+        // 别人动态下发的评论，也包括自己动态下的任意评论。
         if (!(myWatchId != null && myWatchId.equals(comment.getWatchId()))) {
+            if (isSelf) {
+                // 自己发的动态：下面任何人的评论都可以删。
+                if (this.deleteCommentListener != null) {
+                    this.deleteCommentListener.onDeleteComment(comment, moment, true);
+                }
+                return;
+            }
             handleCommentDelete(new IOnDialogClickLister() {
                 @Override
                 public void onRightBtnClick() {

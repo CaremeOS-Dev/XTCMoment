@@ -21,6 +21,7 @@ public interface Constants {
     /** Physical table names. */
     interface TableName {
         String ADVERT_CLOSE_RECORD = "advert_close_record";
+        String FAVORITE_MOMENT = "favorite_moment";
         String ILLEGAL_RECORD = "db_illegal_record";
         String LIKE_MESSAGE_INFO = "like_message_info";
         String MOMENT = "moment";

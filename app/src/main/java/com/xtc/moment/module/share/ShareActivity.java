@@ -258,6 +258,12 @@ public class ShareActivity extends BaseInteractActivity<IShareView, SharePresent
         if (eventData.getType() == 21) {
             LogUtil.i(ReminderHelper.M_TAG, "温馨提示配置结束, check share reminder");
             checkUnExecutedReminder();
+            return;
+        }
+        if (eventData.getType() == EventData.CHANGE_FAVORITE) {
+            if (eventData.getData() instanceof DbMoment) {
+                this.mRvAdapter.refreshFavoriteData((DbMoment) eventData.getData());
+            }
         }
     }
 

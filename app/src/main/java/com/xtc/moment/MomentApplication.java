@@ -33,6 +33,7 @@ import com.xtc.moment.receiver.IConChangeReceiver;
 import com.xtc.moment.serve.AccountInfoServerImpl;
 import com.xtc.moment.serve.CommentServeImpl;
 import com.xtc.moment.serve.MomentServeImpl;
+import com.xtc.moment.serve.favorite.MomentFavoriteServe;
 import com.xtc.moment.serve.MomentTemplateServeImpl;
 import com.xtc.moment.tasks.start.InitSwitchTask;
 import com.xtc.moment.util.FileManager;
@@ -123,6 +124,8 @@ public class MomentApplication extends Application {
                 com.xtc.moment.util.RawDump.logAllModuleSwitches(applicationContext);
                 com.xtc.moment.util.RawDump.log("env", "=== RAWDUMP 结束 ===");
                 MomentServeImpl.getInstance(applicationContext);
+                // 预热本地收藏的内存集合，避免主列表首次绑定时在主线程读库。
+                MomentFavoriteServe.getInstance(applicationContext);
                 IllegalMessageHandler.getInstance(applicationContext);
                 Glide.with(applicationContext);
                 prepareDataCache();

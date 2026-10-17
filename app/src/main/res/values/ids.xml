@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item type="id" name="Loading_anim_view" />
+    <item type="id" name="about_rii_favorite" />
     <item type="id" name="about_rii_privacy" />
     <item type="id" name="about_rii_theme" />
     <item type="id" name="action0" />
@@ -160,6 +161,7 @@
     <item type="id" name="iv_bottom_positive" />
     <item type="id" name="iv_center" />
     <item type="id" name="iv_champion" />
+    <item type="id" name="iv_collect" />
     <item type="id" name="iv_chat_scene" />
     <item type="id" name="iv_check" />
     <item type="id" name="iv_checked" />
@@ -176,6 +178,7 @@
     <item type="id" name="iv_content_bg" />
     <item type="id" name="iv_emoji" />
     <item type="id" name="iv_error" />
+    <item type="id" name="iv_favorite_empty" />
     <item type="id" name="iv_foreground" />
     <item type="id" name="iv_fragment" />
     <item type="id" name="iv_friend_head" />
@@ -432,6 +435,7 @@
     <item type="id" name="rv_gift" />
     <item type="id" name="rv_moment" />
     <item type="id" name="rv_moment_like" />
+    <item type="id" name="rv_favorite_moment" />
     <item type="id" name="rv_new_like" />
     <item type="id" name="rv_poi" />
     <item type="id" name="rv_report_proof_view" />
@@ -549,6 +553,8 @@
     <item type="id" name="tv_extra_click_scale_right_switch_with_extra" />
     <item type="id" name="tv_extra_normal_dialog_with_title" />
     <item type="id" name="tv_flower_count" />
+    <item type="id" name="tv_favorite_empty" />
+    <item type="id" name="tv_favorite_empty_hint" />
     <item type="id" name="tv_fragment" />
     <item type="id" name="tv_friend_label" />
     <item type="id" name="tv_friend_name" />
@@ -582,6 +588,7 @@
     <item type="id" name="tv_moment_banner" />
     <item type="id" name="tv_moment_content" />
     <item type="id" name="tv_moment_content_mood_or_state" />
+    <item type="id" name="tv_moment_deleted_hint" />
     <item type="id" name="tv_moment_description" />
     <item type="id" name="tv_moment_gift_title" />
     <item type="id" name="tv_mood_content" />

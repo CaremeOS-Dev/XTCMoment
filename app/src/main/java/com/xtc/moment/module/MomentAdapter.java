@@ -74,6 +74,7 @@ import com.xtc.moment.module.widget.PhotoPreviewActivity;
 import com.xtc.moment.module.widget.VerticallyLinearLayoutManager;
 import com.xtc.moment.module.widget.livephotoView.PlayLivePhotoActivity;
 import com.xtc.moment.serve.AccountInfoServerImpl;
+import com.xtc.moment.serve.FriendInfoServeImpl;
 import com.xtc.moment.serve.IAccountInfoServe;
 import com.xtc.moment.third.behavior.MomentBehavior;
 import com.xtc.moment.util.ClickUtils;
@@ -277,6 +278,12 @@ public class MomentAdapter extends AbsInteractionAdapter<AbsViewHolder>
                     onMomentLikeClick(viewHolder, view);
                 }
             });
+            viewHolder.momentLike.setCollectClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onMomentCollectClick(viewHolder);
+                }
+            });
         }
         if (viewHolder.ivMomentComment != null) {
             viewHolder.ivMomentComment.setOnClickListener(new View.OnClickListener() {
@@ -323,13 +330,22 @@ public class MomentAdapter extends AbsInteractionAdapter<AbsViewHolder>
                     LogUtil.d(TAG, "index: 删除" + position + ";dbMomentComment:" + comment
                             + viewHolder.getDbMoment().getType());
                     DbMoment moment = viewHolder.getDbMoment();
-                    boolean isSelf = MomentAdapter.this.selfWatchId != null
+                    // 删除权限 = 自己发的评论，或自己动态下的任意评论。
+                    boolean isOwnComment = MomentAdapter.this.selfWatchId != null
+                            && MomentAdapter.this.selfWatchId.equals(comment.getWatchId());
+                    boolean isOwnMoment = MomentAdapter.this.selfWatchId != null
                             && MomentAdapter.this.selfWatchId.equals(moment.getWatchId());
-                    dealCommentDeleteClick(moment, comment, MomentAdapter.this.selfWatchId, isSelf);
+                    dealCommentDeleteClick(moment, comment, MomentAdapter.this.selfWatchId,
+                            isOwnComment || isOwnMoment);
                 }
             });
         }
     }
+    /** 收藏按钮点击：交给统一入口做收藏/取消收藏。 */
+    private void onMomentCollectClick(AbsViewHolder viewHolder) {
+        toggleCollect(viewHolder.getDbMoment());
+    }
+
     private void onMomentLikeClick(AbsViewHolder viewHolder, View view) {
         if (!ClickUtils.isFastClick()) {
             LogUtil.i(TAG, "click isFastClick");
@@ -412,8 +428,13 @@ public class MomentAdapter extends AbsInteractionAdapter<AbsViewHolder>
                 viewHolder.momentLike.setLike(this.mContext, !moment.isEnableLike());
             }
             viewHolder.momentLike.setCount(moment.getLikeTotal() != null ? moment.getLikeTotal().intValue() : 0);
+            viewHolder.momentLike.setCollected(isCollected(moment));
             setMomentCommentData(viewHolder, moment, moment.getComments());
             setOfficialLabel(viewHolder, moment);
+            return;
+        }
+        if (AbsInteractionAdapter.PART_REFRESH_FAVORITE.equals(payload)) {
+            viewHolder.momentLike.setCollected(isCollected(moment));
             return;
         }
         if (PART_REFRESH_LOCAL_PATH.equals(payload)) {
@@ -540,14 +561,20 @@ public class MomentAdapter extends AbsInteractionAdapter<AbsViewHolder>
         } else {
             ContactBean matched = ContactManager.getInstance(this.mContext)
                     .getContactWithoutShortNumberByWatchIdSync(moment.getWatchId());
+            Friend serverFriend = FriendInfoServeImpl.getInstance(this.mContext)
+                    .getFriendByWatchId(moment.getWatchId());
             if (matched != null) {
                 displayName = matched.getName();
                 contactBean = matched;
-                displayIconPath = matched.getPhotoPath();
+                displayIconPath = serverFriend != null
+                        && !TextUtils.isEmpty(serverFriend.getFriendIcon())
+                        ? serverFriend.getFriendIcon() : matched.getPhotoPath();
             } else if (!advertisement(moment.getType().intValue())) {
                 LogUtil.d(TAG, "showContact is null");
-                displayName = moment.getName();
-                displayIconPath = "";
+                displayName = serverFriend != null && !TextUtils.isEmpty(serverFriend.getName())
+                        ? serverFriend.getName() : moment.getName();
+                displayIconPath = serverFriend != null && !TextUtils.isEmpty(serverFriend.getFriendIcon())
+                        ? serverFriend.getFriendIcon() : moment.getIconPath();
                 contactBean = matched;
             } else {
                 LogUtil.d(TAG, "show advertisement");
@@ -630,6 +657,7 @@ public class MomentAdapter extends AbsInteractionAdapter<AbsViewHolder>
         }
         setTvTime(viewHolder, moment);
         viewHolder.momentLike.setCount(likeCount);
+        viewHolder.momentLike.setCollected(isCollected(moment));
         viewHolder.momentView.setIconOnClickListener(moment);
         setMomentCommentData(viewHolder, moment, moment.getComments());
         setMomentReminder(viewHolder, moment);
@@ -697,7 +725,7 @@ public class MomentAdapter extends AbsInteractionAdapter<AbsViewHolder>
         }
         if (!isSelf && contactBean != null) {
             Glide.with(this.mContext)
-                    .load(contactBean.getPhotoPath())
+                    .load(TextUtils.isEmpty(iconPath) ? contactBean.getPhotoPath() : iconPath)
                     .apply(new RequestOptions()
                             .centerCrop()
                             .diskCacheStrategy(DiskCacheStrategy.NONE)
@@ -1385,6 +1413,21 @@ public class MomentAdapter extends AbsInteractionAdapter<AbsViewHolder>
 
     public void refreshMomentReminder(DbMoment moment) {
         refreshData(moment, PART_REFRESH_MOMENT_REMINDER);
+    }
+
+    /** 收藏态变化后只刷新收藏图标，不动卡片其它内容。 */
+    public void refreshFavoriteData(DbMoment moment) {
+        if (moment == null || CollectionUtil.isEmpty(this.mData)) {
+            return;
+        }
+        for (int index = 0; index < this.mData.size(); index++) {
+            DbMoment item = this.mData.get(index);
+            if (item != null && item.getMomentId() != null
+                    && item.getMomentId().equals(moment.getMomentId())) {
+                notifyItemChanged(getHolderPosition(item), AbsInteractionAdapter.PART_REFRESH_FAVORITE);
+                return;
+            }
+        }
     }
 
     /** 按 momentId 找到对应列表项并触发局部刷新。 */

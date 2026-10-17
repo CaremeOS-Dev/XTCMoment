@@ -33,7 +33,7 @@ public class MomentCommentDao extends OrmLiteDao<DbMomentComment> {
         if (comment == null) {
             return;
         }
-        insert(comment);
+        upsertComment(comment);
     }
 
     public void update(final List<DbMomentComment> comments) {
@@ -66,17 +66,8 @@ public class MomentCommentDao extends OrmLiteDao<DbMomentComment> {
                 public Void call() throws Exception {
                     int insertCount = 0;
                     for (DbMomentComment comment : comments) {
-                        List<DbMomentComment> localComments = MomentCommentDao.this.queryByMomentIdAndCommentId(comment.getMomentId(), comment.getCommentId());
-                        if (localComments == null || localComments.size() == 0) {
-                            if (MomentCommentDao.this.insert(comment)) {
-                                insertCount++;
-                            }
-                        } else {
-                            DbMomentComment local = localComments.get(0);
-                            if (local.isChecked() != comment.isChecked()) {
-                                comment.setChecked(local.isChecked());
-                                LogUtil.i(MomentCommentDao.TAG, "addComments successfully,update:" + MomentCommentDao.this.update(comment));
-                            }
+                        if (MomentCommentDao.this.upsertComment(comment)) {
+                            insertCount++;
                         }
                     }
                     LogUtil.i(MomentCommentDao.TAG, "addComments successfully,size:" + insertCount);
@@ -93,6 +84,47 @@ public class MomentCommentDao extends OrmLiteDao<DbMomentComment> {
         conditions.put("momentId", momentId);
         conditions.put("commentId", commentId);
         return queryByColumnName(conditions);
+    }
+
+    /**
+     * Insert a comment, or repair/update the existing row with the same
+     * ``commentId``.
+     *
+     * <p>``commentId`` is globally unique in the table, while older rows were
+     * stored with an empty ``momentId``. Querying by (momentId, commentId)
+     * therefore missed them and the insert failed on the unique index, which
+     * left the list showing only "展开剩余评论". Looking up by ``commentId``
+     * alone and backfilling the missing ``momentId`` fixes those rows.</p>
+     *
+     * @return true when a row was inserted
+     */
+    private boolean upsertComment(DbMomentComment comment) {
+        if (comment == null || TextUtils.isEmpty(comment.getCommentId())) {
+            return false;
+        }
+        List<DbMomentComment> existing = queryCommentByCommentId(comment.getCommentId());
+        if (existing == null || existing.isEmpty()) {
+            return insert(comment);
+        }
+        DbMomentComment local = existing.get(0);
+        boolean changed = false;
+        if (TextUtils.isEmpty(local.getMomentId()) && !TextUtils.isEmpty(comment.getMomentId())) {
+            local.setMomentId(comment.getMomentId());
+            changed = true;
+        }
+        if (TextUtils.isEmpty(local.getMomentWatchId()) && !TextUtils.isEmpty(comment.getMomentWatchId())) {
+            local.setMomentWatchId(comment.getMomentWatchId());
+            changed = true;
+        }
+        if (changed) {
+            updateBy(local, "commentId", local.getCommentId());
+            LogUtil.i(TAG, "repair comment momentId: " + local.getCommentId());
+        }
+        if (local.isChecked() != comment.isChecked()) {
+            comment.setChecked(local.isChecked());
+            updateBy(comment, "commentId", comment.getCommentId());
+        }
+        return false;
     }
 
     public List<DbMomentComment> queryCommentByMomentId(String momentId) {

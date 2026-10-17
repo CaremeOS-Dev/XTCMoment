@@ -22,6 +22,7 @@ import com.xtc.moment.data.local.MomentsLocalDataSource;
 import com.xtc.moment.data.remote.MomentLikeRemoteDataSource;
 import com.xtc.moment.data.remote.MomentsRemoteDataSource;
 import com.xtc.moment.db.bean.DbAdvertCloseRecord;
+import com.xtc.moment.db.bean.DbLikeMessage;
 import com.xtc.moment.db.bean.DbMoment;
 import com.xtc.moment.db.bean.DbMomentComment;
 import com.xtc.moment.helper.ReminderHelper;
@@ -35,6 +36,7 @@ import com.xtc.moment.serve.CommentServeImpl;
 import com.xtc.moment.serve.IMomentServe;
 import com.xtc.moment.serve.bean.WatchAccountInfo;
 import com.xtc.moment.serve.delete.MomentDeleteServe;
+import com.xtc.moment.serve.favorite.MomentFavoriteServe;
 import com.xtc.moment.tasks.domain.usecase.CancelPraiseMomentTask;
 import com.xtc.moment.tasks.domain.usecase.PraiseMomentTask;
 import com.xtc.moment.tasks.domain.usecase.PublishCommentTask;
@@ -212,7 +214,9 @@ public abstract class BaseInteractPresenter<M extends IBaseInteractView> extends
             return;
         }
         final String watchId = AccountInfoServerImpl.getInstance(this.mContext).getWatchAccountInfo().getWatchId(this.mContext);
-        comment.setWatchId(watchId);
+        // 不要覆盖评论作者：服务端按 commentId 定位评论并校验“评论作者或
+        // 动态作者”的删除权限，把 watchId 改成自己会让权限判断和本地
+        // 数据都失真（删除后刷新又出现）。
         this.iMomentServe.deleteServerComment(comment).map(new Func1<NormalResultBean, Boolean>() {
             @Override
             public Boolean call(NormalResultBean result) {
@@ -337,6 +341,49 @@ public abstract class BaseInteractPresenter<M extends IBaseInteractView> extends
         });
         TaskDispatcher.dispatchImmediately(task);
     }
+    /**
+     * 收藏动态：把动态本体、当时的评论与点赞记录一起写入本地快照。
+     *
+     * <p>动态被删除后这三张表的数据都会消失，快照是收藏列表唯一的展示来源，所以要在收藏那一刻
+     * 就把评论与点赞记录一起打包。
+     */
+    public void collectMoment(final DbMoment moment) {
+        if (moment == null || TextUtils.isEmpty(moment.getMomentId())) {
+            return;
+        }
+        HandlerUtil.runOnBackground(new Runnable() {
+            @Override
+            public void run() {
+                List<DbMomentComment> comments = moment.getComments();
+                List<DbLikeMessage> likes = BaseInteractPresenter.this.iMomentServe == null ? null
+                        : BaseInteractPresenter.this.iMomentServe.getLikeMessageByMomentId(moment.getMomentId());
+                boolean success = MomentFavoriteServe.getInstance(BaseInteractPresenter.this.mContext)
+                        .collect(moment, comments, likes);
+                if (success && BaseInteractPresenter.this.mContext != null) {
+                    ToastUtil.showShort(BaseInteractPresenter.this.mContext, R.string.favorite_success);
+                }
+            }
+        });
+    }
+
+    /** 取消收藏：删掉本地收藏记录，动态本身不受影响。 */
+    public void uncollectMoment(final DbMoment moment) {
+        if (moment == null || TextUtils.isEmpty(moment.getMomentId())) {
+            return;
+        }
+        final String momentId = moment.getMomentId();
+        HandlerUtil.runOnBackground(new Runnable() {
+            @Override
+            public void run() {
+                boolean success = MomentFavoriteServe.getInstance(BaseInteractPresenter.this.mContext)
+                        .uncollect(momentId);
+                if (success && BaseInteractPresenter.this.mContext != null) {
+                    ToastUtil.showShort(BaseInteractPresenter.this.mContext, R.string.favorite_cancel);
+                }
+            }
+        });
+    }
+
     /**
      * 长按动态的处理入口：官方广告弹关闭框，自己的动态按类型弹删除/可见范围框。
      */

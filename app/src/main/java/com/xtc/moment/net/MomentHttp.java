@@ -42,6 +42,10 @@ import com.xtc.moment.net.bean.SearchOfficialCommentResponse;
 import com.xtc.moment.net.bean.SendGiftRequest;
 import com.xtc.moment.net.bean.TemplateRequestBean;
 import com.xtc.moment.net.bean.TemplateResponseBean;
+import com.xtc.moment.net.bean.GetFriendListBean;
+import com.xtc.moment.module.bean.Friend;
+import com.xtc.moment.module.bean.FriendAvatar;
+import com.xtc.moment.net.bean.GetFriendAvatarBean;
 import com.xtc.moment.net.bean.RespTopicConfig;
 import com.xtc.moment.net.bean.ReviewRequestBean;
 import com.xtc.moment.net.bean.VideoTokenVoResponse;
@@ -148,4 +152,22 @@ public interface MomentHttp {
      */
     @POST("/extra/review-request")
     Observable<NetBaseResult<String>> submitReviewRequest(@Body ReviewRequestBean body);
+
+    /**
+     * 自建服务端的好友列表。
+     *
+     * <p>本机通讯录 provider 查询失败或返回空时，客户端回退到这里；
+     * 服务端返回 {@code Friend} 数组（watchId / name / friendIcon）。</p>
+     */
+    @POST("/extra/getFriendList")
+    Observable<NetBaseResult<List<Friend>>> getFriendList(@Body GetFriendListBean body);
+
+    /**
+     * 自建服务端配置的好友头像。
+     *
+     * <p>通讯录 provider 仍是好友关系的主要来源；这个接口只按 watchId
+     * 覆盖头像，provider 里没有对应联系人时也能拿到服务端头像。</p>
+     */
+    @POST("/extra/getFriendAvatar")
+    Observable<NetBaseResult<List<FriendAvatar>>> getFriendAvatar(@Body GetFriendAvatarBean body);
 }

@@ -9,6 +9,7 @@ public class EventData<T> {
     public static final int CANCEL_LIKE_CHANGE_MOMENTADAPTER = 11;
     public static final int CANCEL_LIKE_CHANGE_MOMENT_ADAPTER_MOMENT = 13;
     public static final int CANCEL_LIKE_CHANGE_MOMENT_ADAPTER_SHARE = 12;
+    public static final int CHANGE_FAVORITE = 23;
     public static final int CHANGE_TO_REPORTED = 10;
     public static final int CHANGE_VISIBLE_MOMENT = 18;
     public static final int CHECK_MOMENT_REMINDER = 19;

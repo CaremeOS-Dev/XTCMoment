@@ -433,6 +433,16 @@ public class MomentDetailsActivity extends BaseInteractActivity<IMomentDetailsVi
             this.detailsAdapter.addCommentData((DbMomentComment) eventData.getData());
             return;
         }
+        if (eventData.getType() == EventData.CHANGE_FAVORITE) {
+            if (eventData.getData() == null || !(eventData.getData() instanceof DbMoment)) {
+                return;
+            }
+            // 收藏/取消收藏事件只带 momentId（取消收藏是只填了 id 的占位对象），不比对其它字段。
+            if (TextUtils.equals(((DbMoment) eventData.getData()).getMomentId(), this.detailsMomentId)) {
+                this.detailsAdapter.refreshFavoriteData();
+            }
+            return;
+        }
         if (eventData.getType() == EventData.LIKE_MOMENT) {
             if (eventData.getData() == null || !(eventData.getData() instanceof DbLikeMessage)) {
                 return;

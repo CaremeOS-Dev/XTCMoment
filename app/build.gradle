@@ -35,7 +35,7 @@ android {
         applicationId 'com.xtc.moment'
         minSdk 19
         targetSdk 25
-        versionCode 53110
+        versionCode 53111
         versionName '5.3.11.Develop_Qcom_AW_Moment_J359_G17c225e_D2e85c07f'
         multiDexEnabled true
         ndk { abiFilters 'armeabi' }

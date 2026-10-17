@@ -130,6 +130,12 @@
     <string name="exit">退出</string>
     <string name="exit_redact">你还没编辑动态噢，\u0009确认退出本次编辑吗</string>
     <string name="exit_remind">退出提醒</string>
+    <string name="favorite_cancel">已取消收藏</string>
+    <string name="favorite_moment">收藏的动态</string>
+    <string name="favorite_moment_deleted">该动态已被删除</string>
+    <string name="favorite_moment_empty">还没有收藏的动态</string>
+    <string name="favorite_moment_empty_hint">在动态左下角点收藏，就能在这里看到</string>
+    <string name="favorite_success">已收藏</string>
     <string name="first_lbs_tip">可点击下方定位进行评价噢</string>
     <string name="frequent_request">勿频繁操作</string>
     <string name="frequent_request_new">操作太快啦，让我喘口气</string>

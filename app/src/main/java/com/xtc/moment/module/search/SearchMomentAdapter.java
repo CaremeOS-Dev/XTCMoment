@@ -17,6 +17,8 @@ import com.xtc.moment.module.share.adapter.ShareAdapter;
 import com.xtc.moment.module.share.holder.AbsViewHolder;
 import com.xtc.moment.module.widget.VerticallyLinearLayoutManager;
 import com.xtc.moment.serve.AccountInfoServerImpl;
+import com.xtc.moment.serve.FriendInfoServeImpl;
+import com.xtc.moment.serve.IFriendInfoServe;
 import com.xtc.moment.util.DressUtil;
 import com.xtc.moment.util.LikeDrawableCache;
 import com.xtc.moment.util.MomentTypeUtil;
@@ -31,6 +33,7 @@ public class SearchMomentAdapter extends ShareAdapter {
     private static final String TAG = "XTC_MOMENT_SearchMomentAdapter";
 
     private final ContactManager contactManager;
+    private final IFriendInfoServe friendInfoServe;
 
     /** 当前登录账号的 watchId：搜索结果里可能混有自己的动态，需要逐条判断。 */
     private final String mAccountWatchId;
@@ -39,6 +42,7 @@ public class SearchMomentAdapter extends ShareAdapter {
             VerticallyLinearLayoutManager layoutManager, String watchId, LikeDrawableCache likeDrawableCache) {
         super(activity, isSelf, name, iconPath, layoutManager, watchId, likeDrawableCache);
         this.contactManager = ContactManager.getInstance(activity);
+        this.friendInfoServe = FriendInfoServeImpl.getInstance(activity);
         this.mAccountWatchId = AccountInfoServerImpl.getInstance(activity).getWatchAccountInfo()
                 .getWatchId(activity);
     }
@@ -90,7 +94,8 @@ public class SearchMomentAdapter extends ShareAdapter {
                 Intent intent = new Intent(context, ShareActivity.class);
                 intent.putExtra(Constants.INTENT_EXTRA_WATCH_ID, authorWatchId);
                 intent.putExtra(Constants.INTENT_EXTRA_IS_SELF, isSelf);
-                intent.putExtra(Constants.INTENT_EXTRA_ICON_PATH, resolveIconPath(isSelf, authorWatchId));
+                intent.putExtra(Constants.INTENT_EXTRA_ICON_PATH,
+                        resolveIconPath(isSelf, authorWatchId, moment.getIconPath()));
                 intent.putExtra(Constants.INTENT_EXTRA_START_FROM_MOMENT, true);
                 intent.putExtra(Constants.INTENT_EXTRA_NAME, resolveName(isSelf, authorWatchId));
                 context.startActivity(intent);
@@ -121,11 +126,22 @@ public class SearchMomentAdapter extends ShareAdapter {
         boolean self = isSelfMoment(moment);
         ContactBean contactBean = self ? null
                 : this.contactManager.getContactWithoutShortNumberByWatchIdSync(moment.getWatchId());
+        // 好友列表来自服务端时，dashboard 设置的头像优先于本机 provider
+        // 的头像；provider 记录存在但头像为空时，以前会直接退回默认头像。
+        if (!self) {
+            com.xtc.moment.module.bean.Friend serverFriend = this.friendInfoServe
+                    .getFriendByWatchId(moment.getWatchId());
+            if (serverFriend != null
+                    && !TextUtils.isEmpty(serverFriend.getFriendIcon())) {
+                holder.setIvIcon(serverFriend.getFriendIcon(), false);
+                return;
+            }
+        }
         if (contactBean != null) {
             holder.setIvIcon(contactBean, false);
             return;
         }
-        holder.setIvIcon(resolveIconPath(self, moment.getWatchId()), self);
+        holder.setIvIcon(resolveIconPath(self, moment.getWatchId(), moment.getIconPath()), self);
     }
 
     /** 昵称：自己取当前账号名，好友取联系人库，兜底「未命名」。 */
@@ -136,18 +152,38 @@ public class SearchMomentAdapter extends ShareAdapter {
             return TextUtils.isEmpty(myName) ? this.mContext.getString(R.string.unknown_watch) : myName;
         }
         ContactBean contact = this.contactManager.getContactWithoutShortNumberByWatchIdSync(watchId);
-        if (contact == null || TextUtils.isEmpty(contact.getName())) {
-            return this.mContext.getString(R.string.unknown_watch);
+        if (contact != null && !TextUtils.isEmpty(contact.getName())) {
+            return contact.getName();
         }
-        return contact.getName();
+        // 云端好友可能只存在于自建服务端，provider 里没有联系人记录。
+        com.xtc.moment.module.bean.Friend friend = this.friendInfoServe.getFriendByWatchId(watchId);
+        if (friend != null && !TextUtils.isEmpty(friend.getName())) {
+            return friend.getName();
+        }
+        return this.mContext.getString(R.string.unknown_watch);
     }
 
-    /** 头像路径：自己取账号头像，好友取联系人头像。 */
-    private String resolveIconPath(boolean isSelf, String watchId) {
+    /**
+     * 头像路径：自己取账号头像，好友取联系人头像。
+     *
+     * <p>自己的头像必须走 {@code getMyHeadIconPath()}：它读的是本地已经落盘的头像文件，
+     * 主列表也是用它。{@code WatchAccountInfo.getIcon()} 取的是账号库里那个字段，
+     * 经常是空的，用它会让卡片退回默认头像。
+     */
+    private String resolveIconPath(boolean isSelf, String watchId, String momentIconPath) {
         if (isSelf) {
-            return AccountInfoServerImpl.getInstance(this.mContext).getWatchAccountInfo().getIcon();
+            return AccountInfoServerImpl.getInstance(this.mContext).getMyHeadIconPath();
         }
         ContactBean contact = this.contactManager.getContactWithoutShortNumberByWatchIdSync(watchId);
-        return contact == null ? null : contact.getPhotoPath();
+        if (contact != null && !TextUtils.isEmpty(contact.getPhotoPath())) {
+            return contact.getPhotoPath();
+        }
+        com.xtc.moment.module.bean.Friend friend = this.friendInfoServe.getFriendByWatchId(watchId);
+        if (friend != null && !TextUtils.isEmpty(friend.getFriendIcon())) {
+            return friend.getFriendIcon();
+        }
+        // 服务端好友列表失败、但动态本身带有作者头像时，直接使用动态头像。
+        // 这是云端好友不在 provider 且头像接口暂不可用时的最后一级兜底。
+        return momentIconPath;
     }
 }

@@ -72,8 +72,13 @@ public abstract class BaseInteractActivity<V extends IBaseInteractView, P extend
                     if (keyCode != KeyEvent.KEYCODE_DEL) {
                         return false;
                     }
-                    Utils.hideSoftInputFromWindow(BaseInteractActivity.this.getInputMethodManager(), view);
-                    return true;
+                    // 退格交给输入框正常处理：原实现在这里直接隐藏输入法，
+                    // 导致用户按一次退格就被迫重新唤起键盘。这里不再拦截，
+                    // 同时保证输入框仍然持有焦点。
+                    if (view != null) {
+                        view.requestFocus();
+                    }
+                    return false;
                 }
                 Utils.hideSoftInputFromWindow(BaseInteractActivity.this.getInputMethodManager(), view);
                 if (BaseInteractActivity.this.etHint == null) {
@@ -165,6 +170,10 @@ public abstract class BaseInteractActivity<V extends IBaseInteractView, P extend
             this.arguedId = replyWatchId;
             this.arguedName = replyName;
         }
+        // etHint 是 1x1 的隐藏输入框，必须先把焦点拿过来再拉输入法。
+        // 搜索结果页的列表（RecyclerView）会持有焦点，直接 showSoftInput 会静默失败，
+        // 表现就是「点了评论按钮没反应」。这里先 requestFocus，把焦点从列表抢回来。
+        this.etHint.requestFocus();
         getInputMethodManager().showSoftInput(this.etHint, 0);
     }
 
@@ -227,6 +236,19 @@ public abstract class BaseInteractActivity<V extends IBaseInteractView, P extend
             @Override
             public void cancelLikeAdvertise(String momentId, String momentWatchId, DbMoment moment) {
                 BaseInteractActivity.this.presenter.cancelLikeMoment(momentId, momentWatchId, moment, true);
+            }
+        });
+        adapter.setOnCollectMomentListener(new AbsInteractionAdapter.OnCollectMomentListener() {
+            @Override
+            public void collect(DbMoment moment) {
+                LogUtil.d(BaseInteractActivity.this.getLogTag(), "collect moment :" + moment.getMomentId());
+                BaseInteractActivity.this.presenter.collectMoment(moment);
+            }
+
+            @Override
+            public void uncollect(DbMoment moment) {
+                LogUtil.d(BaseInteractActivity.this.getLogTag(), "uncollect moment :" + moment.getMomentId());
+                BaseInteractActivity.this.presenter.uncollectMoment(moment);
             }
         });
         adapter.setOnDeleteItemListener(new AbsInteractionAdapter.OnDeleteItemListener() {
