@@ -22,6 +22,7 @@ import com.xtc.moment.net.bean.Moment;
 import com.xtc.moment.net.bean.NormalResultBean;
 import com.xtc.moment.net.bean.OfficialCommentResultBean;
 import com.xtc.moment.net.bean.PraiseResponse;
+import com.xtc.moment.net.bean.TopicListBean;
 import com.xtc.moment.net.bean.VideoTokenVoResponse;
 
 import java.util.List;
@@ -146,7 +147,11 @@ public interface IMomentServe {
 
     Observable<Moment> publishMoment(int type, String resource, int resourceId, String content, PoiBean poiBean, FriendsVisibleBean friendsVisibleBean);
 
+    Observable<Moment> publishMoment(int type, String resource, int resourceId, String content, PoiBean poiBean, FriendsVisibleBean friendsVisibleBean, List<TopicListBean> topicList);
+
     Observable<Moment> publishMoment(int type, String resource, int resourceId, String content, String packageName, PoiBean poiBean, FriendsVisibleBean friendsVisibleBean);
+
+    Observable<Moment> publishMoment(int type, String resource, int resourceId, String content, String packageName, PoiBean poiBean, FriendsVisibleBean friendsVisibleBean, List<TopicListBean> topicList);
 
     Observable<Moment> publishMoment(int type, String resource, int resourceId, String content, String packageName, List<Integer> visibleTypes, PoiBean poiBean);
 

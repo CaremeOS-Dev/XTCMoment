@@ -7,6 +7,7 @@ import com.j256.ormlite.table.DatabaseTable;
 
 import com.xtc.moment.module.StringConstant;
 import com.xtc.moment.net.bean.MomentLbs;
+import com.xtc.moment.net.bean.TopicListBean;
 import com.xtc.utils.encode.JSONUtil;
 
 import java.util.List;
@@ -140,6 +141,12 @@ public class DbMoment {
 
     /** Not persisted. */
     private String typeList;
+
+    /** Not persisted. 「小括号」列表，展示时使用。 */
+    private List<TopicListBean> topicList;
+
+    @DatabaseField
+    private String topicListJson;
 
     @DatabaseField
     private String videoContent;
@@ -367,6 +374,22 @@ public class DbMoment {
 
     public void setTypeList(String typeList) {
         this.typeList = typeList;
+    }
+
+    public List<TopicListBean> getTopicList() {
+        return this.topicList;
+    }
+
+    public void setTopicList(List<TopicListBean> topicList) {
+        this.topicList = topicList;
+    }
+
+    public String getTopicListJson() {
+        return this.topicListJson;
+    }
+
+    public void setTopicListJson(String topicListJson) {
+        this.topicListJson = topicListJson;
     }
 
     public int getCommentsPageNum() {

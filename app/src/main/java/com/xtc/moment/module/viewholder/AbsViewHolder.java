@@ -32,6 +32,7 @@ public class AbsViewHolder extends RecyclerView.ViewHolder {
     public MomentReminderView momentReminderView;
     public AbsMomentView momentView;
     public TextView tvContext;
+    public TextView tvTopic;
     public TextView tvTime;
 
     private Context context;

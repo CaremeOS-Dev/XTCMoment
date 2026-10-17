@@ -62,6 +62,8 @@ public class StringConstant {
         String MOMENT_SHARE = "enjoytakepicture_sharefriend";
         String MOMENT_SUBMIT_REPORT_CONTENT = "moment_submit_report_content";
         String MOMENT_VISIBLE_RANGE = "moment_visible_range";
+        String MOMENT_CLICK_TOPIC_LABEL = "moment_click_topic_label";
+        String MOMENT_TOPIC_MAX_TOAST = "moment_topic_max_toast";
         String SHARE_SUPPORT_RESULT = "share_support_result";
     }
 
@@ -105,6 +107,8 @@ public class StringConstant {
         String VISIBLE_TIMING = "time";
         String VISIBLE_TYPE = "type";
         String WEB_URL = "webUrl";
+        String TOPIC_TYPE = "topic_type";
+        String IS_SELF = "is_self";
     }
 
     /** How the moment module was started. */

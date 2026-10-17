@@ -3,9 +3,12 @@ package com.xtc.moment.module.publish.text;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.InputFilter;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,6 +33,11 @@ import com.xtc.moment.module.main.MomentActivity;
 import com.xtc.moment.module.publish.location.PublishLocationActivity;
 import com.xtc.moment.module.publish.multi.ConstraintLayoutView;
 import com.xtc.moment.module.publish.multi.SaveDynamic;
+import com.xtc.moment.module.publish.topic.ShowTopicAdapter;
+import com.xtc.moment.module.publish.topic.TopicActivity;
+import com.xtc.moment.net.bean.TopicListBean;
+import com.xtc.moment.third.behavior.MomentBehavior;
+import com.xtc.utils.common.CollectionUtil;
 import com.xtc.moment.module.publish.visible.VisibleTypeActivity;
 import com.xtc.moment.module.widget.LoadingPupWindowHolder;
 import com.xtc.moment.module.widget.MaxLengthWatcher;
@@ -41,6 +49,7 @@ import com.xtc.moment.util.PermissionStringUtils;
 import com.xtc.moment.util.PublishErrorUtil;
 import com.xtc.moment.util.SystemUtil;
 import com.xtc.moment.util.ToastUtil;
+import com.xtc.moment.util.SharedTool;
 import com.xtc.moment.util.Utils;
 import com.xtc.moment.util.switchs.ModuleSwitchUtil;
 import com.xtc.ui.widget.button.DoubleFlatButton;
@@ -51,6 +60,7 @@ import com.xtc.utils.encode.JSONUtil;
 import com.xtc.utils.system.NetworkUtils;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.concurrent.Callable;
 
 import org.greenrobot.eventbus.EventBus;
@@ -97,6 +107,12 @@ public class PushTextActivity extends BaseActivity<IPublishTextView, PublishText
     private TextView tvLocation;
     private TextView tvVisibleRange;
     private TextView tvVisibleRangeDetails;
+    private LinearLayout llTopic;
+    private RecyclerView rvTopicList;
+    private ShowTopicAdapter showTopicAdapter;
+    private final ArrayList<TopicListBean> topicList = new ArrayList<>();
+    private boolean topicModuleSwitch = true;
+    private String topicSourceType = null;
     private int type;
 
     @Override
@@ -132,6 +148,16 @@ public class PushTextActivity extends BaseActivity<IPublishTextView, PublishText
         this.tvVisibleRangeDetails = (TextView) findViewById(R.id.tv_visible_range_details);
         this.ivVisibleRange = (ImageView) findViewById(R.id.iv_visible_range);
         this.etHint = (EditText) findViewById(R.id.et_push_picture_text);
+        this.llTopic = (LinearLayout) findViewById(R.id.ll_topic);
+        this.llTopic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PushTextActivity.this, TopicActivity.class);
+                intent.putParcelableArrayListExtra(TopicActivity.INTENT_CHOOSE_DATA,
+                        PushTextActivity.this.topicList);
+                PushTextActivity.this.startActivityForResult(intent, Constants.StartActivityOnResultCode.MOMENT_TOPIC_REQUEST_CODE);
+            }
+        });
         setSwipeBack();
         initEditText();
         this.publish.setOnClickListener(new View.OnClickListener() {
@@ -161,6 +187,7 @@ public class PushTextActivity extends BaseActivity<IPublishTextView, PublishText
         if (ModuleSwitchUtil.queryModuleSwitchByBoolean(this, ModuleSwitchConstant.MODULE_VISIBLE_RANGE, false)) {
             this.rlVisibleRange.setVisibility(View.VISIBLE);
         }
+        initShowTopicAdapter();
     }
 
     private void initEditText() {
@@ -176,6 +203,9 @@ public class PushTextActivity extends BaseActivity<IPublishTextView, PublishText
     public void initData() {
         LogUtil.d(TAG, "initData");
         this.type = getIntent().getIntExtra(Constants.INTENT_EXTRA_PUBLISH_TYPE, -1);
+        this.topicModuleSwitch = ModuleSwitchUtil.queryModuleSwitchByBoolean(
+                getApplicationContext(), ModuleSwitchConstant.MODULE_SWITCH_TOPIC, true);
+        showOrHideTopicModule(this.topicModuleSwitch);
         String textContent = getIntent().getStringExtra(Constants.INTENT_EXTRA_TEXT_CONTENT);
         if (!TextUtils.isEmpty(textContent)) {
             this.etHint.setText(textContent);
@@ -192,6 +222,7 @@ public class PushTextActivity extends BaseActivity<IPublishTextView, PublishText
                 .subscribe(new Action0() {
                     @Override
                     public void call() {
+                        dealTopicJson();
                         refreshView();
                     }
                 }, new Action1<Throwable>() {
@@ -286,7 +317,7 @@ public class PushTextActivity extends BaseActivity<IPublishTextView, PublishText
             }
             this.presenter.publishMoodOrStateMoment(this.type, this.templateBean.getResource(),
                     this.templateBean.getResourceId(), this.templateBean.getContent(),
-                    this.poiBean, this.friendsVisibleBean);
+                    this.poiBean, this.friendsVisibleBean, this.topicList, this.topicSourceType);
             return;
         }
         if (publishType == TYPE_LOCATION) {
@@ -295,7 +326,8 @@ public class PushTextActivity extends BaseActivity<IPublishTextView, PublishText
                 this.loadingPupWindowHolder.dismissLoading();
                 return;
             }
-            this.presenter.publishMoment(this.poiBean, this.friendsVisibleBean);
+            this.presenter.publishMoment(this.poiBean, this.friendsVisibleBean,
+                    this.topicList, this.topicSourceType);
             return;
         }
         if (publishType != TYPE_TEXT) {
@@ -304,9 +336,10 @@ public class PushTextActivity extends BaseActivity<IPublishTextView, PublishText
         this.inputContent = this.etHint.getText().toString();
         if (!TextUtils.isEmpty(this.inputContent)) {
             this.presenter.publishMoment(this.inputContent, TYPE_TEXT, TYPE_TEXT,
-                    this.poiBean, this.friendsVisibleBean);
+                    this.poiBean, this.friendsVisibleBean, this.topicList, this.topicSourceType);
         } else if (this.poiBean != null) {
-            this.presenter.publishMoment(this.poiBean, this.friendsVisibleBean);
+            this.presenter.publishMoment(this.poiBean, this.friendsVisibleBean,
+                    this.topicList, this.topicSourceType);
         } else {
             ToastUtil.showLong(this.context, getString(R.string.string_after_edit));
             this.loadingPupWindowHolder.dismissLoading();
@@ -337,6 +370,10 @@ public class PushTextActivity extends BaseActivity<IPublishTextView, PublishText
         }
         if (savedTemplate != null) {
             this.templateBean = savedTemplate;
+        }
+        if (!CollectionUtil.isEmpty(savedBean.getTopicList()) && this.topicModuleSwitch) {
+            this.topicList.addAll(savedBean.getTopicList());
+            this.showTopicAdapter.setData(savedBean.getTopicList());
         }
         clearCache();
     }
@@ -486,6 +523,10 @@ public class PushTextActivity extends BaseActivity<IPublishTextView, PublishText
             return;
         }
         if (requestCode != REQUEST_VISIBLE_RANGE) {
+            if (requestCode == Constants.StartActivityOnResultCode.MOMENT_TOPIC_REQUEST_CODE
+                    && this.topicModuleSwitch) {
+                dealTopicResult(data);
+            }
             return;
         }
         this.friendsVisibleBean = (FriendsVisibleBean) data.getParcelableExtra("visible");
@@ -517,6 +558,9 @@ public class PushTextActivity extends BaseActivity<IPublishTextView, PublishText
             draftBean.setDbTemplate(PushTextActivity.this.templateBean);
             draftBean.setFriendsVisibleBean(PushTextActivity.this.friendsVisibleBean);
             draftBean.setType(PushTextActivity.this.type);
+            if (PushTextActivity.this.topicModuleSwitch) {
+                draftBean.setTopicList(PushTextActivity.this.topicList);
+            }
             HandlerUtil.runOnBackground(new Runnable() {
                 @Override
                 public void run() {
@@ -559,5 +603,106 @@ public class PushTextActivity extends BaseActivity<IPublishTextView, PublishText
 
     public boolean isConnected() {
         return NetworkUtils.isConnected(this.context);
+    }
+
+    /**
+     * 初始化已选「小括号」横向列表。
+     */
+    private void initShowTopicAdapter() {
+        this.topicList.clear();
+        this.rvTopicList = (RecyclerView) findViewById(R.id.rv_topic_list);
+        this.showTopicAdapter = new ShowTopicAdapter();
+        this.rvTopicList.setLayoutManager(new LinearLayoutManager(this));
+        this.rvTopicList.setAdapter(this.showTopicAdapter);
+        this.showTopicAdapter.setOnDeleteItemListener(new ShowTopicAdapter.OnDeleteItemListener() {
+            @Override
+            public void onDeleteItem(int position) {
+                if (!CollectionUtil.isEmpty(PushTextActivity.this.topicList)) {
+                    PushTextActivity.this.topicList.remove(position);
+                }
+                PushTextActivity.this.showTopicAdapter.setData(PushTextActivity.this.topicList);
+            }
+        });
+    }
+
+    /**
+     * 根据开关显示或隐藏「小括号」入口。
+     */
+    private void showOrHideTopicModule(boolean show) {
+        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) this.llLocation.getLayoutParams();
+        if (show) {
+            this.rvTopicList.setVisibility(View.VISIBLE);
+            this.llTopic.setVisibility(View.VISIBLE);
+            layoutParams.topMargin = getResources().getDimensionPixelOffset(R.dimen.dp_6);
+        } else {
+            this.rvTopicList.setVisibility(View.GONE);
+            this.llTopic.setVisibility(View.GONE);
+            layoutParams.topMargin = getResources().getDimensionPixelOffset(R.dimen.dp_17);
+        }
+        this.llLocation.setLayoutParams(layoutParams);
+    }
+
+    /**
+     * 处理外部传入的「小括号」json。
+     */
+    private void dealTopicJson() {
+        if (getIntent() == null) {
+            return;
+        }
+        String topicJson = getIntent().getStringExtra(Constants.INTENT_EXTRA_TOPIC);
+        this.topicSourceType = getIntent().getStringExtra(Constants.INTENT_EXTRA_TOPIC_SOURCE);
+        if (TextUtils.isEmpty(topicJson)) {
+            return;
+        }
+        if (SharedTool.getMaxTopicCount(this) <= this.topicList.size()) {
+            ToastUtil.showShort(this, getString(R.string.string_add_topic_max));
+            return;
+        }
+        ArrayList<String> topicNames = (ArrayList<String>) JSONUtil.fromJSON(topicJson, ArrayList.class, String.class);
+        if (CollectionUtil.isEmpty(topicNames)) {
+            return;
+        }
+        for (String topicName : topicNames) {
+            if (TextUtils.isEmpty(topicName)) {
+                continue;
+            }
+            if (!topicName.contains(Constants.TOPIC_PREFIX)) {
+                topicName = Constants.TOPIC_PREFIX + topicName + Constants.TOPIC_SUFFIX;
+            }
+            boolean exists = false;
+            for (TopicListBean topicListBean : this.topicList) {
+                if (topicListBean != null && TextUtils.equals(topicListBean.getTopicName(), topicName)) {
+                    exists = true;
+                    break;
+                }
+            }
+            if (!exists) {
+                TopicListBean topicListBean = new TopicListBean();
+                topicListBean.setTopicName(topicName);
+                this.topicList.add(topicListBean);
+            }
+        }
+        this.showTopicAdapter.setData(this.topicList);
+    }
+
+    /**
+     * 处理「小括号」选择页返回结果。
+     */
+    private void dealTopicResult(Intent data) {
+        ArrayList<TopicListBean> chooseList = data.getParcelableArrayListExtra(TopicActivity.INTENT_CHOOSE_DATA);
+        if (!CollectionUtil.isEmpty(chooseList)) {
+            this.topicList.clear();
+            this.topicList.addAll(chooseList);
+        }
+        TopicListBean topicListBean = data.getParcelableExtra(TopicActivity.INTENT_TOPIC_DATA);
+        if (topicListBean != null) {
+            if (data.getIntExtra(TopicActivity.INTENT_MAX_TOPIC_COUNT, 0) > this.topicList.size()) {
+                this.topicList.add(topicListBean);
+            } else {
+                MomentBehavior.clickTopicMaxToast();
+                ToastUtil.showShort(this, getString(R.string.string_add_topic_max));
+            }
+        }
+        this.showTopicAdapter.setData(this.topicList);
     }
 }

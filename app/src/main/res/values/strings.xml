@@ -276,6 +276,11 @@
     <string name="publish">发布</string>
     <string name="publish_comment_limit">今天评论已达上限</string>
     <string name="account_abnormal">账号异常，请自查违规行为</string>
+    <string name="account_banned_title">封禁通知</string>
+    <string name="account_banned_content">经过我们的内部调查，您可能存在违反我们的用户协议的行为，如果你觉得这是一个错误，请点击申请复核，否则您可以下载您所发布过的动态</string>
+    <string name="account_banned_appeal">申请复核</string>
+    <string name="account_banned_download">下载我发布过的动态</string>
+    <string name="account_banned_review_sent">复核申请已提交，我们会尽快处理</string>
     <string name="publish_fail">发布失败</string>
     <string name="publish_invalidate">"发布内容包
 含非法内容"</string>
@@ -499,4 +504,7 @@
     <string name="custom_background_not_set">未设置</string>
     <string name="custom_background_failed">设置失败，请重试</string>
     <string name="custom_background_live_not_support">暂不支持实况照片</string>
+    <string name="string_topic">小括号</string>
+    <string name="string_add_topic_max">小括号数量已达上限</string>
+    <string name="string_not_topic_list">啊哦，还没有小括号哦~</string>
 </resources>

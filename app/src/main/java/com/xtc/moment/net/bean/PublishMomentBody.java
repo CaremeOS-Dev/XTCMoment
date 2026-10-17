@@ -18,6 +18,7 @@ public class PublishMomentBody {
     private int resourceId;
     private int type;
     private String typeList;
+    private List<TopicListBean> topicList;
     private String watchId;
 
     public String getWatchId() {
@@ -136,12 +137,20 @@ public class PublishMomentBody {
         return this.lookupIds;
     }
 
+    public List<TopicListBean> getTopicList() {
+        return this.topicList;
+    }
+
+    public void setTopicList(List<TopicListBean> topicList) {
+        this.topicList = topicList;
+    }
+
     public void setLookupIds(List<String> lookupIds) {
         this.lookupIds = lookupIds;
     }
 
     @Override
     public String toString() {
-        return "PublishMomentBody{watchId='" + this.watchId + "', resourceId=" + this.resourceId + ", resource='" + this.resource + "', content='" + this.content + "', type=" + this.type + ", packageName='" + this.packageName + "', typeList='" + this.typeList + "', location='" + this.location + "', locationType=" + this.locationType + ", longitude=" + this.longitude + ", latitude=" + this.latitude + ", emotionId=" + this.emotionId + ", locationTag='" + this.locationTag + "', permissionType=" + this.permissionType + ", lookupIds=" + this.lookupIds + '}';
+        return "PublishMomentBody{watchId='" + this.watchId + "', resourceId=" + this.resourceId + ", resource='" + this.resource + "', content='" + this.content + "', type=" + this.type + ", packageName='" + this.packageName + "', typeList='" + this.typeList + "', location='" + this.location + "', locationType=" + this.locationType + ", longitude=" + this.longitude + ", latitude=" + this.latitude + ", emotionId=" + this.emotionId + ", locationTag='" + this.locationTag + "', permissionType=" + this.permissionType + ", lookupIds=" + this.lookupIds + ", topicList=" + this.topicList + '}';
     }
 }

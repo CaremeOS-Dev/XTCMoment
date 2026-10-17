@@ -547,7 +547,7 @@ public class PublishService extends Service {
         if (tokenVo != null && tokenVo.getPoiBean() != null) {
             BehaviorEvent.publishLbs(MomentApp.getAppContext());
         }
-        PubVideoOrPhotoServer.getInstance().publishMoment(null, tokenVo, null, friendsVisibleBean);
+        PubVideoOrPhotoServer.getInstance().publishMoment(null, tokenVo, null, friendsVisibleBean, null);
         LogUtil.i(TAG, "videoMsg.getDialogType() 类型 ：" + tokenVo.getDialogType());
     }
     private void uploadLivePhoto(final LivePhotoMsg livePhotoMsg) {

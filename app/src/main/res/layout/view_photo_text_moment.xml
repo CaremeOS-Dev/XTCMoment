@@ -5,5 +5,6 @@
     <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_below="@id/rl_moment_sender">
         <com.xtc.moment.module.widget.MomentContentView android:textSize="15.0sp" android:textColor="#ccffffff" android:id="@id/tv_moment_description" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4.0dip" />
         <ImageView android:id="@id/chat_msg_item_photo_iv" android:layout_width="@dimen/photo_thumnail_width" android:layout_height="@dimen/photo_thumnail_height" android:layout_marginTop="7.0dip" android:scaleType="centerCrop" />
+        <TextView android:textSize="@dimen/sp_13" android:id="@id/tv_topic" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dp_4" android:layout_marginStart="@dimen/dp_4" android:layout_marginEnd="@dimen/dp_4" />
     </LinearLayout>
 </LinearLayout>

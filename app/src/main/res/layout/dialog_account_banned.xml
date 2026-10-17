@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:background="#ff000000" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingLeft="@dimen/dp_8" android:paddingRight="@dimen/dp_8">
+        <TextView android:textSize="24.0sp" android:textColor="#ffffffff" android:id="@id/tv_ban_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dp_10" android:layout_marginBottom="@dimen/dp_8" android:layout_gravity="center_horizontal" android:text="@string/account_banned_title" />
+        <TextView android:textSize="@dimen/sp_14" android:textColor="@color/video_record_big_circle" android:id="@id/tv_ban_content" android:paddingBottom="@dimen/dp_10" android:layout_width="fill_parent" android:layout_height="wrap_content" android:lineSpacingExtra="@dimen/dp_3" android:includeFontPadding="true" android:text="@string/account_banned_content" />
+        <Button android:textSize="@dimen/sp_17" android:textColor="@color/video_record_big_circle" android:gravity="center" android:id="@id/btn_ban_appeal" android:background="@drawable/bg_btn_risk" android:layout_width="fill_parent" android:layout_height="@dimen/dp_40" android:layout_marginTop="@dimen/dp_5" android:text="@string/account_banned_appeal" />
+        <Button android:textSize="@dimen/sp_17" android:textColor="@color/video_record_big_circle" android:gravity="center" android:id="@id/btn_ban_download" android:background="@drawable/bg_btn_risk" android:layout_width="fill_parent" android:layout_height="@dimen/dp_40" android:layout_marginTop="@dimen/dp_5" android:text="@string/account_banned_download" />
+        <Button android:textSize="@dimen/sp_17" android:textColor="@color/video_record_big_circle" android:gravity="center" android:id="@id/btn_ban_confirm" android:background="@drawable/bg_btn_risk" android:layout_width="fill_parent" android:layout_height="@dimen/dp_40" android:layout_marginTop="@dimen/dp_5" android:layout_marginBottom="@dimen/dp_10" android:text="@string/i_known" />
+    </LinearLayout>
+</ScrollView>

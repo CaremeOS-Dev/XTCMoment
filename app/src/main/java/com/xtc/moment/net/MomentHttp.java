@@ -42,6 +42,8 @@ import com.xtc.moment.net.bean.SearchOfficialCommentResponse;
 import com.xtc.moment.net.bean.SendGiftRequest;
 import com.xtc.moment.net.bean.TemplateRequestBean;
 import com.xtc.moment.net.bean.TemplateResponseBean;
+import com.xtc.moment.net.bean.RespTopicConfig;
+import com.xtc.moment.net.bean.ReviewRequestBean;
 import com.xtc.moment.net.bean.VideoTokenVoResponse;
 import com.xtc.moment.tasks.domain.usecase.PublishMomentTask;
 
@@ -132,9 +134,18 @@ public interface MomentHttp {
     @GET("/social-service/warmReminder/getWarmReminderConfig")
     Observable<NetBaseResult<ReminderConfig>> getReminderConfig();
 
+    @GET("/moment-service/topic/recommend/list")
+    Observable<NetBaseResult<RespTopicConfig>> getTopicConfigData();
+
     @POST("/social-service/inform/submit")
     Observable<NetBaseResult<String>> launchedReport(@Body StartReportRequest request);
 
     @POST("/social-service/inform/state")
     Observable<NetBaseResult<ReportDataBean>> queryReportInform(@Body ReportInformParam param);
+
+    /**
+     * 封禁申诉。封禁账号的其他接口都会返回 000007，只有这个接口放行。
+     */
+    @POST("/extra/review-request")
+    Observable<NetBaseResult<String>> submitReviewRequest(@Body ReviewRequestBean body);
 }

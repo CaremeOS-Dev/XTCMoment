@@ -330,6 +330,27 @@ public class MomentBehavior {
         BehaviorUtil.customEvent(context, StringConstant.BehaviorFunName.MOMENT_VISIBLE_RANGE, map);
     }
 
+    /**
+     * 点击「小括号」埋点。
+     *
+     * @param isSelf 是否为自己发布的动态
+     */
+    public static void clickTopic(boolean isSelf, int topicType) {
+        LogUtil.d(TAG, "clickTopic isSelf =" + isSelf + ", type =" + topicType);
+        HashMap<String, String> map = new HashMap<>(2);
+        map.put(StringConstant.BehaviorKey.IS_SELF, isSelf ? "1" : "0");
+        map.put(StringConstant.BehaviorKey.TOPIC_TYPE, String.valueOf(topicType));
+        BehaviorUtil.customEvent(ContextUtils.getContext(),
+                StringConstant.BehaviorFunName.MOMENT_CLICK_TOPIC_LABEL, map);
+    }
+
+    /** 点击「小括号」数量已达上限的埋点。 */
+    public static void clickTopicMaxToast() {
+        LogUtil.d(TAG, "topicMaxToast");
+        BehaviorUtil.customEvent(ContextUtils.getContext(),
+                StringConstant.BehaviorFunName.MOMENT_TOPIC_MAX_TOAST, null);
+    }
+
     public static void uploadMomentReminderInfo(String label, int count) {
         LogUtil.d(ReminderHelper.M_TAG, "uploadIMInfo label =" + label + ", count =" + count);
         HashMap<String, String> map = new HashMap<>(2);

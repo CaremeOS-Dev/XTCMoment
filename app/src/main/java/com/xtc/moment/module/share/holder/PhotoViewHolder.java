@@ -70,6 +70,7 @@ public class PhotoViewHolder extends AbsViewHolder {
         this.ivIcon = (ImageView) view.findViewById(R.id.iv_icon);
         this.tvName = (TextView) view.findViewById(R.id.tv_name);
         this.tvTime = (TextView) view.findViewById(R.id.tv_time);
+        this.tvTopic = (TextView) view.findViewById(R.id.tv_topic);
         this.ivContent = (ImageView) view.findViewById(R.id.chat_msg_item_photo_iv);
         this.ivContent.setImageResource(R.drawable.ic_selfie_album_default);
         this.tvLikes = (TextView) view.findViewById(R.id.tv_likes);

@@ -18,6 +18,7 @@ import com.xtc.moment.module.bean.PoiBean;
 import com.xtc.moment.module.bean.ShareVideoMoment;
 import com.xtc.moment.module.bean.VideoKeyOrToken;
 import com.xtc.moment.net.bean.Moment;
+import com.xtc.moment.net.bean.TopicListBean;
 import com.xtc.moment.net.bean.VideoTokenVoResponse;
 import com.xtc.moment.prerogative.MomentPrerogativeServeImpl;
 import com.xtc.moment.serve.IMomentServe;
@@ -30,6 +31,7 @@ import com.xtc.utils.encode.JSONUtil;
 
 import java.lang.ref.WeakReference;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.List;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -90,7 +92,8 @@ public class PubVideoOrPhotoServer {
      */
     public void publishMoment(final PhotoMsg photoMsg, final VideoTokenVoResponse videoTokenVoResponse,
                               final PublishVideoOrPhotoCallback callback,
-                              final FriendsVisibleBean visibleBean) {
+                              final FriendsVisibleBean visibleBean,
+                              final List<TopicListBean> topicList) {
         PoiBean poiBean;
         int dialogType;
         String packageName;
@@ -210,7 +213,7 @@ public class PubVideoOrPhotoServer {
         final String publishResourceKey = resourceKey;
         final int publishDialogType = dialogType;
         final String publishContent = content;
-        this.momentServe.publishMoment(dialogType, resourceKey, 0, content, packageName, poiBean, visibleBean)
+        this.momentServe.publishMoment(dialogType, resourceKey, 0, content, packageName, poiBean, visibleBean, topicList)
                 .map(new Func1<Moment, DbMoment>() {
                     @Override
                     public DbMoment call(Moment moment) {

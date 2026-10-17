@@ -78,6 +78,8 @@ public class MoodOrStateActivity extends BaseActivity<IMoodOrStateView, MoodOrSt
     private boolean isLoadMoreNull;
     private long enterTime;
     private long leaveTime;
+    private String topicJson;
+    private String topicSourceType;
 
     @Override
     public MoodOrStatePresenter createPresenter() {
@@ -95,6 +97,8 @@ public class MoodOrStateActivity extends BaseActivity<IMoodOrStateView, MoodOrSt
         ThemeBackgroundHelper.apply(this);
         this.enterTime = System.currentTimeMillis();
         this.mType = getIntent().getIntExtra(Constants.INTENT_EXTRA_PUBLISH_TYPE, -1);
+        this.topicJson = getIntent().getStringExtra(Constants.INTENT_EXTRA_TOPIC);
+        this.topicSourceType = getIntent().getStringExtra(Constants.INTENT_EXTRA_TOPIC_SOURCE);
         this.presenter.getTemplatesByTypeFromDb(this.mType);
         initView();
     }
@@ -218,6 +222,9 @@ public class MoodOrStateActivity extends BaseActivity<IMoodOrStateView, MoodOrSt
                         Intent intent = new Intent(MoodOrStateActivity.this, PushTextActivity.class);
                         intent.putExtra(Constants.INTENT_EXTRA_PUBLISH_TYPE, type);
                         intent.putExtra(Constants.INTENT_EXTRA_DB_TEMPLATE, JSONUtil.toJSON(template));
+                        intent.putExtra(Constants.INTENT_EXTRA_TOPIC, MoodOrStateActivity.this.topicJson);
+                        intent.putExtra(Constants.INTENT_EXTRA_TOPIC_SOURCE,
+                                MoodOrStateActivity.this.topicSourceType);
                         mContext.startActivity(intent);
                     }
                 });

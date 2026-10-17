@@ -27,6 +27,8 @@ public class DigitalEntity {
     public String sendFailReason;
     public String publicStatus;
     public String momentContent;
+    public String topicList;
+    public String topicSourceType;
     public HashMap<String, String> mHashMap = new HashMap<>();
 
     public HashMap<String, String> getHashMap() {
@@ -47,6 +49,8 @@ public class DigitalEntity {
         this.mHashMap.put("publicStatus", this.publicStatus);
         this.mHashMap.put("shareTransTime", this.shareTransTime);
         this.mHashMap.put("moment_content", this.momentContent);
+        this.mHashMap.put("topic_list", this.topicList);
+        this.mHashMap.put("topic_source_type", this.topicSourceType);
         return this.mHashMap;
     }
 

@@ -99,6 +99,7 @@ public class Moments {
                     moment.setTopExpireTime(advert.getTopExpireTime());
                     moment.setOfficial(advert.getOfficial());
                     moment.setComments(advert.getComments());
+                    moment.setTopicList(advert.getTopicList());
                     result.add(moment);
                 }
             }

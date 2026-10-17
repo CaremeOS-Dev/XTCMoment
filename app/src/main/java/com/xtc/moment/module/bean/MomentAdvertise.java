@@ -1,6 +1,7 @@
 package com.xtc.moment.module.bean;
 
 import com.xtc.moment.db.bean.DbMomentComment;
+import com.xtc.moment.net.bean.TopicListBean;
 
 import java.util.List;
 
@@ -31,6 +32,24 @@ public class MomentAdvertise {
     private int enableLike;
     private List<DbMomentComment> comments;
     private String dataUrl;
+    private List<TopicListBean> topicList;
+    private String topicNames;
+
+    public List<TopicListBean> getTopicList() {
+        return this.topicList;
+    }
+
+    public void setTopicList(List<TopicListBean> topicList) {
+        this.topicList = topicList;
+    }
+
+    public String getTopicNames() {
+        return this.topicNames;
+    }
+
+    public void setTopicNames(String topicNames) {
+        this.topicNames = topicNames;
+    }
     private int top;
     private int official;
     private long topExpireTime;
@@ -170,6 +189,7 @@ public class MomentAdvertise {
                 + "', resource='" + this.resource + "', publishTime=" + this.publishTime + ", scaleType="
                 + this.scaleType + ", likeTotal=" + this.likeTotal + ", enableLike=" + this.enableLike + ", dataUrl='"
                 + this.dataUrl + "', top=" + this.top + ", official=" + this.official + ", topExpireTime="
-                + this.topExpireTime + ", comments=" + this.comments + '}';
+                + this.topExpireTime + ", comments=" + this.comments + ", topicNames=" + this.topicNames
+                + ", topicList=" + this.topicList + '}';
     }
 }

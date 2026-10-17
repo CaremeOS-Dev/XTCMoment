@@ -40,6 +40,7 @@ import com.xtc.moment.third.behavior.MomentBehavior;
 import com.xtc.moment.util.BeanConverterUtil;
 import com.xtc.moment.util.HandlerUtil;
 import com.xtc.moment.util.MomentTypeUtil;
+import com.xtc.moment.util.PublishErrorUtil;
 import com.xtc.moment.util.SharedTool;
 import com.xtc.moment.util.switchs.ModuleSwitchUtil;
 import com.xtc.ui.widget.dialog.NormalIconDialog;
@@ -217,6 +218,10 @@ public class MomentPresenter extends BaseInteractPresenter<IMomentActivityView> 
                             @Override
                             public void onError(Throwable throwable) {
                                 LogUtil.e(TAG, throwable);
+                                // 账号被封禁时服务端返回 000007，这里直接弹封禁弹窗，
+                                // 而不是让列表静默走本地缓存。
+                                PublishErrorUtil.maybeShowAccountBanned(
+                                        MomentPresenter.this.mContext, throwable);
                                 if (MomentPresenter.this.isViewAttached()) {
                                     MomentPresenter.this.getView().loadLocalData(offset, count);
                                 }

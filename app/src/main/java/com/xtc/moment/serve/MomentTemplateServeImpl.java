@@ -9,6 +9,7 @@ import com.xtc.moment.db.bean.DbTemplate;
 import com.xtc.moment.db.dao.MomentTemplateDao;
 import com.xtc.moment.net.MomentHttpServiceProxy;
 import com.xtc.moment.net.bean.TemplateResponseBean;
+import com.xtc.moment.net.bean.RespTopicConfig;
 import com.xtc.utils.common.CollectionUtil;
 
 import java.util.List;
@@ -84,5 +85,10 @@ public class MomentTemplateServeImpl extends BaseServe implements IMomentTemplat
     @Override
     public long getTemplatesCount() {
         return this.momentTemplateDao.getCount();
+    }
+
+    @Override
+    public Observable<RespTopicConfig> getTopicConfigData() {
+        return this.momentHttpServiceProxy.getTopicConfigData();
     }
 }

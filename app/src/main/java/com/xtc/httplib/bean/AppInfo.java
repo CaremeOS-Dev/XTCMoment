@@ -8,6 +8,7 @@ import com.xtc.httplib.bigdata.RsaKeyBigData;
 import com.xtc.httplib.cache.RequestCacheManager;
 import com.xtc.httplib.okhttp.BaseInterceptor;
 import com.xtc.log.LogUtil;
+import com.xtc.moment.config.NetBuildConfig;
 import com.xtc.utils.encode.JSONUtil;
 import com.xtc.utils.security.XtcSecurity;
 
@@ -64,6 +65,10 @@ public class AppInfo {
     }
 
     private boolean isEncrypt() {
+        if (NetBuildConfig.OVERRIDE_ENCRYPT) {
+            // 编译期固定了加密开关，忽略服务端下发的 encSwitch。
+            return NetBuildConfig.ENCRYPT;
+        }
         if (TextUtils.isEmpty(this.encSwitch)) {
             return true;
         }

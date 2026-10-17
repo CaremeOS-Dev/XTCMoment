@@ -33,6 +33,7 @@ import com.xtc.moment.module.bean.SendVideoParam;
 import com.xtc.moment.module.bean.ShareVideoMoment;
 import com.xtc.moment.net.bean.BanStateBean;
 import com.xtc.moment.net.bean.Moment;
+import com.xtc.moment.net.bean.TopicListBean;
 import com.xtc.moment.net.bean.TemplateResponseBean;
 import com.xtc.moment.net.bean.VideoTokenVoResponse;
 import com.xtc.moment.prerogative.MomentPrerogativeServeImpl;
@@ -391,6 +392,11 @@ public class PublishPresenter extends MvpBasePresenter<IPublishView> {
     }
 
     public void publishMoment(String content, int type, int resourceId, PoiBean poiBean) {
+        publishMoment(content, type, resourceId, poiBean, null);
+    }
+
+    public void publishMoment(String content, int type, int resourceId, PoiBean poiBean,
+                              List<TopicListBean> topicList) {
         PublishMomentTask publishMomentTask = new PublishMomentTask(this.momentsDataSource, this.context);
         PublishMomentTask.RequestValues requestValues = new PublishMomentTask.RequestValues(
                 AccountInfoServerImpl.getInstance(this.context).getWatchAccountInfo().getWatchId(this.context),
@@ -401,6 +407,13 @@ public class PublishPresenter extends MvpBasePresenter<IPublishView> {
             requestValues.setLocationType(poiBean.getLocationType());
             requestValues.setLatitude(Double.parseDouble(poiBean.getLocation().getLatitude()));
             requestValues.setLongitude(Double.parseDouble(poiBean.getLocation().getLongitude()));
+        }
+        if (!CollectionUtil.isEmpty(topicList)) {
+            for (TopicListBean topicListBean : topicList) {
+                topicListBean.setTopicName(topicListBean.getTopicName()
+                        .replace(Constants.TOPIC_PREFIX, "").replace(Constants.TOPIC_SUFFIX, ""));
+            }
+            requestValues.setTopicList(topicList);
         }
         publishMomentTask.setRequestValues(requestValues);
         publishMomentTask.setTaskCallback(new AbsTask.TaskCallback<AbsTask.ResponseValue>() {
@@ -493,9 +506,9 @@ public class PublishPresenter extends MvpBasePresenter<IPublishView> {
     }
 
     public void publishMoment(PhotoMsg photoMsg, VideoTokenVoResponse videoTokenVoResponse,
-                              FriendsVisibleBean visibleBean) {
+                              FriendsVisibleBean visibleBean, List<TopicListBean> topicList) {
         PubVideoOrPhotoServer.getInstance().publishMoment(photoMsg, videoTokenVoResponse,
-                new VideoOrPhotoPublishCallback(), visibleBean);
+                new VideoOrPhotoPublishCallback(), visibleBean, topicList);
     }
 
     public void publishMoment(LivePhotoMsg livePhotoMsg) {
@@ -806,10 +819,15 @@ public class PublishPresenter extends MvpBasePresenter<IPublishView> {
         getView().toMomentActivity();
     }
     public void publishMoment(PoiBean poiBean, FriendsVisibleBean visibleBean) {
+        publishMoment(poiBean, visibleBean, null, null);
+    }
+
+    public void publishMoment(PoiBean poiBean, FriendsVisibleBean visibleBean,
+                              List<TopicListBean> topicList, String topicSourceType) {
         long startPublishTime = SystemClock.elapsedRealtime();
         DigitalManager.getInstance().getDigitalEntity().momentType = String.valueOf(MOMENT_TYPE_LOCATION);
         this.momentServe.publishMoment(MOMENT_TYPE_LOCATION, null, 0, poiBean.getAddressDesc(),
-                        poiBean, visibleBean)
+                        poiBean, visibleBean, topicList)
                 .subscribeOn(Schedulers.io())
                 .subscribe(new LocationPublishSubscriber(startPublishTime, visibleBean));
     }

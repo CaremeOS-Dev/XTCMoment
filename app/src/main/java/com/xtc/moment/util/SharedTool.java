@@ -196,4 +196,13 @@ public class SharedTool {
     public static void saveCustomBackgroundPath(Context context, String path) {
         SharedManager.getInstance(context).putString(Constant.ThemeSetting.CUSTOM_BACKGROUND_PATH, path);
     }
+
+    /** 「小括号」最多可选的个数，由推荐话题接口下发。 */
+    public static int getMaxTopicCount(Context context) {
+        return SharedManager.getInstance(context).getInt(Constants.SpConstant.MAX_TOPIC_COUNT, 2);
+    }
+
+    public static void saveMaxTopicCount(Context context, int maxTopicCount) {
+        SharedManager.getInstance(context).putInt(Constants.SpConstant.MAX_TOPIC_COUNT, maxTopicCount);
+    }
 }
