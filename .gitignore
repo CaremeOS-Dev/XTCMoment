@@ -21,6 +21,7 @@ Thumbs.db
 *.keystore
 
 # Logs
+/logs/
 *.log
 
 tmpbc/
