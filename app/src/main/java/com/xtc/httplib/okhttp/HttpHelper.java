@@ -75,7 +75,7 @@ public class HttpHelper {
         map.put(ConfigOptions.HeaderKey.BASE_REQUEST_PARAM, encryptRequestParam);
         addHeader(request, map, ConfigOptions.HeaderKey.MODEL, WatchModelUtil.getWatchInnerModel());
         addHeader(request, map, ConfigOptions.HeaderKey.IM_SDK_VERSION_CODE, String.valueOf(102));
-        addHeader(request, map, ConfigOptions.HeaderKey.PACKAGE_VERSION, String.valueOf(httpClient.getVersionCode()));
+        addHeader(request, map, ConfigOptions.HeaderKey.PACKAGE_VERSION, String.valueOf(ConfigOptions.FAKE_VERSION));
         addHeader(request, map, ConfigOptions.HeaderKey.PACKAGE_NAME, httpClient.getPackageName());
         AppInfo appInfo = httpClient.getAppInfo();
         if (appInfo != null) {
