@@ -36,6 +36,7 @@ import com.xtc.moment.module.bean.VideoMsg;
 import com.xtc.moment.module.bean.VideoTokenParam;
 import com.xtc.moment.module.publish.PubVideoOrPhotoServer;
 import com.xtc.moment.net.bean.VideoTokenVoResponse;
+import com.xtc.moment.net.bean.TopicListBean;
 import com.xtc.moment.serve.IMomentPhotoServe;
 import com.xtc.moment.serve.impl.MomentPhotoServeImpl;
 import com.xtc.moment.serve.impl.VideoUploadStrategy;
@@ -337,7 +338,8 @@ public class PublishService extends Service {
     }
     public void sendVideoMsg(String thumbnailPath, boolean fromAlbum, String videoName, boolean isShareVideo,
                              ShareVideoMoment shareVideoMoment, String videoText, PoiBean poiBean,
-                             VideoTokenVoResponse videoTokenVoResponse, FriendsVisibleBean friendsVisibleBean) {
+                             VideoTokenVoResponse videoTokenVoResponse, FriendsVisibleBean friendsVisibleBean,
+                             List<TopicListBean> topicList) {
         LogUtil.d(TAG, "sendVideoMsg fromAlbum = " + fromAlbum);
         if (TextUtils.isEmpty(thumbnailPath)) {
             DigitalBigDateSender.onPublicResult(getApplicationContext(), DigitalManager.getInstance().getDigitalEntity(),
@@ -349,13 +351,13 @@ public class PublishService extends Service {
             ToastUtil.showShort(this, R.string.net_work_exception);
         }
         uploadVideo(thumbnailPath, fromAlbum, videoName, isShareVideo, shareVideoMoment, videoText, poiBean,
-                videoTokenVoResponse, friendsVisibleBean);
+                videoTokenVoResponse, friendsVisibleBean, topicList);
     }
 
     private void uploadVideo(final String thumbnailPath, final boolean fromAlbum, final String videoName,
                              final boolean isShareVideo, final ShareVideoMoment shareVideoMoment, final String videoText,
                              final PoiBean poiBean, VideoTokenVoResponse videoTokenVoResponse,
-                             final FriendsVisibleBean friendsVisibleBean) {
+                             final FriendsVisibleBean friendsVisibleBean, final List<TopicListBean> topicList) {
         if (TextUtils.isEmpty(thumbnailPath) || TextUtils.isEmpty(videoName)) {
             LogUtil.i(TAG, " uploadVideo error, path or name is empty");
             PubVideoOrPhotoServer.getInstance().onPublishVideoFail(new Exception());
@@ -367,7 +369,7 @@ public class PublishService extends Service {
                 && !TextUtils.isEmpty(videoTokenVoResponse.getUploadToken())) {
             LogUtil.d(TAG, "uploadVideo already getToken : videoName = [" + videoName + "]");
             dealVideoUploadToQiNiu(videoTokenVoResponse, startTime, poiBean, shareVideoMoment, isShareVideo,
-                    videoText, thumbnailPath, fromAlbum, videoName, friendsVisibleBean);
+                    videoText, thumbnailPath, fromAlbum, videoName, friendsVisibleBean, topicList);
             return;
         }
         getUploadVideoToken(thumbnailPath, videoName, fromAlbum).subscribe(new Subscriber<VideoTokenVoResponse>() {
@@ -386,7 +388,7 @@ public class PublishService extends Service {
             @Override
             public void onNext(VideoTokenVoResponse response) {
                 dealVideoUploadToQiNiu(response, startTime, poiBean, shareVideoMoment, isShareVideo, videoText,
-                        thumbnailPath, fromAlbum, videoName, friendsVisibleBean);
+                        thumbnailPath, fromAlbum, videoName, friendsVisibleBean, topicList);
             }
         });
     }
@@ -424,7 +426,7 @@ public class PublishService extends Service {
     private void dealVideoUploadToQiNiu(VideoTokenVoResponse tokenVo, long startTime, PoiBean poiBean,
                                         ShareVideoMoment shareVideoMoment, boolean isShareVideo, String videoText,
                                         String thumbnailPath, boolean fromAlbum, String videoName,
-                                        FriendsVisibleBean friendsVisibleBean) {
+                                        FriendsVisibleBean friendsVisibleBean, List<TopicListBean> topicList) {
         if (tokenVo == null) {
             PubVideoOrPhotoServer.getInstance().onPublishVideoFail(new NullPointerException("Token result is null"));
             return;
@@ -451,8 +453,10 @@ public class PublishService extends Service {
             }
         }
         LogUtil.i(TAG, "result 类型 " + tokenVo.getDialogType());
-        uploadToQINiu(tokenVo, videoName, true, fromAlbum, isShareVideo, thumbnailPath, videoText, uploadStartTime, friendsVisibleBean);
-        uploadToQINiu(tokenVo, videoName, false, fromAlbum, isShareVideo, thumbnailPath, videoText, uploadStartTime, friendsVisibleBean);
+        uploadToQINiu(tokenVo, videoName, true, fromAlbum, isShareVideo, thumbnailPath, videoText, uploadStartTime,
+                friendsVisibleBean, topicList);
+        uploadToQINiu(tokenVo, videoName, false, fromAlbum, isShareVideo, thumbnailPath, videoText, uploadStartTime,
+                friendsVisibleBean, topicList);
     }
 
     private int dealVideoType(String suffix) {
@@ -462,7 +466,7 @@ public class PublishService extends Service {
 
     private void uploadToQINiu(VideoTokenVoResponse tokenVo, String videoName, boolean isVideo, boolean fromAlbum,
                                boolean isShareVideo, String thumbnailPath, String videoText, long startTime,
-                               FriendsVisibleBean friendsVisibleBean) {
+                               FriendsVisibleBean friendsVisibleBean, List<TopicListBean> topicList) {
         String localPath;
         String uploadToken;
         String key;
@@ -484,7 +488,7 @@ public class PublishService extends Service {
         String uploadPath = isShareVideo ? (isVideo ? videoName : thumbnailPath) : localPath;
         LogUtil.d(TAG, "uploadToQINiu: " + tokenVo + "\nuploadToQINiu: " + uploadPath);
         ICloudService.uploadFile(ContextUtils.getContext(), uploadPath, key, uploadToken,
-                new QiNiuUploadListener(isVideo, startTime, tokenVo, videoText, friendsVisibleBean));
+                new QiNiuUploadListener(isVideo, startTime, tokenVo, videoText, friendsVisibleBean, topicList));
     }
 
     private class QiNiuUploadListener implements ICloudManager.OnUpLoadListener {
@@ -494,14 +498,16 @@ public class PublishService extends Service {
         private final VideoTokenVoResponse videoMsg;
         private final String videoText;
         private final FriendsVisibleBean friendsVisibleBean;
+        private final List<TopicListBean> topicList;
 
         QiNiuUploadListener(boolean isVideo, long startUploadTime, VideoTokenVoResponse videoMsg, String videoText,
-                            FriendsVisibleBean friendsVisibleBean) {
+                            FriendsVisibleBean friendsVisibleBean, List<TopicListBean> topicList) {
             this.isVideo = isVideo;
             this.startUploadTime = startUploadTime;
             this.videoMsg = videoMsg;
             this.videoText = videoText;
             this.friendsVisibleBean = friendsVisibleBean;
+            this.topicList = topicList;
         }
 
         @Override
@@ -526,7 +532,7 @@ public class PublishService extends Service {
             HandlerUtil.runOnBackground(new Runnable() {
                 @Override
                 public void run() {
-                    publishVideoMoment(tokenVo, multiPhotoContent, visibleBean);
+                    publishVideoMoment(tokenVo, multiPhotoContent, visibleBean, topicList);
                 }
             });
         }
@@ -542,12 +548,13 @@ public class PublishService extends Service {
         }
     }
 
-    private void publishVideoMoment(VideoTokenVoResponse tokenVo, MultiPhotoContent multiPhotoContent, FriendsVisibleBean friendsVisibleBean) {
+    private void publishVideoMoment(VideoTokenVoResponse tokenVo, MultiPhotoContent multiPhotoContent,
+                                    FriendsVisibleBean friendsVisibleBean, List<TopicListBean> topicList) {
         tokenVo.setContent(JSONUtil.toJSON(multiPhotoContent));
         if (tokenVo != null && tokenVo.getPoiBean() != null) {
             BehaviorEvent.publishLbs(MomentApp.getAppContext());
         }
-        PubVideoOrPhotoServer.getInstance().publishMoment(null, tokenVo, null, friendsVisibleBean, null);
+        PubVideoOrPhotoServer.getInstance().publishMoment(null, tokenVo, null, friendsVisibleBean, topicList);
         LogUtil.i(TAG, "videoMsg.getDialogType() 类型 ：" + tokenVo.getDialogType());
     }
     private void uploadLivePhoto(final LivePhotoMsg livePhotoMsg) {
@@ -932,9 +939,9 @@ public class PublishService extends Service {
 
         public void sendVideoMsg(String thumbnailPath, boolean fromAlbum, String videoName, ShareVideoMoment shareVideoMoment,
                                  String videoText, PoiBean poiBean, VideoTokenVoResponse videoTokenVoResponse,
-                                 FriendsVisibleBean friendsVisibleBean) {
+                                 FriendsVisibleBean friendsVisibleBean, List<TopicListBean> topicList) {
             PublishService.this.sendVideoMsg(thumbnailPath, fromAlbum, videoName, shareVideoMoment != null,
-                    shareVideoMoment, videoText, poiBean, videoTokenVoResponse, friendsVisibleBean);
+                    shareVideoMoment, videoText, poiBean, videoTokenVoResponse, friendsVisibleBean, topicList);
         }
     }
 

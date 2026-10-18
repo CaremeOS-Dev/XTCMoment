@@ -1540,7 +1540,7 @@ public class PushPictureActivity extends BaseCtaPermissionActivity<IPublishView,
     public void chooseVideoItemSuccess(boolean fromAlbum, String videoPath, final String videoText) {
         LogUtil.i(TAG, "chooseVideoItemSuccess : " + videoText);
         this.presenter.sendVideoMsg(fromAlbum, getPublishBinder(), videoPath, videoText, this.poiBean,
-                this.friendsVisibleBean);
+                this.friendsVisibleBean, this.topicList);
         HandlerUtil.runOnBackground(new Runnable() {
             @Override
             public void run() {
@@ -1638,7 +1638,7 @@ public class PushPictureActivity extends BaseCtaPermissionActivity<IPublishView,
         this.loadingPupWindowHolder.showLoading(getWindow().getDecorView());
         this.presenter.sendShareVideoMsg(fromAlbum, getPublishBinder(), videoPath, packageName,
                 funVideoParam, appIcon, appName, videoLength, videoText, this.poiBean,
-                this.friendsVisibleBean);
+                this.friendsVisibleBean, this.topicList);
         if (!TextUtils.isEmpty(videoText)) {
             MomentBehavior.pushDynamic(this, 29);
         }
