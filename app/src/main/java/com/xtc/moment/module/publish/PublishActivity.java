@@ -1117,7 +1117,7 @@ public class PublishActivity extends BaseCtaPermissionActivity<IPublishView, Pub
             public void run() {
                 LogUtil.i(TAG, "chooseVideoItemSuccess");
                 PublishActivity.this.presenter.sendVideoMsg(fromAlbum,
-                        PublishActivity.this.getPublishBinder(), videoPath, "");
+                        PublishActivity.this.getPublishBinder(), videoPath, "", null, null, null);
                 PublishActivity.this.sendVideoRecord();
             }
         });
@@ -1136,7 +1136,7 @@ public class PublishActivity extends BaseCtaPermissionActivity<IPublishView, Pub
                         PublishActivity.this.getWindow().getDecorView());
                 PublishActivity.this.presenter.sendShareVideoMsg(fromAlbum,
                         PublishActivity.this.getPublishBinder(), videoPath, packageName, funVideoParam,
-                        appIcon, appName, videoLength, null, null, null);
+                        appIcon, appName, videoLength, null, null, null, null);
                 PublishActivity.this.sendVideoRecord();
             }
         });

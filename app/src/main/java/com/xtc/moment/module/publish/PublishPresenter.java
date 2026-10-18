@@ -585,12 +585,12 @@ public class PublishPresenter extends MvpBasePresenter<IPublishView> {
     }
     public void sendVideoMsg(boolean fromAlbum, PublishService.PublishBinder publishBinder,
                              String videoPath, String videoText) {
-        sendVideoMsg(fromAlbum, publishBinder, videoPath, videoText, null, null);
+        sendVideoMsg(fromAlbum, publishBinder, videoPath, videoText, null, null, null);
     }
 
     public void sendVideoMsg(final boolean fromAlbum, final PublishService.PublishBinder publishBinder,
                              final String videoPath, final String videoText, final PoiBean poiBean,
-                             final FriendsVisibleBean visibleBean) {
+                             final FriendsVisibleBean visibleBean, final List<TopicListBean> topicList) {
         final String videoName = ChatVideoUtil.getVideoName(videoPath);
         String thumbnailPath = (fromAlbum ? FileManager.getVideoThumnailDir()
                 : FileManager.getThirdVideoThumnailPath()) + videoName + FileManager.WEBP_FORMAT;
@@ -605,7 +605,7 @@ public class PublishPresenter extends MvpBasePresenter<IPublishView> {
         LogUtil.d(TAG, "sendVideoMsg thumbnailPath exit : " + thumbnailExists);
         if (thumbnailExists || !TextUtils.isEmpty(this.loadingTokenVideoName)) {
             sendVideoMsg(publishBinder, thumbnailPath, fromAlbum, videoName, null, videoText,
-                    poiBean, visibleBean);
+                    poiBean, visibleBean, topicList);
             return;
         }
         final long saveThumbnailStartTime = SystemClock.elapsedRealtime();
@@ -636,14 +636,15 @@ public class PublishPresenter extends MvpBasePresenter<IPublishView> {
                         DigitalManager.getInstance().getDigitalEntity().saveThumnailTime =
                                 String.valueOf(SystemClock.elapsedRealtime() - saveThumbnailStartTime);
                         PublishPresenter.this.sendVideoMsg(publishBinder, thumbnailPath, fromAlbum,
-                                videoName, null, videoText, poiBean, visibleBean);
+                                videoName, null, videoText, poiBean, visibleBean, topicList);
                     }
                 });
     }
 
     private void sendVideoMsg(PublishService.PublishBinder publishBinder, String thumbnailPath,
                               boolean fromAlbum, String videoName, ShareVideoMoment shareVideoMoment,
-                              String videoText, PoiBean poiBean, FriendsVisibleBean visibleBean) {
+                              String videoText, PoiBean poiBean, FriendsVisibleBean visibleBean,
+                              List<TopicListBean> topicList) {
         if (publishBinder == null) {
             return;
         }
@@ -659,10 +660,12 @@ public class PublishPresenter extends MvpBasePresenter<IPublishView> {
             }
             this.sendVideoParam = new SendVideoParam(thumbnailPath, videoName, fromAlbum, videoText,
                     poiBean, shareVideoMoment);
+            this.sendVideoParam.setTopicList(topicList);
             return;
         }
         this.sendVideoParam = new SendVideoParam(thumbnailPath, videoName, fromAlbum, videoText, poiBean,
                 shareVideoMoment, this.videoTokenVoResponse, visibleBean);
+        this.sendVideoParam.setTopicList(topicList);
         toSendVideoInBackground(this.sendVideoParam);
     }
 
@@ -670,7 +673,8 @@ public class PublishPresenter extends MvpBasePresenter<IPublishView> {
                                   final String videoPath, String packageName, String funVideoParamJson,
                                   byte[] appIcon, String appName, long videoLength,
                                   final String videoText, final PoiBean poiBean,
-                                  final FriendsVisibleBean visibleBean) {
+                                  final FriendsVisibleBean visibleBean,
+                                  final List<TopicListBean> topicList) {
         LogUtil.d(TAG, "sendShareVideoMsg: " + videoPath);
         final String thumbnailPath = FileManager.getVideoThumnailDir()
                 + ChatVideoUtil.getVideoName(videoPath) + FileManager.WEBP_FORMAT;
@@ -689,7 +693,7 @@ public class PublishPresenter extends MvpBasePresenter<IPublishView> {
         if ((thumbnailFile.isFile() && thumbnailFile.exists())
                 || !TextUtils.isEmpty(this.loadingTokenVideoName)) {
             sendVideoMsg(publishBinder, thumbnailPath, fromAlbum, videoPath, shareVideoMoment,
-                    videoText, poiBean, visibleBean);
+                    videoText, poiBean, visibleBean, topicList);
             return;
         }
         Observable.just(thumbnailPath)
@@ -714,7 +718,7 @@ public class PublishPresenter extends MvpBasePresenter<IPublishView> {
                     @Override
                     public void onNext(String savedPath) {
                         PublishPresenter.this.sendVideoMsg(publishBinder, thumbnailPath, fromAlbum,
-                                videoPath, shareVideoMoment, videoText, poiBean, visibleBean);
+                                videoPath, shareVideoMoment, videoText, poiBean, visibleBean, topicList);
                     }
                 });
     }

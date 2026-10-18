@@ -1,6 +1,9 @@
 package com.xtc.moment.module.bean;
 
 import com.xtc.moment.net.bean.VideoTokenVoResponse;
+import com.xtc.moment.net.bean.TopicListBean;
+
+import java.util.List;
 
 /**
  * 视频发布参数：缩略图、视频名、来源、文案、地点、分享数据与 token 返回体。
@@ -16,6 +19,7 @@ public class SendVideoParam {
     private VideoTokenVoResponse videoTokenVoResponse;
     private int fromType;
     private FriendsVisibleBean friendsVisibleBean;
+    private List<TopicListBean> topicList;
 
     public SendVideoParam(String thumbnailPath, String videoName, boolean fromAlbum, String videoText, PoiBean poiBean,
             ShareVideoMoment shareVideoMoment) {
@@ -110,6 +114,14 @@ public class SendVideoParam {
 
     public void setFriendsVisibleBean(FriendsVisibleBean friendsVisibleBean) {
         this.friendsVisibleBean = friendsVisibleBean;
+    }
+
+    public List<TopicListBean> getTopicList() {
+        return this.topicList;
+    }
+
+    public void setTopicList(List<TopicListBean> topicList) {
+        this.topicList = topicList;
     }
 
     @Override

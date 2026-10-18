@@ -1489,7 +1489,7 @@ public class MomentActivity extends BaseInteractActivity<IMomentActivityView, Mo
                         sendVideoParam.isFromAlbum(), sendVideoParam.getVideoName(),
                         sendVideoParam.getShareVideoMoment(), sendVideoParam.getVideoText(),
                         sendVideoParam.getPoiBean(), sendVideoParam.getVideoTokenVoResponse(),
-                        sendVideoParam.getFriendsVisibleBean());
+                        sendVideoParam.getFriendsVisibleBean(), sendVideoParam.getTopicList());
             }
 
             @Override
