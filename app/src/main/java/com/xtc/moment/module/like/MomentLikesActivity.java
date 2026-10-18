@@ -108,14 +108,17 @@ public class MomentLikesActivity extends BaseActivity<IMomentLikeView, MomentLik
                         .getPrerogativeLikeByEmotionId(emotionId);
                 if (prerogativeLike == null) {
                     itemHolder.friendLikeView.setImageResource(R.drawable.circle_like_pressed);
-                    return;
+                    // 自建服务端可以返回 emotionId，却不一定配置对应的付费
+                    // 点赞装饰资源。缺少装饰图时只回退普通点赞图标，不能
+                    // 直接返回，否则后面的昵称和头像都不会绑定。
+                } else {
+                    Glide.with(MomentLikesActivity.this.getApplication())
+                            .load(prerogativeLike.getPraisedPic())
+                            .apply(new RequestOptions().error(R.drawable.circle_like_pressed)
+                                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                    .placeholder(R.drawable.circle_like_pressed))
+                            .into(itemHolder.friendLikeView);
                 }
-                Glide.with(MomentLikesActivity.this.getApplication())
-                        .load(prerogativeLike.getPraisedPic())
-                        .apply(new RequestOptions().error(R.drawable.circle_like_pressed)
-                                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                                .placeholder(R.drawable.circle_like_pressed))
-                        .into(itemHolder.friendLikeView);
             }
             if (MomentLikesActivity.this.friendList == null || MomentLikesActivity.this.friendList.isEmpty()) {
                 bindDefaultIcon(itemHolder, likeMessage);
